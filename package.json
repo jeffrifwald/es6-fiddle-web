@@ -1,0 +1,28 @@
+{
+  "name": "es6-fiddle-web",
+  "description": "Fiddlin' with ECMAScript6.",
+  "version": "0.0.1",
+  "homepage": "www.es6fiddle.net",
+  "author": {
+    "name": "Jeff McRiffey",
+    "email": "jeff.mcriffey@tryambition.com",
+    "url": "github.com/jmcriffey"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmcriffey/es6-fiddle-web.git"
+  },
+  "devDependencies": {
+    "grunt-cli": "~0.1.13",
+    "grunt": "~0.4.2",
+    "grunt-contrib-stylus": "~0.12.0",
+    "grunt-contrib-uglify": "~0.3.2",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-jscs-checker": "~0.3.2",
+    "grunt-contrib-watch": "~0.5.3"
+  },
+  "scripts": {
+    "test": "grunt test",
+    "start": "grunt watch"
+  }
+}

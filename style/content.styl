@@ -1,0 +1,43 @@
+.content-item {
+    height: 400px;
+    display: block;
+    float: left;
+    border: 1px solid #ddd;
+    margin-right: 5px;
+    font-size: 14px;
+}
+
+.content {
+    position: relative;
+    width: 1025px;
+    margin-top: 4px;
+    font-size: 0;
+
+    .menu {
+        @extend .content-item;
+        width: 150px;
+        border-color: transparent;
+        text-align: center;
+
+        selector {
+            width: 125px;
+            display: inline-block;
+        }
+    }
+
+    .fiddle {
+        @extend .content-item;
+        width: 520px;
+    }
+
+    .result-wrapper {
+        @extend .content-item;
+        width: 325px;
+
+        .result {
+            height: 400px;
+            width: 325px;
+            border: none;
+        }
+    }
+}
