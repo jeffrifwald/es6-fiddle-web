@@ -6,11 +6,11 @@ window.es6Example.blockScope = [
     '}',
     '',
     'try {',
-    '    console.log(i);',
+    '\tconsole.log(i);',
     '} catch(e) {',
-    '    console.log(',
-    '        \'i does not exist here!\'',
-    '    );',
+    '\tconsole.log(',
+    '\t\t\'i does not exist here!\'',
+    '\t);',
     '}',
     ''
 ].join('\n');

@@ -1,10 +1,10 @@
 module.exports = function(grunt) {
     var jsFiles = [
-            'lib/codemirror/**/*.js',
+            'static/lib/codemirror/**/*.js',
             'src/es6-fiddle.js',
             'src//*-example.js'
         ],
-        styleFiles = ['lib/**/*.css', 'style/*.styl'],
+        styleFiles = ['static/lib/**/*.css', 'style/*.styl'],
         lintFiles = ['Gruntfile.js', 'src/*.js'],
         pkg = grunt.file.readJSON('package.json'),
         npmTasks = [
