@@ -76,13 +76,6 @@ traceur.onload = function() {
             fiddle.setValue(window.es6Example[exampleSelector.value]);
         }
     };
-
-    //always focus the fiddle
-    fiddle.on('blur', function() {
-        setTimeout(function() {
-            fiddle.focus();
-        }, 1);
-    });
 };
 
 //add traceur to the iframe
