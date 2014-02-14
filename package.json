@@ -22,8 +22,7 @@
     "grunt-contrib-uglify": "~0.3.2",
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-jscs-checker": "~0.3.2",
-    "grunt-contrib-watch": "~0.5.3",
-    "nib": "~1.0.2"
+    "grunt-contrib-watch": "~0.5.3"
   },
   "scripts": {
     "test": "grunt test",
