@@ -10,33 +10,61 @@
 .content {
     position: relative;
     width: 1025px;
+    height: 508px;
     margin-top: 4px;
     font-size: 0;
 
     .menu {
         @extend .content-item;
-        width: 150px;
+        width: 200px;
         border-color: transparent;
-        text-align: center;
 
-        selector {
-            width: 125px;
-            display: inline-block;
+        select {
+            width: 175px;
+            margin-left: 15px;
         }
     }
 
     .fiddle {
         @extend .content-item;
-        width: 520px;
+        width: 750px;
+
+        .line-error {
+            background-color: #bf3030;
+            opacity: 0.1;
+        }
     }
 
     .result-wrapper {
-        @extend .content-item;
-        width: 325px;
+        height: 100px;
+        position: absolute;
+        border: 1px solid #ddd;
+        width: 750px;
+        bottom: 0;
+        right: 66px;
+
+        .result-badge {
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            z-index: 2;
+            padding: 2px 5px;
+            font-size: 15px;
+            font-family: monospace;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            color: darken(#ddd, 20%);
+            cursor: default;
+
+            &:hover {
+                color: darken(#ddd, 40%);
+                border-color: darken(#ddd, 40%);
+            }
+        }
 
         .result {
-            height: 400px;
-            width: 325px;
+            height: 100px;
+            width: 750px;
             border: none;
         }
     }

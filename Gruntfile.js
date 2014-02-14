@@ -1,8 +1,9 @@
 module.exports = function(grunt) {
     var jsFiles = [
+            'static/lib/jshint/**/*.js',
             'static/lib/codemirror/**/*.js',
             'src/es6-fiddle.js',
-            'src//*-example.js'
+            'src/*-example.js'
         ],
         styleFiles = ['static/lib/**/*.css', 'style/*.styl'],
         lintFiles = ['Gruntfile.js', 'app.js', 'src/*.js'],
@@ -30,6 +31,9 @@ module.exports = function(grunt) {
             }
         },
         uglify: {
+            options: {
+                mangle: false
+            },
             compile: {
                 files: {
                     'static/src/es6-fiddle.js': jsFiles
@@ -40,6 +44,9 @@ module.exports = function(grunt) {
             compile: {
                 files: {
                     'static/style/es6-fiddle.css': styleFiles
+                },
+                options: {
+                    import: ['nib']
                 }
             }
         },
@@ -47,13 +54,13 @@ module.exports = function(grunt) {
             options: {
                 atBegin: true
             },
-            src: {
-                files: jsFiles,
-                tasks: ['uglify']
-            },
             style: {
                 files: styleFiles,
                 tasks: ['stylus']
+            },
+            src: {
+                files: jsFiles,
+                tasks: ['uglify']
             }
         }
     });
