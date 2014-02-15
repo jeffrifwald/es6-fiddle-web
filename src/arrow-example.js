@@ -1,4 +1,6 @@
-window.es6Example.arrow = [
+window.es6Example.arrow = {};
+
+window.es6Example.arrow.code = [
     'let square = x => x * x;',
     'let add = (a, b) => a + b;',
     'let pi = () => 3.1415;',
@@ -8,3 +10,5 @@ window.es6Example.arrow = [
     'console.log(pi());',
     ''
 ].join('\n');
+
+window.es6Example.arrow.display = 'Arrow Functions';

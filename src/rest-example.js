@@ -1,4 +1,6 @@
-window.es6Example.rest = [
+window.es6Example.rest = {};
+
+window.es6Example.rest.code = [
     'function format(str, ...args) {',
     '\treturn str.replace(/\\{\\s*(\\d+)\\s*\\}/g, function(m, n) {',
     '\t\treturn args[n];',
@@ -15,3 +17,5 @@ window.es6Example.rest = [
     'console.log(msg);',
     ''
 ].join('\n');
+
+window.es6Example.rest.display = 'Rest Parameters';

@@ -71,7 +71,9 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#f22}
 @media print{.CodeMirror div.CodeMirror-cursor{visibility:hidden}
 }
 .content-item,.content .menu,.content .fiddle{height:400px;display:block;float:left;border:1px solid #ddd;margin-right:5px;font-size:14px}
-.content{position:relative;width:1025px;height:508px;margin-top:4px;font-size:0;}
+.content{zoom:1;position:relative;width:1025px;height:508px;margin-top:4px;font-size:0;}
+.content:before,.content:after{content:"";display:table}
+.content:after{clear:both}
 .content .menu{width:200px;border-color:transparent;}
 .content .menu select{width:175px;margin-left:15px}
 .content .fiddle{width:750px;}
@@ -81,7 +83,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#f22}
 .content .result-wrapper .result-badge:hover{color:#858585;border-color:#858585}
 .content .result-wrapper .result{height:100px;width:750px;border:none}
 
-body,html{height:100%;width:100%;margin:0;padding:0}
+body,html{margin:0;padding:0 0 10px 0}
 .CodeMirror{height:100%}
 .CodeMirror-scroll{overflow-y:hidden;overflow-x:auto}
 

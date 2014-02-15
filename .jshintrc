@@ -8,20 +8,5 @@
     "undef": true,
     "sub": true,
     "browser": true,
-    "node": true,
-    "jquery": true,
-    "globals": {
-        "Ext": true,
-        "jasmine": true,
-        "runs": true,
-        "waitsFor": true,
-        "it": true,
-        "describe": true,
-        "beforeEach": true,
-        "afterEach": true,
-        "expect": true,
-        "xdescribe": true,
-        "xit": true,
-        "xexpect": true
-    }
+    "node": true
 }

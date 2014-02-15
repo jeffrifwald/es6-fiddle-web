@@ -2,7 +2,6 @@
 var fiddle = null,
     runBtn = document.querySelector('.run'),
     lintBtn = document.querySelector('.lint'),
-    exampleSelector = document.querySelector('.examples'),
     iDoc = document.querySelector('.result').contentDocument,
     iHead = iDoc.getElementsByTagName('head')[0],
     traceur = document.createElement('script'),
@@ -14,6 +13,7 @@ var fiddle = null,
 
 //set the global examples object
 window.es6Example = {};
+window.exampleSelector = document.querySelector('.examples');
 
 //add the fiddle area
 fiddle = window.CodeMirror(document.querySelector('.fiddle'), {
@@ -27,6 +27,16 @@ logger.innerHTML =
     '\tvar log = console.log;\n' +
     '\treturn function() {\n' +
     '\t\tlog.apply(window.console, arguments);\n' +
+    '\t\tdocument.body.innerHTML +=\n' +
+    '\t\t\t"<div>" + \n' +
+    '\t\t\t\tArray.prototype.slice.call(arguments).join(" ") + \n' +
+    '\t\t"</div>";\n' +
+    '\t};\n' +
+    '})();\n\n' +
+    'window.console.error = (function() {\n' +
+    '\tvar err = console.error;\n' +
+    '\treturn function() {\n' +
+    '\t\terr.apply(window.console, arguments);\n' +
     '\t\tdocument.body.innerHTML +=\n' +
     '\t\t\t"<div>" + \n' +
     '\t\t\t\tArray.prototype.slice.call(arguments).join(" ") + \n' +
@@ -73,7 +83,9 @@ traceur.onload = function() {
     //lint the result
     lintBtn.onclick = function() {
         var lint = JSHINT(fiddle.getValue(), {
-            esnext: true
+            esnext: true,
+            undef: true,
+            devel: true
         });
 
         //clean up the old lint log script
@@ -91,20 +103,22 @@ traceur.onload = function() {
         });
 
         if (!lint) {
-            JSHINT.errors.forEach(function(error) {
-                fiddle.addLineClass(error.line - 1, 'background', 'line-error');
+            JSHINT.errors.forEach(function(err) {
+                fiddle.addLineClass(err.line - 1, 'background', 'line-error');
                 lintLog.innerHTML +=
-                    'console.log(\'Line \' + ' + error.line + ' + \':\', \'' + error.reason + '\')\n';
+                    'console.log(\'Line \' + ' + err.line + ' + \':\', \'' + err.reason.replace(/'/g, '\\\'') + '\')\n';
             });
+        } else {
+            lintLog.innerHTML += 'console.log(\'Your code is lint free!\');';
         }
 
         iHead.appendChild(lintLog);
     };
 
     //load the selected code
-    exampleSelector.onchange = function() {
-        if (exampleSelector.value) {
-            fiddle.setValue(window.es6Example[exampleSelector.value]);
+    window.exampleSelector.onchange = function() {
+        if (window.exampleSelector.value) {
+            fiddle.setValue(window.es6Example[window.exampleSelector.value].code);
         }
     };
 };

@@ -1,4 +1,6 @@
-window.es6Example.blockScope = [
+window.es6Example.blockScope = {};
+
+window.es6Example.blockScope.code = [
     'var x = 0;',
     '',
     'for (let i = 0; i < 10; i++) {',
@@ -14,3 +16,5 @@ window.es6Example.blockScope = [
     '}',
     ''
 ].join('\n');
+
+window.es6Example.blockScope.display = 'Block Scope';
