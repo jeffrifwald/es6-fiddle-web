@@ -2,6 +2,7 @@
 var fiddle = null,
     runBtn = document.querySelector('.run'),
     lintBtn = document.querySelector('.lint'),
+    saveBtn = document.querySelector('.save'),
     iDoc = document.querySelector('.result').contentDocument,
     iHead = iDoc.getElementsByTagName('head')[0],
     traceur = document.createElement('script'),
@@ -53,6 +54,8 @@ iHead.appendChild(style);
 
 //wait for traceur to load
 traceur.onload = function() {
+
+    //run the input
     runBtn.onclick = function() {
         if (userInput) { //clean up the old code
             iHead.removeChild(userInput);
@@ -113,6 +116,32 @@ traceur.onload = function() {
         }
 
         iHead.appendChild(lintLog);
+    };
+
+    //save the code to gist
+    saveBtn.onclick = function() {
+        var req = new XMLHttpRequest(),
+            code = fiddle.getValue(),
+            resp;
+
+        if (code) {
+            req.open('POST', '//gists.github.com/gists', true);
+            req.onload = function() {
+                if (this.status >= 200 && this.status < 400) {
+                    resp = JSON.parse(this.reponse);
+                    console.log(resp);
+                }
+            };
+            req.send({
+                'public': true,
+                'description': 'ES6 Fiddle Script',
+                'files': {
+                    'fiddle.js': {
+                        'content': fiddle.getValue()
+                    }
+                }
+            });
+        }
     };
 
     //load the selected code
