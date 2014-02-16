@@ -7,7 +7,7 @@ module.exports = function(app) {
     });
 
     app.get(/^\/fiddles\/\w+$/, function(req, res) {
-        var fiddle = req.url.split('/').pop;
+        var fiddle = req.url.split('/').pop();
 
         if (fiddle) {
             fiddles.findOne({fiddle: fiddle}, function(err, item) {
