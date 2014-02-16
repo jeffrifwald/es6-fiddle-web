@@ -2,7 +2,7 @@
   "name": "es6-fiddle-web",
   "description": "Fiddlin' with ECMAScript6.",
   "version": "0.0.1",
-  "homepage": "www.es6fiddle.net",
+  "homepage": "http://www.es6fiddle.net",
   "author": {
     "name": "Jeff McRiffey",
     "email": "jeff.mcriffey@tryambition.com",
@@ -13,7 +13,8 @@
     "url": "https://github.com/jmcriffey/es6-fiddle-web.git"
   },
   "dependencies": {
-    "express": "~3.4.8"
+    "express": "~3.4.8",
+    "mongodb": "~1.3.23"
   },
   "devDependencies": {
     "grunt-cli": "~0.1.13",

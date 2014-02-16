@@ -54,6 +54,24 @@ iHead.appendChild(style);
 
 //wait for traceur to load
 traceur.onload = function() {
+    var saveId = window.location.href.split('/'),
+        loadReq = new XMLHttpRequest(),
+        loadResp;
+
+    if (saveId.length > 4) { //load up the saved code
+        loadReq.open('GET', '/fiddles/' + saveId[saveId.length - 2], true);
+        loadReq.send();
+        loadReq.onload = function() {
+            if (this.status >= 200 && this.status < 400) {
+                loadResp = JSON.parse(this.response);
+                if (loadResp.value) {
+                    fiddle.setValue(loadResp.value);
+                } else {
+                    fiddle.setValue('\/* Sorry, but I could not load your code right now. *\/');
+                }
+            }
+        };
+    }
 
     //run the input
     runBtn.onclick = function() {
@@ -120,27 +138,22 @@ traceur.onload = function() {
 
     //save the code to gist
     saveBtn.onclick = function() {
-        var req = new XMLHttpRequest(),
-            code = fiddle.getValue(),
+        var code = fiddle.getValue(),
+            saveReq = new XMLHttpRequest(),
             resp;
 
         if (code) {
-            req.open('POST', '//gists.github.com/gists', true);
-            req.onload = function() {
+            saveReq.open('POST', '/save', true);
+            saveReq.setRequestHeader('Content-type','application/json');
+            saveReq.onload = function() {
                 if (this.status >= 200 && this.status < 400) {
-                    resp = JSON.parse(this.reponse);
-                    console.log(resp);
+                    resp = JSON.parse(this.response);
+                    window.location.href = resp.fiddle;
                 }
             };
-            req.send({
-                'public': true,
-                'description': 'ES6 Fiddle Script',
-                'files': {
-                    'fiddle.js': {
-                        'content': fiddle.getValue()
-                    }
-                }
-            });
+            saveReq.send(JSON.stringify({
+                value: fiddle.getValue()
+            }));
         }
     };
 
@@ -153,5 +166,5 @@ traceur.onload = function() {
 };
 
 //add traceur to the iframe
-traceur.src = 'lib/traceur/src/traceur.js';
+traceur.src = '/lib/traceur/src/traceur.js';
 iHead.appendChild(traceur);
