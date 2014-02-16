@@ -148,7 +148,7 @@ traceur.onload = function() {
             saveReq.onload = function() {
                 if (this.status >= 200 && this.status < 400) {
                     resp = JSON.parse(this.response);
-                    window.location.href = resp.fiddle;
+                    window.location.href = '/' + resp.fiddle + '/';
                 }
             };
             saveReq.send(JSON.stringify({
