@@ -76,6 +76,10 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#f22}
 .content:after{clear:both}
 .content .menu{width:200px;border-color:transparent;}
 .content .menu select{width:175px;margin-left:15px}
+.content .menu .links{list-style-type:none;}
+.content .menu .links li{list-style-type:none;}
+.content .menu .links li a{text-decoration:none;color:#099;font-family:'helvetica','arial','sans-serif';}
+.content .menu .links li a:hover{color:#1d7373}
 .content .fiddle{width:750px;}
 .content .fiddle .line-error{background-color:#bf3030;opacity:.1;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";filter:alpha(opacity=10)}
 .content .result-wrapper{height:100px;position:absolute;border:1px solid #ddd;width:750px;bottom:0;right:66px;}
