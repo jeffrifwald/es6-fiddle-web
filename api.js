@@ -2,8 +2,24 @@ var mongo = require('mongodb').MongoClient,
     fiddles = null;
 
 module.exports = function(app) {
-    mongo.connect(String(process.env.MONGOHQ_URL), function(err, db) {
+    mongo.connect('mongodb://localhost/es6fiddle', function(err, db) {
         fiddles = db.collection('fiddles');
+    });
+
+    app.get('/embed/:id', function (req, res) {
+        var fiddle = req.params.id;
+        if (fiddle) {
+            fiddles.findOne({fiddle: fiddle}, function(err, item) {
+                if (item) {
+                    //res.json(item);
+                    res.sendfile(__dirname + '/static/embed.html');
+                } else {
+                    res.json({
+                        'message': 'No fiddle found.'
+                    });
+                }
+            });
+        }
     });
 
     app.get(/^\/fiddles\/\w+$/, function(req, res) {
