@@ -10,11 +10,26 @@
         style = document.createElement('style'),
         lintLog = null,
         userInput = null,
+        fiddleId = location.pathname.split('/')[1],
         bootstrap = null;
 
     //set the global examples object
     window.es6Example = {};
     window.exampleSelector = document.querySelector('.examples');
+
+    // Is an saved fiddle?
+    if (fiddleId) {
+        var element = document.querySelector('#link-embed'),
+            src = document.location.protocol + '//' + document.location.host + '/embed/' + fiddleId + '/',
+            iframeTpl = '<iframe width="100%" height="500" frameborder="0" allowfullscreen src="' + src + '"></iframe>';
+        if (element) {
+            element.style.display = 'inline-block';
+            element.querySelectorAll('input')[0].value = iframeTpl;
+            element.querySelectorAll('input')[0].addEventListener('click', function() {
+                this.select();
+            });
+        }
+    }
 
     //add the fiddle area
     fiddle = window.CodeMirror(document.querySelector('.fiddle'), {
@@ -140,32 +155,36 @@
         };
 
         //save the code to gist
-        saveBtn.onclick = function() {
-            var code = fiddle.getValue(),
-                saveReq = new XMLHttpRequest(),
-                resp;
+        if (saveBtn) {
+            saveBtn.onclick = function() {
+                var code = fiddle.getValue(),
+                    saveReq = new XMLHttpRequest(),
+                    resp;
 
-            if (code) {
-                saveReq.open('POST', '/save', true);
-                saveReq.setRequestHeader('Content-type','application/json');
-                saveReq.onload = function() {
-                    if (this.status >= 200 && this.status < 400) {
-                        resp = JSON.parse(this.response);
-                        window.location.href = '/' + resp.fiddle + '/';
-                    }
-                };
-                saveReq.send(JSON.stringify({
-                    value: fiddle.getValue()
-                }));
-            }
-        };
+                if (code) {
+                    saveReq.open('POST', '/save', true);
+                    saveReq.setRequestHeader('Content-type','application/json');
+                    saveReq.onload = function() {
+                        if (this.status >= 200 && this.status < 400) {
+                            resp = JSON.parse(this.response);
+                            window.location.href = '/' + resp.fiddle + '/';
+                        }
+                    };
+                    saveReq.send(JSON.stringify({
+                        value: fiddle.getValue()
+                    }));
+                }
+            };
+        }
 
         //load the selected code
-        window.exampleSelector.onchange = function() {
-            if (window.exampleSelector.value) {
-                fiddle.setValue(window.es6Example[window.exampleSelector.value].code);
-            }
-        };
+        if (window.exampleSelector)  {
+            window.exampleSelector.onchange = function() {
+                if (window.exampleSelector.value) {
+                    fiddle.setValue(window.es6Example[window.exampleSelector.value].code);
+                }
+            };
+        }
     };
 
     //add traceur to the iframe

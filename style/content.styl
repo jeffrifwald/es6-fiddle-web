@@ -7,6 +7,22 @@
     font-size: 14px;
 }
 
+.content-embed {
+    width : 100%;
+}
+
+#link-embed {
+    display: none;    
+}
+
+#link-embed input{
+    color: #999;
+    border-radius: 2px;
+    border: 1px solid gray;
+    height: 20px;
+    width: 200px;
+}
+
 .content {
     clearfix();
     position: relative;
@@ -51,6 +67,40 @@
         .line-error {
             background-color: #bf3030;
             opacity: 0.1;
+        }
+    }
+
+    .result-wrapper-embed {
+        height: 100px;
+        position: absolute;
+        border: 1px solid #ddd;
+        width: 750px;
+        bottom: 0;
+
+        .result-badge {
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            z-index: 2;
+            padding: 2px 5px;
+            font-size: 15px;
+            font-family: monospace;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            color: darken(#ddd, 20%);
+            cursor: default;
+
+            &:hover {
+                color: darken(#ddd, 40%);
+                border-color: darken(#ddd, 40%);
+            }
+        }
+
+        .result {
+            height: 100px;
+            width: 720px;
+            border: none;
+            margin-left: 30px;
         }
     }
 
