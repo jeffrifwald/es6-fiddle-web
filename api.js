@@ -6,21 +6,6 @@ module.exports = function(app) {
         fiddles = db.collection('fiddles');
     });
 
-    app.get('/embed/:id', function(req, res) {
-        var fiddle = req.params.id;
-        if (fiddle) {
-            fiddles.findOne({fiddle: fiddle}, function(err, item) {
-                if (item) {
-                    res.sendfile(__dirname + '/static/embed.html');
-                } else {
-                    res.json({
-                        'message': 'No fiddle found.'
-                    });
-                }
-            });
-        }
-    });
-
     app.get(/^\/fiddles\/\w+$/, function(req, res) {
         var fiddle = req.url.split('/').pop();
 

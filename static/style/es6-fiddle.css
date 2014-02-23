@@ -72,8 +72,6 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#f22}
 }
 .content-item,.content .menu,.content .fiddle{height:400px;display:block;float:left;border:1px solid #ddd;margin-right:5px;font-size:14px}
 .content-embed{width:100%}
-#link-embed{display:none}
-#link-embed input{color:#999;-webkit-border-radius:2px;border-radius:2px;border:1px solid #808080;height:20px;width:200px}
 .content{zoom:1;position:relative;width:1025px;height:508px;margin-top:4px;font-size:0;}
 .content:before,.content:after{content:"";display:table}
 .content:after{clear:both}
@@ -101,3 +99,5 @@ body,html{margin:0;padding:0 0 10px 0}
 .header{width:100%;height:50px;background:#099 url("/images/es6-fiddle.png") no-repeat 36px 8px;color:#fff;font-size:0;}
 .header div{font-size:16px;height:50px;min-width:50px;line-height:50px;text-align:center;background:#1d7373;display:inline-block;font-family:'helvetica','arial','sans-serif';cursor:pointer;border-right:1px solid #099;margin:0;padding:0 10px;}
 .header div.run{margin-left:207px}
+.header div.embed{display:none;}
+.header div.embed input{color:#999;-webkit-border-radius:2px;border-radius:2px;border:1px solid #808080;height:20px;width:200px}

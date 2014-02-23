@@ -16,7 +16,15 @@ app.get(/^\/\w+\/$/, function(req, res) {
     res.sendfile(__dirname + '/static/index.html');
 });
 
+app.get(/^\/embed\/\w+\/$/, function(req, res) {
+    res.sendfile(__dirname + '/static/embed.html');
+});
+
 app.get(/^\/\w+$/, function(req, res) {
+    res.redirect(req.url + '/');
+});
+
+app.get(/^\/embed\/\w+$/, function(req, res) {
     res.redirect(req.url + '/');
 });
 

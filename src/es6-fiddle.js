@@ -10,16 +10,17 @@
         style = document.createElement('style'),
         lintLog = null,
         userInput = null,
-        fiddleId = location.pathname.split('/')[1],
+        pathArr = location.pathname.split('/'),
+        fiddleId = pathArr[pathArr.length - 2],
         bootstrap = null;
 
     //set the global examples object
     window.es6Example = {};
     window.exampleSelector = document.querySelector('.examples');
 
-    // Is an saved fiddle?
+    //check for a fiddle id
     if (fiddleId) {
-        var element = document.querySelector('#link-embed'),
+        var element = document.querySelector('.embed'),
             src = document.location.protocol + '//' + document.location.host + '/embed/' + fiddleId + '/',
             iframeTpl = '<iframe width="100%" height="500" frameborder="0" allowfullscreen src="' + src + '"></iframe>';
         if (element) {
@@ -69,12 +70,11 @@
 
     //wait for traceur to load
     traceur.onload = function() {
-        var saveId = window.location.href.split('/'),
-            loadReq = new XMLHttpRequest(),
+        var loadReq = new XMLHttpRequest(),
             loadResp;
 
-        if (saveId.length > 4) { //load up the saved code
-            loadReq.open('GET', '/fiddles/' + saveId[saveId.length - 2], true);
+        if (fiddleId) { //load up the saved code
+            loadReq.open('GET', '/fiddles/' + fiddleId, true);
             loadReq.send();
             loadReq.onload = function() {
                 if (this.status >= 200 && this.status < 400) {
@@ -154,7 +154,7 @@
             iHead.appendChild(lintLog);
         };
 
-        //save the code to gist
+        //save the code
         if (saveBtn) {
             saveBtn.onclick = function() {
                 var code = fiddle.getValue(),
