@@ -11,7 +11,6 @@
         lintLog = null,
         userInput = null,
         fiddleId = location.pathname.split('/')[1],
-        isSaved = fiddleId ? true : false,
         bootstrap = null;
 
     //set the global examples object
@@ -19,7 +18,7 @@
     window.exampleSelector = document.querySelector('.examples');
 
     // Is an saved fiddle?
-    if (isSaved) {
+    if (fiddleId) {
         var element = document.querySelector('#link-embed'),
             src = document.location.protocol + '//' + document.location.host + '/embed/' + fiddleId + '/',
             iframeTpl = '<iframe width="100%" height="500" frameborder="0" allowfullscreen src="' + src + '"></iframe>';
@@ -185,7 +184,7 @@
                     fiddle.setValue(window.es6Example[window.exampleSelector.value].code);
                 }
             };
-        }        
+        }
     };
 
     //add traceur to the iframe
