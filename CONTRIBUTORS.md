@@ -4,5 +4,3 @@ ES6 Fiddle contributors
   * Author and project maintainer
 * [Jaydson Gomes](https://github.com/jaydson)
   * Embedded fiddles
-
-[Contributors](https://github.com/jmcriffey/es6-fiddle-web/contributors)
