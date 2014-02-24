@@ -12,29 +12,62 @@
         userInput = null,
         pathArr = location.pathname.split('/'),
         fiddleId = pathArr[pathArr.length - 2],
+        embedded = pathArr[1] === 'embed',
         bootstrap = null;
 
     //set the global examples object
     window.es6Example = {};
     window.exampleSelector = document.querySelector('.examples');
+    window.embedded = embedded;
 
-    //check for a fiddle id
-    if (fiddleId) {
-        var element = document.querySelector('.embed'),
+    //check to see if the share button should be shown
+    if (fiddleId && !embedded) {
+        var share = document.querySelector('.share'),
             src = document.location.protocol + '//' + document.location.host + '/embed/' + fiddleId + '/',
-            iframeTpl = '<iframe width="100%" height="500" frameborder="0" allowfullscreen src="' + src + '"></iframe>';
-        if (element) {
-            element.style.display = 'inline-block';
-            element.querySelectorAll('input')[0].value = iframeTpl;
-            element.querySelectorAll('input')[0].addEventListener('click', function() {
-                this.select();
-            });
+            iframe = '<iframe width="100%" height="300" frameborder="0" allowfullscreen src="' + src + '"></iframe>';
+
+        if (share) {
+            var embed = share.querySelector('#share-embed'),
+                link = share.querySelector('#share-link'),
+                twitter = share.querySelector('.tweet');
+
+            share.style.display = 'inline-block';
+            link.value = document.location.href;
+            embed.value = iframe;
+            link.onclick = link.select;
+            embed.onclick = embed.select;
+            twitter.href = 'http://twitter.com/home?status=ES6%20fiddle:%20' + document.location.href;
         }
+    }
+
+    //handle the embedded buttons
+    if (embedded) {
+        var es6Btn = document.querySelector('.es6-click-btn'),
+            consoleBtn = document.querySelector('.console-click-btn'),
+            editLink = document.querySelector('.edit-at-es6');
+
+        editLink.href = document.location.href.replace('/embed', '');
+
+        es6Btn.onclick = function() {
+            document.querySelector('.fiddle').style.display = 'block';
+            document.querySelector('.result-wrapper').style.display = 'none';
+            es6Btn.className += ' selected';
+            consoleBtn.className = consoleBtn.className.replace(' selected', '');
+        };
+
+        consoleBtn.onclick = function() {
+            document.querySelector('.fiddle').style.display = 'none';
+            document.querySelector('.result-wrapper').style.display = 'block';
+            es6Btn.className = es6Btn.className.replace(' selected', '');
+            consoleBtn.className += ' selected';
+        };
+
     }
 
     //add the fiddle area
     fiddle = window.CodeMirror(document.querySelector('.fiddle'), {
-        lineNumbers: true
+        lineNumbers: !embedded,
+        readOnly: embedded ? 'nocursor' : false
     });
     fiddle.focus();
 
@@ -71,7 +104,33 @@
     //wait for traceur to load
     traceur.onload = function() {
         var loadReq = new XMLHttpRequest(),
-            loadResp;
+            loadResp,
+            runFiddle = function() {
+                if (userInput) { //clean up the old code
+                    iHead.removeChild(userInput);
+                }
+                if (bootstrap) { //clean up the old code
+                    iHead.removeChild(bootstrap);
+                }
+
+                //create new script elements for the bootstrap and user input
+                userInput = document.createElement('script');
+                bootstrap = document.createElement('script');
+
+                //user input needs to be a 'module' script for traceur
+                userInput.setAttribute('type', 'module');
+
+                //set the new script code
+                userInput.innerHTML = fiddle.getValue();
+                bootstrap.innerHTML =
+                    'document.body.innerHTML = \'\';\n' +
+                    'traceur.options.experimental = true;\n' +
+                    'new traceur.WebPageTranscoder(document.location.href).run();\n';
+
+                //append the new scripts
+                iHead.appendChild(userInput);
+                iHead.appendChild(bootstrap);
+            };
 
         if (fiddleId) { //load up the saved code
             loadReq.open('GET', '/fiddles/' + fiddleId, true);
@@ -85,77 +144,57 @@
                         fiddle.setValue('\/* Sorry, but I could not load your code right now. *\/');
                     }
                 }
+
+                if (embedded) { //go ahead and run the code
+                    runFiddle();
+                }
             };
         }
 
-        //run the input
-        runBtn.onclick = function() {
-            if (userInput) { //clean up the old code
-                iHead.removeChild(userInput);
-            }
-            if (bootstrap) { //clean up the old code
-                iHead.removeChild(bootstrap);
-            }
+        if (!embedded) {
 
-            //create new script elements for the bootstrap and user input
-            userInput = document.createElement('script');
-            bootstrap = document.createElement('script');
+            //run the input
+            runBtn.onclick = runFiddle;
 
-            //user input needs to be a 'module' script for traceur
-            userInput.setAttribute('type', 'module');
-
-            //set the new script code
-            userInput.innerHTML = fiddle.getValue();
-            bootstrap.innerHTML =
-                'document.body.innerHTML = \'\';\n' +
-                'traceur.options.experimental = true;\n' +
-                'new traceur.WebPageTranscoder(document.location.href).run();\n';
-
-            //append the new scripts
-            iHead.appendChild(userInput);
-            iHead.appendChild(bootstrap);
-        };
-
-        //lint the result
-        lintBtn.onclick = function() {
-            var lint = window.JSHINT(fiddle.getValue(), {
-                esnext: true,
-                undef: true,
-                devel: true
-            });
-
-            //clean up the old lint log script
-            if (lintLog) {
-                iHead.removeChild(lintLog);
-            }
-
-            //make a new lint log script
-            lintLog = document.createElement('script');
-            lintLog.innerHTML = 'document.body.innerHTML = \'\';\n';
-
-            //remove the line error class from all lines
-            fiddle.eachLine(function(line) {
-                fiddle.removeLineClass(line, 'background', 'line-error');
-            });
-
-            if (!lint) {
-                window.JSHINT.errors.forEach(function(err) {
-                    fiddle.addLineClass(err.line - 1, 'background', 'line-error');
-                    lintLog.innerHTML +=
-                        'console.log(\'Line \' + ' +
-                        err.line +
-                        ' + \':\', \'' +
-                        err.reason.replace(/'/g, '\\\'') + '\')\n';
+            //lint the result
+            lintBtn.onclick = function() {
+                var lint = window.JSHINT(fiddle.getValue(), {
+                    esnext: true,
+                    undef: true,
+                    devel: true
                 });
-            } else {
-                lintLog.innerHTML += 'console.log(\'Your code is lint free!\');';
-            }
 
-            iHead.appendChild(lintLog);
-        };
+                //clean up the old lint log script
+                if (lintLog) {
+                    iHead.removeChild(lintLog);
+                }
 
-        //save the code
-        if (saveBtn) {
+                //make a new lint log script
+                lintLog = document.createElement('script');
+                lintLog.innerHTML = 'document.body.innerHTML = \'\';\n';
+
+                //remove the line error class from all lines
+                fiddle.eachLine(function(line) {
+                    fiddle.removeLineClass(line, 'background', 'line-error');
+                });
+
+                if (!lint) {
+                    window.JSHINT.errors.forEach(function(err) {
+                        fiddle.addLineClass(err.line - 1, 'background', 'line-error');
+                        lintLog.innerHTML +=
+                            'console.log(\'Line \' + ' +
+                            err.line +
+                            ' + \':\', \'' +
+                            err.reason.replace(/'/g, '\\\'') + '\')\n';
+                    });
+                } else {
+                    lintLog.innerHTML += 'console.log(\'Your code is lint free!\');';
+                }
+
+                iHead.appendChild(lintLog);
+            };
+
+            //save the code
             saveBtn.onclick = function() {
                 var code = fiddle.getValue(),
                     saveReq = new XMLHttpRequest(),
@@ -175,10 +214,8 @@
                     }));
                 }
             };
-        }
 
-        //load the selected code
-        if (window.exampleSelector)  {
+            //load the selected code
             window.exampleSelector.onchange = function() {
                 if (window.exampleSelector.value) {
                     fiddle.setValue(window.es6Example[window.exampleSelector.value].code);

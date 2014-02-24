@@ -18,20 +18,63 @@
         border-right: 1px solid #009999;
         margin: 0;
         padding: 0 10px;
+        position: relative;
 
         &.run {
             margin-left: 207px;
         }
 
-        &.embed {
+        &.share {
             display: none;
 
-            input {
-               color: #999;
-                border-radius: 2px;
-                border: 1px solid gray;
-                height: 20px;
-                width: 200px;
+            .share-drop {
+                color: #009999;
+                background: #fff;
+                display: none;
+                position: absolute;
+                height: 150px;
+                width: 250px;
+                z-index: 10;
+                top: 50px;
+                left: 0;
+                line-height: 25px;
+                font-size: 12px;
+                text-align: left;
+                box-shadow: 0 2px 25px #777;
+                border-right: none;
+
+                label {
+                    display: block;
+                }
+
+                input {
+                    display: block;
+                    color: #777;
+                    width: 90%;
+
+                    &#share-embed {
+                        margin-bottom: 10px;
+                    }
+                }
+
+                .tweet {
+                    background: url('/images/twitter.png') no-repeat;
+                    color: #009999;
+                    padding-left: 25px;
+                    margin-top: 10px;
+                    width: 50px;
+                    text-decoration: none;
+
+                    &:hover {
+                        color: #1d7373;
+                    }
+                }
+            }
+
+            &:hover {
+                .share-drop {
+                    display: block;
+                }
             }
         }
     }

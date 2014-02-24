@@ -83,21 +83,36 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket{color:#f22}
 .content .menu .links li a:hover{color:#1d7373}
 .content .fiddle{width:750px;}
 .content .fiddle .line-error{background-color:#bf3030;opacity:.1;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";filter:alpha(opacity=10)}
-.content .result-wrapper-embed{height:100px;position:absolute;border:1px solid #ddd;width:750px;bottom:0;}
-.content .result-wrapper-embed .result-badge{-webkit-border-radius:6px;border-radius:6px;border:1px solid #ddd;z-index:2;padding:2px 5px;font-size:15px;font-family:monospace;position:absolute;top:5px;right:5px;color:#b1b1b1;cursor:default;}
-.content .result-wrapper-embed .result-badge:hover{color:#858585;border-color:#858585}
-.content .result-wrapper-embed .result{height:100px;width:720px;border:none;margin-left:30px}
 .content .result-wrapper{height:100px;position:absolute;border:1px solid #ddd;width:750px;bottom:0;right:66px;}
 .content .result-wrapper .result-badge{-webkit-border-radius:6px;border-radius:6px;border:1px solid #ddd;z-index:2;padding:2px 5px;font-size:15px;font-family:monospace;position:absolute;top:5px;right:5px;color:#b1b1b1;cursor:default;}
 .content .result-wrapper .result-badge:hover{color:#858585;border-color:#858585}
 .content .result-wrapper .result{height:100px;width:750px;border:none}
+
+.embed-wrapper{position:relative;border:1px solid #ddd;}
+.embed-wrapper .embed-header{width:100%;height:30px;line-height:30px;position:absolute;top:0;left:0;border-bottom:1px solid #ddd;color:#000;overflow:hidden;z-index:10;font-family:'helvetica','arial','sans-serif';font-size:13px;-webkit-box-shadow:0 1px 3px #ddd;box-shadow:0 1px 3px #ddd;}
+.embed-wrapper .embed-header span{color:#099;margin-left:15px;cursor:pointer;}
+.embed-wrapper .embed-header span:hover{color:#1d7373;font-weight:bold}
+.embed-wrapper .embed-header span.selected{color:#1d7373;font-weight:bold}
+.embed-wrapper .embed-header a{float:right;margin-right:10px;color:#099;text-decoration:none;font-size:10px;}
+.embed-wrapper .embed-header a:hover{color:#1d7373}
+.embed-wrapper .embed-header a.selected{color:#1d7373}
+.embed-wrapper .embed-content{position:relative;top:30px;height:260px;overflow:auto;}
+.embed-wrapper .embed-content .fiddle{display:block;height:215px;margin-left:10px;margin-top:10px}
+.embed-wrapper .embed-content .result-wrapper{display:none;}
+.embed-wrapper .embed-content .result-wrapper .result{width:100%;height:100%;border:none}
 
 body,html{margin:0;padding:0 0 10px 0}
 .CodeMirror{height:100%}
 .CodeMirror-scroll{overflow-y:hidden;overflow-x:auto}
 
 .header{width:100%;height:50px;background:#099 url("/images/es6-fiddle.png") no-repeat 36px 8px;color:#fff;font-size:0;}
-.header div{font-size:16px;height:50px;min-width:50px;line-height:50px;text-align:center;background:#1d7373;display:inline-block;font-family:'helvetica','arial','sans-serif';cursor:pointer;border-right:1px solid #099;margin:0;padding:0 10px;}
+.header div{font-size:16px;height:50px;min-width:50px;line-height:50px;text-align:center;background:#1d7373;display:inline-block;font-family:'helvetica','arial','sans-serif';cursor:pointer;border-right:1px solid #099;margin:0;padding:0 10px;position:relative;}
 .header div.run{margin-left:207px}
-.header div.embed{display:none;}
-.header div.embed input{color:#999;-webkit-border-radius:2px;border-radius:2px;border:1px solid #808080;height:20px;width:200px}
+.header div.share{display:none;}
+.header div.share .share-drop{color:#099;background:#fff;display:none;position:absolute;height:150px;width:250px;z-index:10;top:50px;left:0;line-height:25px;font-size:12px;text-align:left;-webkit-box-shadow:0 2px 25px #777;box-shadow:0 2px 25px #777;border-right:none;}
+.header div.share .share-drop label{display:block}
+.header div.share .share-drop input{display:block;color:#777;width:90%;}
+.header div.share .share-drop input#share-embed{margin-bottom:10px}
+.header div.share .share-drop .tweet{background:url("/images/twitter.png") no-repeat;color:#099;padding-left:25px;margin-top:10px;width:50px;text-decoration:none;}
+.header div.share .share-drop .tweet:hover{color:#1d7373}
+.header div.share:hover .share-drop{display:block}

@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -8,30 +8,19 @@
 
         <title>ES6 Fiddle</title>
         <link rel="stylesheet" href="/style/es6-fiddle.css">
-        <link rel="icon" href="/images/favicon.png">
     </head>
     <body>
-        <div class="header">
-            <div class="run">Run</div>
-            <div class="lint">Lint</div>
-        </div>
-        <div class="content" style="width:100%;height:100%;">
-            <div class="menu" style="display:none">
-                <select class="examples">
-                    <option value="" selected="selected">ES6 Examples</option>
-                </select>
-                <ul class="links">
-                    <li><a href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts">ECMAScript 6</a></li>
-                    <li><a href="http://github.com/google/traceur-compiler">Traceur</a></li>
-                    <li><a href="http://codemirror.net/">CodeMirror</a></li>
-                    <li><a href="http://www.jshint.com/">JSHint</a></li>
-                    <li><a href="http://github.com/jmcriffey/es6-fiddle-web">ES6 Fiddle</a></li>
-                </ul>
+        <div class="embed-wrapper">
+            <div class="embed-header">
+                <span class="es6-click-btn selected">ECMAScript 6</span>
+                <span class="console-click-btn">Console</span>
+                <a class="edit-at-es6" href="#">Edit at ES6 Fiddle</a>
             </div>
-            <div class="fiddle"></div>
-            <div class="result-wrapper-embed">
-                <span class="result-badge">console</span>
-                <iframe class="result"></iframe>
+            <div class="embed-content">
+                <div class="fiddle"></div>
+                <div class="result-wrapper">
+                    <iframe class="result"></iframe>
+                </div>
             </div>
         </div>
         <script src="/src/analytics.js"></script>
