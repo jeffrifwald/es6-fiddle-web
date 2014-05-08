@@ -1,0 +1,9 @@
+{
+  "name": "es6-fiddle-web",
+  "version": "0.0.1",
+  "main": ["./src"],
+  "dependencies": {
+    "traceur": "0.0.41",
+    "jshint": "2.4.3"
+  }
+}

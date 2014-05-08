@@ -225,6 +225,6 @@
     };
 
     //add traceur to the iframe
-    traceur.src = '/lib/traceur/src/traceur.js';
+    traceur.src = '/lib/traceur/traceur.js';
     iHead.appendChild(traceur);
 })();
