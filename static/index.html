@@ -12,37 +12,32 @@
     </head>
     <body>
         <div class="header">
-            <div class="run">Run</div>
-            <div class="lint">Lint</div>
-            <div class="save">Save</div>
-            <div class="share">
-                <span>Share</span>
-                <div class="share-drop">
-                    <label for="share-link">Link</label>
-                    <input value="" id="share-link">
-                    <label for="shared-embed">Embed</label>
-                    <input value="" id="share-embed">
-                    <a class="tweet" href="#" target="_blank">Tweet</a>
-                </div>
-            </div>
-
+            <span class="about">About</span>
         </div>
         <div class="content">
-            <div class="menu">
-                <select class="examples">
-                    <option value="" selected="selected">ES6 Examples</option>
-                </select>
-                <ul class="links">
-                    <li><a href="http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts">ECMAScript 6</a></li>
-                    <li><a href="http://github.com/google/traceur-compiler">Traceur</a></li>
-                    <li><a href="http://codemirror.net/">CodeMirror</a></li>
-                    <li><a href="http://www.jshint.com/">JSHint</a></li>
-                    <li><a href="http://github.com/jmcriffey/es6-fiddle-web">ES6 Fiddle</a></li>
-                </ul>
+             <select class="examples">
+                <option value="" selected="selected">ES6 Examples</option>
+            </select>
+            <div class="fiddle-wrapper">
+                <div class="fiddle-header">
+                    <span>Code</span>
+                    <div title="run" class="run"></div>
+                    <div title="lint" class="lint"></div>
+                    <div title="save" class="save"></div>
+                    <div class="share">
+                        <div class="share-drop">
+                            <label for="share-link">Link</label>
+                            <input value="" id="share-link">
+                            <label for="shared-embed">Embed</label>
+                            <input value="" id="share-embed">
+                            <a class="tweet" href="#" target="_blank">Tweet</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="fiddle"></div>
             </div>
-            <div class="fiddle"></div>
             <div class="result-wrapper">
-                <span class="result-badge">console</span>
+                <div class="result-header"><span>Console</span></div>
                 <iframe class="result"></iframe>
             </div>
         </div>
