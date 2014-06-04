@@ -18,9 +18,11 @@
     width: 15px;
     padding: 5px;
     background-size: cover;
-    position: absolute;
-    top: 16px;
+    display: inline-block;
     cursor: pointer;
+    float: right;
+    margin-right: 10px;
+    margin-top: 18px;
 }
 
 .content-embed {
@@ -94,25 +96,21 @@
             .run {
                 @extend .icon-btn;
                 background-image: url('/images/run.png');
-                right: 80px;
             }
 
             .lint {
                 @extend .icon-btn;
                 background-image: url('/images/lint.png');
-                right: 50px;
             }
 
             .save {
                 @extend .icon-btn;
                 background-image: url('/images/save.png');
-                right: 20px;
             }
 
             .share {
                 @extend .icon-btn;
                 background-image: url('/images/share.png');
-                right: 110px;
                 display: none;
 
                 .share-drop {
@@ -123,8 +121,8 @@
                     height: 150px;
                     width: 250px;
                     z-index: 10;
-                    top: 20px;
-                    left: 0;
+                    top: 40px;
+                    right: -220px;
                     line-height: 25px;
                     font-size: 12px;
                     text-align: left;
