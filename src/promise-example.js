@@ -16,5 +16,3 @@ window.es6Example.promise.code = [
 ].join('\n');
 
 window.es6Example.promise.display = 'Promises';
-
-
