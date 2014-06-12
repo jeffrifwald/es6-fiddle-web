@@ -161,7 +161,8 @@
                 var lint = window.JSHINT(fiddle.getValue(), {
                     esnext: true,
                     undef: true,
-                    devel: true
+                    devel: true,
+                    browser: true
                 });
 
                 //clean up the old lint log script

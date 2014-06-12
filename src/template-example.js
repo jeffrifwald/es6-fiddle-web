@@ -4,7 +4,7 @@ window.es6Example.template.code = [
     'let person = {name: \'John Smith\'};',
     'let tpl = `My name is ${person.name}.`;',
     '',
-    'console.log(tpl)',
+    'console.log(tpl);',
     ''
 ].join('\n');
 
