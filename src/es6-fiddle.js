@@ -124,7 +124,6 @@
                 userInput.innerHTML = fiddle.getValue();
                 bootstrap.innerHTML =
                     'document.body.innerHTML = \'\';\n' +
-                    'traceur.options.experimental = true;\n' +
                     'new traceur.WebPageTranscoder(document.location.href).run();\n';
 
                 //append the new scripts
