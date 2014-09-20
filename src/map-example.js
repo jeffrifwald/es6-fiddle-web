@@ -1,7 +1,7 @@
 window.es6Example.map = {};
 
 window.es6Example.map.code = [
-    'let x = new Map([1, \'is a number key\'], [\'1\', \'is a string key\']);',
+    'let x = new Map([[1, \'is a number key\']]);',
     'let today = new Date()',
     '',
     '//anything can be a key',
