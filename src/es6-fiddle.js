@@ -159,7 +159,6 @@
             lintBtn.onclick = function() {
                 var lint = window.JSHINT(fiddle.getValue(), {
                     esnext: true,
-                    undef: true,
                     devel: true,
                     browser: true
                 });
