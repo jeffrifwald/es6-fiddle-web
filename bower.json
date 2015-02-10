@@ -3,6 +3,6 @@
   "version": "0.0.1",
   "main": ["./src"],
   "dependencies": {
-    "traceur": "0.0.78"
+    "traceur": "0.0.82"
   }
 }
