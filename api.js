@@ -1,9 +1,16 @@
 var mongo = require('mongodb').MongoClient,
-    fiddles = null;
+    fiddles = null,
+    mongoConntectionStr = process.env.MONGOHQ_URL ? String(process.env.MONGOHQ_URL) : "mongodb://localhost:27017/es6-fiddle";
 
 module.exports = function(app) {
-    mongo.connect(String(process.env.MONGOHQ_URL), function(err, db) {
-        fiddles = db.collection('fiddles');
+    
+    mongo.connect(mongoConntectionStr, function(err, db) {
+        if(err) {
+            console.error("✗ MongoDB Connection Error " +err);
+        }
+        else {
+            fiddles = db.collection('fiddles');    
+        }
     });
 
     app.get(/^\/fiddles\/\w+$/, function(req, res) {
