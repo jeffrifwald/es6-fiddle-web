@@ -10,13 +10,9 @@ ES6 Fiddle Web
 1. clone the repo.
 2. 
 ```> cd es6-fiddle-web ```
-3. Install the dependencies.
-```
-npm install 
-```
+3. Install the dependencies.```npm install ```
 4. Start mongodb locally.
-5. Start the server
-```
-node app.js
-```
+5. Start the server ```node app.js```
+
 This starts the server at port 5001.
+
