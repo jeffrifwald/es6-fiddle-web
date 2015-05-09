@@ -74,10 +74,10 @@
     //add the logger script to the iframe
     logger.innerHTML =
         'window.console.log = (function() {\n' +
-        '\tvar escaped = {"&": "&amp;", "<": "&lt;", ">": "&gt;", "\\\"": "&quot;", "\'": "&#39", "/": "&#x2F;"};' +
-        '\tvar escapeHTML = function(str) {return String(string).replace(/[&<>"\'\/]/g, function (s) {' +
-        '\t\treturn escaped[s];' +
-        '\t});' +
+        '\tvar escaped = {"&": "&amp;", "<": "&lt;", ">": "&gt;", "\\\"": "&quot;", "\'": "&#39", "/": "&#x2F;"};\n' +
+        '\tvar escapeHTML = function(str) {return String(string).replace(/[&<>"\'\/]/g, function (s) {\n' +
+        '\t\treturn escaped[s];\n' +
+        '\t});\n' +
         '\tvar log = console.log;\n' +
         '\treturn function() {\n' +
         '\t\tlog.apply(window.console, arguments);\n' +
