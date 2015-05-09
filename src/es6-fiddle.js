@@ -85,7 +85,7 @@
         '\t\tlog.apply(window.console, arguments);\n' +
         '\t\tdocument.body.innerHTML +=\n' +
         '\t\t\t"<div>" + \n' +
-        '\t\t\t\tArray.prototype.slice.call(escapeHTML(arguments)).join(" ") + \n' +
+        '\t\t\t\tescapeHTML(Array.prototype.slice.call(arguments).join(" ")) + \n' +
         '\t\t\t"</div>";\n' +
         '\t};\n' +
         '})();\n\n' +
