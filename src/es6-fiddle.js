@@ -78,14 +78,15 @@
         '\tvar escapeHTML = function(str) {\n' +
         '\t\treturn String(string).replace(/[&<>"\'\/]/g, function (s) {\n' +
         '\t\t\t\treturn escaped[s];\n' +
-        '\t});\n' +
+        '\t\t});\n' +
+        '\t};' +
         '\tvar log = console.log;\n' +
         '\treturn function() {\n' +
         '\t\tlog.apply(window.console, arguments);\n' +
         '\t\tdocument.body.innerHTML +=\n' +
         '\t\t\t"<div>" + \n' +
         '\t\t\t\tArray.prototype.slice.call(escapeHTML(arguments)).join(" ") + \n' +
-        '\t\t"</div>";\n' +
+        '\t\t\t"</div>";\n' +
         '\t};\n' +
         '})();\n\n' +
         'window.console.error = (function() {\n' +
