@@ -130,7 +130,7 @@
                 userInput.innerHTML = fiddle.getValue();
                 bootstrap.innerHTML =
                     'document.body.innerHTML = \'\';\n' +
-                    'new traceur.WebPageTranscoder(document.location.href).run();\n';
+                    'new traceur.WebPageTranscoder(document.location.href, {"freeVariableChecker": true}).run();\n';
 
                 //append the new scripts
                 iHead.appendChild(userInput);
