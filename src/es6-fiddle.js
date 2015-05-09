@@ -76,7 +76,7 @@
         'window.console.log = (function() {\n' +
         '\tvar escaped = {"&": "&amp;", "<": "&lt;", ">": "&gt;", "\\\"": "&quot;", "\'": "&#39", "/": "&#x2F;"};\n' +
         '\tvar escapeHTML = function(str) {\n' +
-        '\t\treturn String(string).replace(/[&<>"\'\/]/g, function (s) {\n' +
+        '\t\treturn String(str).replace(/[&<>"\'\/]/g, function (s) {\n' +
         '\t\t\t\treturn escaped[s];\n' +
         '\t\t});\n' +
         '\t};' +
