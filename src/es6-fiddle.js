@@ -5,7 +5,7 @@
         saveBtn = document.querySelector('.save'),
         iDoc = document.querySelector('.result').contentDocument,
         iHead = iDoc.getElementsByTagName('head')[0],
-        traceur = document.createElement('script'),
+        babel = document.createElement('script'),
         logger = document.createElement('script'),
         style = document.createElement('style'),
         lintLog = null,
@@ -107,8 +107,8 @@
         'div{border-bottom:1px solid #eee;padding: 2px 0;}';
     iHead.appendChild(style);
 
-    //wait for traceur to load
-    traceur.onload = function() {
+    //wait for babel to load
+    babel.onload = function() {
         var loadReq = new XMLHttpRequest(),
             loadResp,
             runFiddle = function() {
@@ -123,14 +123,16 @@
                 userInput = document.createElement('script');
                 bootstrap = document.createElement('script');
 
-                //user input needs to be a 'module' script for traceur
-                userInput.setAttribute('type', 'module');
+                //user input needs to be a 'text/babel' script for babel
+                userInput.setAttribute('type', 'text/babel');
+                userInput.className = 'babel-text';
 
                 //set the new script code
                 userInput.innerHTML = fiddle.getValue();
-                bootstrap.innerHTML =
+                bootstrap.innerHTML = (
                     'document.body.innerHTML = \'\';\n' +
-                    'new traceur.WebPageTranscoder(document.location.href, {"freeVariableChecker": true}).run();\n';
+                    'babel.run(document.querySelector(".babel-text").innerHTML);'
+                );
 
                 //append the new scripts
                 iHead.appendChild(userInput);
@@ -229,7 +231,7 @@
         }
     };
 
-    //add traceur to the iframe
-    traceur.src = '/lib/traceur/traceur.js';
-    iHead.appendChild(traceur);
+    //add babel to the iframe
+    babel.src = '/lib/babel/babel.js';
+    iHead.appendChild(babel);
 })();

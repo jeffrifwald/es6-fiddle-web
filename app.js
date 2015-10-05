@@ -28,7 +28,7 @@ app.get(/^\/embed\/\w+$/, function(req, res) {
     res.redirect(req.url + '/');
 });
 
-api(app);
+//api(app);
 
 app.listen(port);
 
