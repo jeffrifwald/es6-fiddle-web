@@ -6,6 +6,7 @@
         iDoc = document.querySelector('.result').contentDocument,
         iHead = iDoc.getElementsByTagName('head')[0],
         babel = document.createElement('script'),
+        babelPolyfill = document.createElement('script'),
         logger = document.createElement('script'),
         style = document.createElement('style'),
         lintLog = null,
@@ -19,6 +20,8 @@
     window.es6Example = {};
     window.exampleSelector = document.querySelector('.examples');
     window.embedded = embedded;
+
+
 
     //check to see if the share button should be shown
     if (fiddleId && !embedded) {
@@ -131,7 +134,7 @@
                 userInput.innerHTML = fiddle.getValue();
                 bootstrap.innerHTML = (
                     'document.body.innerHTML = \'\';\n' +
-                    'babel.run(document.querySelector(".babel-text").innerHTML);'
+                    'babel.run(document.querySelector(".babel-text").innerHTML);\n'
                 );
 
                 //append the new scripts
@@ -232,6 +235,8 @@
     };
 
     //add babel to the iframe
+    babelPolyfill.src = '/lib/babel/babel-polyfill.js';
     babel.src = '/lib/babel/babel.js';
+    iHead.appendChild(babelPolyfill);
     iHead.appendChild(babel);
 })();
