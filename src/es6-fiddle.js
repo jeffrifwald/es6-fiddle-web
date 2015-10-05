@@ -21,8 +21,6 @@
     window.exampleSelector = document.querySelector('.examples');
     window.embedded = embedded;
 
-
-
     //check to see if the share button should be shown
     if (fiddleId && !embedded) {
         var share = document.querySelector('.share'),
