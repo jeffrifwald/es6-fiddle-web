@@ -1,7 +1,7 @@
 {
   "name": "es6-fiddle-web",
   "description": "Fiddlin' with ECMAScript6.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "http://www.es6fiddle.net",
   "license" : "SEE LICENSE IN LICENSE.md",
   "author": {
