@@ -20,6 +20,7 @@ cd es6-fiddle-web
 npm Install
 
 # Add a MONGOHQ_URL to your environment
+export MONGOHQ_URL='mongodb://localhost:27017/fiddles'
 
 # Open a new terminal window and start MongoDB
 mongod
