@@ -14,7 +14,8 @@
     "url": "https://github.com/jmcriffey/es6-fiddle-web.git"
   },
   "dependencies": {
-    "dotenv": "^2.0.0",
+    "body-parser": "^1.15.2",
+    "compression": "^1.6.2",
     "express": "^4.14.0",
     "mongodb": "^2.2.5"
   },
