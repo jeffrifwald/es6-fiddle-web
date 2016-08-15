@@ -3,6 +3,7 @@ var express = require('express'),
     api = require('./api'),
     app = express(),
     port = Number(process.env.PORT || 5001);
+    dotenv = require('dotenv').config();
 
 app.use(express.compress());
 app.use(express.logger());

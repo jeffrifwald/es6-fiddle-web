@@ -3,7 +3,7 @@
   "description": "Fiddlin' with ECMAScript6.",
   "version": "0.0.2",
   "homepage": "http://www.es6fiddle.net",
-  "license" : "SEE LICENSE IN LICENSE.md",
+  "license": "SEE LICENSE IN LICENSE.md",
   "author": {
     "name": "Jeff McRiffey",
     "email": "jeff.mcriffey@tryambition.com",
@@ -14,6 +14,7 @@
     "url": "https://github.com/jmcriffey/es6-fiddle-web.git"
   },
   "dependencies": {
+    "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "mongodb": "^2.2.5"
   },
@@ -28,7 +29,7 @@
   },
   "scripts": {
     "test": "grunt test",
-    "start": "grunt watch",
+    "start": "grunt build && node app.js",
     "build": "grunt build"
   }
 }
