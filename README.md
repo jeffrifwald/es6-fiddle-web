@@ -6,7 +6,8 @@ ES6 Fiddle Web
 See it online at [here](http://www.es6fiddle.net/)
 
 ### Getting Started
-** This guide assumes you already have MongoDB and NodeJS installed. **
+*This guide assumes you already have MongoDB and NodeJS installed.*
+
 Clone the repository
 ```bash
 # Get the latest version
