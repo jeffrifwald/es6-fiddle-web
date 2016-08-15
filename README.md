@@ -19,9 +19,7 @@ cd es6-fiddle-web
 # Install Npm dependancies
 npm Install
 
-# Copy the environment keys
-# Change the MongoDB URL if yours is different. If you have the default configuration then it _should_ work
-cp sample.env .env
+# Add a MONGOHQ_URL to your environment
 
 # Open a new terminal window and start MongoDB
 mongod
