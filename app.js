@@ -2,7 +2,6 @@ var express = require('express'),
     pkg = require('./package.json'),
     api = require('./api'),
     app = express(),
-    dotenv = require('dotenv').config(), // jshint ignore:line
     port = Number(process.env.PORT || 5001);
 
 app.use(express.compress());
