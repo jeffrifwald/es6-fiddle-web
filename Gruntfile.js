@@ -14,7 +14,7 @@ module.exports = function(grunt) {
             'grunt-contrib-stylus',
             'grunt-contrib-uglify',
             'grunt-contrib-watch',
-            'grunt-jscs-checker'
+            'grunt-jscs'
         ];
 
     grunt.initConfig({
@@ -22,7 +22,8 @@ module.exports = function(grunt) {
         jscs: {
             all: lintFiles,
             options: {
-                config: '.jscs.json'
+                config: '.jscs.json',
+                fix: true
             }
         },
         jshint: {

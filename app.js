@@ -2,15 +2,14 @@ var express = require('express'),
     pkg = require('./package.json'),
     api = require('./api'),
     app = express(),
+    dotenv = require('dotenv').config(), // jshint ignore:line
     port = Number(process.env.PORT || 5001);
 
 app.use(express.compress());
 app.use(express.logger());
 app.use(express.json());
 
-app.configure(function() {
-    app.use('/', express.static(__dirname + '/static'));
-});
+app.use('/', express.static(__dirname + '/static'));
 
 app.get(/^\/\w+\/$/, function(req, res) {
     res.sendfile(__dirname + '/static/index.html');
