@@ -8,10 +8,16 @@
         "beforeOpeningRoundBrace": true
     },
     "requireMultipleVarDecl": true,
-    "disallowLeftStickedOperators": ["?", "-", "+", "/", "*", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<="],
-    "disallowRightStickedOperators": ["?", "/", "+", "*", ":", "=", "==", "===", "!=", "!==", ">", ">=", "<", "<="],
-    "requireRightStickedOperators": ["!"],
-    "requireLeftStickedOperators": [","],
+    "requireSpaceBeforeBinaryOperators": [
+        "=", "+=", "-=", "*=", "/=", "%=", "<<=", ">>=", ">>>=",
+        "&=", "|=", "^=", "+=",
+
+        "+", "-", "*", "/", "%", "<<", ">>", ">>>", "&",
+        "|", "^", "&&", "||", "===", "==", ">=",
+        "<=", "<", ">", "!=", "!=="
+    ],
+    "disallowSpaceAfterPrefixUnaryOperators": ["!"],
+    "disallowSpaceBeforeBinaryOperators": [","],
     "disallowKeywords": ["with"],
     "disallowMultipleLineBreaks": true,
     "disallowKeywordsOnNewLine": ["else"],
