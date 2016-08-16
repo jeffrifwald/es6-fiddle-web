@@ -16,7 +16,7 @@ git clone git@github.com:jmcriffey/es6-fiddle-web.git
 # Change directory
 cd es6-fiddle-web
 
-# Install Npm dependancies
+# Install Npm dependencies
 npm Install
 
 # Add a MONGOHQ_URL to your environment
