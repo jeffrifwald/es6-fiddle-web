@@ -12,7 +12,7 @@
         style = document.createElement('style'),
         lintLog = null,
         userInput = null,
-        savedTheme = localStorage.getItem("theme"),
+        savedTheme = localStorage.getItem('theme'),
         pathArr = location.pathname.split('/'),
         fiddleId = pathArr[pathArr.length - 2],
         embedded = pathArr[1] === 'embed',
@@ -69,7 +69,7 @@
 
     // If the user has not got a saved theme then we just use the default
     if (savedTheme === null) {
-        savedTheme = "default"
+        savedTheme = 'default';
     }
 
     //add the fiddle area
@@ -234,11 +234,11 @@
                 }
             };
 
-            themeChanger.onchange = function(){
+            themeChanger.onchange = function() {
                 var theme = themeChanger.options[themeChanger.selectedIndex].textContent;
                 fiddle.setOption('theme', theme);
-                localStorage.setItem("theme", theme);
-            }
+                localStorage.setItem('theme', theme);
+            };
 
             //load the selected code
             window.exampleSelector.onchange = function() {
