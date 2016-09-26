@@ -11,11 +11,11 @@ app.use(bodyParser.json());
 app.use('/', express.static(__dirname + '/static'));
 
 app.get(/^\/\w+\/$/, function(req, res) {
-    res.sendfile(__dirname + '/static/index.html');
+    res.sendFile(__dirname + '/static/index.html');
 });
 
 app.get(/^\/embed\/\w+\/$/, function(req, res) {
-    res.sendfile(__dirname + '/static/embed.html');
+    res.sendFile(__dirname + '/static/embed.html');
 });
 
 app.get(/^\/\w+$/, function(req, res) {
