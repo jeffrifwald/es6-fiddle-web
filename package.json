@@ -1,7 +1,7 @@
 {
   "name": "es6-fiddle-web",
   "description": "Fiddlin' with ECMAScript6.",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "homepage": "http://www.es6fiddle.net",
   "license": "SEE LICENSE IN LICENSE.md",
   "author": {
@@ -20,14 +20,13 @@
     "mongodb": "^2.2.5"
   },
   "devDependencies": {
-    "grunt": "1.0.1",
+    "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-stylus": "^1.2.0",
     "grunt-contrib-uglify": "^2.0.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-jscs": "^3.0.1",
-    "grunt-jscs-checker": "^0.8.1"
+    "grunt-jscs": "^3.0.1"
   },
   "scripts": {
     "test": "grunt test",

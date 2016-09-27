@@ -67,21 +67,18 @@
 
     }
 
-    // If the user has not got a saved theme then we just use the default
-    if (savedTheme === null) {
-        savedTheme = 'default';
-    }
-
     //add the fiddle area
     fiddle = window.CodeMirror(document.querySelector('.fiddle'), {
         lineNumbers: !embedded,
         readOnly: embedded ? 'nocursor' : false,
-        theme: savedTheme,
+        theme: savedTheme || 'default'
     });
     fiddle.focus();
 
     // Set the saved theme in the theme changer dropdown
-    themeChanger.value = savedTheme;
+    if (savedTheme) {
+        themeChanger.value = savedTheme;
+    }
 
     //add the logger script to the iframe
     logger.innerHTML =
