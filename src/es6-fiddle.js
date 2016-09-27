@@ -3,6 +3,7 @@
         runBtn = document.querySelector('.run'),
         lintBtn = document.querySelector('.lint'),
         saveBtn = document.querySelector('.save'),
+        themeChanger = document.querySelector('.change-theme'),
         iDoc = document.querySelector('.result').contentDocument,
         iHead = iDoc.getElementsByTagName('head')[0],
         babel = document.createElement('script'),
@@ -11,6 +12,7 @@
         style = document.createElement('style'),
         lintLog = null,
         userInput = null,
+        savedTheme = localStorage.getItem('theme'),
         pathArr = location.pathname.split('/'),
         fiddleId = pathArr[pathArr.length - 2],
         embedded = pathArr[1] === 'embed',
@@ -65,12 +67,21 @@
 
     }
 
+    // If the user has not got a saved theme then we just use the default
+    if (savedTheme === null) {
+        savedTheme = 'default';
+    }
+
     //add the fiddle area
     fiddle = window.CodeMirror(document.querySelector('.fiddle'), {
         lineNumbers: !embedded,
-        readOnly: embedded ? 'nocursor' : false
+        readOnly: embedded ? 'nocursor' : false,
+        theme: savedTheme,
     });
     fiddle.focus();
+
+    // Set the saved theme in the theme changer dropdown
+    themeChanger.value = savedTheme;
 
     //add the logger script to the iframe
     logger.innerHTML =
@@ -221,6 +232,12 @@
                         value: fiddle.getValue()
                     }));
                 }
+            };
+
+            themeChanger.onchange = function() {
+                var theme = themeChanger.options[themeChanger.selectedIndex].textContent;
+                fiddle.setOption('theme', theme);
+                localStorage.setItem('theme', theme);
             };
 
             //load the selected code
