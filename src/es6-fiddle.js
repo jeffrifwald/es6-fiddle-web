@@ -77,12 +77,12 @@
     vertBtn.onclick = function() {
         setVerticalStyle();
         saveLayoutOption('vertical');
-    }
+    };
 
     horzBtn.onclick = function() {
         setHorizontalStyle();
         saveLayoutOption('horizontal');
-    }
+    };
 
     function saveLayoutOption(layoutType) {
         localStorage.setItem('es6fiddleLayout', layoutType);
@@ -105,7 +105,6 @@
         theme: savedTheme || 'default'
     });
     fiddle.focus();
-
 
     if (savedLayout === 'horizontal') {
         setHorizontalStyle();
