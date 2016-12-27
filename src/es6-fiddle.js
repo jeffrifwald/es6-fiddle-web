@@ -79,20 +79,28 @@
         saveLayoutOption('vertical');
     };
 
+    // Onclick of the horizontal button then make the page visually horizontal
+    // And save the layout option clicked (in this case horizontal) to localstorage
     horzBtn.onclick = function() {
         setHorizontalStyle();
         saveLayoutOption('horizontal');
     };
 
+    // Save the layout option specified to localStorage
+    // Pass in a string either "vertical" or "horizontal" to save the layout
     function saveLayoutOption(layoutType) {
         localStorage.setItem('es6fiddleLayout', layoutType);
     }
 
+    // A method to change the width of the results and fiddle containers
+    // Setting the width to 100% will make the fiddle box be on top and the results below
     function setHorizontalStyle() {
         fiddleWrap.style.width = '100%';
         resultWrap.style.width = '100%';
     }
 
+    // Called when we want to make the page back to its default vertical style
+    // This will make the page have the fiddle on the left and the results on the right
     function setVerticalStyle() {
         fiddleWrap.style.width = '49%';
         resultWrap.style.width = '49%';
@@ -106,8 +114,10 @@
     });
     fiddle.focus();
 
+    // If the user has previously selected to use the horizontal layout then load that
     if (savedLayout === 'horizontal') {
         setHorizontalStyle();
+    // Otherwise make the page the default vertical style
     } else {
         setVerticalStyle();
     }
