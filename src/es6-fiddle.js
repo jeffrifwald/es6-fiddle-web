@@ -3,6 +3,11 @@
         runBtn = document.querySelector('.run'),
         lintBtn = document.querySelector('.lint'),
         saveBtn = document.querySelector('.save'),
+        vertBtn = document.querySelector('.vertical'),
+        horzBtn = document.querySelector('.horizontal'),
+        fiddleWrap = document.querySelector('.fiddle-wrapper'),
+        resultWrap = document.querySelector('.result-wrapper'),
+        savedLayout = localStorage.getItem('es6fiddleLayout'),
         themeChanger = document.querySelector('.change-theme'),
         iDoc = document.querySelector('.result').contentDocument,
         iHead = iDoc.getElementsByTagName('head')[0],
@@ -64,7 +69,33 @@
             es6Btn.className = es6Btn.className.replace(' selected', '');
             consoleBtn.className += ' selected';
         };
+    }
 
+    // Change the layout of the page based on the type clicked.
+    // Save this layout choice in localStorage
+    // By default this will be vertical
+    vertBtn.onclick = function() {
+        setVerticalStyle();
+        saveLayoutOption('vertical');
+    }
+
+    horzBtn.onclick = function() {
+        setHorizontalStyle();
+        saveLayoutOption('horizontal');
+    }
+
+    function saveLayoutOption(layoutType) {
+        localStorage.setItem('es6fiddleLayout', layoutType);
+    }
+
+    function setHorizontalStyle() {
+        fiddleWrap.style.width = '100%';
+        resultWrap.style.width = '100%';
+    }
+
+    function setVerticalStyle() {
+        fiddleWrap.style.width = '49%';
+        resultWrap.style.width = '49%';
     }
 
     //add the fiddle area
@@ -74,6 +105,13 @@
         theme: savedTheme || 'default'
     });
     fiddle.focus();
+
+
+    if (savedLayout === 'horizontal') {
+        setHorizontalStyle();
+    } else {
+        setVerticalStyle();
+    }
 
     // Set the saved theme in the theme changer dropdown
     if (savedTheme) {
