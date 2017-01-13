@@ -1,9 +1,13 @@
-ES6 Fiddle Web
+ESFiddle
 ===
 
-[![Build Status](https://travis-ci.org/jmcriffey/es6-fiddle-web.png?branch=master)](https://travis-ci.org/jmcriffey/es6-fiddle-web)
+[![Build Status](https://travis-ci.org/esfiddle/esfiddle.png?branch=master)](https://travis-ci.org/esfiddle/esfiddle)
 
-See it online [here](https://es6fiddle.net/).
+Try out the latest ES6+ features right in your browser.
+
+See it online [here](https://esfiddle.net/).
+
+We welcome pull requests from first-timers and seasoned veteran programmers alike. Follow the steps below to get setup. Then have a look at some of the [projects issues](https://github.com/esfiddle/esfiddle/labels/up-for-grabs)
 
 ### Getting Started
 *This guide assumes you already have MongoDB and NodeJS installed.*
@@ -11,15 +15,15 @@ See it online [here](https://es6fiddle.net/).
 Clone the repository
 ```bash
 # Get the latest version
-git clone git@github.com:jmcriffey/es6-fiddle-web.git
+git clone git@github.com:esfiddle/esfiddle.git
 
 # Change directory
-cd es6-fiddle-web
+cd esfiddle
 
 # Install Npm dependencies
-npm Install
+npm install
 
-# Add a MONGOHQ_URL to your environment
+# Add a MONGODB_URI to your environment
 export MONGODB_URI='mongodb://localhost:27017/fiddles'
 
 # Open a new terminal window and start MongoDB
