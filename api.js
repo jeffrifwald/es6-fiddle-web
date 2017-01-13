@@ -2,7 +2,7 @@ var mongo = require('mongodb').MongoClient,
     fiddles = null;
 
 module.exports = function(app) {
-    mongo.connect(String(process.env.MONGOHQ_URL), function(err, db) {
+    mongo.connect(String(process.env.MONGODB_URI), function(err, db) {
         fiddles = db.collection('fiddles');
     });
 
