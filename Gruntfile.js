@@ -14,7 +14,8 @@ module.exports = function(grunt) {
             'grunt-contrib-stylus',
             'grunt-contrib-uglify',
             'grunt-contrib-watch',
-            'grunt-jscs'
+            'grunt-jscs',
+            'grunt-contrib-imagemin'
         ];
 
     grunt.initConfig({
@@ -64,6 +65,15 @@ module.exports = function(grunt) {
                 files: jsFiles,
                 tasks: ['uglify']
             }
+        },
+        imagemin: {
+          dynamic: {
+            files: [{
+              expand: true,
+//              cwd: 'static/',
+              src: ['**/*.{png,jpg,gif}'],
+            }]
+          }
         }
     });
 
@@ -73,5 +83,5 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['watch']);
     grunt.registerTask('test', ['jshint', 'jscs']);
-    grunt.registerTask('build', ['stylus', 'uglify']);
+    grunt.registerTask('build', ['stylus', 'uglify','imagemin']);
 };
