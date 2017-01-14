@@ -4,7 +4,8 @@ module.exports = function(grunt) {
             'static/lib/codemirror/**/*.js',
             'src/es6-fiddle.js',
             'src/*-example.js',
-            'src/add-examples.js'
+            'src/add-examples.js',
+            'src/redirect_traffic.js'
         ],
         styleFiles = ['static/lib/**/*.css', 'style/*.styl'],
         lintFiles = ['Gruntfile.js', 'app.js', 'api.js', 'src/*.js'],
