@@ -35,9 +35,6 @@ module.exports = function(grunt) {
             }
         },
         uglify: {
-            options: {
-                mangle: false
-            },
             compile: {
                 files: {
                     'static/src/es6-fiddle.js': jsFiles
