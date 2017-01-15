@@ -4,8 +4,7 @@ module.exports = function(grunt) {
             'static/lib/codemirror/**/*.js',
             'src/es6-fiddle.js',
             'src/*-example.js',
-            'src/add-examples.js',
-            'src/redirect_traffic.js'
+            'src/add-examples.js'
         ],
         styleFiles = ['static/lib/**/*.css', 'style/*.styl'],
         lintFiles = ['Gruntfile.js', 'app.js', 'api.js', 'src/*.js'],
@@ -16,7 +15,8 @@ module.exports = function(grunt) {
             'grunt-contrib-uglify',
             'grunt-contrib-watch',
             'grunt-jscs',
-            'grunt-contrib-imagemin'
+            'grunt-contrib-imagemin',
+            'grunt-inline'
         ];
 
     grunt.initConfig({
@@ -65,13 +65,18 @@ module.exports = function(grunt) {
             }
         },
         imagemin: {
-          dynamic: {
-            files: [{
-              expand: true,
-//              cwd: 'static/',
-              src: ['**/*.{png,jpg,gif}'],
-            }]
-          }
+            dynamic: {
+                files: [{
+                    expand: true,
+                    src: ['**/*.{png,jpg,gif}'],
+                }]
+            }
+        },
+        inline: {
+            dist: {
+                src: 'static/index.html',
+                dist: 'static/index.html'
+            }
         }
     });
 
@@ -81,5 +86,5 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['watch']);
     grunt.registerTask('test', ['jshint', 'jscs']);
-    grunt.registerTask('build', ['stylus', 'uglify','imagemin']);
+    grunt.registerTask('build', ['inline', 'stylus', 'uglify','imagemin']);
 };
