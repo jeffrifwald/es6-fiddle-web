@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+    require('load-grunt-tasks')(grunt);
     var jsFiles = [
             'static/lib/jshint/**/*.js',
             'static/lib/codemirror/**/*.js',
@@ -77,6 +78,12 @@ module.exports = function(grunt) {
                 src: 'static/index.html',
                 dist: 'static/index.html'
             }
+        },
+        eslint: {
+          options: {
+            config: '.eslintrc'
+          },
+          target: ['src/**/*.js']
         }
     });
 
@@ -85,6 +92,6 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', ['watch']);
-    grunt.registerTask('test', ['jshint', 'jscs']);
+    grunt.registerTask('test', ['jshint', 'jscs', 'eslint']);
     grunt.registerTask('build', ['inline', 'stylus', 'uglify','imagemin']);
 };
