@@ -80,10 +80,10 @@ module.exports = function(grunt) {
             }
         },
         eslint: {
-          options: {
-            config: '.eslintrc'
-          },
-          target: ['src/**/*.js']
+            options: {
+                config: '.eslintrc',
+            },
+            target: ['src/**/*.js', 'Gruntfile.js']
         }
     });
 
