@@ -9,4 +9,19 @@ if (!window.embedded) {
                 '</option>';
         }
     }
+
+    if (window.es7ExamplesEnabled) {
+        window.exampleSelector.innerHTML +=
+            '<option disabled>ES7 Examples</option>';
+
+        for (var example in window.es7Example) {
+            if (window.es7Example.hasOwnProperty(example)) {
+                window.exampleSelector.innerHTML +=
+                    '<option value="' + example + '">' +
+                    window.es7Example[example].display +
+                    '</option>';
+            }
+        }
+
+    }
 }

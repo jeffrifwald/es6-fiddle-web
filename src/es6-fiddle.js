@@ -25,8 +25,10 @@
 
     //set the global examples object
     window.es6Example = {};
-    window.exampleSelector = document.querySelector('.examples');
     window.embedded = embedded;
+    window.es7ExamplesEnabled = true;
+    window.es7Example = {};
+    window.exampleSelector = document.querySelector('.examples');
 
     //check to see if the share button should be shown
     if (fiddleId && !embedded) {
@@ -287,7 +289,15 @@
             //load the selected code
             window.exampleSelector.onchange = function() {
                 if (window.exampleSelector.value) {
-                    fiddle.setValue(window.es6Example[window.exampleSelector.value].code);
+                    var code = 'Example Can Not Be Found';
+
+                    if (window.es6Example[window.exampleSelector.value]) {
+                        code = window.es6Example[window.exampleSelector.value].code;
+                    } else if (window.es7Example[window.exampleSelector.value]) {
+                        code = window.es7Example[window.exampleSelector.value].code;
+                    }
+
+                    fiddle.setValue(code);
                 }
             };
         }
