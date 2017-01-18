@@ -7,9 +7,8 @@ Try out the latest ES6+ features right in your browser.
 
 See it online [here](https://esfiddle.net/).
 
-We welcome pull requests from first-timers and seasoned veteran programmers alike. Follow the steps below to get setup. Then have a look at some of the [projects issues](https://github.com/esfiddle/esfiddle/labels/up-for-grabs)
-
-### Getting Started
+Getting Started
+------------
 *This guide assumes you already have MongoDB and NodeJS installed.*
 
 Clone the repository
@@ -31,3 +30,16 @@ mongod
 
 # Start the application
 npm start
+```
+
+Found a bug?
+------------
+Read the [Help I've Found a Bug](REPORTBUG.md) article and follow its instructions.
+
+
+Contributing
+------------
+We welcome pull requests from first-timers and seasoned veteran programmers alike. Follow the steps above to get setup.
+Then have a look at some of the [projects issues](https://github.com/esfiddle/esfiddle/labels/up-for-grabs). After, please follow [these steps](CONTRIBUTE.md) to contribute.
+
+
