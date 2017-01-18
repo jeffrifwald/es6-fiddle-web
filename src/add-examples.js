@@ -1,7 +1,9 @@
 //add all of the example code to the example selector
 
 if (!window.embedded) {
-    for (var example in window.es6Example) {
+    var example;
+    
+    for (example in window.es6Example) {
         if (window.es6Example.hasOwnProperty(example)) {
             window.exampleSelector.innerHTML +=
                 '<option value="' + example + '">' +
@@ -14,7 +16,7 @@ if (!window.embedded) {
         window.exampleSelector.innerHTML +=
             '<option disabled>ES7 Examples</option>';
 
-        for (var example in window.es7Example) {
+        for (example in window.es7Example) {
             if (window.es7Example.hasOwnProperty(example)) {
                 window.exampleSelector.innerHTML +=
                     '<option value="' + example + '">' +
