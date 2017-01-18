@@ -21,7 +21,16 @@
         pathArr = location.pathname.split('/'),
         fiddleId = pathArr[pathArr.length - 2],
         embedded = pathArr[1] === 'embed',
-        bootstrap = null;
+        bootstrap = null,
+        share,
+        src,
+        iframe,
+        embed,
+        link,
+        twitter,
+        es6Btn,
+        consoleBtn,
+        editLink;
 
     //set the global examples object
     window.es6Example = {};
@@ -32,14 +41,14 @@
 
     //check to see if the share button should be shown
     if (fiddleId && !embedded) {
-        var share = document.querySelector('.share'),
-            src = document.location.protocol + '//' + document.location.host + '/embed/' + fiddleId + '/',
-            iframe = '<iframe width="100%" height="300" frameborder="0" allowfullscreen src="' + src + '"></iframe>';
+        share = document.querySelector('.share');
+        src = document.location.protocol + '//' + document.location.host + '/embed/' + fiddleId + '/';
+        iframe = '<iframe width="100%" height="300" frameborder="0" allowfullscreen src="' + src + '"></iframe>';
 
         if (share) {
-            var embed = share.querySelector('#share-embed'),
-                link = share.querySelector('#share-link'),
-                twitter = share.querySelector('.tweet');
+            embed = share.querySelector('#share-embed');
+            link = share.querySelector('#share-link');
+            twitter = share.querySelector('.tweet');
 
             share.style.display = 'inline-block';
             link.value = document.location.href;
@@ -52,9 +61,9 @@
 
     //handle the embedded buttons
     if (embedded) {
-        var es6Btn = document.querySelector('.es6-click-btn'),
-            consoleBtn = document.querySelector('.console-click-btn'),
-            editLink = document.querySelector('.edit-at-es6');
+        es6Btn = document.querySelector('.es6-click-btn');
+        consoleBtn = document.querySelector('.console-click-btn');
+        editLink = document.querySelector('.edit-at-es6');
 
         editLink.href = document.location.href.replace('/embed', '');
 
