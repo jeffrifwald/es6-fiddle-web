@@ -20,6 +20,7 @@
     "mongodb": "^2.2.5"
   },
   "devDependencies": {
+    "eslint": "^3.13.1",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-imagemin": "^1.0.1",
@@ -27,8 +28,10 @@
     "grunt-contrib-stylus": "^1.2.0",
     "grunt-contrib-uglify": "^2.0.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-eslint": "^19.0.0",
     "grunt-inline": "0.3.6",
-    "grunt-jscs": "^3.0.1"
+    "grunt-jscs": "^3.0.1",
+    "load-grunt-tasks": "^3.5.2"
   },
   "scripts": {
     "test": "grunt test",
