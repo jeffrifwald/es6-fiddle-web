@@ -39,7 +39,7 @@ module.exports = function(grunt) {
             compile: {
                 files: {
                     'static/src/es6-fiddle.js': jsFiles,
-                    'static/lib/babel/babel.min.js' : ['static/lib/babel/*.js']
+                    'static/lib/babel/babel.min.js' : ['static/lib/babel/*.js', '!static/lib/babel/babel.min.js']
                 }
             }
         },
