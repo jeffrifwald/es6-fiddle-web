@@ -12,7 +12,6 @@
         iDoc = document.querySelector('.result').contentDocument,
         iHead = iDoc.getElementsByTagName('head')[0],
         babel = document.createElement('script'),
-        babelPolyfill = document.createElement('script'),
         logger = document.createElement('script'),
         style = document.createElement('style'),
         lintLog = null,
@@ -195,7 +194,8 @@
                 userInput.className = 'babel-text';
 
                 //set the new script code
-                userInput.innerHTML = fiddle.getValue();
+                var inputWithTryCatch = 'try {' + fiddle.getValue() + '} catch(e) { console.log(e.message); }';
+                userInput.innerHTML = inputWithTryCatch;
                 bootstrap.innerHTML = (
                     'document.body.innerHTML = \'\';\n' +
                     'babel.run(document.querySelector(".babel-text").innerHTML);\n'
@@ -313,8 +313,6 @@
     };
 
     //add babel to the iframe
-    babelPolyfill.src = '/lib/babel/babel-polyfill.js';
-    babel.src = '/lib/babel/babel.js';
-    iHead.appendChild(babelPolyfill);
+    babel.src = '/lib/babel/babel.min.js';
     iHead.appendChild(babel);
 })();

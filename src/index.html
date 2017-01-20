@@ -7,15 +7,9 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
         <meta name="Keywords" content="ES6, ES7, ES8, Ecmascript 2015, ES2015, ES2016, Ecmascript, Javascript, JS, TC39, ES2017, Ecmascript 2016">
 
         <title>ESFiddle</title>
-        <link rel="stylesheet" href="/style/es6-fiddle.css">
+        <link rel="stylesheet" href="../static/style/es6-fiddle.css?__inline=true">
+        <script src="../src/redirect-traffic.js?__inline=true"></script>
         <link rel="icon" href="/images/favicon.png">
-        <script>
-// redirect traffic to HTTPS from HTTP
-if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && location.protocol != 'https:') {
-    location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
-}
-
-</script>
     </head>
     <body>
         <div class="header">
@@ -103,7 +97,7 @@ if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && loca
                 <iframe class="result"></iframe>
             </div>
         </div>
-        <script src="/src/analytics.js"></script>
-        <script src="/src/es6-fiddle.js"></script>
+        <script defer src="/src/analytics.js"></script>
+        <script async src="/src/es6-fiddle.js"></script>
     </body>
 </html>

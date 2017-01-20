@@ -38,7 +38,8 @@ module.exports = function(grunt) {
         uglify: {
             compile: {
                 files: {
-                    'static/src/es6-fiddle.js': jsFiles
+                    'static/src/es6-fiddle.js': jsFiles,
+                    'static/lib/babel/babel.min.js' : ['static/lib/babel/*.js', '!static/lib/babel/babel.min.js']
                 }
             }
         },
@@ -75,8 +76,8 @@ module.exports = function(grunt) {
         },
         inline: {
             dist: {
-                src: 'static/index.html',
-                dist: 'static/index.html'
+                src: 'src/index.html',
+                dest: 'static/index.html'
             }
         },
         eslint: {
@@ -93,5 +94,5 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['watch']);
     grunt.registerTask('test', ['jshint', 'jscs', 'eslint']);
-    grunt.registerTask('build', ['inline', 'stylus', 'uglify','imagemin']);
+    grunt.registerTask('build', ['stylus', 'uglify','imagemin', 'inline']);
 };
