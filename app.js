@@ -8,8 +8,7 @@ var express = require('express'),
 
 app.use(compression());
 app.use(bodyParser.json());
-app.use('/', express.static(__dirname + '/static'), { maxAge: 0});
-app.use('/static/images', express.static(__dirname + '/static/images'), { maxAge: '1y' });
+app.use('/', express.static(__dirname + '/static'));
 
 app.get(/^\/\w+\/$/, function(req, res) {
     res.sendFile(__dirname + '/static/index.html');
