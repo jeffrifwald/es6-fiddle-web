@@ -12,7 +12,6 @@
         iDoc = document.querySelector('.result').contentDocument,
         iHead = iDoc.getElementsByTagName('head')[0],
         babel = document.createElement('script'),
-        babelPolyfill = document.createElement('script'),
         logger = document.createElement('script'),
         style = document.createElement('style'),
         lintLog = null,
@@ -314,8 +313,6 @@
     };
 
     //add babel to the iframe
-    babelPolyfill.src = '/lib/babel/babel-polyfill.js';
-    babel.src = '/lib/babel/babel.js';
-    iHead.appendChild(babelPolyfill);
+    babel.src = '/lib/babel/babel.min.js';
     iHead.appendChild(babel);
 })();

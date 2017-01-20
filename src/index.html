@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="Description" content="Try out ES6+ features and share them with your friends, right in your browser! 
+With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) with our preset samples or create your own snippets to share with others.">
+        <meta name="Keywords" content="ES6, ES7, ES8, Ecmascript 2015, ES2015, ES2016, Ecmascript, Javascript, JS, TC39, ES2017, Ecmascript 2016">
+
+        <title>ESFiddle</title>
+        <link rel="stylesheet" href="../static/style/es6-fiddle.css?__inline=true">
+        <script src="../src/redirect-traffic.js?__inline=true"></script>
+        <link rel="icon" href="/images/favicon.png">
+    </head>
+    <body>
+        <div class="header">
+            <span class="about">About</span>
+            <span><a href="https://github.com/esfiddle/esfiddle" target="_blank"><img src="/images/GitHub.png" class="github-logo"></a></span>
+            <span class="horizontal layoutBtns">H</span>
+            <span class="vertical layoutBtns">V</span>
+        </div>
+        <div class="content">
+            <div class="selector-wrapper">
+                <select class="examples">
+                    <option selected disabled>ES6 Examples</option>
+                </select>
+                <select class="change-theme">
+                    <option selected disabled>Choose Theme</option>
+                    <option>default</option>
+                    <option>3024-day</option>
+                    <option>3024-night</option>
+                    <option>abcdef</option>
+                    <option>ambiance</option>
+                    <option>base16-dark</option>
+                    <option>base16-light</option>
+                    <option>bespin</option>
+                    <option>blackboard</option>
+                    <option>cobalt</option>
+                    <option>colorforth</option>
+                    <option>dracula</option>
+                    <option>eclipse</option>
+                    <option>elegant</option>
+                    <option>erlang-dark</option>
+                    <option>hopscotch</option>
+                    <option>icecoder</option>
+                    <option>isotope</option>
+                    <option>lesser-dark</option>
+                    <option>liquibyte</option>
+                    <option>material</option>
+                    <option>mbo</option>
+                    <option>mdn-like</option>
+                    <option>midnight</option>
+                    <option>monokai</option>
+                    <option>neat</option>
+                    <option>neo</option>
+                    <option>night</option>
+                    <option>panda-syntax</option>
+                    <option>paraiso-dark</option>
+                    <option>paraiso-light</option>
+                    <option>pastel-on-dark</option>
+                    <option>railscasts</option>
+                    <option>rubyblue</option>
+                    <option>seti</option>
+                    <option>solarized dark</option>
+                    <option>solarized light</option>
+                    <option>the-matrix</option>
+                    <option>tomorrow-night-bright</option>
+                    <option>tomorrow-night-eighties</option>
+                    <option>ttcn</option>
+                    <option>twilight</option>
+                    <option>vibrant-ink</option>
+                    <option>xq-dark</option>
+                    <option>xq-light</option>
+                    <option>yeti</option>
+                    <option>zenburn</option>
+                </select>
+            </div>
+            <div class="fiddle-wrapper">
+                <div class="fiddle-header">
+                    <span>Code</span>
+                    <div class="share">
+                        <div class="share-drop">
+                            <label for="share-link">Link</label>
+                            <input value="" id="share-link">
+                            <label for="shared-embed">Embed</label>
+                            <input value="" id="share-embed">
+                            <a class="tweet" href="#" target="_blank">Tweet</a>
+                        </div>
+                    </div>
+                    <div title="save" class="save"></div>
+                    <div title="lint" class="lint"></div>
+                    <div title="run" class="run"></div>
+                </div>
+                <div class="fiddle"></div>
+            </div>
+            <div class="result-wrapper">
+                <div class="result-header"><span>Console</span></div>
+                <iframe class="result"></iframe>
+            </div>
+        </div>
+        <script defer src="/src/analytics.js"></script>
+        <script async src="/src/es6-fiddle.js"></script>
+    </body>
+</html>

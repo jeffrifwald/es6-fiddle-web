@@ -1,9 +1,16 @@
 {
   "name": "es6-fiddle-web",
   "description": "Fiddlin' with ECMAScript6.",
-  "version": "0.1.0",
-  "homepage": "http://www.es6fiddle.net",
+  "version": "1.0.0",
+  "homepage": "https://www.esfiddle.net",
   "license": "SEE LICENSE IN LICENSE.md",
+  "maintainers": [
+    {
+      "name": "Josh Ghent",
+      "email": "josh@esfiddle.net",
+      "url": "github.com/joshghent"
+    }
+  ],
   "author": {
     "name": "Jeff McRiffey",
     "email": "jeff.mcriffey@tryambition.com",
@@ -11,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jmcriffey/es6-fiddle-web.git"
+    "url": "https://github.com/esfiddle/esfiddle.git"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -22,6 +29,7 @@
   "devDependencies": {
     "eslint": "^3.13.1",
     "grunt": "^1.0.1",
+    "grunt-assets-inline": "0.1.14",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-imagemin": "^1.0.1",
     "grunt-contrib-jshint": "^1.0.0",
