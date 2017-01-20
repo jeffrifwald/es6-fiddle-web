@@ -3,6 +3,6 @@ node_modules/
 .env
 npm-debug.log
 .idea/*
-/static/src/es6-fiddle.js
-/static/style/es6-fiddle.css
-/static/index.html
+*/static/src/es6-fiddle.js
+*/static/style/es6-fiddle.css
+*/static/index.html
