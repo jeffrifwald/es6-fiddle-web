@@ -42,6 +42,7 @@
     "load-grunt-tasks": "^3.5.2"
   },
   "scripts": {
+    "heroku-prebuild": "grunt build",
     "test": "grunt test",
     "start": "grunt build && node app.js",
     "build": "grunt build"
