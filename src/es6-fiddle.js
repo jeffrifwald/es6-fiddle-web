@@ -194,7 +194,8 @@
                 userInput.className = 'babel-text';
 
                 //set the new script code
-                userInput.innerHTML = fiddle.getValue();
+                var inputWithTryCatch = 'try {' + fiddle.getValue() + '} catch(e) { console.log(e.message); }';
+                userInput.innerHTML = inputWithTryCatch;
                 bootstrap.innerHTML = (
                     'document.body.innerHTML = \'\';\n' +
                     'babel.run(document.querySelector(".babel-text").innerHTML);\n'
