@@ -4,7 +4,7 @@ var mongo = require('mongodb').MongoClient,
     app = require('./../app').app;
 
 var testFiddle = {
-    fiddle: parseInt( new Date(), 10).toString(36),
+    fiddle: parseInt( Date.now() , 10).toString(36),
     value: "console.log('Testing....');"
 }
 
@@ -14,18 +14,7 @@ mongo.connect(String(process.env.MONGODB_URI), function (err, db) {
 });
 
 
-// beforeEach( () =>{
-//     fiddles.findOne({fiddle:testFiddle.fiddle}, (err,item) => {
-//             if(err)
-//                 return ;
-//             console.log('test fiddle',item);
-            
-//         });
-// });
-
-
-
-describe('/save', function () {
+describe('POST /save', function () {
 
     it('Should save fiddle in to database', (done) => {
         var fiddleValue = "console.log('Testing....');"
@@ -55,8 +44,38 @@ describe('/save', function () {
     it('Should return 400 Bad Request for empty fiddle (no value)', (done) =>{
         request(app).post('/save').send({ })
                                   .expect(400)
+                                  .expect( res => {
+                                        expect(res.body).to.empty;                                        
+                                    })
                                   .end(done);
     });
 
 
+});
+
+
+describe('GET /fiddles/fiddle', function () {
+    it('should get correct fiddle from DB', (done) => {
+        request(app).get('/fiddles/'+testFiddle.fiddle)
+                    .expect(200)
+                    .expect( res => {
+                        expect(res.body).to.not.null;
+                        expect(res.body.fiddle).to.equal(testFiddle.fiddle);
+                        expect(res.body.value).to.equal(testFiddle.value);
+                    })
+                    .end(done);
+    });
+
+    it('should not return fiddle', (done) => {
+        request(app).get('/fiddles/'+ parseInt( new Date(), 10).toString(36) )
+                    .expect(200) //Ideally this one should return 404
+                    .expect( res => {
+                        expect(res.body).to.exist;
+                        expect(res.body.fiddle).to.not.exist;
+                        expect(res.body.value).to.not.exist;
+                        expect(res.body.message).to.exist;
+                        
+                    })
+                    .end(done);
+    });
 });
