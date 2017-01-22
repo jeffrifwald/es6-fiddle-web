@@ -67,7 +67,7 @@ describe('GET /fiddles/fiddle', function () {
     });
 
     it('should not return fiddle', (done) => {
-        request(app).get('/fiddles/'+ parseInt( new Date(), 10).toString(36) )
+        request(app).get('/fiddles/'+ parseInt( Date.now() , 10).toString(36) )
                     .expect(404) 
                     .expect( res => {
                         expect(res.body).to.exist;
