@@ -1,5 +1,5 @@
 var mongo = require('mongodb').MongoClient,
-    request = require('superTest'),
+    request = require('supertest'),
     expect = require('chai').expect,
     app = require('./../app').app;
 
