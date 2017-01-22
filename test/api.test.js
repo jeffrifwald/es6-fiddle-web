@@ -1,7 +1,8 @@
 var mongo = require('mongodb').MongoClient,
     request = require('supertest'),
     expect = require('chai').expect,
-    app = require('./../app').app;
+    app = require('./../app').app
+    fiddles = null;
 
 var testFiddle = {
     fiddle: parseInt( Date.now() , 10).toString(36),
