@@ -68,7 +68,7 @@ describe('GET /fiddles/fiddle', function () {
 
     it('should not return fiddle', (done) => {
         request(app).get('/fiddles/'+ parseInt( new Date(), 10).toString(36) )
-                    .expect(200) //Ideally this one should return 404
+                    .expect(404) 
                     .expect( res => {
                         expect(res.body).to.exist;
                         expect(res.body.fiddle).to.not.exist;
