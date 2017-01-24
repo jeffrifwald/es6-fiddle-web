@@ -52,8 +52,7 @@
     "test": "grunt test && npm run test-node",
     "test-node": "mocha test/*.test.js",
     "prestart": "npm install",
-    "start": "grunt build && node app.js",
-    "dev": "npm run prestart && grunt dev",
+    "start": "grunt dev",
     "build": "grunt build"
   }
 }

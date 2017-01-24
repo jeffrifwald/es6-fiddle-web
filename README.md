@@ -19,9 +19,6 @@ git clone git@github.com:esfiddle/esfiddle.git
 # Change directory
 cd esfiddle
 
-# Install Npm dependencies
-npm install
-
 # Add a MONGODB_URI to your environment
 export MONGODB_URI='mongodb://localhost:27017/fiddles'
 
