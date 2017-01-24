@@ -1,18 +1,22 @@
-var mongo = require('mongodb').MongoClient,
-    request = require('supertest'),
+//var mongo = require('mongodb').MongoClient,
+var request = require('supertest'),
     expect = require('chai').expect,
     app = require('./../app').app
-    fiddles = null;
+    fiddles = require('./../db/fiddles');
 
-var testFiddle = {
+var testFiddle = new fiddles({
     fiddle: parseInt( Date.now() , 10).toString(36),
     value: "console.log('Testing....');"
-}
-
-mongo.connect(String(process.env.MONGODB_URI), function (err, db) {
-    fiddles = db.collection('fiddles');
-    fiddles.insert(testFiddle);
 });
+
+testFiddle.save().then ( (fiddle) => console.log('Test Fiddle Saved', JSON.stringify(fiddle,undefined,2)))
+                 .catch( e => console.log('Error while saving test fiddle',e));
+
+
+// mongo.connect(String(process.env.MONGODB_URI), function (err, db) {
+//     fiddles = db.collection('fiddles');
+//     fiddles.insert(testFiddle);
+// });
 
 
 describe('POST /save', function () {

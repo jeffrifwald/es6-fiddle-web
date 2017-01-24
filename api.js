@@ -1,10 +1,10 @@
-var mongo = require('mongodb').MongoClient,
-    fiddles = null;
+//var mongo = require('mongodb').MongoClient,
+var  fiddles = require('./db/fiddles');
 
 module.exports = function(app) {
-    mongo.connect(String(process.env.MONGODB_URI), function(err, db) {
-        fiddles = db.collection('fiddles');
-    });
+    // mongo.connect(String(process.env.MONGODB_URI), function(err, db) {
+    //     fiddles = db.collection('fiddles');
+    // });
 
     app.get(/^\/fiddles\/\w+$/, function(req, res) {
         var fiddle = req.url.split('/').pop();
@@ -29,10 +29,11 @@ module.exports = function(app) {
         if (req.body.value) { //don't save anything empty
             fiddles.findOne({fiddle: fiddle}, function(err, item) {
                 if (!item) {
-                    fiddles.insert({
+                    var newFiddle = new fiddles({
                         fiddle: fiddle,
                         value: req.body.value
-                    }, function() {
+                    });
+                    newFiddle.save(function() {
                         console.log('Inserted fiddle at', fiddle + '.');
                         res.json({      //send response after saving fiddle
                             saved: true,

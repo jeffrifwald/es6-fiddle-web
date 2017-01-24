@@ -24,7 +24,8 @@
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
     "express": "^4.14.0",
-    "mongodb": "^2.2.5"
+    "mongodb": "^2.2.5",
+    "mongoose": "^4.7.7"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -46,7 +47,7 @@
   },
   "scripts": {
     "test": "grunt test && npm run test-node",
-    "test-node":"mocha test/*.test.js",
+    "test-node": "mocha test/*.test.js",
     "start": "grunt build && node app.js",
     "build": "grunt build"
   }
