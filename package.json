@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "cross-env": "3.1.4",
     "eslint": "^3.13.1",
     "grunt": "^1.0.1",
     "grunt-assets-inline": "0.1.14",
@@ -51,8 +52,8 @@
     "test": "grunt test && npm run test-node",
     "test-node": "mocha test/*.test.js",
     "prestart": "npm install",
-    "start": "export MONGODB_URI='mongodb://localhost:27017/fiddles' && grunt build && node app.js",
-    "dev": "grunt dev",
+    "start": "grunt build && node app.js",
+    "dev": "npm run prestart && grunt dev",
     "build": "grunt build"
   }
 }
