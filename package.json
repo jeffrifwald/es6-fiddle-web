@@ -29,9 +29,11 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "cross-env": "3.1.4",
     "eslint": "^3.13.1",
     "grunt": "^1.0.1",
     "grunt-assets-inline": "0.1.14",
+    "grunt-browser-sync": "2.2.0",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-imagemin": "^1.0.1",
     "grunt-contrib-jshint": "^1.0.0",
@@ -39,6 +41,7 @@
     "grunt-contrib-uglify": "^2.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-eslint": "^19.0.0",
+    "grunt-express-server": "0.5.3",
     "grunt-inline": "0.3.6",
     "grunt-jscs": "^3.0.1",
     "load-grunt-tasks": "^3.5.2",
@@ -48,7 +51,8 @@
   "scripts": {
     "test": "grunt test && npm run test-node",
     "test-node": "mocha test/*.test.js",
-    "start": "grunt build && node app.js",
+    "prestart": "npm install",
+    "start": "grunt dev",
     "build": "grunt build"
   }
 }

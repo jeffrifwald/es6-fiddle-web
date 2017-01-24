@@ -17,7 +17,9 @@ module.exports = function(grunt) {
             'grunt-contrib-watch',
             'grunt-jscs',
             'grunt-contrib-imagemin',
-            'grunt-inline'
+            'grunt-inline',
+            'grunt-browser-sync',
+            'grunt-express-server'
         ];
 
     grunt.initConfig({
@@ -55,15 +57,19 @@ module.exports = function(grunt) {
         },
         watch: {
             options: {
-                atBegin: true
+                reload: true
             },
             style: {
                 files: styleFiles,
-                tasks: ['stylus']
+                tasks: ['stylus', 'inline']
             },
             src: {
                 files: jsFiles,
                 tasks: ['uglify']
+            },
+            html: {
+                files: 'src/index.html',
+                tasks: ['inline']
             }
         },
         imagemin: {
@@ -85,6 +91,23 @@ module.exports = function(grunt) {
                 config: '.eslintrc',
             },
             target: ['src/**/*.js', 'Gruntfile.js']
+        },
+        browserSync: {
+            bsFiles: {
+                src: [jsFiles, styleFiles],
+            },
+            options: {
+                watchTask: true,
+                proxy: 'http://localhost:3000',
+                reloadOnRestart: true
+            }
+        },
+        express: {
+            dev: {
+                options: {
+                    script: 'app.js'
+                }
+            }
         }
     });
 
@@ -95,4 +118,5 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['watch']);
     grunt.registerTask('test', ['jshint', 'jscs', 'eslint']);
     grunt.registerTask('build', ['stylus', 'uglify','imagemin', 'inline']);
+    grunt.registerTask('dev', ['express:dev', 'browserSync', 'watch']);
 };
