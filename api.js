@@ -1,5 +1,5 @@
 //var mongo = require('mongodb').MongoClient,
-var  fiddles = require('./db/fiddles');
+var  Fiddles = require('./db/fiddles');
 
 module.exports = function(app) {
     // mongo.connect(String(process.env.MONGODB_URI), function(err, db) {
@@ -10,7 +10,7 @@ module.exports = function(app) {
         var fiddle = req.url.split('/').pop();
 
         if (fiddle) {
-            fiddles.findOne({fiddle: fiddle}, function(err, item) {
+            Fiddles.findOne({fiddle: fiddle}, function(err, item) {
                 if (item) {
                     res.json(item);
                 } else {
@@ -27,9 +27,9 @@ module.exports = function(app) {
             fiddle = parseInt(now, 10).toString(36);
 
         if (req.body.value) { //don't save anything empty
-            fiddles.findOne({fiddle: fiddle}, function(err, item) {
+            Fiddles.findOne({fiddle: fiddle}, function(err, item) {
                 if (!item) {
-                    var newFiddle = new fiddles({
+                    var newFiddle = new Fiddles({
                         fiddle: fiddle,
                         value: req.body.value
                     });

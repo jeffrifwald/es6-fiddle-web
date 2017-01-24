@@ -2,7 +2,7 @@
  * Run this file to test DB
  * Only need to run this file after setting up MONGODB_URI
  * 
- * export MONGODB_URI='mongodb://localhost:27017/fiddles'
+ * export MONGODB_URI='mongodb://localhost:27017/Fiddles'
  * 
  * Not actual test file this is just to check if any conflict with old and new database schema
  */
@@ -11,7 +11,7 @@
 
 var mongoose = require('mongoose'),
     Users = require('./users'),
-    fiddles = require('./fiddles');
+    Fiddles = require('./fiddles');
 
 
 var userId= new mongoose.Types.ObjectId();
@@ -36,14 +36,14 @@ var user = new Users({
 });
 
 //With UserID
-var testFiddle1 = new fiddles({
+var testFiddle1 = new Fiddles({
     userId:userId,
     fiddle: parseInt( Date.now() , 10).toString(36),
     value: "console.log('Testing....');"
 });
 
 //With UserID
-var testFiddle2 = new fiddles({
+var testFiddle2 = new Fiddles({
     fiddle: parseInt( Date.now() , 10).toString(36),
     value: "console.log('Testing....');"
 });

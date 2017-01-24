@@ -18,7 +18,7 @@ var fiddlesSchema = new Schema({
 
 });
 
-var fiddles = mongoose.model('fiddles', fiddlesSchema);
+var Fiddles = mongoose.model('Fiddles', fiddlesSchema);
 
-module.exports = fiddles
+module.exports = Fiddles
 

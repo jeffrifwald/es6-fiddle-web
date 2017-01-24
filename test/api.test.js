@@ -2,9 +2,9 @@
 var request = require('supertest'),
     expect = require('chai').expect,
     app = require('./../app').app
-    fiddles = require('./../db/fiddles');
+    Fiddles = require('./../db/fiddles');
 
-var testFiddle = new fiddles({
+var testFiddle = new Fiddles({
     fiddle: parseInt( Date.now() , 10).toString(36),
     value: "console.log('Testing....');"
 });
@@ -34,7 +34,7 @@ describe('POST /save', function () {
                 if (err)
                     return done(err);
                 // Make sure fiddle is saved in database
-                fiddles.findOne({ fiddle:res.body.fiddle }, function (err, item) {
+                Fiddles.findOne({ fiddle:res.body.fiddle }, function (err, item) {
                     if (err) {
                         return done(err);
                     }
