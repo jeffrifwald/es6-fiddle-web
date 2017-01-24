@@ -1,7 +1,7 @@
-var mongoose = require('./mongoose');
+var mongoose = require('./mongoose'),
+    Schema = mongoose.Schema;
 
-
-var fiddles = mongoose.model('fiddles', {
+var fiddlesSchema = new Schema({
 
     userId:{    
         type:mongoose.Schema.Types.ObjectId,
@@ -18,6 +18,7 @@ var fiddles = mongoose.model('fiddles', {
 
 });
 
+var fiddles = mongoose.model('fiddles', fiddlesSchema);
 
 module.exports = fiddles
 

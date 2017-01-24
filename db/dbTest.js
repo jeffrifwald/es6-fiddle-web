@@ -49,13 +49,13 @@ var testFiddle2 = new fiddles({
 });
 
 
-user.save().then( (user) => console.log('User Added',user))
+user.save().then( (user) => console.log('User Added:',JSON.stringify(user,undefined,2)))
                  .catch( (e) => console.log(e));
 
 
-testFiddle1.save().then( (fiddle) => console.log('Fiddle added',fiddle))
+testFiddle1.save().then( (fiddle) => console.log('Fiddle added(with UserID):',JSON.stringify(fiddle,undefined,2)))
                           .catch( (e) => console.log(e));
 
-testFiddle2.save().then( (fiddle) => console.log('Fiddle added',fiddle))
+testFiddle2.save().then( (fiddle) => console.log('Fiddle added(without UserID):',JSON.stringify(fiddle,undefined,2)))
                           .catch( (e) => console.log(e));
 

@@ -1,7 +1,7 @@
-var mongoose = require('./mongoose');
+var mongoose = require('./mongoose'),
+    Schema = mongoose.Schema;
 
-
-var Users = mongoose.model('Users', {
+var usersSchema = new Schema({
     
     login: String,
     name: String,
@@ -20,7 +20,9 @@ var Users = mongoose.model('Users', {
     accessToken:String,
     refreshToken:String,
     totalFiddles:Number,
+    startedFiddles:[String]     //We will store fiddle string here NOT objectID
 });
 
+var Users = mongoose.model('Users',usersSchema)
 
 module.exports = Users ;
