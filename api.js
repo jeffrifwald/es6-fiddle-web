@@ -15,7 +15,8 @@ module.exports = function(app) {
                     res.json(item);
                 } else {
                     res.status(404).json({
-                        'message': '\/* Oops! I got 404,\n * but not the fiddle \"' + fiddle + '\" you are looking for :( \n *\/\n'
+                        'message': '\/* Oops! I got 404,\n * but not the fiddle \"' + fiddle + 
+                                            '\" you are looking for :( \n *\/\n'
                     });
                 }
             });
