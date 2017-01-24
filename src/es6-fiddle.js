@@ -210,13 +210,15 @@
             loadReq.open('GET', '/fiddles/' + fiddleId, true);
             loadReq.send();
             loadReq.onload = function() {
+                loadResp = JSON.parse(this.response);
                 if (this.status >= 200 && this.status < 400) {
-                    loadResp = JSON.parse(this.response);
                     if (loadResp.value) {
                         fiddle.setValue(loadResp.value);
                     } else {
                         fiddle.setValue('\/* Sorry, but I could not load your code right now. *\/');
                     }
+                } else if (this.status === 404 ){
+                    fiddle.setValue(loadResp.message);
                 }
 
                 if (embedded) { //go ahead and run the code

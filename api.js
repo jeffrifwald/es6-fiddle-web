@@ -1,21 +1,22 @@
-var mongo = require('mongodb').MongoClient,
-    fiddles = null;
+//var mongo = require('mongodb').MongoClient,
+var  Fiddles = require('./db/fiddles');
 
 module.exports = function(app) {
-    mongo.connect(String(process.env.MONGODB_URI), function(err, db) {
-        fiddles = db.collection('fiddles');
-    });
+    // mongo.connect(String(process.env.MONGODB_URI), function(err, db) {
+    //     fiddles = db.collection('fiddles');
+    // });
 
     app.get(/^\/fiddles\/\w+$/, function(req, res) {
         var fiddle = req.url.split('/').pop();
 
         if (fiddle) {
-            fiddles.findOne({fiddle: fiddle}, function(err, item) {
+            Fiddles.findOne({fiddle: fiddle}, function(err, item) {
                 if (item) {
                     res.json(item);
                 } else {
-                    res.json({
-                        'message': 'No fiddle found.'
+                    res.status(404).json({
+                        'message': '\/* Oops! I got 404,\n * but not the fiddle \"' + fiddle + 
+                                            '\" you are looking for :( \n *\/\n'
                     });
                 }
             });
@@ -27,12 +28,13 @@ module.exports = function(app) {
             fiddle = parseInt(now, 10).toString(36);
 
         if (req.body.value) { //don't save anything empty
-            fiddles.findOne({fiddle: fiddle}, function(err, item) {
+            Fiddles.findOne({fiddle: fiddle}, function(err, item) {
                 if (!item) {
-                    fiddles.insert({
+                    var newFiddle = new Fiddles({
                         fiddle: fiddle,
                         value: req.body.value
-                    }, function() {
+                    });
+                    newFiddle.save(function() {
                         console.log('Inserted fiddle at', fiddle + '.');
                         res.json({      //send response after saving fiddle
                             saved: true,
