@@ -19,11 +19,11 @@ git clone git@github.com:esfiddle/esfiddle.git
 # Change directory
 cd esfiddle
 
-# Add a MONGODB_URI to your environment
-export MONGODB_URI='mongodb://localhost:27017/fiddles'
+# Update PRIVATE variables in sample.env file and rename it to '.env'
+mv sample.env .env
 
 # Open a new terminal window and start MongoDB
-mongod
+mongod --dbpath path/to/your/db/folder
 
 # Start the application
 npm start
