@@ -1,0 +1,21 @@
+<!-- views/login.ejs -->
+<!doctype html>
+<html>
+<head>
+
+</head>
+<body>
+
+<p>
+			<a href="/">Home</a> |
+			<a href="/auth/github">Git login</a>
+			</p>
+
+<!-- show any messages that come back with authentication -->
+    <% if (message) { %>
+        <div class="alert alert-danger"><%= message.failure %></div>
+    <% } %>
+
+    <h1> <%= title %> </h1>
+</body>
+</html>

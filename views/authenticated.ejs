@@ -1,0 +1,41 @@
+<!-- views/login.ejs -->
+<!doctype html>
+<html>
+<head>
+<style>
+.avatar {      
+background-color: #F5F5F5;      
+border: 1px solid #DDDDDD;
+width: 150px;
+height: 150px;      
+border-radius: 50% 50% 50% 50%;      
+padding: 4px; 
+} 
+</style>
+</head>
+<body>
+
+<p>
+			<a href="/">Home</a> |
+			<a href="/github/logout">Log Out</a>
+			</p>
+
+<!-- show any messages that come back with authentication -->
+    <% if (message) { %>
+        <div class="alert alert-danger"><%= message.success %></div>
+    <% } %>
+<img class=avatar src="<%= user.avatar_url %>" alt="">
+<br/>
+<p>githubId: <%= user.githubId %></p>
+<p>login: <%= user.login %></p>
+<p>Name: <%= user.name %></p>
+<p>email: <%= user.email %></p>
+<p>avatar_url: <%= user.avatar_url %></p>
+<p>location: <%= user.location %></p>
+<p>bio: <%= user.bio %></p>
+<p>public_repos: <%= user.public_repos %></p>
+<p>public_gists: <%= user.public_gists %></p>
+<p>Name: <%= user.name %></p>
+
+</body>
+</html>

@@ -4,6 +4,7 @@ var express = require('express'),
     compression = require('compression'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
+    flash = require('connect-flash'),
     passport = require('./auth'),
     pkg = require('./package.json'),
     api = require('./api'),
@@ -12,11 +13,15 @@ var express = require('express'),
 
 app.use(compression());
 app.use(bodyParser.json());
+app.use(flash());
 app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 // Initialize Passport!  Also use passport.session() middleware, to support
 // persistent login sessions (recommended).
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
 
 //Passport middleware function to make sure user is authenticated.
 function ensureAuthenticated(req, res, next) {
@@ -48,7 +53,8 @@ app.get(/^\/embed\/\w+$/, function(req, res) {
 });
 
 app.get('/github/login', function(req, res) {
-    res.send('you are in login page! you are not logged in.');
+    var title = 'you are on login page! you are not logged in.';
+    res.render('login', { title: title , message: req.flash() });
 });
 
 //TESTING URL FOR GITHUB 
@@ -61,7 +67,7 @@ app.get('/auth/github',
 
 app.get('/auth/github/callback', 
   passport.authenticate('github', { 
-      failureRedirect: '/github/login', failureFlash: true }),
+      failureRedirect: '/github/login', failureFlash: true, successFlash: 'Welcome!' }),
   function(req, res) {
     // Successful authentication, redirect home.
       res.redirect('/github/onlyAuthoisedUser');
@@ -69,7 +75,8 @@ app.get('/auth/github/callback',
 
 app.get('/github/onlyAuthoisedUser', ensureAuthenticated, function(req, res) {
     // Testing for authorised user
-    res.send(req.user);
+    //res.send(req.user);
+    res.render('authenticated', { user: req.user ,  message: req.flash() });
 });
 
 app.get('/github/logout', function(req, res) {
