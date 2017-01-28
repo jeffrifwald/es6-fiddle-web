@@ -23,6 +23,7 @@
     float: right;
     margin-right: 10px;
     margin-top: 18px;
+    transition: background-color 0.5s;
 }
 
 .layoutBtns {
@@ -33,6 +34,18 @@
     color: #983e50;
     background-color: white;
     padding: 3px;
+}
+
+.dark-mode {
+    display: inline-block;
+    float: right;
+    height: 19px;
+    width: 19px;
+    margin-top: 1px;
+    margin-right: 10px;
+    background-image: url('/images/dark.png');
+    background-size: contain;
+    cursor: pointer;
 }
 
 .github-logo {
@@ -112,6 +125,7 @@
             font-size: 18px;
             font-family: 'helvetica', 'arial', 'sans-serif';
             position: relative;
+            transition: background-color, color 0.5s;
 
             span {
                 margin-left: 20px;
@@ -213,6 +227,7 @@
             line-height: 58px;
             font-size: 18px;
             font-family: 'helvetica', 'arial', 'sans-serif';
+            transition: background-color, color 0.5s;
 
             span {
                 margin-left: 20px;
@@ -224,6 +239,29 @@
             height: 450px;
             width: 100%;
             border: none;
+            transition: background-color 0.5s;
+        }
+    }
+}
+
+.dark {
+    .content {
+        .fiddle-header, .result-header {
+            background-color: #983e50;
+            color: white;
+
+            transition: background-color, color 0.5s;
+        }
+
+        .result {
+            background-color: #272822;
+            transition: background-color 0.5s;
+            color: darken(white, 25%);
+        }
+
+        .save, .lint, .run, .share {
+            background-color: darken(#983e50, 25%) !important;
+            transition: background-color 0.5s;
         }
     }
 }

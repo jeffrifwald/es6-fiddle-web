@@ -1,13 +1,16 @@
 (function() {
     var fiddle = null,
+        body = document.querySelector('body'),
         runBtn = document.querySelector('.run'),
         lintBtn = document.querySelector('.lint'),
         saveBtn = document.querySelector('.save'),
         vertBtn = document.querySelector('.vertical'),
         horzBtn = document.querySelector('.horizontal'),
+        darkModeBtn = document.querySelector('.dark-mode'),
         fiddleWrap = document.querySelector('.fiddle-wrapper'),
         resultWrap = document.querySelector('.result-wrapper'),
         savedLayout = localStorage.getItem('es6fiddleLayout'),
+        darkMode = localStorage.getItem('es6fiddleDarkMode') == 'true',
         themeChanger = document.querySelector('.change-theme'),
         iDoc = document.querySelector('.result').contentDocument,
         iHead = iDoc.getElementsByTagName('head')[0],
@@ -96,6 +99,24 @@
         saveLayoutOption('horizontal');
     };
 
+    // When the dark mode button is clicked, toggle the dark mode setting
+    darkModeBtn.onclick = function() {
+        if (darkMode === true) {
+            darkMode = false;
+            disableDarkMode();
+            localStorage.setItem('es6fiddleDarkMode', false);
+        } else {
+            darkMode = true;
+            enableDarkMode();
+
+            // When switching to dark mode, set the theme to monokai
+            themeChanger.value = 'monokai';
+            fiddle.setOption('theme', 'monokai');
+
+            localStorage.setItem('es6fiddleDarkMode', true);
+        }
+    };
+
     // Save the layout option specified to localStorage
     // Pass in a string either "vertical" or "horizontal" to save the layout
     function saveLayoutOption(layoutType) {
@@ -116,6 +137,16 @@
         resultWrap.style.width = '49%';
     }
 
+    // Enable dark mode by adding the .dark class to the body, which then enables dark mode specific styling
+    function enableDarkMode() {
+        body.classList.add('dark');
+    }
+
+    // Disable dark mode by removing the .dark class from the body
+    function disableDarkMode() {
+        body.classList.remove('dark');
+    }
+
     //add the fiddle area
     fiddle = window.CodeMirror(document.querySelector('.fiddle'), {
         lineNumbers: !embedded,
@@ -130,6 +161,13 @@
     // Otherwise make the page the default vertical style
     } else {
         setVerticalStyle();
+    }
+
+    // If the user has previously enabled dark mode then open in dark mode
+    if (darkMode) {
+        enableDarkMode();
+    } else {
+        disableDarkMode();
     }
 
     // Set the saved theme in the theme changer dropdown
