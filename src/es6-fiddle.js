@@ -1,13 +1,16 @@
 (function() {
     var fiddle = null,
+        body = document.querySelector('body'),
         runBtn = document.querySelector('.run'),
         lintBtn = document.querySelector('.lint'),
         saveBtn = document.querySelector('.save'),
         vertBtn = document.querySelector('.vertical'),
         horzBtn = document.querySelector('.horizontal'),
+        darkModeBtn = document.querySelector('.dark-mode'),
         fiddleWrap = document.querySelector('.fiddle-wrapper'),
         resultWrap = document.querySelector('.result-wrapper'),
         savedLayout = localStorage.getItem('es6fiddleLayout'),
+        darkMode = localStorage.getItem('es6fiddleDarkMode') == 'true',
         themeChanger = document.querySelector('.change-theme'),
         iDoc = document.querySelector('.result').contentDocument,
         iHead = iDoc.getElementsByTagName('head')[0],
@@ -17,6 +20,7 @@
         lintLog = null,
         userInput = null,
         savedTheme = localStorage.getItem('theme'),
+        darkModeTheme = 'monokai',
         pathArr = location.pathname.split('/'),
         fiddleId = pathArr[pathArr.length - 2],
         embedded = pathArr[1] === 'embed',
@@ -96,6 +100,25 @@
         saveLayoutOption('horizontal');
     };
 
+    // When the dark mode button is clicked, toggle the dark mode setting
+    darkModeBtn.onclick = function() {
+        if (darkMode === true) {
+            darkMode = false;
+            disableDarkMode();
+            localStorage.setItem('es6fiddleDarkMode', false);
+        } else {
+            darkMode = true;
+            enableDarkMode();
+
+            // When switching to dark mode, set the theme
+            themeChanger.value = darkModeTheme;
+            fiddle.setOption('theme', darkModeTheme);
+            localStorage.setItem('theme', darkModeTheme);
+
+            localStorage.setItem('es6fiddleDarkMode', true);
+        }
+    };
+
     // Save the layout option specified to localStorage
     // Pass in a string either "vertical" or "horizontal" to save the layout
     function saveLayoutOption(layoutType) {
@@ -116,6 +139,25 @@
         resultWrap.style.width = '49%';
     }
 
+    // Enable dark mode by adding the .dark class to the body, which then enables dark mode specific styling
+    function enableDarkMode() {
+        body.classList.add('dark');
+        setResultsColors('#FFF', '#333');
+    }
+
+    // Disable dark mode by removing the .dark class from the body
+    function disableDarkMode() {
+        body.classList.remove('dark');
+        setResultsColors('#666', '#EEE');
+    }
+
+    // Sets the styling for the results box with the given text and border color
+    function setResultsColors(textColor, borderColor) {
+        style.innerHTML =
+            'body{font-family:monospace;padding:10px;color:' + textColor + '; transition:color 0.5s;}\n' +
+            'div{border-bottom:1px solid ' + borderColor + ';padding: 2px 0; transition:bottom-border 0.5s;}';
+    }
+
     //add the fiddle area
     fiddle = window.CodeMirror(document.querySelector('.fiddle'), {
         lineNumbers: !embedded,
@@ -130,6 +172,13 @@
     // Otherwise make the page the default vertical style
     } else {
         setVerticalStyle();
+    }
+
+    // If the user has previously enabled dark mode then open in dark mode
+    if (darkMode) {
+        enableDarkMode();
+    } else {
+        disableDarkMode();
     }
 
     // Set the saved theme in the theme changer dropdown
@@ -167,10 +216,6 @@
         '})();\n\n';
     iHead.appendChild(logger);
 
-    //set the iDoc css
-    style.innerHTML =
-        'body{font-family:monospace;padding:10px;color:#666}\n' +
-        'div{border-bottom:1px solid #eee;padding: 2px 0;}';
     iHead.appendChild(style);
 
     //wait for babel to load
