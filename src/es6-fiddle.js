@@ -142,13 +142,13 @@
     // Enable dark mode by adding the .dark class to the body, which then enables dark mode specific styling
     function enableDarkMode() {
         body.classList.add('dark');
-        setResultsColors("#FFF", "#333");
+        setResultsColors('#FFF', '#333');
     }
 
     // Disable dark mode by removing the .dark class from the body
     function disableDarkMode() {
         body.classList.remove('dark');
-        setResultsColors("#666", "#EEE");
+        setResultsColors('#666', '#EEE');
     }
 
     // Sets the styling for the results box with the given text and border color
