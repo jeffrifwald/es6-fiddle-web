@@ -274,8 +274,8 @@
             saveBtn.onclick = function() {
                 var code = fiddle.getValue(),
                     saveReq = new XMLHttpRequest(),
+                    pathArr = window.location.pathname.split('/'),
                     resp;
-
                 if (code) {
                     saveReq.open('POST', '/save', true);
                     saveReq.setRequestHeader('Content-type','application/json');
@@ -286,6 +286,7 @@
                         }
                     };
                     saveReq.send(JSON.stringify({
+                        fiddle: pathArr[1].length > 1 ? pathArr[1] : - 1,
                         value: fiddle.getValue()
                     }));
                 }

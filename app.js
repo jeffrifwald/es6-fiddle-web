@@ -54,7 +54,7 @@ app.get(/^\/embed\/\w+$/, function(req, res) {
 
 app.get('/github/login', function(req, res) {
     var title = 'you are on login page! you are not logged in.';
-    res.render('login', { title: title , message: req.flash() });
+    res.render('login', { title: title, message: req.flash() });
 });
 
 //TESTING URL FOR GITHUB 
@@ -76,7 +76,8 @@ app.get('/auth/github/callback',
 app.get('/github/onlyAuthoisedUser', ensureAuthenticated, function(req, res) {
     // Testing for authorised user
     //res.send(req.user);
-    res.render('authenticated', { user: req.user ,  message: req.flash() });
+    console.log(req.user);
+    res.render('authenticated', { user: req.user,  message: req.flash() });
 });
 
 app.get('/github/logout', function(req, res) {
