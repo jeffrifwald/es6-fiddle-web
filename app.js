@@ -76,7 +76,7 @@ app.get('/auth/github/callback',
 app.get('/github/onlyAuthoisedUser', ensureAuthenticated, function(req, res) {
     // Testing for authorised user
     //res.send(req.user);
-    console.log(req.user);
+    //console.log('onlyAuthoisedUser',req.user);
     res.render('authenticated', { user: req.user,  message: req.flash() });
 });
 

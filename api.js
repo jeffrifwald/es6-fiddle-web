@@ -27,7 +27,7 @@ module.exports = function(app) {
     app.post('/save', function(req, res) {
 
         var fiddle;
-
+      //  console.log('user logged in = ', req.user);
         if (req.body.value) { //don't save anything empty
             if (req.body.fiddle !== - 1 && req.isAuthenticated()){  //Check if user trying to save existing fiddle;
                 fiddle = req.body.fiddle;
@@ -44,7 +44,7 @@ module.exports = function(app) {
                         newFiddle.userId = req.user._id;
                     }
                     newFiddle.save(function() {
-                        console.log('Inserted fiddle at', fiddle + '.');
+                        console.log('       Inserted fiddle at', fiddle + '.');
                         res.json({      //send response after saving fiddle
                             saved: true,
                             fiddle: fiddle
@@ -54,7 +54,7 @@ module.exports = function(app) {
                     if ( item.userId && item.userId.toHexString() === req.user._id) {
                         item.value = req.body.value;
                         item.save().then( () =>{
-                                    console.log('updated fiddle at', fiddle + '.');
+                                    console.log('       updated fiddle at', fiddle + '.');
                                     res.json({      //send response after saving fiddle
                                         saved: true,
                                         fiddle: fiddle
@@ -69,7 +69,7 @@ module.exports = function(app) {
                             userId:req.user._id
                         });
                         newFiddle.save().then( () =>{
-                                    console.log('Inserted fiddle at', fiddle + '.');
+                                    console.log('       Inserted fiddle at', fiddle + '.');
                                     res.json({      //send response after saving fiddle
                                         saved: true,
                                         fiddle: fiddle

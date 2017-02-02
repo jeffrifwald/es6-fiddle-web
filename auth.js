@@ -16,7 +16,7 @@ passport.use(new GitHubStrategy({
     callbackURL: 'http://localhost:3000/auth/github/callback'
 }, function(accessToken, refreshToken, profile, done) {
 
-    Users.findOrCreate(profile,accessToken).then ( (user) => {
+    Users.findOrCreate(profile,accessToken).then ( user => {
                                                     done(null,user)
                                                 })
                                            .catch( err => {
