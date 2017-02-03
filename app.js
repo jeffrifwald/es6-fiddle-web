@@ -8,6 +8,7 @@ var express = require('express'),
     passport = require('./auth'),
     pkg = require('./package.json'),
     api = require('./api'),
+    Fiddles = require('./db/fiddles'),
     app = express(),
     port = Number(process.env.PORT || 5001);
 
@@ -74,10 +75,12 @@ app.get('/auth/github/callback',
   });
 
 app.get('/github/onlyAuthoisedUser', ensureAuthenticated, function(req, res) {
-    // Testing for authorised user
-    //res.send(req.user);
-    //console.log('onlyAuthoisedUser',req.user);
-    res.render('authenticated', { user: req.user,  message: req.flash() });
+
+    Fiddles.find({userId:req.user._id}).then ( fiddles => {
+                res.render('authenticated', { user: req.user, fiddles:fiddles, message: req.flash() });
+                            })
+                            .catch( e => res.status(400).send(e));
+    
 });
 
 app.get('/github/logout', function(req, res) {
