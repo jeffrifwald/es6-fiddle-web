@@ -6,6 +6,7 @@ module.exports = function(app) {
     //     fiddles = db.collection('fiddles');
     // });
 
+    // This will match /fiddles/fiddleNo
     app.get(/^\/fiddles\/\w+$/, function(req, res) {
         var fiddle = req.url.split('/').pop();
 
@@ -24,24 +25,59 @@ module.exports = function(app) {
     });
 
     app.post('/save', function(req, res) {
-        var now = Date.now(),
-            fiddle = parseInt(now, 10).toString(36);
 
+        var fiddle;
+      //  console.log('user logged in = ', req.user);
         if (req.body.value) { //don't save anything empty
+            if (req.body.fiddle !== - 1 && req.isAuthenticated()){  //Check if user trying to save existing fiddle;
+                fiddle = req.body.fiddle;
+            } else {
+                fiddle = parseInt(Date.now(), 10).toString(36);
+            }
             Fiddles.findOne({fiddle: fiddle}, function(err, item) {
-                if (!item) {
-                    var newFiddle = new Fiddles({
+                if (!item) { //If no fiddle found save new fiddle
+                    let newFiddle = new Fiddles({
                         fiddle: fiddle,
                         value: req.body.value
                     });
+                    if (req.isAuthenticated()) {
+                        newFiddle.userId = req.user._id;
+                    }
                     newFiddle.save(function() {
-                        console.log('Inserted fiddle at', fiddle + '.');
+                        console.log('       Inserted fiddle at', fiddle + '.');
                         res.json({      //send response after saving fiddle
                             saved: true,
                             fiddle: fiddle
                         });
                     });
-                }
+                } else { //Existing fiddle found update that fiddle
+                    if ( item.userId && item.userId.toHexString() === req.user._id) {
+                        item.value = req.body.value;
+                        item.save().then( () =>{
+                                    console.log('       updated fiddle at', fiddle + '.');
+                                    res.json({      //send response after saving fiddle
+                                        saved: true,
+                                        fiddle: fiddle
+                                    });
+                                })
+                                .catch( () => res.status(400).send());
+                    } else {
+                        fiddle = parseInt(Date.now(), 10).toString(36);
+                        let newFiddle = new Fiddles({
+                            fiddle: fiddle,
+                            value: req.body.value,
+                            userId:req.user._id
+                        });
+                        newFiddle.save().then( () =>{
+                                    console.log('       Inserted fiddle at', fiddle + '.');
+                                    res.json({      //send response after saving fiddle
+                                        saved: true,
+                                        fiddle: fiddle
+                                    });
+                                })
+                                .catch( () => res.status(400).send());
+                    }
+                } 
             });
         } else {
             res.status(400).send();
