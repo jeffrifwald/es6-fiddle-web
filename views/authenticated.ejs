@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html">
   <title>ESFiddle</title>
+  <link rel="icon" href="./../static/images/favicon.png">
   <script
   src="https://code.jquery.com/jquery-1.12.4.min.js"
   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
@@ -24,7 +25,7 @@
         -moz-box-sizing: border-box;
         box-sizing: border-box;
       }
-      html { overflow-y: scroll; }
+      html { overflow-y: auto; }
       body { 
         background: #f0f0f0; 
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -77,9 +78,8 @@
       img { border: 0; max-width: 100%; }
 
       #topbar {
-        background: #4f4a41;
+        background: #983e50;
         padding: 10px 0 10px 0;
-        text-align: center;
         height: 36px;
         overflow: hidden;
         -webkit-transition: height 0.5s linear;
@@ -91,11 +91,10 @@
         font-size:1.3em;
         line-height: 1.25em;
         text-decoration: none;
-        opacity: 0.5;
         font-weight: bold;
       }
       #topbar a:hover {
-        opacity: 1;
+        text-decoration: underline;
       }
 
       /** typography **/
@@ -290,20 +289,31 @@
       
       html[xmlns] .clearfix { display: block; }
       * html .clearfix { height: 1%; }
-        
+      
+      .right {
+        text-align: right;
+        float: right;
+        padding-right: 15px;
+      }
+
+      .left {
+        text-align: left;
+        float: left;
+        padding-left: 15px;
+      }
   </style>
 </head>
 
 <body>
   <div id="topbar">
-  <a href="/">Home</a> |
-	<a href="/github/logout">Log Out</a>
+  <span class="left"><a href="/">Home</a></span>
+	<span class="right"><a href="/github/logout">Log Out</a></span><span class="right"><a href="#bio">Welcome   <%= user.name %> </a></span>
   </div>
   
   <div id="w">
     <div id="content" class="clearfix">
       <div id="userphoto"><img src= "<%= user.avatar_url %>" alt="default avatar"></div>
-      <h1>Welcome   <%= user.name %></h1>
+      <h1><%= user.name %></h1>
 
       <nav id="profiletabs">
         <ul class="clearfix">
@@ -314,25 +324,18 @@
       </nav>
       
       <section id="bio">
-        <p>login: <%= user.login %></p>
-        <p>bio: <%= user.bio %></p>
-        <p>email: <%= user.email %></p>
-        <p>location: <%= user.location %></p>
-        <p>public_repos: <%= user.public_repos %></p>
-        <p>public_gists: <%= user.public_gists %></p>
+        <p>Github Username: <%= user.login %></p>
+        <p>Bio: <%= user.bio %></p>
+        <p>Email: <%= user.email %></p>
       </section>
       
       <section id="activity" class="hidden">
         <p>Most recent fiddles:</p>
 
-
             <% for(var i=0; i<fiddles.length; i++) { %>
                     <p class="activity"><a href='/<%= fiddles[i].fiddle %>'> <%= fiddles[i].fiddle %></p>
             </a></p>
             <% } %>
-
-        
-        
       </section>
       
     </div><!-- @end #content -->
