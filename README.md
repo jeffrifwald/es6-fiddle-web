@@ -34,9 +34,12 @@ Found a bug?
 Read the [Help I've Found a Bug](REPORTBUG.md) article and follow its instructions.
 
 
+Want to know what are working on?
+------------
+Checkout our [vision](VISION.md).
+
+
 Contributing
 ------------
 We welcome pull requests from first-timers and seasoned veteran programmers alike. Follow the steps above to get setup.
 Then have a look at some of the [projects issues](https://github.com/esfiddle/esfiddle/labels/up-for-grabs). After, please follow [these steps](CONTRIBUTE.md) to contribute.
-
-
