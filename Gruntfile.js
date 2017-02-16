@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+    require('load-grunt-tasks')(grunt);
     var jsFiles = [
             'static/lib/jshint/**/*.js',
             'static/lib/codemirror/**/*.js',
@@ -14,7 +15,11 @@ module.exports = function(grunt) {
             'grunt-contrib-stylus',
             'grunt-contrib-uglify',
             'grunt-contrib-watch',
-            'grunt-jscs'
+            'grunt-jscs',
+            'grunt-contrib-imagemin',
+            'grunt-inline',
+            'grunt-browser-sync',
+            'grunt-express-server'
         ];
 
     grunt.initConfig({
@@ -33,12 +38,10 @@ module.exports = function(grunt) {
             }
         },
         uglify: {
-            options: {
-                mangle: false
-            },
             compile: {
                 files: {
-                    'static/src/es6-fiddle.js': jsFiles
+                    'static/src/es6-fiddle.js': jsFiles,
+                    'static/lib/babel/babel.min.js' : ['static/lib/babel/*.js', '!static/lib/babel/babel.min.js']
                 }
             }
         },
@@ -54,15 +57,56 @@ module.exports = function(grunt) {
         },
         watch: {
             options: {
-                atBegin: true
+                reload: true
             },
             style: {
                 files: styleFiles,
-                tasks: ['stylus']
+                tasks: ['stylus', 'inline']
             },
             src: {
                 files: jsFiles,
                 tasks: ['uglify']
+            },
+            html: {
+                files: 'src/index.html',
+                tasks: ['inline']
+            }
+        },
+        imagemin: {
+            dynamic: {
+                files: [{
+                    expand: true,
+                    src: ['**/*.{png,jpg,gif}'],
+                }]
+            }
+        },
+        inline: {
+            dist: {
+                src: 'src/index.html',
+                dest: 'static/index.html'
+            }
+        },
+        eslint: {
+            options: {
+                config: '.eslintrc',
+            },
+            target: ['src/**/*.js', 'Gruntfile.js']
+        },
+        browserSync: {
+            bsFiles: {
+                src: [jsFiles, styleFiles],
+            },
+            options: {
+                watchTask: true,
+                proxy: 'http://localhost:3000',
+                reloadOnRestart: true
+            }
+        },
+        express: {
+            dev: {
+                options: {
+                    script: 'app.js'
+                }
             }
         }
     });
@@ -72,6 +116,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', ['watch']);
-    grunt.registerTask('test', ['jshint', 'jscs']);
-    grunt.registerTask('build', ['stylus', 'uglify']);
+    grunt.registerTask('test', ['jshint', 'jscs', 'eslint']);
+    grunt.registerTask('build', ['stylus', 'uglify','imagemin', 'inline']);
+    grunt.registerTask('dev', ['express:dev', 'browserSync', 'watch']);
 };

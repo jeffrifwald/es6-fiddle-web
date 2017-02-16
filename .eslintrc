@@ -1,0 +1,67 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "globals": {},
+  "rules": {
+    "camelcase": 2,
+    "indent": [
+      2,
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "quotes": [
+      2,
+      "single"
+    ],
+    "max-len": [
+      2,
+      {
+        "code": 120,
+        "ignoreComments": true
+      }
+    ],
+    "no-unused-vars": 2,
+    "no-undef": 2,
+    "dot-notation": 0,
+    "curly": [
+      2,
+      "all"
+    ],
+    "keyword-spacing": [
+      2,
+      {}
+    ],
+    "space-before-function-paren": [
+      2,
+      "never"
+    ],
+    "one-var": [
+      2,
+      "always"
+    ],
+    "space-infix-ops": 2,
+    "space-unary-ops": [
+      2,
+      {
+        "nonwords": true,
+        "overrides": {
+          "!": false
+        }
+      }
+    ],
+    "no-with": 2,
+    "no-multiple-empty-lines": 2,
+    "brace-style": [
+      2,
+      "1tbs",
+      {
+        "allowSingleLine": true
+      }
+    ],
+    "eol-last": 2
+  }
+}

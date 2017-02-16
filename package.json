@@ -1,9 +1,16 @@
 {
   "name": "es6-fiddle-web",
   "description": "Fiddlin' with ECMAScript6.",
-  "version": "0.1.0",
-  "homepage": "http://www.es6fiddle.net",
+  "version": "1.0.0",
+  "homepage": "https://www.esfiddle.net",
   "license": "SEE LICENSE IN LICENSE.md",
+  "maintainers": [
+    {
+      "name": "Josh Ghent",
+      "email": "josh@esfiddle.net",
+      "url": "github.com/joshghent"
+    }
+  ],
   "author": {
     "name": "Jeff McRiffey",
     "email": "jeff.mcriffey@tryambition.com",
@@ -11,26 +18,47 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jmcriffey/es6-fiddle-web.git"
+    "url": "https://github.com/esfiddle/esfiddle.git"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.5",
     "express": "^4.14.0",
-    "mongodb": "^2.2.5"
+    "express-session": "^1.15.0",
+    "mongodb": "^2.2.5",
+    "mongoose": "^4.7.7",
+    "passport": "^0.3.2",
+    "passport-github2": "^0.1.10"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "cross-env": "3.1.4",
+    "eslint": "^3.13.1",
     "grunt": "^1.0.1",
+    "grunt-assets-inline": "0.1.14",
+    "grunt-browser-sync": "2.2.0",
     "grunt-cli": "^1.2.0",
+    "grunt-contrib-imagemin": "^1.0.1",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-stylus": "^1.2.0",
     "grunt-contrib-uglify": "^2.0.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-jscs": "^3.0.1"
+    "grunt-eslint": "^19.0.0",
+    "grunt-express-server": "0.5.3",
+    "grunt-inline": "0.3.6",
+    "grunt-jscs": "^3.0.1",
+    "load-grunt-tasks": "^3.5.2",
+    "mocha": "^3.2.0",
+    "supertest": "^2.0.1"
   },
   "scripts": {
-    "test": "grunt test",
-    "start": "grunt build && node app.js",
+    "test": "grunt test && npm run test-node",
+    "test-node": "mocha test/*.test.js",
+    "prestart": "",
+    "start": "grunt dev",
     "build": "grunt build"
   }
 }
