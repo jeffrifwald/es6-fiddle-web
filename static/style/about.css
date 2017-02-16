@@ -1,0 +1,28 @@
+#about{
+	position: absolute;
+	display: block;
+	right: 0;
+	left: 0;
+	margin: 0 auto;
+	top: 50%;
+	transform: translateY(-55%);
+	width: 60%;
+	font-family: Calibri;
+	font-size: 1.4em;
+}
+	a{
+		text-decoration: none;
+	}
+	h1{
+		font-size: 1.5em;
+		font-weight: lighter;
+		color: #BDBDBD;
+		margin-bottom:.3em;
+	}
+	p{
+		margin-top:.3em; margin-bottom:.3em
+	} 
+	.tip{
+		color: #6E6E6E;
+		font-size: .8em;
+	}
