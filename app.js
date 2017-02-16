@@ -39,7 +39,9 @@ app.use('/', express.static(__dirname + '/static'));
 app.get(/^\/\w+\/$/, function(req, res) {
     res.sendFile(__dirname + '/static/index.html');
 });
-
+app.get('/about', function(req, res) {
+    res.sendFile(__dirname + '/static/about.html');
+});
 app.get(/^\/embed\/\w+\/$/, function(req, res) {
     res.sendFile(__dirname + '/static/embed.html');
 });
@@ -82,7 +84,9 @@ app.get('/github/onlyAuthoisedUser', ensureAuthenticated, function(req, res) {
                             .catch( e => res.status(400).send(e));
     
 });
-
+app.get('/about', function(req, res) {
+    res.render('about');
+});
 app.get('/github/logout', function(req, res) {
     req.logout();
     res.redirect('/');
