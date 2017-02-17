@@ -23,7 +23,7 @@ app.use(passport.session());
 
 // caching middleware
 app.use(function(req, res, next) {
-  if ( req.url.match(/^\/(images)\/.+/) ) {
+  if ( req.url.match(/^\/(images|lib\/babel)\/.+/) ) {
     res.setHeader('Cache-Control', 'public, max-age=2628000');
   }
   next();
