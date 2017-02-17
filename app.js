@@ -21,6 +21,14 @@ app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: fals
 app.use(passport.initialize());
 app.use(passport.session());
 
+// caching middleware
+app.use(function(req, res, next) {
+  if ( req.url.match(/^\/(images|lib\/babel)\/.+/) ) {
+    res.setHeader('Cache-Control', 'public, max-age=2628000');
+  }
+  next();
+});
+
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 

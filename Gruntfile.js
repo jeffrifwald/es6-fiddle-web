@@ -8,7 +8,7 @@ module.exports = function(grunt) {
             'src/add-examples.js'
         ],
         styleFiles = ['static/lib/**/*.css', 'style/*.styl'],
-        lintFiles = ['Gruntfile.js', 'app.js', 'api.js', 'src/*.js'],
+        lintFiles = ['app.js', 'api.js', 'src/*.js'],
         pkg = grunt.file.readJSON('package.json'),
         npmTasks = [
             'grunt-contrib-jshint',
