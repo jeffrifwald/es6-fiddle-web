@@ -5,7 +5,7 @@ var request = require('supertest'),
     fs = require('fs'),
     path = require('path');
 
-describe('GET /images/* and /lib/*', () => {
+describe('GET /images/*', () => {
 
 	it('Should return max-age=2628000 for each image', (done) => {
 		fs.readdir(path.resolve(__dirname, "../static/images/"), (err, files) => {
@@ -26,6 +26,9 @@ describe('GET /images/* and /lib/*', () => {
 		});
 	});
 
+});
+
+describe('GET /lib/babel/babel.min.js', () => {
 	it('Should return max-age=2628000 for babel.min.js', (done) => {
 		request(app)
 		.get('/lib/babel/babel.min.js')
@@ -34,5 +37,4 @@ describe('GET /images/* and /lib/*', () => {
 			expect(res.headers['cache-control']).to.equal('public, max-age=2628000');
 		}).end(done);
 	});
-
 });
