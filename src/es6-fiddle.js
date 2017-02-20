@@ -7,9 +7,10 @@
         vertBtn = document.querySelector('.vertical'),
         horzBtn = document.querySelector('.horizontal'),
         darkModeBtn = document.querySelector('.dark-mode'),
-        fiddleWrap = document.querySelector('.fiddle-wrapper'),
-        resultWrap = document.querySelector('.result-wrapper'),
         savedLayout = localStorage.getItem('es6fiddleLayout'),
+        codeWrapper = document.querySelector('.code-wrapper'),
+        fieldWrapperClass = '.fiddle-wrapper',
+        fiddleWrapper = document.querySelector(fieldWrapperClass),
         darkMode = localStorage.getItem('es6fiddleDarkMode') == 'true',
         themeChanger = document.querySelector('.change-theme'),
         iDoc = document.querySelector('.result').contentDocument,
@@ -24,6 +25,10 @@
         pathArr = location.pathname.split('/'),
         fiddleId = pathArr[pathArr.length - 2],
         embedded = pathArr[1] === 'embed',
+        resizer = document.querySelector('.resizer'),
+        documentElement = document.documentElement,
+        startX,
+        startWidth,
         bootstrap = null,
         share,
         src,
@@ -128,15 +133,13 @@
     // A method to change the width of the results and fiddle containers
     // Setting the width to 100% will make the fiddle box be on top and the results below
     function setHorizontalStyle() {
-        fiddleWrap.style.width = '100%';
-        resultWrap.style.width = '100%';
+        codeWrapper.classList.add('column');
     }
 
     // Called when we want to make the page back to its default vertical style
     // This will make the page have the fiddle on the left and the results on the right
     function setVerticalStyle() {
-        fiddleWrap.style.width = '49%';
-        resultWrap.style.width = '49%';
+        codeWrapper.classList.remove('column');
     }
 
     // Enable dark mode by adding the .dark class to the body, which then enables dark mode specific styling
@@ -359,6 +362,28 @@
             };
         }
     };
+
+    fiddleWrapper.addEventListener('click', function init() {
+        fiddleWrapper.removeEventListener('click', init, false);
+        resizer.addEventListener('mousedown', initDrag, false);
+    }, false);
+
+    function initDrag(e) {
+        startX = e.clientX;
+        startWidth = parseInt(document.defaultView.getComputedStyle(fiddleWrapper).width, 10);
+        documentElement.addEventListener('mousemove', doDrag, false);
+        documentElement.addEventListener('mouseup', stopDrag, false);
+    }
+
+    function doDrag(e) {
+        fiddleWrapper.style.flexBasis = startWidth + e.clientX - startX + 'px';
+    }
+
+    function stopDrag() {
+        documentElement.removeEventListener('mousemove', doDrag, false);
+        documentElement.removeEventListener('mouseup', stopDrag, false);
+    }
+
 
     //add babel to the iframe
     babel.src = '/lib/babel/babel.min.js';

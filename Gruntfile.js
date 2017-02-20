@@ -84,11 +84,11 @@ module.exports = function(grunt) {
             dist: {
                 src: 'src/index.html',
                 dest: 'static/index.html'
-            },
-            dist: {
-                src: 'src/about.html',
-                dest: 'static/about.html'
             }
+            // dist: {
+            //     src: 'src/about.html',
+            //     dest: 'static/about.html'
+            // }
         },
         eslint: {
             options: {
