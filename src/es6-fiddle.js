@@ -384,7 +384,6 @@
         documentElement.removeEventListener('mouseup', stopDrag, false);
     }
 
-
     //add babel to the iframe
     babel.src = '/lib/babel/babel.min.js';
     iHead.appendChild(babel);
