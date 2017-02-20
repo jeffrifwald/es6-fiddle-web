@@ -28,9 +28,7 @@
         resizer = document.querySelector('.resizer'),
         documentElement = document.documentElement,
         startX,
-        startY,
         startWidth,
-        startHeight,
         bootstrap = null,
         share,
         src,
@@ -372,15 +370,13 @@
 
     function initDrag(e) {
         startX = e.clientX;
-        startY = e.clientY;
         startWidth = parseInt(document.defaultView.getComputedStyle(fiddleWrapper).width, 10);
-        startHeight = parseInt(document.defaultView.getComputedStyle(fiddleWrapper).height, 10);
         documentElement.addEventListener('mousemove', doDrag, false);
         documentElement.addEventListener('mouseup', stopDrag, false);
     }
 
     function doDrag(e) {
-        fiddleWrapper.style.flexBasis = startHeight + e.clientY - startY + 'px';
+        fiddleWrapper.style.flexBasis = startWidth + e.clientX - startX + 'px';
     }
 
     function stopDrag() {
