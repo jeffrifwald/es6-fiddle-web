@@ -87,7 +87,7 @@
     position: relative;
     width: 100%;
     min-width: 600px;
-    height: 100%;
+    height: calc(100% - 22px);
     margin-top: 4px;
     font-size: 0;
     margin: 0 auto;
@@ -95,16 +95,19 @@
     .code-wrapper {
       display: flex;
       flex-direction: row;
-      height: 100%;
-
-      &:not(.column) {
-        .result-wrapper {
-          flex: 1;
-        }  
-      }
+      height: calc(100% - 57px);
 
       &.column {
         flex-direction: column;
+
+
+        .resizer {
+          bottom: -50px;
+          right: 0;
+          width: 100%;
+          height: 100px;
+          cursor: row-resize;
+        }
       }
     }
 
@@ -325,7 +328,7 @@
     .result-wrapper {
       font-size: 14px;
       border: 1px solid #ddd;
-      flex-basis: 50%;
+      flex: 1;
 
         .result-header {
             height: 58px;
@@ -344,7 +347,6 @@
         }
 
         .result {
-            height: 450px;
             width: 100%;
             border: none;
             transition: background-color 0.5s;
