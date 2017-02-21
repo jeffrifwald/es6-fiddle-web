@@ -10,7 +10,23 @@ var express = require('express'),
     api = require('./api'),
     Fiddles = require('./db/fiddles'),
     app = express(),
-    port = Number(process.env.PORT || 5001);
+    port = Number(process.env.PORT || 5001),
+    //Setting up poet for blog
+    Poet = require('poet'),
+    poet = Poet(app, {
+      posts:'./_posts',
+      postsPerPage: 5,
+      metaFormat: 'json',
+      routes: {
+        '/blog/:post': 'post',
+        '/tags/:tag': 'tag',
+        '/categories/:category': 'category',
+        '/blog/:page': 'page'
+      }
+    });
+
+//initialize poet
+poet.init();
 
 app.use(compression());
 app.use(bodyParser.json());
@@ -41,7 +57,10 @@ function ensureAuthenticated(req, res, next) {
     res.redirect('/github/login');
 }
 
+
 app.use('/', express.static(__dirname + '/static'));
+
+
 
 // This one is matching '/xyz/' NOT -> '/xyz/sdf'
 app.get(/^\/\w+\/$/, function(req, res) {
@@ -52,6 +71,11 @@ app.get('/about', function(req, res) {
 });
 app.get(/^\/embed\/\w+\/$/, function(req, res) {
     res.sendFile(__dirname + '/static/embed.html');
+});
+
+//poet routes
+app.get('/blog', function (req, res) {
+    res.render('blog/index');
 });
 
 // This one is matching '/xyz' NOT -> '/xyz/'
@@ -68,7 +92,11 @@ app.get('/github/login', function(req, res) {
     res.render('login', { title: title, message: req.flash() });
 });
 
-//TESTING URL FOR GITHUB 
+
+
+
+
+//TESTING URL FOR GITHUB
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }), function(req, res) {
       // The request will be redirected to GitHub for authentication, so this
@@ -76,8 +104,8 @@ app.get('/auth/github',
       console.log('just to get rid of lint error !',res);
   });
 
-app.get('/auth/github/callback', 
-  passport.authenticate('github', { 
+app.get('/auth/github/callback',
+  passport.authenticate('github', {
       failureRedirect: '/github/login', failureFlash: true, successFlash: 'Welcome!' }),
   function(req, res) {
     // Successful authentication, redirect home.
@@ -90,7 +118,7 @@ app.get('/github/onlyAuthoisedUser', ensureAuthenticated, function(req, res) {
                 res.render('authenticated', { user: req.user, fiddles:fiddles, message: req.flash() });
                             })
                             .catch( e => res.status(400).send(e));
-    
+
 });
 app.get('/about', function(req, res) {
     res.render('about');
