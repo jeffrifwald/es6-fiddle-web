@@ -97,6 +97,10 @@
       flex-direction: row;
       height: calc(100% - 57px);
 
+      &:not(.column) .result-wrapper {
+        flex: 1;
+      }
+
       &.column {
         flex-direction: column;
 
@@ -127,8 +131,6 @@
           padding: 0.5em 3.5em 0.5em 1em;
           font-size: 14px;
           margin-right: 10px;
-
-          /* reset */
           background-image:
             linear-gradient(45deg, transparent 50%, gray 50%),
             linear-gradient(135deg, gray 50%, transparent 50%),
@@ -223,6 +225,7 @@
         right: -80px;
         bottom: 0;
         cursor: col-resize;
+        z-index: 2;
       }
 
         .fiddle-header {
@@ -328,7 +331,8 @@
     .result-wrapper {
       font-size: 14px;
       border: 1px solid #ddd;
-      flex: 1;
+      flex-grow: 1;
+      position: relative;
 
         .result-header {
             height: 58px;
@@ -349,7 +353,9 @@
         .result {
             width: 100%;
             border: none;
+            height: calc(100% - 58px);
             transition: background-color 0.5s;
+            position: absolute;
         }
     }
 }

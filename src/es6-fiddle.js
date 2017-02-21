@@ -28,7 +28,9 @@
         resizer = document.querySelector('.resizer'),
         documentElement = document.documentElement,
         startX,
+        startY,
         startWidth,
+        startHeight,
         bootstrap = null,
         share,
         src,
@@ -96,6 +98,9 @@
     vertBtn.onclick = function() {
         setVerticalStyle();
         saveLayoutOption('vertical');
+        fiddleWrapper.removeAttribute('style');
+        startX = fiddleWrapper.clientX;
+        startY = fiddleWrapper.clientY;
     };
 
     // Onclick of the horizontal button then make the page visually horizontal
@@ -103,6 +108,9 @@
     horzBtn.onclick = function() {
         setHorizontalStyle();
         saveLayoutOption('horizontal');
+        fiddleWrapper.removeAttribute('style');
+        startX = fiddleWrapper.clientX;
+        startY = fiddleWrapper.clientY;
     };
 
     // When the dark mode button is clicked, toggle the dark mode setting
@@ -363,6 +371,8 @@
         }
     };
 
+    // Add dragging funcionality
+
     fiddleWrapper.addEventListener('click', function init() {
         fiddleWrapper.removeEventListener('click', init, false);
         resizer.addEventListener('mousedown', initDrag, false);
@@ -371,12 +381,19 @@
     function initDrag(e) {
         startX = e.clientX;
         startWidth = parseInt(document.defaultView.getComputedStyle(fiddleWrapper).width, 10);
+        startY = e.clientY;
+        startHeight = parseInt(document.defaultView.getComputedStyle(fiddleWrapper).height, 10);
         documentElement.addEventListener('mousemove', doDrag, false);
         documentElement.addEventListener('mouseup', stopDrag, false);
     }
 
     function doDrag(e) {
-        fiddleWrapper.style.flexBasis = startWidth + e.clientX - startX + 'px';
+        var layout = localStorage.getItem('es6fiddleLayout');
+        if (layout === 'horizontal') {
+            fiddleWrapper.style.flexBasis = startHeight + e.clientY - startY + 'px';
+        } else {
+            fiddleWrapper.style.flexBasis = startWidth + e.clientX - startX + 'px';
+        }
     }
 
     function stopDrag() {
