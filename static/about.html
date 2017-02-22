@@ -7,6 +7,7 @@
     <meta name="Description" content="Try out ES6+ features and share them with your friends, right in your browser!
 With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) with our preset samples or create your own snippets to share with others.">
     <meta name="Keywords" content="ES6, ES7, ES8, Ecmascript 2015, ES2015, ES2016, Ecmascript, Javascript, JS, TC39, ES2017, Ecmascript 2016">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>ESFiddle</title>
     <style>
@@ -4850,8 +4851,8 @@ THE SOFTWARE.
   color: #fff;
   background-repeat: no-repeat;
   border-radius: 2px;
-  height: 15px;
-  width: 15px;
+  height: 25px;
+  width: 25px;
   padding: 5px;
   box-sizing: border-box;
   background-size: cover;
@@ -4889,6 +4890,123 @@ THE SOFTWARE.
   color: #983e50;
   background-color: #fff;
   padding: 3px;
+}
+.run {
+  background-color: #983e50;
+  color: #fff;
+  background-repeat: no-repeat;
+  border-radius: 2px;
+  height: 25px;
+  width: 25px;
+  padding: 5px;
+  box-sizing: border-box;
+  background-size: cover;
+  display: inline-block;
+  cursor: pointer;
+  float: right;
+  margin-right: 10px;
+  margin-top: 18px;
+  transition: background-color 0.5s;
+  background-image: url('../../../../../images/run.png');
+}
+.lint {
+  background-color: #983e50;
+  color: #fff;
+  background-repeat: no-repeat;
+  border-radius: 2px;
+  height: 25px;
+  width: 25px;
+  padding: 5px;
+  box-sizing: border-box;
+  background-size: cover;
+  display: inline-block;
+  cursor: pointer;
+  float: right;
+  margin-right: 10px;
+  margin-top: 18px;
+  transition: background-color 0.5s;
+  background-image: url('../../../../../images/lint.png');
+}
+.save {
+  background-color: #983e50;
+  color: #fff;
+  background-repeat: no-repeat;
+  border-radius: 2px;
+  height: 25px;
+  width: 25px;
+  padding: 5px;
+  box-sizing: border-box;
+  background-size: cover;
+  display: inline-block;
+  cursor: pointer;
+  float: right;
+  margin-right: 10px;
+  margin-top: 18px;
+  transition: background-color 0.5s;
+  background-image: url('../../../../../images/save.png');
+}
+.share {
+  background-color: #983e50;
+  color: #fff;
+  background-repeat: no-repeat;
+  border-radius: 2px;
+  height: 25px;
+  width: 25px;
+  padding: 5px;
+  box-sizing: border-box;
+  background-size: cover;
+  display: inline-block;
+  cursor: pointer;
+  float: right;
+  margin-right: 10px;
+  margin-top: 18px;
+  transition: background-color 0.5s;
+  background-image: url('../../../../../images/share.png');
+  display: none;
+}
+.share .share-drop {
+  color: #983e50;
+  background: #fff;
+  display: none;
+  position: absolute;
+  height: 150px;
+  width: 250px;
+  z-index: 10;
+  top: 40px;
+  right: -220px;
+  line-height: 25px;
+  font-size: 12px;
+  text-align: left;
+  box-shadow: 0 2px 25px #777777;
+  border-right: none;
+  padding-left: 10px;
+  box-sizing: border-box;
+}
+.share .share-drop label {
+  display: block;
+}
+.share .share-drop input {
+  display: block;
+  color: #777777;
+  width: 90%;
+}
+.share .share-drop #share-embed {
+  margin-bottom: 10px;
+}
+.share .share-drop .tweet {
+  background: url('../../../../../images/twitter.png') no-repeat;
+  color: #983e50;
+  padding-left: 25px;
+  margin-top: 10px;
+  width: 75px;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.share .share-drop .tweet:hover {
+  color: #ce8795;
+}
+.share:hover .share-drop {
+  display: block;
 }
 .dark-mode {
   display: inline-block;
@@ -5010,123 +5128,6 @@ THE SOFTWARE.
 .content .fiddle-wrapper .fiddle-header span {
   margin-left: 20px;
   text-transform: uppercase;
-}
-.content .fiddle-wrapper .fiddle-header .run {
-  background-color: #983e50;
-  color: #fff;
-  background-repeat: no-repeat;
-  border-radius: 2px;
-  height: 15px;
-  width: 15px;
-  padding: 5px;
-  box-sizing: border-box;
-  background-size: cover;
-  display: inline-block;
-  cursor: pointer;
-  float: right;
-  margin-right: 10px;
-  margin-top: 18px;
-  transition: background-color 0.5s;
-  background-image: url('../../../../../images/run.png');
-}
-.content .fiddle-wrapper .fiddle-header .lint {
-  background-color: #983e50;
-  color: #fff;
-  background-repeat: no-repeat;
-  border-radius: 2px;
-  height: 15px;
-  width: 15px;
-  padding: 5px;
-  box-sizing: border-box;
-  background-size: cover;
-  display: inline-block;
-  cursor: pointer;
-  float: right;
-  margin-right: 10px;
-  margin-top: 18px;
-  transition: background-color 0.5s;
-  background-image: url('../../../../../images/lint.png');
-}
-.content .fiddle-wrapper .fiddle-header .save {
-  background-color: #983e50;
-  color: #fff;
-  background-repeat: no-repeat;
-  border-radius: 2px;
-  height: 15px;
-  width: 15px;
-  padding: 5px;
-  box-sizing: border-box;
-  background-size: cover;
-  display: inline-block;
-  cursor: pointer;
-  float: right;
-  margin-right: 10px;
-  margin-top: 18px;
-  transition: background-color 0.5s;
-  background-image: url('../../../../../images/save.png');
-}
-.content .fiddle-wrapper .fiddle-header .share {
-  background-color: #983e50;
-  color: #fff;
-  background-repeat: no-repeat;
-  border-radius: 2px;
-  height: 15px;
-  width: 15px;
-  padding: 5px;
-  box-sizing: border-box;
-  background-size: cover;
-  display: inline-block;
-  cursor: pointer;
-  float: right;
-  margin-right: 10px;
-  margin-top: 18px;
-  transition: background-color 0.5s;
-  background-image: url('../../../../../images/share.png');
-  display: none;
-}
-.content .fiddle-wrapper .fiddle-header .share .share-drop {
-  color: #983e50;
-  background: #fff;
-  display: none;
-  position: absolute;
-  height: 150px;
-  width: 250px;
-  z-index: 10;
-  top: 40px;
-  right: -220px;
-  line-height: 25px;
-  font-size: 12px;
-  text-align: left;
-  box-shadow: 0 2px 25px #777777;
-  border-right: none;
-  padding-left: 10px;
-  box-sizing: border-box;
-}
-.content .fiddle-wrapper .fiddle-header .share .share-drop label {
-  display: block;
-}
-.content .fiddle-wrapper .fiddle-header .share .share-drop input {
-  display: block;
-  color: #777777;
-  width: 90%;
-}
-.content .fiddle-wrapper .fiddle-header .share .share-drop #share-embed {
-  margin-bottom: 10px;
-}
-.content .fiddle-wrapper .fiddle-header .share .share-drop .tweet {
-  background: url('../../../../../images/twitter.png') no-repeat;
-  color: #983e50;
-  padding-left: 25px;
-  margin-top: 10px;
-  width: 75px;
-  text-decoration: none;
-  box-sizing: border-box;
-}
-.content .fiddle-wrapper .fiddle-header .share .share-drop .tweet:hover {
-  color: #ce8795;
-}
-.content .fiddle-wrapper .fiddle-header .share:hover .share-drop {
-  display: block;
 }
 .content .fiddle-wrapper .fiddle {
   width: 100%;
