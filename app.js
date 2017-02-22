@@ -18,15 +18,14 @@ var express = require('express'),
       postsPerPage: 5,
       metaFormat: 'json',
       routes: {
-        '/blog/:post': 'post',
-        '/tags/:tag': 'tag',
-        '/categories/:category': 'category',
-        '/blog/:page': 'page'
+        '/blog/:post': 'blog/post',
+        '/tags/:tag': 'blog/tag',
+        '/categories/:category': 'blog/category',
+        '/blog/:page': 'blog/page'
       }
     });
 
-//initialize poet
-poet.init();
+
 
 app.use(compression());
 app.use(bodyParser.json());
@@ -44,6 +43,9 @@ app.use(function(req, res, next) {
   }
   next();
 });
+
+//initialize poet
+poet.init();
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
