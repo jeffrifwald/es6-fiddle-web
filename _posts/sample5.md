@@ -2,7 +2,8 @@
 "title": "Fifth sample",
 "tags": ["blog", "fun", "lorem", "ipsum"],
 "category": "javascript",
-"date": "7-29-22016"
+"date": "7-29-22016",
+"previewLength": 400
 }}}
 
 # Cytherea circumspice Lycabas labitur orbem de quos

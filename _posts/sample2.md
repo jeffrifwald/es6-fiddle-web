@@ -2,7 +2,8 @@
 "title": "Sample Two",
 "tags": ["blog", "lorem"],
 "category": "markdown",
-"date": "2-21-2017"
+"date": "2-21-2017",
+"previewLength": 300
 }}}
 
 # Altera huc Austro erit adita plangore resecat

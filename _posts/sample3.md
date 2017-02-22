@@ -2,7 +2,8 @@
 "title": "Sample 3",
 "tags": ["ipsum", "fun"],
 "category": "markdown",
-"date": "5-19-2016"
+"date": "5-19-2016",
+"previewLength": 400
 }}}
 
  Velle hoc Phoebe meumque et tertius montes

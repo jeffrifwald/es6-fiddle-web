@@ -3,7 +3,7 @@
 "tags": ["blog", "fun"],
 "category": "markdown",
 "date": "7-29-2913",
-"previewLength": 100
+"previewLength": 400
 }}}
 
 # Cytherea circumspice Lycabas labitur orbem de quos

@@ -2,7 +2,8 @@
 "title": "Sample 1",
 "tags": ["lorum", "ipsum"],
 "category": "javascript",
-"date": "7-29-2013"
+"date": "7-29-2013",
+"previewLength": 200
 }}}
 
 # Hostis alga calidumque redolentia hic corde proavos

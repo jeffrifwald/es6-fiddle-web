@@ -25,8 +25,6 @@ var express = require('express'),
       }
     });
 
-
-
 app.use(compression());
 app.use(bodyParser.json());
 app.use(flash());
@@ -59,10 +57,7 @@ function ensureAuthenticated(req, res, next) {
     res.redirect('/github/login');
 }
 
-
 app.use('/', express.static(__dirname + '/static'));
-
-
 
 // This one is matching '/xyz/' NOT -> '/xyz/sdf'
 app.get(/^\/\w+\/$/, function(req, res) {
@@ -76,7 +71,7 @@ app.get(/^\/embed\/\w+\/$/, function(req, res) {
 });
 
 //poet routes
-app.get('/blog', function (req, res) {
+app.get('/blog', function(req, res) {
     res.render('blog/index');
 });
 
@@ -93,10 +88,6 @@ app.get('/github/login', function(req, res) {
     var title = 'you are on login page! you are not logged in.';
     res.render('login', { title: title, message: req.flash() });
 });
-
-
-
-
 
 //TESTING URL FOR GITHUB
 app.get('/auth/github',
