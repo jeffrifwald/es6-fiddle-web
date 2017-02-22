@@ -1,0 +1,248 @@
+.dark-mode {
+    display: inline-block;
+    float: right;
+    height: 19px;
+    width: 19px;
+    margin-top: 1px;
+    margin-right: 10px;
+    background-image: url('/images/dark.png');
+    background-size: contain;
+    cursor: pointer;
+}
+
+.github-logo {
+    width: 20px;
+    margin-top: 1px;
+    margin-right: 20px;
+    float: right;
+}
+
+.content-embed {
+    width : 100%;
+}
+
+.content {
+    .clearfix;
+    position: relative;
+    width: 100%;
+    min-width: 600px;
+    height: ~"calc(100% - 22px)";
+    margin-top: 4px;
+    font-size: 0;
+    margin: 0 auto;
+
+    .code-wrapper {
+      display: flex;
+      flex-direction: row;
+      height: ~"calc(100% - 57px)";
+
+      &:not(.column) .result-wrapper {
+        flex: 1;
+      }
+
+      &.column {
+        flex-direction: column;
+
+        .resizer {
+          bottom: -50px;
+          right: 0;
+          width: 100%;
+          height: 100px;
+          cursor: row-resize;
+        }
+      }
+    }
+
+    .examples {
+        margin-right: 10px;
+    }
+
+    .change-theme {
+        margin-left: 10px;
+    }
+
+    .menu {
+        height: 508px;
+        display: block;
+        float: left;
+        border: 1px solid @gray;
+        box-sizing: border-box;
+        font-size: 14px;
+        margin-top: 40px;
+        float: left;
+        width: 200px;
+        border-color: transparent;
+
+        select {
+            width: 175px;
+            margin-left: 15px;
+        }
+
+        .links {
+            list-style-type: none;
+
+            li {
+                list-style-type: none;
+
+                a {
+                    text-decoration: none;
+                    color: @turquoise;
+                    font-family: @font-family;
+
+                    &:hover {
+                        color: @turquoise-dark;
+                    }
+                }
+            }
+        }
+    }
+
+    .fiddle-wrapper {
+      flex-basis: 50%;
+      font-size: 14px;
+      border: 1px solid @gray;
+      position: relative;
+
+      .resizer {
+        width: 100px;
+        height: 100%;
+        position: absolute;
+        right: -80px;
+        bottom: 0;
+        cursor: col-resize;
+        z-index: 2;
+      }
+
+        .fiddle-header {
+            height: 58px;
+            width: 100%;
+            background: #e9d9d3; // ESTA COR NAO VAI DAR
+            color: @wine;
+            line-height: 58px;
+            font-size: 18px;
+            font-family: @font-family;
+            position: relative;
+            transition: background-color, color 0.5s;
+
+            span {
+                margin-left: 20px;
+                text-transform: uppercase;
+            }
+
+            .run {
+                .icon-btn;
+                background-image: url('/images/run.png');
+            }
+
+            .lint {
+                .icon-btn;
+                background-image: url('/images/lint.png');
+            }
+
+            .save {
+                .icon-btn;
+                background-image: url('/images/save.png');
+            }
+
+            .share {
+                .icon-btn;
+                background-image: url('/images/share.png');
+                display: none;
+
+                .share-drop {
+                    color: @wine;
+                    background: @white;
+                    display: none;
+                    position: absolute;
+                    height: 150px;
+                    width: 250px;
+                    z-index: 10;
+                    top: 40px;
+                    right: -220px;
+                    line-height: 25px;
+                    font-size: 12px;
+                    text-align: left;
+                    box-shadow: 0 2px 25px @gray-dark;
+                    border-right: none;
+                    padding-left: 10px;
+                    box-sizing: border-box;
+
+                    label {
+                        display: block;
+                    }
+
+                    input {
+                        display: block;
+                        color: @gray-dark;
+                        width: 90%;
+                    }
+
+                    #share-embed {
+                        margin-bottom: 10px;
+                    }
+
+                    .tweet {
+                        background: url('/images/twitter.png') no-repeat;
+                        color: @wine;
+                        padding-left: 25px;
+                        margin-top: 10px;
+                        width: 75px;
+                        text-decoration: none;
+                        box-sizing: border-box;
+
+                        &:hover {
+                            color: lighten(@wine, 25%);
+                        }
+                    }
+                }
+
+                &:hover {
+                    .share-drop {
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        .fiddle {
+            width: 100%;
+            height: ~"calc(100% - 58px)";
+
+            .line-error {
+                background-color: @red;
+                opacity: 0.1;
+            }
+        }
+    }
+
+    .result-wrapper {
+      font-size: 14px;
+      border: 1px solid @gray;
+      flex-grow: 1;
+      position: relative;
+
+        .result-header {
+            height: 58px;
+            width: 100%;
+            background: #e9d9d3; // NAO VAI DAR MAN
+            color: @wine;
+            line-height: 58px;
+            font-size: 18px;
+            font-family: @font-family;
+            transition: background-color, color 0.5s;
+
+            span {
+                margin-left: 20px;
+                text-transform: uppercase;
+            }
+        }
+
+        .result {
+            width: 100%;
+            border: none;
+            height: ~"calc(100% - 58px)";
+            transition: background-color 0.5s;
+            position: absolute;
+        }
+    }
+}
