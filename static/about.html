@@ -4856,40 +4856,31 @@ THE SOFTWARE.
   padding: 5px;
   box-sizing: border-box;
   background-size: cover;
-  display: inline-block;
   cursor: pointer;
-  float: right;
   margin-right: 10px;
-  margin-top: 18px;
   transition: background-color 0.5s;
 }
-.loginBtns {
-  float: left;
-  margin-left: 10px;
-  margin-top: 1px;
+.loginBtns,
+.layoutBtns {
   cursor: pointer;
   color: #fff;
   padding: 3px;
+}
+.loginBtns {
   text-transform: uppercase;
   font-weight: bold;
 }
-.loginBtns:hover {
-  text-decoration: underline;
-}
-.loginBtns a {
-  text-decoration: none;
-}
-.loginBtns a:visited {
-  color: #fff;
-}
 .layoutBtns {
-  float: right;
-  margin-right: 10px;
-  margin-top: 1px;
-  cursor: pointer;
-  color: #983e50;
   background-color: #fff;
   padding: 3px;
+  color: #983e50;
+}
+.dark-mode {
+  height: 20px;
+  width: 20px;
+  background-image: url('../../../../../images/dark.png');
+  background-size: contain;
+  cursor: pointer;
 }
 .run {
   background-color: #983e50;
@@ -4901,11 +4892,8 @@ THE SOFTWARE.
   padding: 5px;
   box-sizing: border-box;
   background-size: cover;
-  display: inline-block;
   cursor: pointer;
-  float: right;
   margin-right: 10px;
-  margin-top: 18px;
   transition: background-color 0.5s;
   background-image: url('../../../../../images/run.png');
 }
@@ -4919,11 +4907,8 @@ THE SOFTWARE.
   padding: 5px;
   box-sizing: border-box;
   background-size: cover;
-  display: inline-block;
   cursor: pointer;
-  float: right;
   margin-right: 10px;
-  margin-top: 18px;
   transition: background-color 0.5s;
   background-image: url('../../../../../images/lint.png');
 }
@@ -4937,11 +4922,8 @@ THE SOFTWARE.
   padding: 5px;
   box-sizing: border-box;
   background-size: cover;
-  display: inline-block;
   cursor: pointer;
-  float: right;
   margin-right: 10px;
-  margin-top: 18px;
   transition: background-color 0.5s;
   background-image: url('../../../../../images/save.png');
 }
@@ -4955,11 +4937,8 @@ THE SOFTWARE.
   padding: 5px;
   box-sizing: border-box;
   background-size: cover;
-  display: inline-block;
   cursor: pointer;
-  float: right;
   margin-right: 10px;
-  margin-top: 18px;
   transition: background-color 0.5s;
   background-image: url('../../../../../images/share.png');
   display: none;
@@ -5008,25 +4987,9 @@ THE SOFTWARE.
 .share:hover .share-drop {
   display: block;
 }
-.dark-mode {
-  display: inline-block;
-  float: right;
-  height: 19px;
-  width: 19px;
-  margin-top: 1px;
-  margin-right: 10px;
-  background-image: url('../../../../../images/dark.png');
-  background-size: contain;
-  cursor: pointer;
-}
 .github-logo {
   width: 20px;
-  margin-top: 1px;
-  margin-right: 20px;
   float: right;
-}
-.content-embed {
-  width: 100%;
 }
 .content {
   zoom: 1;
@@ -5064,48 +5027,36 @@ THE SOFTWARE.
   height: 100px;
   cursor: row-resize;
 }
-.content .examples {
-  margin-right: 10px;
-}
-.content .change-theme {
-  margin-left: 10px;
-}
-.content .menu {
-  height: 508px;
-  display: block;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  font-size: 14px;
-  margin-top: 40px;
-  float: left;
-  width: 200px;
-  border-color: transparent;
-}
-.content .menu select {
-  width: 175px;
-  margin-left: 15px;
-}
-.content .menu .links {
-  list-style-type: none;
-}
-.content .menu .links li {
-  list-style-type: none;
-}
-.content .menu .links li a {
-  text-decoration: none;
-  color: #009999;
-  font-family: 'helvetica', 'arial', 'sans-serif';
-}
-.content .menu .links li a:hover {
-  color: #1d7373;
-}
-.content .fiddle-wrapper {
-  flex-basis: 50%;
+.content .wrapper {
   font-size: 14px;
   border: 1px solid #ddd;
   position: relative;
 }
-.content .fiddle-wrapper .resizer {
+.content .wrapper .wrapper-header {
+  height: 58px;
+  width: 100%;
+  background: #e9d9d3;
+  color: #983e50;
+  font-size: 18px;
+  font-family: 'helvetica', 'arial', 'sans-serif';
+  transition: background-color, color 0.5s;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+.content .wrapper .wrapper-header span {
+  margin-left: 20px;
+  text-transform: uppercase;
+}
+.content .wrapper .wrapper-content {
+  width: 100%;
+  height: calc(100% - 58px);
+}
+.content .wrapper.fiddle-wrapper {
+  flex-basis: 50%;
+}
+.content .wrapper.fiddle-wrapper .resizer {
   width: 100px;
   height: 100%;
   position: absolute;
@@ -5114,53 +5065,23 @@ THE SOFTWARE.
   cursor: col-resize;
   z-index: 2;
 }
-.content .fiddle-wrapper .fiddle-header {
-  height: 58px;
-  width: 100%;
-  background: #e9d9d3;
-  color: #983e50;
-  line-height: 58px;
-  font-size: 18px;
-  font-family: 'helvetica', 'arial', 'sans-serif';
-  position: relative;
-  transition: background-color, color 0.5s;
+.content .wrapper.fiddle-wrapper .fiddle-header {
+  justify-content: space-between;
 }
-.content .fiddle-wrapper .fiddle-header span {
-  margin-left: 20px;
-  text-transform: uppercase;
+.content .wrapper.fiddle-wrapper .fiddle-header nav {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
 }
-.content .fiddle-wrapper .fiddle {
-  width: 100%;
-  height: calc(100% - 58px);
-}
-.content .fiddle-wrapper .fiddle .line-error {
+.content .wrapper.fiddle-wrapper .fiddle .line-error {
   background-color: #BF3030;
   opacity: 0.1;
 }
-.content .result-wrapper {
-  font-size: 14px;
-  border: 1px solid #ddd;
+.content .wrapper.result-wrapper {
   flex-grow: 1;
-  position: relative;
 }
-.content .result-wrapper .result-header {
-  height: 58px;
-  width: 100%;
-  background: #e9d9d3;
-  color: #983e50;
-  line-height: 58px;
-  font-size: 18px;
-  font-family: 'helvetica', 'arial', 'sans-serif';
-  transition: background-color, color 0.5s;
-}
-.content .result-wrapper .result-header span {
-  margin-left: 20px;
-  text-transform: uppercase;
-}
-.content .result-wrapper .result {
-  width: 100%;
+.content .wrapper.result-wrapper .result {
   border: none;
-  height: calc(100% - 58px);
   transition: background-color 0.5s;
   position: absolute;
 }
@@ -5248,11 +5169,28 @@ body.dark {
 }
 .header {
   width: 100%;
-  height: 22px;
   background: #983e50;
   font-family: 'helvetica', 'arial', 'sans-serif';
   color: #fff;
   font-size: 12px;
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+.header nav {
+  display: flex;
+  align-items: center;
+}
+.header nav span:not(:last-child) {
+  margin-right: 10px;
+}
+.header nav a {
+  text-decoration: none;
+  color: #fff;
+}
+.header nav a:hover {
+  text-decoration: underline;
 }
 .about {
   color: #983e50;
@@ -5277,7 +5215,7 @@ body.dark {
   line-height: 1.5em;
   padding: 0.5em 3.5em 0.5em 1em;
   font-size: 14px;
-  margin-right: 10px;
+  margin-right: 20px;
   background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ddd, #ddd);
   background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
   background-size: 5px 5px,
@@ -5335,13 +5273,18 @@ if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && loca
   </head>
   <body>
   	<div class="header">
-            <span class="loginBtns"><a href="/auth/github">Login</a></span>
-            <span class="loginBtns"><a href="/github/logout">Logout</a></span>
-            <span class="loginBtns"><a href="/github/onlyAuthoisedUser">Profile</a></span>
-            <span class="loginBtns"><a href="/about">About</a></span>
-            <span class="loginBtns"><a href="/blog">Blog</a></span>
-            <span><a href="https://github.com/esfiddle/esfiddle" target="_blank"><img src="/images/GitHub.png" class="github-logo"></a></span>
-        </div>
+        <nav>
+          <span class="loginBtns"><a href="/auth/github">Login</a></span>
+          <span class="loginBtns"><a href="/github/logout">Logout</a></span>
+          <span class="loginBtns"><a href="/github/onlyAuthoisedUser">Profile</a></span>
+          <span class="loginBtns"><a href="/">Home</a></span>
+          <span class="loginBtns"><a href="/about">About</a></span>
+          <span class="loginBtns"><a href="/blog">Blog</a></span>
+        </nav>
+        <nav>
+          <span><a href="https://github.com/esfiddle/esfiddle" target="_blank"><img src="/images/GitHub.png" class="github-logo"></a></span>
+        </nav>
+    </div>
     <div id="about">
 	    <h1>Why ESFiddle?</h1>
 		  	<p> ES6 - or ECMAScript 2015 - is the latest JavaScript specification. It includes exciting features like arrow functions and a new class syntax. With ESFiddle, trying out these awesome features in the browser couldn't be easier. Our vision is to help programmers transition to ES6 by providing a reliable testing environment, along with a rich library of example code.</p>

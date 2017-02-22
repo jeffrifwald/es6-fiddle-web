@@ -8,45 +8,35 @@
     padding: 5px;
     box-sizing: border-box;
     background-size: cover;
-    display: inline-block;
     cursor: pointer;
-    float: right;
     margin-right: 10px;
-    margin-top: 18px;
     transition: background-color 0.5s;
 }
 
+.loginBtns,
+.layoutBtns {
+  cursor: pointer;
+  color: @white;
+  padding: 3px;
+}
+
 .loginBtns {
-    float: left;
-    margin-left: 10px;
-    margin-top: 1px;
-    cursor: pointer;
-    color: @white;
-    padding: 3px;
     text-transform: uppercase;
     font-weight: bold;
-
-    &:hover {
-        text-decoration: underline;
-    }
-
-    a {
-        text-decoration: none;
-
-        &:visited {
-            color: @white;
-        }
-    }
 }
 
 .layoutBtns {
-    float: right;
-    margin-right: 10px;
-    margin-top: 1px;
-    cursor: pointer;
-    color: @wine;
     background-color: @white;
     padding: 3px;
+    color: @wine;
+}
+
+.dark-mode {
+    height: 20px;
+    width: 20px;
+    background-image: url('/images/dark.png');
+    background-size: contain;
+    cursor: pointer;
 }
 
 .run {
@@ -121,4 +111,9 @@
             display: block;
         }
     }
+}
+
+.github-logo {
+    width: 20px;
+    float: right;
 }
