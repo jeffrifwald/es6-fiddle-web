@@ -31,7 +31,8 @@
     "mongodb": "^2.2.5",
     "mongoose": "^4.7.7",
     "passport": "^0.3.2",
-    "passport-github2": "^0.1.10"
+    "passport-github2": "^0.1.10",
+    "poet": "^2.0.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",
