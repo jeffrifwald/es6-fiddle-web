@@ -2,7 +2,7 @@
 
 ## Notes
 If you see anyone who you feel breaks these rules or would generally like 
-to speak to us about any inclusion issues, please email us at [abuse@esfiddle.net](mailto:abuse@esfiddle.net). 
+to speak to us about any inclusion issues, please email us at [report@esfiddle.net](mailto:report@esfiddle.net). 
 This email address will go to the project maintainers for review.
 
 ## Our Pledge
