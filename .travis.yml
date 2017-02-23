@@ -4,8 +4,9 @@ node_js:
 services: mongodb
 env: "MONGODB_URI='mongodb://localhost:27017/fiddles'"
 install:
-    - npm install -g codecov
+    - npm install -g mocha
     - npm install -g istanbul
+    - npm install 
 script:
     - "istanbul cover _mocha"
 after_success:
