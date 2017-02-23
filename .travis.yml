@@ -1,11 +1,11 @@
 language: node_js
 node_js:
     - "node"
-    - "0.10"
-    - "0.12"
-    - "4"
-    - "5"
-    - "6"
-    - "7"
+    - "7.x"
+    - "6.x"
+    - "5.x"
+    - "4.x"
+    - "0.12.x"
+    - "0.10.x"
 services: mongodb
 env: "MONGODB_URI='mongodb://localhost:27017/fiddles'"
