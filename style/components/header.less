@@ -1,13 +1,17 @@
 .header {
     width: 100%;
-    background: @wine;
-    font-family: @font-family;
-    color: @white;
+    background: #D9D9D9;
+    color: #353535;
     font-size: 12px;
     display: flex;
     padding: 10px;
+    box-sizing: border-box;
     justify-content: space-between;
     align-items: center;
+
+    .sun {
+      display: none;
+    }
 
     nav {
       display: flex;
@@ -19,7 +23,7 @@
 
       a {
           text-decoration: none;
-          color: @white;
+          color: #353535;
 
           &:hover {
               text-decoration: underline;
@@ -28,17 +32,17 @@
     }
 }
 
-.about {
-    color: @wine;
-    font-size: 0;
-}
-
 .theme-wrapper {
     float: right;
 }
 
 .dark {
     .dark-mode {
-        background-image: url('/images/sun.png');
+      .moon {
+        display: none;
+      }
+      .sun {
+        display: block;
+      }
     }
 }

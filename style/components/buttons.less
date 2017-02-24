@@ -16,47 +16,16 @@
 .loginBtns,
 .layoutBtns {
   cursor: pointer;
-  color: @white;
   padding: 3px;
 }
 
-.loginBtns {
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-.layoutBtns {
-    background-color: @white;
-    padding: 3px;
-    color: @wine;
-}
-
-.dark-mode {
-    height: 20px;
-    width: 20px;
-    background-image: url('/images/dark.png');
-    background-size: contain;
-    cursor: pointer;
-}
-
-.run {
-    .icon-btn;
-    background-image: url('/images/run.png');
-}
-
-.lint {
-    .icon-btn;
-    background-image: url('/images/lint.png');
-}
-
-.save {
-    .icon-btn;
-    background-image: url('/images/save.png');
+.horizontal {
+  i {
+    transform: rotateZ(90deg);
+  }
 }
 
 .share {
-    .icon-btn;
-    background-image: url('/images/share.png');
     display: none;
 
     .share-drop {
@@ -87,22 +56,17 @@
             width: 90%;
         }
 
-        #share-embed {
+        .share-embed {
             margin-bottom: 10px;
         }
 
         .tweet {
-            background: url('/images/twitter.png') no-repeat;
             color: @wine;
             padding-left: 25px;
             margin-top: 10px;
             width: 75px;
             text-decoration: none;
             box-sizing: border-box;
-
-            &:hover {
-                color: lighten(@wine, 25%);
-            }
         }
     }
 
@@ -111,9 +75,4 @@
             display: block;
         }
     }
-}
-
-.github-logo {
-    width: 20px;
-    float: right;
 }

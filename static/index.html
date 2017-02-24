@@ -8,6 +8,7 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>ESFiddle</title>
+        <script src="https://use.fontawesome.com/52284be701.js"></script>
         <style>
 /* BASICS */
 .CodeMirror {
@@ -4829,6 +4830,8 @@ THE SOFTWARE.
   background: #4f4f4f;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Bitter');
 .full-width {
   width: 100%;
   height: 100%;
@@ -4843,6 +4846,56 @@ THE SOFTWARE.
 }
 .clearfix:after {
   clear: both;
+}
+body,
+html {
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.5s;
+  height: 100%;
+  font-family: 'Raleway', sans-serif;
+  background: #fdfdfd;
+  font-size: 16px;
+}
+body * {
+  box-sizing: border-box;
+}
+body.dark {
+  background-color: #303030;
+  transition: background-color 0.5s;
+}
+.CodeMirror {
+  height: 100%;
+}
+.CodeMirror-scroll {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+h1 {
+  font-size: 24px;
+  font-family: 'Bitter', serif;
+  color: #284B63;
+}
+p {
+  font-size: 16px;
+  line-height: 24px;
+  color: #353535;
+}
+.fa {
+  font-size: 16px;
+}
+a {
+  color: #4c8bb7;
+  text-decoration: none;
+  transition: all 200ms ease;
+}
+a:hover {
+  color: #70a3c6;
+}
+.about {
+  width: 70%;
+  padding-top: 60px;
+  margin: auto;
 }
 .icon-btn {
   background-color: #983e50;
@@ -4861,84 +4914,12 @@ THE SOFTWARE.
 .loginBtns,
 .layoutBtns {
   cursor: pointer;
-  color: #fff;
   padding: 3px;
 }
-.loginBtns {
-  text-transform: uppercase;
-  font-weight: bold;
-}
-.layoutBtns {
-  background-color: #fff;
-  padding: 3px;
-  color: #983e50;
-}
-.dark-mode {
-  height: 20px;
-  width: 20px;
-  background-image: url('../../../../../images/dark.png');
-  background-size: contain;
-  cursor: pointer;
-}
-.run {
-  background-color: #983e50;
-  color: #fff;
-  background-repeat: no-repeat;
-  border-radius: 2px;
-  height: 25px;
-  width: 25px;
-  padding: 5px;
-  box-sizing: border-box;
-  background-size: cover;
-  cursor: pointer;
-  margin-right: 10px;
-  transition: background-color 0.5s;
-  background-image: url('../../../../../images/run.png');
-}
-.lint {
-  background-color: #983e50;
-  color: #fff;
-  background-repeat: no-repeat;
-  border-radius: 2px;
-  height: 25px;
-  width: 25px;
-  padding: 5px;
-  box-sizing: border-box;
-  background-size: cover;
-  cursor: pointer;
-  margin-right: 10px;
-  transition: background-color 0.5s;
-  background-image: url('../../../../../images/lint.png');
-}
-.save {
-  background-color: #983e50;
-  color: #fff;
-  background-repeat: no-repeat;
-  border-radius: 2px;
-  height: 25px;
-  width: 25px;
-  padding: 5px;
-  box-sizing: border-box;
-  background-size: cover;
-  cursor: pointer;
-  margin-right: 10px;
-  transition: background-color 0.5s;
-  background-image: url('../../../../../images/save.png');
+.horizontal i {
+  transform: rotateZ(90deg);
 }
 .share {
-  background-color: #983e50;
-  color: #fff;
-  background-repeat: no-repeat;
-  border-radius: 2px;
-  height: 25px;
-  width: 25px;
-  padding: 5px;
-  box-sizing: border-box;
-  background-size: cover;
-  cursor: pointer;
-  margin-right: 10px;
-  transition: background-color 0.5s;
-  background-image: url('../../../../../images/share.png');
   display: none;
 }
 .share .share-drop {
@@ -4967,11 +4948,10 @@ THE SOFTWARE.
   color: #777777;
   width: 90%;
 }
-.share .share-drop #share-embed {
+.share .share-drop .share-embed {
   margin-bottom: 10px;
 }
 .share .share-drop .tweet {
-  background: url('../../../../../images/twitter.png') no-repeat;
   color: #983e50;
   padding-left: 25px;
   margin-top: 10px;
@@ -4979,15 +4959,8 @@ THE SOFTWARE.
   text-decoration: none;
   box-sizing: border-box;
 }
-.share .share-drop .tweet:hover {
-  color: #ce8795;
-}
 .share:hover .share-drop {
   display: block;
-}
-.github-logo {
-  width: 20px;
-  float: right;
 }
 .content {
   zoom: 1;
@@ -5026,21 +4999,19 @@ THE SOFTWARE.
   cursor: row-resize;
 }
 .content .wrapper {
-  font-size: 14px;
-  border: 1px solid #ddd;
   position: relative;
 }
 .content .wrapper .wrapper-header {
   height: 58px;
   width: 100%;
-  background: #e9d9d3;
-  color: #983e50;
+  background: #D9D9D9;
+  color: #5F888A;
   font-size: 18px;
-  font-family: 'helvetica', 'arial', 'sans-serif';
   transition: background-color, color 0.5s;
   position: relative;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
   padding: 0 10px;
 }
 .content .wrapper .wrapper-header span {
@@ -5099,7 +5070,6 @@ THE SOFTWARE.
   color: #000;
   overflow: hidden;
   z-index: 10;
-  font-family: 'helvetica', 'arial', 'sans-serif';
   font-size: 13px;
   box-shadow: 0 1px 3px #ddd;
 }
@@ -5144,37 +5114,19 @@ THE SOFTWARE.
   height: 100%;
   border: none;
 }
-body,
-html {
-  margin: 0;
-  padding: 0;
-  transition: background-color 0.5s;
-  height: 100%;
-}
-body * {
-  box-sizing: border-box;
-}
-body.dark {
-  background-color: #303030;
-  transition: background-color 0.5s;
-}
-.CodeMirror {
-  height: 100%;
-}
-.CodeMirror-scroll {
-  overflow-y: hidden;
-  overflow-x: auto;
-}
 .header {
   width: 100%;
-  background: #983e50;
-  font-family: 'helvetica', 'arial', 'sans-serif';
-  color: #fff;
+  background: #D9D9D9;
+  color: #353535;
   font-size: 12px;
   display: flex;
   padding: 10px;
+  box-sizing: border-box;
   justify-content: space-between;
   align-items: center;
+}
+.header .sun {
+  display: none;
 }
 .header nav {
   display: flex;
@@ -5185,20 +5137,19 @@ body.dark {
 }
 .header nav a {
   text-decoration: none;
-  color: #fff;
+  color: #353535;
 }
 .header nav a:hover {
   text-decoration: underline;
 }
-.about {
-  color: #983e50;
-  font-size: 0;
-}
 .theme-wrapper {
   float: right;
 }
-.dark .dark-mode {
-  background-image: url('../../../../../images/sun.png');
+.dark .dark-mode .moon {
+  display: none;
+}
+.dark .dark-mode .sun {
+  display: block;
 }
 .selector-wrapper {
   margin: 10px 0;
@@ -5253,7 +5204,7 @@ body.dark {
 .dark .content .lint,
 .dark .content .run,
 .dark .content .share {
-  background-color: #3d1920 !important;
+  background-color: #3d1920;
   transition: background-color 0.5s;
 }
 
@@ -5270,6 +5221,7 @@ if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && loca
     <body>
         <div class="header">
           <nav>
+            <img src="/images/logo.png"/>
             <span class="loginBtns"><a href="/auth/github">Login</a></span>
             <span class="loginBtns"><a href="/github/logout">Logout</a></span>
             <span class="loginBtns"><a href="/github/onlyAuthoisedUser">Profile</a></span>
@@ -5277,17 +5229,20 @@ if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && loca
             <span class="loginBtns"><a href="/blog">Blog</a></span>
           </nav>
           <nav>
-            <span><a href="https://github.com/esfiddle/esfiddle" target="_blank"><img src="/images/GitHub.png" class="github-logo"></a></span>
-            <span class="horizontal layoutBtns">H</span>
-            <span class="vertical layoutBtns">V</span>
-            <span class="dark-mode"> </span>
+            <span><a href="https://github.com/esfiddle/esfiddle" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></span>
+            <span class="horizontal layoutBtns"><i class="fa fa-pause" aria-hidden="true"></i></span>
+            <span class="vertical layoutBtns"><i class="fa fa-pause" aria-hidden="true"></i></span>
+            <span class="dark-mode">
+              <i class="fa fa-moon-o moon" aria-hidden="true"></i>
+              <i class="fa fa-sun-o sun" aria-hidden="true"></i>
+            </span>
+            <span class="layoutBtns settings">
+              <i class="fa fa-cog" aria-hidden="true"></i>
+            </span>
           </nav>
         </div>
         <div class="content">
-            <div class="selector-wrapper">
-                <select class="examples">
-                    <option selected disabled>ES6 Examples</option>
-                </select>
+            <!-- <div class="selector-wrapper">
                 <select class="change-theme">
                     <option selected disabled>Choose Theme</option>
                     <option>default</option>
@@ -5338,24 +5293,33 @@ if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && loca
                     <option>yeti</option>
                     <option>zenburn</option>
                 </select>
-            </div>
+            </div> -->
             <div class="code-wrapper">
               <div class="fiddle-wrapper wrapper">
                 <div class="fiddle-header wrapper-header">
                     <span>Code</span>
+                    <div class="selector-wrapper">
+                      <select class="examples">
+                          <option selected disabled>ES6 Examples</option>
+                      </select>
+                    </div>
                     <nav>
                       <div class="share">
+                          <i class="fa fa-share" aria-hidden="true"></i>
                           <div class="share-drop">
                               <label for="share-link">Link</label>
-                              <input value="" id="share-link">
+                              <input value="" class="share-link">
                               <label for="shared-embed">Embed</label>
-                              <input value="" id="share-embed">
-                              <a class="tweet" href="#" target="_blank">Tweet</a>
+                              <input value="" class="share-embed">
+                              <a class="tweet" href="#" target="_blank">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                                Tweet
+                              </a>
                           </div>
                       </div>
-                      <div title="save" class="save"></div>
-                      <div title="lint" class="lint"></div>
-                      <div title="run" class="run"></div>
+                      <div title="save" class="save"><i class="fa fa-floppy-o" aria-hidden="true"></i></div>
+                      <div title="lint" class="lint"><i class="fa fa-check" aria-hidden="true"></i></div>
+                      <div title="run" class="run"><i class="fa fa-play" aria-hidden="true"></i></div>
                     </nav>
                 </div>
                 <div class="fiddle wrapper-content"></div>

@@ -8,6 +8,7 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>ESFiddle</title>
+        <script src="https://use.fontawesome.com/52284be701.js"></script>
         <link rel="stylesheet" href="../static/style/es6-fiddle.css?__inline=true">
         <script src="../src/redirect-traffic.js?__inline=true"></script>
         <link rel="icon" href="/images/favicon.png">
@@ -15,6 +16,7 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
     <body>
         <div class="header">
           <nav>
+            <img src="/images/logo.png"/>
             <span class="loginBtns"><a href="/auth/github">Login</a></span>
             <span class="loginBtns"><a href="/github/logout">Logout</a></span>
             <span class="loginBtns"><a href="/github/onlyAuthoisedUser">Profile</a></span>
@@ -22,17 +24,20 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
             <span class="loginBtns"><a href="/blog">Blog</a></span>
           </nav>
           <nav>
-            <span><a href="https://github.com/esfiddle/esfiddle" target="_blank"><img src="/images/GitHub.png" class="github-logo"></a></span>
-            <span class="horizontal layoutBtns">H</span>
-            <span class="vertical layoutBtns">V</span>
-            <span class="dark-mode"> </span>
+            <span><a href="https://github.com/esfiddle/esfiddle" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></span>
+            <span class="horizontal layoutBtns"><i class="fa fa-pause" aria-hidden="true"></i></span>
+            <span class="vertical layoutBtns"><i class="fa fa-pause" aria-hidden="true"></i></span>
+            <span class="dark-mode">
+              <i class="fa fa-moon-o moon" aria-hidden="true"></i>
+              <i class="fa fa-sun-o sun" aria-hidden="true"></i>
+            </span>
+            <span class="layoutBtns settings">
+              <i class="fa fa-cog" aria-hidden="true"></i>
+            </span>
           </nav>
         </div>
         <div class="content">
-            <div class="selector-wrapper">
-                <select class="examples">
-                    <option selected disabled>ES6 Examples</option>
-                </select>
+            <!-- <div class="selector-wrapper">
                 <select class="change-theme">
                     <option selected disabled>Choose Theme</option>
                     <option>default</option>
@@ -83,24 +88,33 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
                     <option>yeti</option>
                     <option>zenburn</option>
                 </select>
-            </div>
+            </div> -->
             <div class="code-wrapper">
               <div class="fiddle-wrapper wrapper">
                 <div class="fiddle-header wrapper-header">
                     <span>Code</span>
+                    <div class="selector-wrapper">
+                      <select class="examples">
+                          <option selected disabled>ES6 Examples</option>
+                      </select>
+                    </div>
                     <nav>
                       <div class="share">
+                          <i class="fa fa-share" aria-hidden="true"></i>
                           <div class="share-drop">
                               <label for="share-link">Link</label>
-                              <input value="" id="share-link">
+                              <input value="" class="share-link">
                               <label for="shared-embed">Embed</label>
-                              <input value="" id="share-embed">
-                              <a class="tweet" href="#" target="_blank">Tweet</a>
+                              <input value="" class="share-embed">
+                              <a class="tweet" href="#" target="_blank">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                                Tweet
+                              </a>
                           </div>
                       </div>
-                      <div title="save" class="save"></div>
-                      <div title="lint" class="lint"></div>
-                      <div title="run" class="run"></div>
+                      <div title="save" class="save"><i class="fa fa-floppy-o" aria-hidden="true"></i></div>
+                      <div title="lint" class="lint"><i class="fa fa-check" aria-hidden="true"></i></div>
+                      <div title="run" class="run"><i class="fa fa-play" aria-hidden="true"></i></div>
                     </nav>
                 </div>
                 <div class="fiddle wrapper-content"></div>
