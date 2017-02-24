@@ -1,5 +1,6 @@
 //var mongo = require('mongodb').MongoClient,
 var  Fiddles = require('./db/fiddles');
+var Users = require('./db/users');
 
 module.exports = function(app) {
     // mongo.connect(String(process.env.MONGODB_URI), function(err, db) {
@@ -82,5 +83,35 @@ module.exports = function(app) {
         } else {
             res.status(400).send();
         } 
+    });
+
+     app.post('/star/:fiddleID', function(req,res) {
+            let fiddleID = req.params['fiddleID'];
+            
+            //Only authorized user allowed to star a fiddle 
+            if(!req.isAuthenticated()){
+               return res.status(401).send();
+            }
+
+            // First check if user already started this fiddle before. 
+            Users.findById(req.user._id).then(user => {
+                            if (user.startedFiddles.indexOf(fiddleID) > -1) {
+                                return res.status(400).json({ 'message': 'fiddle:' + fiddle + 'is already Stared !'});
+                            } else {
+                                return Fiddles.findOneAndUpdate({ fiddle: fiddleID}, { $inc: { starCounter: 1 } }, { new: true })
+                            }
+                        })
+                        .then(fiddle => {
+                            if (!fiddle) {
+                                return res.status(404).send();
+                            }
+                            // Now add this fiddle to user startedFiddle array
+                            return Users.findByIdAndUpdate(req.user._id, {
+                                                    $push: { startedFiddles: fiddleID }
+                                                })
+                        })
+                        .then(user => res.status(200).send() )
+                        .catch(e => res.status(400).send(e));
+
     });
 };
