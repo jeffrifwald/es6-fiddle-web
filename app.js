@@ -102,10 +102,10 @@ app.get('/auth/github/callback',
       failureRedirect: '/github/login', failureFlash: true, successFlash: 'Welcome!' }),
   function(req, res) {
     // Successful authentication, redirect home.
-      res.redirect('/github/onlyAuthoisedUser');
+      res.redirect('/github/myProfile');
   });
 
-app.get('/github/onlyAuthoisedUser', ensureAuthenticated, function(req, res) {
+app.get('/github/myProfile', ensureAuthenticated, function(req, res) {
 
     Fiddles.find({userId:req.user._id}).then ( fiddles => {
                 res.render('authenticated', { user: req.user, fiddles:fiddles, message: req.flash() });
