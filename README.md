@@ -22,7 +22,7 @@ git clone git@github.com:esfiddle/esfiddle.git
 # Change directory
 cd esfiddle
 
-# Update PRIVATE variables in sample.env file and rename it to '.env'
+# Update PRIVATE section in sample.env file and rename it to '.env'
 mv sample.env .env
 
 # Open a new terminal window and start MongoDB
