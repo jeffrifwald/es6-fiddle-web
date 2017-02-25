@@ -111,7 +111,7 @@ module.exports = function(app) {
                                                     $push: { startedFiddles: fiddleID }
                                                 });
                         }).then(() => res.status(200).send() ).catch(e => {
-                                    console.log('star/:fiddle', e);
+                                    //console.log('star/:fiddle', e);
                                     res.status(400).json({ 'message': e});
                         });
 

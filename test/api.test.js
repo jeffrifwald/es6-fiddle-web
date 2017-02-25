@@ -208,3 +208,66 @@ describe('GET /fiddles/fiddle', function () {
                     .end(done);
     });
 });
+
+
+describe('POST /star/:fiddle', function () {
+    var agent = request.agent(app);
+    beforeEach(function(done) {
+        passportMock(app, {
+            passAuthentication: true,
+            userId: testUser.user1._id
+        });
+        agent.get('/mock/login')
+            .end(function(err, result) {
+                if (!err) {
+                    //console.log(JSON.stringify(result,undefined,2));
+                    done();
+                } else {
+                    done(err);
+                }
+            });
+    })
+    it('Should Star fiddle', done => {
+        agent.post('/star/'+testFiddle.fiddleU1.fiddle)
+                .expect(200)
+                .end((err,res) => {
+                    if(err) 
+                        return done(err);
+                    Fiddles.findOne({fiddle:testFiddle.fiddleU1.fiddle}).then(fiddle =>{
+                        expect(fiddle.starCounter).to.equal(1);
+                        done();
+                    }).catch( e => done(e));
+                });
+    });
+
+    it('Should return 400 if user trying to Star a fiddle AGAIN', done => {
+        agent.post('/star/'+testFiddle.fiddleU1.fiddle)
+                .expect(400)
+                .end((err,res) => {
+                    if(err) 
+                        return done(err);
+                    done();
+                });
+    });
+
+    it('Shuold return 400 unknown fiddle', done => {
+        agent.post('/star/'+parseInt( Date.now() , 10).toString(36))
+                .expect(400)
+                .end((err,res) => {
+                    if(err) 
+                        return done(err);
+                    done();
+                });
+    });
+
+    it('should return 401 for unauthorized user', done => {
+        request(app).post('/star/'+testFiddle.fiddleU1.fiddle)
+                .expect(401)
+                .end((err,res) => {
+                    if(err) 
+                        return done(err);
+                    done();
+                });
+    });
+
+});
