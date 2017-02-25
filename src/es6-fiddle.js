@@ -4,6 +4,7 @@
         runBtn = document.querySelector('.run'),
         lintBtn = document.querySelector('.lint'),
         saveBtn = document.querySelector('.save'),
+        starBtn = document.querySelector('.star'),
         vertBtn = document.querySelector('.vertical'),
         horzBtn = document.querySelector('.horizontal'),
         darkModeBtn = document.querySelector('.dark-mode'),
@@ -341,6 +342,27 @@
                         fiddle: pathArr[1].length > 1 ? pathArr[1] : - 1,
                         value: fiddle.getValue()
                     }));
+                }
+            };
+
+            //star the code
+            starBtn.onclick = function() {
+                var starReq = new XMLHttpRequest(),
+                    pathArr = window.location.pathname.split('/'),
+                    fiddleID = pathArr[1].length > 1 ? pathArr[1] : - 1;
+                console.log(fiddleID);
+                if (fiddleID !== - 1) {
+                    starReq.open('POST', '/star/' + fiddleID, true);
+                    starReq.setRequestHeader('Content-type','application/json');
+                    starReq.onload = function() {
+                        if (this.status === 200 ){
+                            starBtn.classList.remove('star');
+                            starBtn.classList.add('star_complete');
+                        } else {
+                            fiddle.setValue('/*' + this.response + '*\/');
+                        }
+                    };
+                    starReq.send();
                 }
             };
 

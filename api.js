@@ -90,20 +90,20 @@ module.exports = function(app) {
             
             //Only authorized user allowed to star a fiddle 
             if(!req.isAuthenticated()){
-               return res.status(401).send();
+               return res.status(401).json({ 'message': 'Only logged in user allowed to star fiddle !'});
             }
 
             // First check if user already started this fiddle before. 
             Users.findById(req.user._id).then(user => {
                             if (user.startedFiddles.indexOf(fiddleID) > -1) {
-                                return res.status(400).json({ 'message': 'fiddle:' + fiddle + 'is already Stared !'});
+                                throw ( 'fiddle: "' + fiddleID + '" is already Stared !');
                             } else {
                                 return Fiddles.findOneAndUpdate({ fiddle: fiddleID}, { $inc: { starCounter: 1 } }, { new: true })
                             }
                         })
                         .then(fiddle => {
                             if (!fiddle) {
-                                return res.status(404).send();
+                                throw ('fiddle: "' + fiddleID + '" Not Found !');
                             }
                             // Now add this fiddle to user startedFiddle array
                             return Users.findByIdAndUpdate(req.user._id, {
@@ -111,7 +111,10 @@ module.exports = function(app) {
                                                 })
                         })
                         .then(user => res.status(200).send() )
-                        .catch(e => res.status(400).send(e));
+                        .catch(e => {
+                                    console.log('star/:fiddle', e);
+                                    res.status(400).json({ 'message': e})
+                        });
 
     });
 };
