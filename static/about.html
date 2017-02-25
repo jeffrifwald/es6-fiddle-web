@@ -4972,8 +4972,6 @@ a:hover {
   position: relative;
   width: 100%;
   height: calc(100% - 55px);
-  margin-top: 4px;
-  font-size: 0;
   margin: 0 auto;
 }
 .content:before,
@@ -5162,12 +5160,10 @@ a:hover {
 .header nav a {
   text-decoration: none;
   color: #353535;
+  transition: all 200ms ease;
 }
 .header nav a:hover {
-  text-decoration: underline;
-}
-.theme-wrapper {
-  float: right;
+  color: #686868;
 }
 .dark .dark-mode .moon {
   display: none;
@@ -5280,6 +5276,9 @@ a:hover {
   .content .code-wrapper .wrapper .wrapper-header span {
     margin: 0;
     font-size: 14px;
+  }
+  .content .code-wrapper .resizer {
+    display: none;
   }
   .vertical {
     display: none;
