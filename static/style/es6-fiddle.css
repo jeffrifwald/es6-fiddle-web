@@ -5257,7 +5257,7 @@ a:hover {
 }
 @media (max-width: 768px) {
   .content .code-wrapper {
-    flex-direction: column !important;
+    flex-direction: column;
   }
   .content .code-wrapper .wrapper .wrapper-header span {
     margin: 0;

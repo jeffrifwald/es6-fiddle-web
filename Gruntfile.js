@@ -91,7 +91,8 @@ module.exports = function(grunt) {
                     'box-sizing': false,
                     'adjoining-classes': false,
                     'universal-selector': false,
-                    'font-sizes': false
+                    'font-sizes': false,
+                    'box-model': false
                 }
             },
             target: ['style/main.less']
