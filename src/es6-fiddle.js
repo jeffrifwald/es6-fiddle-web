@@ -98,7 +98,6 @@
     vertBtn.onclick = function() {
         setVerticalStyle();
         saveLayoutOption('vertical');
-        fiddleWrapper.removeAttribute('style');
     };
 
     // Onclick of the horizontal button then make the page visually horizontal
@@ -106,7 +105,6 @@
     horzBtn.onclick = function() {
         setHorizontalStyle();
         saveLayoutOption('horizontal');
-        fiddleWrapper.removeAttribute('style');
     };
 
     // When the dark mode button is clicked, toggle the dark mode setting
@@ -188,10 +186,10 @@
         disableDarkMode();
     }
 
-    // // Set the saved theme in the theme changer dropdown
-    // if (savedTheme) {
-    //     themeChanger.value = savedTheme;
-    // }
+    // Set the saved theme in the theme changer dropdown
+    if (savedTheme) {
+        themeChanger.value = savedTheme;
+    }
 
     //add the logger script to the iframe
     logger.innerHTML =
@@ -344,11 +342,11 @@
                 }
             };
 
-            // themeChanger.onchange = function() {
-            //     var theme = themeChanger.options[themeChanger.selectedIndex].textContent;
-            //     fiddle.setOption('theme', theme);
-            //     localStorage.setItem('theme', theme);
-            // };
+            themeChanger.onchange = function() {
+                var theme = themeChanger.options[themeChanger.selectedIndex].textContent;
+                fiddle.setOption('theme', theme);
+                localStorage.setItem('theme', theme);
+            };
 
             //load the selected code
             window.exampleSelector.onchange = function() {

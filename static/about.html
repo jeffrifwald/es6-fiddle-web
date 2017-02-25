@@ -4971,7 +4971,7 @@ a:hover {
   zoom: 1;
   position: relative;
   width: 100%;
-  height: calc(100% - 22px);
+  height: calc(100% - 55px);
   margin-top: 4px;
   font-size: 0;
   margin: 0 auto;
@@ -4987,7 +4987,7 @@ a:hover {
 .content .code-wrapper {
   display: flex;
   flex-direction: row;
-  height: calc(100% - 57px);
+  height: 100%;
 }
 .content .code-wrapper:not(.column) .result-wrapper {
   flex: 1;
@@ -5006,7 +5006,7 @@ a:hover {
   position: relative;
 }
 .content .wrapper .wrapper-header {
-  height: 58px;
+  height: 50px;
   width: 100%;
   background: #23627B;
   color: #f9f9f9;
@@ -5024,7 +5024,7 @@ a:hover {
 }
 .content .wrapper .wrapper-content {
   width: 100%;
-  height: calc(100% - 58px);
+  height: calc(100% - 50px);
 }
 .content .wrapper.fiddle-wrapper {
   flex-basis: 50%;
@@ -5198,13 +5198,7 @@ a:hover {
   -moz-appearance: none;
 }
 .selector-wrapper select:focus {
-  background-image: linear-gradient(45deg, green 50%, transparent 50%), linear-gradient(135deg, transparent 50%, green 50%), linear-gradient(to right, #ddd, #ddd);
-  background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em, calc(100% - 2.5em) 0.5em;
-  background-size: 5px 5px,
-        5px 5px,
-        1px 1.5em;
-  background-repeat: no-repeat;
-  border-color: #983e50;
+  border-color: #A8D5BE;
   outline: 0;
 }
 .selector-wrapper select:-moz-focusring {
@@ -5278,6 +5272,26 @@ a:hover {
 .dark .content .share {
   background-color: #3d1920;
   transition: background-color 0.5s;
+}
+@media (max-width: 768px) {
+  .content .code-wrapper {
+    flex-direction: column !important;
+  }
+  .content .code-wrapper .wrapper .wrapper-header span {
+    margin: 0;
+    font-size: 14px;
+  }
+  .vertical {
+    display: none;
+  }
+  .header {
+    font-size: 14px;
+    overflow-x: scroll;
+  }
+  body,
+  html {
+    overflow-x: hidden;
+  }
 }
 
 </style>
