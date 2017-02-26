@@ -25,7 +25,7 @@ module.exports = function(grunt) {
         pkg: pkg,
         githooks: {
             all: {
-                'pre-push': 'lesslint eslint',
+                'pre-push': 'test'
             }
         },
         uglify: {
@@ -120,7 +120,7 @@ module.exports = function(grunt) {
         grunt.loadNpmTasks(task);
     });
 
-    grunt.registerTask('default', ['watch']);
+    grunt.registerTask('default', ['githooks', 'watch']);
     grunt.registerTask('test', ['lesslint', 'eslint']);
     grunt.registerTask('build', ['less', 'uglify','imagemin', 'inline']);
     grunt.registerTask('dev', ['express:dev', 'browserSync', 'watch']);
