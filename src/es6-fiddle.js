@@ -4,6 +4,7 @@
         runBtn = document.querySelector('.run'),
         lintBtn = document.querySelector('.lint'),
         saveBtn = document.querySelector('.save'),
+        starBtn = document.querySelector('.star'),
         vertBtn = document.querySelector('.vertical'),
         horzBtn = document.querySelector('.horizontal'),
         darkModeBtn = document.querySelector('.dark-mode'),
@@ -27,6 +28,8 @@
         embedded = pathArr[1] === 'embed',
         resizer = document.querySelector('.resizer'),
         documentElement = document.documentElement,
+        snackbar = document.querySelector('.snackbar'),
+        startFiddle = document.querySelector('.star'),
         startX,
         startY,
         startWidth,
@@ -54,7 +57,7 @@
         share = document.querySelector('.share');
         src = document.location.protocol + '//' + document.location.host + '/embed/' + fiddleId + '/';
         iframe = '<iframe width="100%" height="300" frameborder="0" allowfullscreen src="' + src + '"></iframe>';
-
+        startFiddle.style.display = 'block';
         if (share) {
             embed = share.querySelector('.share-embed');
             link = share.querySelector('.share-link');
@@ -67,6 +70,8 @@
             embed.onclick = embed.select;
             twitter.href = 'http://twitter.com/home?status=ES6%20fiddle:%20' + document.location.href;
         }
+    } else {
+        startFiddle.style.display = 'none';
     }
 
     //handle the embedded buttons
@@ -342,6 +347,28 @@
                 }
             };
 
+            //star the code
+            starBtn.onclick = function() {
+                var starReq = new XMLHttpRequest(),
+                    pathArr = window.location.pathname.split('/'),
+                    fiddleID = pathArr[1].length > 1 ? pathArr[1] : - 1;
+                if (fiddleID !== - 1) {
+                    starReq.open('POST', '/star/' + fiddleID, true);
+                    starReq.setRequestHeader('Content-type','application/json');
+                    starReq.onload = function() {
+                        if (this.status === 200 ){
+                            starBtn.classList.remove('star');
+                            starBtn.classList.add('star_complete');
+                        } else {
+                            showSnackbar(JSON.parse(this.response).message);
+                        }
+                    };
+                    starReq.send();
+                } else {
+                    showSnackbar('Please save your fiddle first!');
+                }
+            };
+
             themeChanger.onchange = function() {
                 var theme = themeChanger.options[themeChanger.selectedIndex].textContent;
                 fiddle.setOption('theme', theme);
@@ -393,6 +420,14 @@
     function stopDrag() {
         documentElement.removeEventListener('mousemove', doDrag, false);
         documentElement.removeEventListener('mouseup', stopDrag, false);
+    }
+
+    function showSnackbar(message) {
+        snackbar.innerHTML = message;
+        snackbar.classList.add('show');
+        setTimeout(function() {
+            snackbar.classList.remove('show');
+        }, 3000);
     }
 
     //add babel to the iframe

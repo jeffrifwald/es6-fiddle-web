@@ -11,7 +11,6 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
         <script src="https://use.fontawesome.com/52284be701.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/balloon-css/0.2.4/balloon.min.css">
         <link rel="stylesheet" href="../static/style/es6-fiddle.css?__inline=true">
-        <script src="../src/redirect-traffic.js?__inline=true"></script>
         <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png">
@@ -36,7 +35,7 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
             <div class="logo"><img src="/images/logo.png"/></div>
             <span class="loginBtns"><a href="/auth/github">Login</a></span>
             <span class="loginBtns"><a href="/github/logout">Logout</a></span>
-            <span class="loginBtns"><a href="/github/onlyAuthoisedUser">Profile</a></span>
+            <span class="loginBtns"><a href="/github/myProfile">Profile</a></span>
             <span class="loginBtns"><a href="/about">About</a></span>
             <span class="loginBtns"><a href="/blog">Blog</a></span>
           </nav>
@@ -142,6 +141,9 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
                       <div title="save" class="save" data-balloon="Save Fiddle" data-balloon-pos="up">
                         <i class="fa fa-floppy-o" aria-hidden="true"></i>
                       </div>
+                      <div title="star" class="star" data-balloon="Star Fiddle" data-balloon-pos="up">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                      </div>
                       <div title="lint" class="lint" data-balloon="Lint Fiddle" data-balloon-pos="up">
                         <i class="fa fa-check" aria-hidden="true"></i>
                       </div>
@@ -164,6 +166,7 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
             </div>
           </div>
         </div>
+        <div class="snackbar"></div>
         <script async src="/src/es6-fiddle.js"></script>
     </body>
 </html>

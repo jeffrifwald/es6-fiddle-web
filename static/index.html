@@ -5188,6 +5188,44 @@ a:hover {
 .settings ~ .settings-toggle ~ .settings-popup span:not(:last-child) {
   margin-bottom: 10px;
 }
+.snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #23627B;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+}
+.snackbar.show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
 .dark .dark-mode .moon {
   display: none;
 }
@@ -5225,13 +5263,6 @@ a:hover {
 }
 
 </style>
-        <script>
-// redirect traffic to HTTPS from HTTP
-if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && location.protocol != 'https:') {
-    location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
-}
-
-</script>
         <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png">
@@ -5256,7 +5287,7 @@ if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && loca
             <div class="logo"><img src="/images/logo.png"/></div>
             <span class="loginBtns"><a href="/auth/github">Login</a></span>
             <span class="loginBtns"><a href="/github/logout">Logout</a></span>
-            <span class="loginBtns"><a href="/github/onlyAuthoisedUser">Profile</a></span>
+            <span class="loginBtns"><a href="/github/myProfile">Profile</a></span>
             <span class="loginBtns"><a href="/about">About</a></span>
             <span class="loginBtns"><a href="/blog">Blog</a></span>
           </nav>
@@ -5362,6 +5393,9 @@ if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && loca
                       <div title="save" class="save" data-balloon="Save Fiddle" data-balloon-pos="up">
                         <i class="fa fa-floppy-o" aria-hidden="true"></i>
                       </div>
+                      <div title="star" class="star" data-balloon="Star Fiddle" data-balloon-pos="up">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                      </div>
                       <div title="lint" class="lint" data-balloon="Lint Fiddle" data-balloon-pos="up">
                         <i class="fa fa-check" aria-hidden="true"></i>
                       </div>
@@ -5384,6 +5418,7 @@ if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && loca
             </div>
           </div>
         </div>
+        <div class="snackbar"></div>
         <script async src="/src/es6-fiddle.js"></script>
     </body>
 </html>

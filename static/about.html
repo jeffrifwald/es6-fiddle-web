@@ -5189,6 +5189,44 @@ a:hover {
 .settings ~ .settings-toggle ~ .settings-popup span:not(:last-child) {
   margin-bottom: 10px;
 }
+.snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #23627B;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+}
+.snackbar.show {
+  visibility: visible;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
 .dark .dark-mode .moon {
   display: none;
 }
@@ -5236,18 +5274,18 @@ if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && loca
     <link rel="icon" href="/images/favicon.png">
   </head>
   <body>
-  	<div class="header">
-        <nav>
-          <span class="loginBtns"><a href="/auth/github">Login</a></span>
-          <span class="loginBtns"><a href="/github/logout">Logout</a></span>
-          <span class="loginBtns"><a href="/github/onlyAuthoisedUser">Profile</a></span>
-          <span class="loginBtns"><a href="/">Home</a></span>
-          <span class="loginBtns"><a href="/about">About</a></span>
-          <span class="loginBtns"><a href="/blog">Blog</a></span>
-        </nav>
-        <nav>
-          <span><a href="https://github.com/esfiddle/esfiddle" target="_blank"><img src="/images/GitHub.png" class="github-logo"></a></span>
-        </nav>
+    <div class="header">
+      <nav>
+        <div class="logo"><img src="/images/logo.png"/></div>
+        <span class="loginBtns"><a href="/auth/github">Login</a></span>
+        <span class="loginBtns"><a href="/github/logout">Logout</a></span>
+        <span class="loginBtns"><a href="/github/myProfile">Profile</a></span>
+        <span class="loginBtns"><a href="/about">About</a></span>
+        <span class="loginBtns"><a href="/blog">Blog</a></span>
+      </nav>
+      <nav>
+        <span><a href="https://github.com/esfiddle/esfiddle" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></span>
+      </nav>
     </div>
     <div class="about">
 	    <h1>Why ESFiddle?</h1>

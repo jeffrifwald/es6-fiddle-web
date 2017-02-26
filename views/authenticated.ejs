@@ -319,6 +319,7 @@
         <ul class="clearfix">
           <li><a href="#bio" class="sel">Bio</a></li>
           <li><a href="#activity">Activity</a></li>
+          <li><a href="#starFiddle">Stared Fiddle</a></li>
           <li><a href="#settings">Settings</a></li>
         </ul>
       </nav>
@@ -334,6 +335,14 @@
 
             <% for(var i=0; i<fiddles.length; i++) { %>
                     <p class="activity"><a href='/<%= fiddles[i].fiddle %>'> <%= fiddles[i].fiddle %></p>
+            </a></p>
+            <% } %>
+      </section>
+
+      <section id="starFiddle" class="hidden">
+        <p>Stared fiddles:</p>
+            <% for(var i=0; i<startedFiddles.length; i++) { %>
+                    <p class="activity"><a href='/<%= startedFiddles[i] %>'> <%= startedFiddles[i] %></p>
             </a></p>
             <% } %>
       </section>
