@@ -8,7 +8,7 @@ env: "MONGODB_URI='mongodb://localhost:27017/fiddles'"
 install:
     - npm install -g mocha
     - npm install -g istanbul
-    - npm install 
-script: npm run test && "istanbul cover _mocha"
+    - npm install
+script: npm run test && istanbul cover
 after_success:
     - bash <(curl -s https://codecov.io/bash)
