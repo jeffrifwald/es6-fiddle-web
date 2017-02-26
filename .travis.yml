@@ -5,4 +5,4 @@ services: mongodb
 env: "MONGODB_URI='mongodb://localhost:27017/fiddles'"
 before_script:
   - npm i
-script: grunt test
+script: npm run test
