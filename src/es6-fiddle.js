@@ -421,10 +421,10 @@
     }
 
     function showSnackbar(message) {
-        var snackbar = document.getElementById("snackbar");
+        var snackbar = document.getElementById('snackbar');
         snackbar.innerHTML = message;
-        snackbar.className = "show";
-        setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+        snackbar.className = 'show';
+        setTimeout(function() { snackbar.className = snackbar.className.replace('show', ''); }, 3000);
     }
 
     //add babel to the iframe
