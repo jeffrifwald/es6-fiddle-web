@@ -4835,16 +4835,29 @@ THE SOFTWARE.
 .clearfix:after {
   clear: both;
 }
+.no-margins {
+  margin: 0;
+  padding: 0;
+}
+.select-bg {
+  background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ddd, #ddd);
+  background-position: calc(100% - 10px) 1em, calc(100% - 5px) 1em, calc(100% - 2.5em) 0.5em;
+  background-size: 5px 5px,
+      5px 5px,
+      1px 1.5em;
+  background-repeat: no-repeat;
+}
 body,
 html {
   margin: 0;
   padding: 0;
-  transition: background-color 0.5s;
+  transition: 0.5s background-color ease;
   height: 100%;
   font-family: 'Raleway', sans-serif;
   background: #fdfdfd;
   font-size: 16px;
   line-height: 24px;
+  overflow-x: hidden;
 }
 body * {
   box-sizing: border-box;
@@ -4870,9 +4883,8 @@ p {
 a {
   color: #4c8bb7;
   text-decoration: none;
-  transition: all 200ms ease;
 }
-a:hover {
+.transition(all, 200ms) a:hover {
   color: #70a3c6;
 }
 .about {
@@ -4938,7 +4950,7 @@ a:hover {
   zoom: 1;
   position: relative;
   width: 100%;
-  height: calc(100% - 55px);
+  height: calc(100% - 54px);
   margin: 0 auto;
 }
 .content:before,
@@ -5048,12 +5060,15 @@ a:hover {
 }
 .header .logo img {
   background-position: 0 0;
-  transition: all 200ms ease;
+  transition: 0.2s all ease;
 }
 .header .logo img:hover {
   margin-top: -37%;
 }
-.header .sun {
+.header .dark-mode {
+  cursor: pointer;
+}
+.header .dark-mode .sun {
   display: none;
 }
 .header nav {
@@ -5067,22 +5082,22 @@ a:hover {
 .header nav a {
   text-decoration: none;
   color: #353535;
-  transition: all 200ms ease;
+  transition: 0.2s all ease;
 }
 .header nav a:hover {
   color: #686868;
-}
-.dark .dark-mode .moon {
-  display: none;
-}
-.dark .dark-mode .sun {
-  display: block;
 }
 .selector-wrapper {
   display: flex;
   justify-content: center;
 }
 .selector-wrapper select {
+  background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ddd, #ddd);
+  background-position: calc(100% - 10px) 1em, calc(100% - 5px) 1em, calc(100% - 2.5em) 0.5em;
+  background-size: 5px 5px,
+      5px 5px,
+      1px 1.5em;
+  background-repeat: no-repeat;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 2px;
@@ -5090,12 +5105,6 @@ a:hover {
   line-height: 1.5em;
   padding: 0.5em 2.5em 0.5em 1em;
   font-size: 10px;
-  background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ddd, #ddd);
-  background-position: calc(100% - 10px) 1em, calc(100% - 5px) 1em, calc(100% - 2.5em) 0.5em;
-  background-size: 5px 5px,
-        5px 5px,
-        1px 1.5em;
-  background-repeat: no-repeat;
   box-sizing: border-box;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -5109,7 +5118,7 @@ a:hover {
   text-shadow: 0 0 0 #000;
 }
 .settings i {
-  transition: transform 300ms ease;
+  transition: 300ms transform ease;
   cursor: pointer;
 }
 .settings i:hover {
@@ -5121,10 +5130,13 @@ a:hover {
   left: -9999px;
 }
 .settings ~ .settings-toggle:checked ~ .settings-popup {
-  display: flex;
+  opacity: 1;
+  visibility: visible;
 }
 .settings ~ .settings-toggle ~ .settings-popup {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 200ms ease;
   position: absolute;
   background: #fff;
   padding: 10px;
@@ -5135,6 +5147,7 @@ a:hover {
   z-index: 999;
   flex-direction: column;
   align-items: flex-start;
+  display: flex;
 }
 .settings ~ .settings-toggle ~ .settings-popup:before {
   width: 0;
@@ -5148,6 +5161,9 @@ a:hover {
   top: -6px;
   right: 17px;
 }
+.settings ~ .settings-toggle ~ .settings-popup i {
+  margin-right: 2px;
+}
 .settings ~ .settings-toggle ~ .settings-popup .selector-wrapper,
 .settings ~ .settings-toggle ~ .settings-popup select {
   margin: 0;
@@ -5158,15 +5174,21 @@ a:hover {
 .settings ~ .settings-toggle ~ .settings-popup span:not(:last-child) {
   margin-bottom: 10px;
 }
+.dark .dark-mode .moon {
+  display: none;
+}
+.dark .dark-mode .sun {
+  display: inline-block;
+}
 .dark .content .wrapper-header {
   background-color: #284B63;
   color: #fff;
-  transition: background-color, color 0.5s;
+  transition: 0.5s all ease;
 }
 .dark .content .result {
   background-color: #272822;
-  transition: background-color 0.5s;
   color: #bfbfbf;
+  transition: 0.5s all ease;
 }
 @media (max-width: 768px) {
   .content .code-wrapper {
@@ -5185,9 +5207,5 @@ a:hover {
   .header {
     font-size: 14px;
     overflow-x: scroll;
-  }
-  body,
-  html {
-    overflow-x: hidden;
   }
 }

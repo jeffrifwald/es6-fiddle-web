@@ -1,15 +1,23 @@
 .dark {
+  .dark-mode {
+    .moon {
+      display: none;
+    }
+    .sun {
+      display: inline-block;
+    }
+  }
   .content {
         .wrapper-header {
             background-color: @blue-dark;
             color: @white;
-            transition: background-color, color 0.5s;
+            .transition(all, 0.5s);
         }
 
         .result {
             background-color: @gray-darker;
-            transition: background-color 0.5s;
             color: darken(white, 25%);
+            .transition(all, 0.5s);
         }
     }
 }

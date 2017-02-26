@@ -1,6 +1,6 @@
 h1 {
   font-size: 24px;
-  font-family: 'Bitter', serif;
+  font-family: @heading-font-family;
   color: @blue-dark;
 }
 
@@ -15,7 +15,7 @@ p {
 a {
   color: @blue-light;
   text-decoration: none;
-  transition: all 200ms ease;
+  .transition(all, 200ms)
 
     &:hover {
       color: lighten(@blue-light, 10%);

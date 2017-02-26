@@ -1,6 +1,6 @@
 .settings {
   i {
-    transition: transform 300ms ease;
+    .transition(transform, 300ms);
     cursor: pointer;
 
     &:hover {
@@ -14,11 +14,11 @@
 
      &:checked {
        & ~ .settings-popup {
-         display: flex;
+         opacity: 1;
+         visibility: visible;
        }
      }
     & ~ .settings-popup {
-
       &:before {
         width: 0;
         height: 0;
@@ -32,7 +32,9 @@
         right: 17px;
       }
 
-      display: none;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s, opacity 200ms ease;
       position: absolute;
       background: @white;
       padding: 10px;
@@ -43,6 +45,11 @@
       z-index: 999;
       flex-direction: column;
       align-items: flex-start;
+      display: flex;
+
+      i {
+        margin-right: 2px;
+      }
 
       .selector-wrapper,
       select {
