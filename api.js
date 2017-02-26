@@ -96,7 +96,7 @@ module.exports = function(app) {
         // First check if user already started this fiddle before. 
         Users.findById(req.user._id).then(user => {
                             if (user.startedFiddles.indexOf(fiddleID) > -1) {
-                                throw ( 'fiddle: "' + fiddleID + '" is already Stared !');
+                                throw ( 'fiddle: ' + fiddleID + ' is already stared !');
                             } else {
                                 return Fiddles.findOneAndUpdate({ fiddle: fiddleID}, 
                                                                 { $inc: { starCounter: 1 } }, 
@@ -104,7 +104,7 @@ module.exports = function(app) {
                             }
                         }).then(fiddle => {
                             if (!fiddle) {
-                                throw ('fiddle: "' + fiddleID + '" Not Found !');
+                                throw ('fiddle: ' + fiddleID + ' Not Found !');
                             }
                             // Now add this fiddle to user startedFiddle array
                             return Users.findByIdAndUpdate(req.user._id, {

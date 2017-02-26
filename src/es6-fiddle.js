@@ -350,7 +350,6 @@
                 var starReq = new XMLHttpRequest(),
                     pathArr = window.location.pathname.split('/'),
                     fiddleID = pathArr[1].length > 1 ? pathArr[1] : - 1;
-                console.log(fiddleID);
                 if (fiddleID !== - 1) {
                     starReq.open('POST', '/star/' + fiddleID, true);
                     starReq.setRequestHeader('Content-type','application/json');
@@ -359,10 +358,12 @@
                             starBtn.classList.remove('star');
                             starBtn.classList.add('star_complete');
                         } else {
-                            fiddle.setValue('/*' + this.response + '*\/');
+                            showSnackbar(JSON.parse(this.response).message);
                         }
                     };
                     starReq.send();
+                } else {
+                    showSnackbar('Please save your fiddle first!');
                 }
             };
 
@@ -417,6 +418,13 @@
     function stopDrag() {
         documentElement.removeEventListener('mousemove', doDrag, false);
         documentElement.removeEventListener('mouseup', stopDrag, false);
+    }
+
+    function showSnackbar(message) {
+        var snackbar = document.getElementById("snackbar");
+        snackbar.innerHTML = message;
+        snackbar.className = "show";
+        setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
     }
 
     //add babel to the iframe
