@@ -25,7 +25,7 @@ module.exports = function(grunt) {
         pkg: pkg,
         githooks: {
             all: {
-                'pre-push': 'gulp test'
+                'pre-push': 'test'
             }
         },
         uglify: {
