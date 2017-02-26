@@ -4,6 +4,9 @@
     "node": true
   },
   "globals": {},
+  "parserOptions": {
+        "ecmaVersion": 6
+  },
   "rules": {
     "camelcase": 2,
     "indent": [

@@ -1,7 +1,10 @@
 ESFiddle
 ===
 
-[![Build Status](https://travis-ci.org/esfiddle/esfiddle.png?branch=master)](https://travis-ci.org/esfiddle/esfiddle) [![Join the chat at https://gitter.im/esfiddle/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/esfiddle/Lobby)
+[![Build Status](https://travis-ci.org/esfiddle/esfiddle.png?branch=master)](https://travis-ci.org/esfiddle/esfiddle) 
+[![Join the chat at https://gitter.im/esfiddle/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/esfiddle/Lobby)
+[![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
+[![first-timers-only Friendly](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](http://www.firsttimersonly.com/)
 
 Try out the latest ES6+ features right in your browser.
 
@@ -33,13 +36,14 @@ Found a bug?
 ------------
 Read the [Help I've Found a Bug](REPORTBUG.md) article and follow its instructions.
 
-
 Want to know what are working on?
 ------------
 Checkout our [vision](VISION.md).
 
-
 Contributing
 ------------
 We welcome pull requests from first-timers and seasoned veteran programmers alike. Follow the steps above to get setup.
-Then have a look at some of the [projects issues](https://github.com/esfiddle/esfiddle/labels/up-for-grabs). After, please follow [these steps](CONTRIBUTE.md) to contribute.
+
+Please first review the [Code of Conduct](CODE_OF_CONDUCT.md) and the [Contributing guide](CONTRIBUTE.md) to help you get setup.
+
+Then have a look at some of the [projects issues](https://github.com/esfiddle/esfiddle/issues) Checkout the labels [first-timers-only](https://github.com/esfiddle/esfiddle/labels/first-timers-only), [bite-size](https://github.com/esfiddle/esfiddle/labels/bite-size) (for small issues) and [up-for-grabs](https://github.com/esfiddle/esfiddle/labels/up-for-grabs).
