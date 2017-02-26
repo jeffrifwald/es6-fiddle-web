@@ -1,14 +1,14 @@
 .header {
     width: 100%;
-    background: #A8D5BE;
-    color: #353535;
+    background: @green;
+    color: @gray-dark;
     font-size: 12px;
     display: flex;
     padding: 10px;
     box-sizing: border-box;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid darken(#A8D5BE, 10%);
+    border-bottom: 1px solid darken(@green, 10%);
 
     .logo {
       height: 32px;
@@ -40,11 +40,11 @@
 
       a {
           text-decoration: none;
-          color: #353535;
+          color: @gray-dark;
           transition: all 200ms ease;
 
           &:hover {
-              color: lighten(#353535, 20%);
+              color: lighten(@gray-dark, 20%);
           }
       }
     }

@@ -6,19 +6,15 @@ body, html {
     padding: 0;
     transition: background-color 0.5s;
     height: 100%;
-    font-family: 'Raleway', sans-serif;
-    background: #fdfdfd;
+    font-family: @font-family;
+    background: @bg;
     font-size: 16px;
+    line-height: 24px;
 }
 
 body {
     * {
       box-sizing: border-box;
-    }
-
-    &.dark {
-        background-color: @gray-medium;
-        transition: background-color 0.5s;
     }
 }
 

@@ -1,7 +1,7 @@
 .dark {
-    .content {
-        .fiddle-header, .result-header {
-            background-color: @wine;
+  .content {
+        .wrapper-header {
+            background-color: @blue-dark;
             color: @white;
             transition: background-color, color 0.5s;
         }
@@ -10,14 +10,6 @@
             background-color: @gray-darker;
             transition: background-color 0.5s;
             color: darken(white, 25%);
-        }
-
-        .save,
-        .lint,
-        .run,
-        .share {
-            background-color: darken(@wine, 25%);
-            transition: background-color 0.5s;
         }
     }
 }
