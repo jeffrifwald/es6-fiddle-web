@@ -8,13 +8,31 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>ESFiddle</title>
+        <script src="https://use.fontawesome.com/52284be701.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/balloon-css/0.2.4/balloon.min.css">
         <link rel="stylesheet" href="../static/style/es6-fiddle.css?__inline=true">
-        <script src="../src/redirect-traffic.js?__inline=true"></script>
-        <link rel="icon" href="/images/favicon.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/images/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/images/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/images/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/images/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+        <link rel="icon" href="/images/favicon.ico">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/images/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
     </head>
     <body>
         <div class="header">
           <nav>
+            <div class="logo"><img src="/images/logo.png"/></div>
             <span class="loginBtns"><a href="/auth/github">Login</a></span>
             <span class="loginBtns"><a href="/github/logout">Logout</a></span>
             <span class="loginBtns"><a href="/github/myProfile">Profile</a></span>
@@ -22,86 +40,121 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
             <span class="loginBtns"><a href="/blog">Blog</a></span>
           </nav>
           <nav>
-            <span><a href="https://github.com/esfiddle/esfiddle" target="_blank"><img src="/images/GitHub.png" class="github-logo"></a></span>
-            <span class="horizontal layoutBtns">H</span>
-            <span class="vertical layoutBtns">V</span>
-            <span class="dark-mode"> </span>
+            <span class="layoutBtns settings">
+              <label for="settings-toggle"><i class="fa fa-cog" aria-hidden="true"></i></label>
+            </span>
+            <input type="checkbox" id="settings-toggle" class="settings-toggle">
+            <div class="settings-popup">
+              <span class="horizontal layoutBtns">
+                <i class="fa fa-pause" aria-hidden="true"></i>
+                Horizontal Layout
+              </span>
+              <span class="vertical layoutBtns">
+                <i class="fa fa-pause" aria-hidden="true"></i>
+                Vertical Layout
+              </span>
+              <span class="dark-mode">
+                <div class="moon">
+                  <i class="fa fa-moon-o" aria-hidden="true"></i>
+                  Dark Mode
+                </div>
+                <div class="sun">
+                  <i class="fa fa-sun-o sun" aria-hidden="true"></i>
+                  Light Mode
+                </div>
+              </span>
+              <div class="selector-wrapper">
+                  <select class="change-theme">
+                      <option selected disabled>Choose Theme</option>
+                      <option>default</option>
+                      <option>3024-day</option>
+                      <option>3024-night</option>
+                      <option>abcdef</option>
+                      <option>ambiance</option>
+                      <option>base16-dark</option>
+                      <option>base16-light</option>
+                      <option>bespin</option>
+                      <option>blackboard</option>
+                      <option>cobalt</option>
+                      <option>colorforth</option>
+                      <option>dracula</option>
+                      <option>eclipse</option>
+                      <option>elegant</option>
+                      <option>erlang-dark</option>
+                      <option>hopscotch</option>
+                      <option>icecoder</option>
+                      <option>isotope</option>
+                      <option>lesser-dark</option>
+                      <option>liquibyte</option>
+                      <option>material</option>
+                      <option>mbo</option>
+                      <option>mdn-like</option>
+                      <option>midnight</option>
+                      <option>monokai</option>
+                      <option>neat</option>
+                      <option>neo</option>
+                      <option>night</option>
+                      <option>panda-syntax</option>
+                      <option>paraiso-dark</option>
+                      <option>paraiso-light</option>
+                      <option>pastel-on-dark</option>
+                      <option>railscasts</option>
+                      <option>rubyblue</option>
+                      <option>seti</option>
+                      <option>solarized dark</option>
+                      <option>solarized light</option>
+                      <option>the-matrix</option>
+                      <option>tomorrow-night-bright</option>
+                      <option>tomorrow-night-eighties</option>
+                      <option>ttcn</option>
+                      <option>twilight</option>
+                      <option>vibrant-ink</option>
+                      <option>xq-dark</option>
+                      <option>xq-light</option>
+                      <option>yeti</option>
+                      <option>zenburn</option>
+                  </select>
+              </div>
+            </div>
+            <span><a href="https://github.com/esfiddle/esfiddle" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></span>
           </nav>
         </div>
         <div class="content">
-            <div class="selector-wrapper">
-                <select class="examples">
-                    <option selected disabled>ES6 Examples</option>
-                </select>
-                <select class="change-theme">
-                    <option selected disabled>Choose Theme</option>
-                    <option>default</option>
-                    <option>3024-day</option>
-                    <option>3024-night</option>
-                    <option>abcdef</option>
-                    <option>ambiance</option>
-                    <option>base16-dark</option>
-                    <option>base16-light</option>
-                    <option>bespin</option>
-                    <option>blackboard</option>
-                    <option>cobalt</option>
-                    <option>colorforth</option>
-                    <option>dracula</option>
-                    <option>eclipse</option>
-                    <option>elegant</option>
-                    <option>erlang-dark</option>
-                    <option>hopscotch</option>
-                    <option>icecoder</option>
-                    <option>isotope</option>
-                    <option>lesser-dark</option>
-                    <option>liquibyte</option>
-                    <option>material</option>
-                    <option>mbo</option>
-                    <option>mdn-like</option>
-                    <option>midnight</option>
-                    <option>monokai</option>
-                    <option>neat</option>
-                    <option>neo</option>
-                    <option>night</option>
-                    <option>panda-syntax</option>
-                    <option>paraiso-dark</option>
-                    <option>paraiso-light</option>
-                    <option>pastel-on-dark</option>
-                    <option>railscasts</option>
-                    <option>rubyblue</option>
-                    <option>seti</option>
-                    <option>solarized dark</option>
-                    <option>solarized light</option>
-                    <option>the-matrix</option>
-                    <option>tomorrow-night-bright</option>
-                    <option>tomorrow-night-eighties</option>
-                    <option>ttcn</option>
-                    <option>twilight</option>
-                    <option>vibrant-ink</option>
-                    <option>xq-dark</option>
-                    <option>xq-light</option>
-                    <option>yeti</option>
-                    <option>zenburn</option>
-                </select>
-            </div>
             <div class="code-wrapper">
               <div class="fiddle-wrapper wrapper">
                 <div class="fiddle-header wrapper-header">
                     <span>Code</span>
                     <nav>
-                      <div class="share">
+                      <div class="share" data-balloon="Share Fiddle" data-balloon-pos="up">
+                          <i class="fa fa-share" aria-hidden="true"></i>
                           <div class="share-drop">
                               <label for="share-link">Link</label>
-                              <input value="" id="share-link">
+                              <input value="" class="share-link">
                               <label for="shared-embed">Embed</label>
-                              <input value="" id="share-embed">
-                              <a class="tweet" href="#" target="_blank">Tweet</a>
+                              <input value="" class="share-embed">
+                              <a class="tweet" href="#" target="_blank">
+                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                                Tweet
+                              </a>
                           </div>
                       </div>
-                      <div title="star" class="star"></div>
-                      <div title="save" class="save"></div>
-                      <div title="lint" class="lint"></div>
-                      <div title="run" class="run"></div>
+                      <div title="save" class="save" data-balloon="Save Fiddle" data-balloon-pos="up">
+                        <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                      </div>
+                      <div title="star" class="star" data-balloon="Star Fiddle" data-balloon-pos="up">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                      </div>
+                      <div title="lint" class="lint" data-balloon="Lint Fiddle" data-balloon-pos="up">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                      </div>
+                      <div title="run" class="run" data-balloon="Run Fiddle" data-balloon-pos="up">
+                        <i class="fa fa-play" aria-hidden="true"></i>
+                      </div>
+                      <div class="selector-wrapper">
+                        <select class="examples">
+                            <option selected disabled>ES6 Examples</option>
+                        </select>
+                      </div>
                     </nav>
                 </div>
                 <div class="fiddle wrapper-content"></div>
@@ -113,8 +166,7 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
             </div>
           </div>
         </div>
-        <div id="snackbar"></div>
-        <script defer src="/src/analytics.js"></script>
+        <div class="snackbar"></div>
         <script async src="/src/es6-fiddle.js"></script>
     </body>
 </html>

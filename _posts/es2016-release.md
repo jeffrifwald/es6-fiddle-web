@@ -2,7 +2,8 @@
 "title": "ES2016 (ES7) Final Feature Set",
 "tags": ["ES6", "ESFiddle", "releases"],
 "category": "javascript",
-"date": "2017-02-22"
+"date": "2017-02-22",
+"image": "http://i.imgur.com/IvGr1XY.jpg"
 }}}
 
 ## ES2016 Feature Set finalized

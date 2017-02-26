@@ -1,44 +1,54 @@
 .header {
     width: 100%;
-    background: @wine;
-    font-family: @font-family;
-    color: @white;
+    background: @green;
+    color: @gray-dark;
     font-size: 12px;
     display: flex;
     padding: 10px;
+    box-sizing: border-box;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid darken(@green, 10%);
+
+    .logo {
+      height: 32px;
+      overflow: hidden;
+      margin-right: 10px;
+
+      img {
+        background-position: 0 0;
+        .transition(all, 0.2s);
+
+        &:hover {
+          margin-top: -37%;
+        }
+      }
+    }
+
+    .dark-mode {
+      cursor: pointer;
+      .sun {
+        display: none;
+      }
+    }
 
     nav {
       display: flex;
       align-items: center;
+      position: relative;
 
       span:not(:last-child) {
         margin-right: 10px;
       }
 
       a {
-          text-decoration: none;
-          color: @white;
+        text-decoration: none;
+        color: @gray-dark;
+        .transition(all, 0.2s);
 
-          &:hover {
-              text-decoration: underline;
-          }
+        &:hover {
+          color: lighten(@gray-dark, 20%);
+        }
       }
-    }
-}
-
-.about {
-    color: @wine;
-    font-size: 0;
-}
-
-.theme-wrapper {
-    float: right;
-}
-
-.dark {
-    .dark-mode {
-        background-image: url('/images/sun.png');
     }
 }

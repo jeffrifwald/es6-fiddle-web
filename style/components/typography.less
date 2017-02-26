@@ -1,0 +1,30 @@
+h1 {
+  font-size: 24px;
+  font-family: @heading-font-family;
+  color: @blue-dark;
+}
+
+p {
+  color: @gray-dark;
+}
+
+.fa {
+    font-size: 16px;
+}
+
+a {
+  color: @blue-light;
+  text-decoration: none;
+  .transition(all, 200ms);
+
+    &:hover {
+      color: lighten(@blue-light, 10%);
+    }
+}
+
+
+.about {
+  width: 70%;
+  padding-top: 60px;
+  margin: auto;
+}

@@ -2,16 +2,13 @@
     .clearfix;
     position: relative;
     width: 100%;
-    min-width: 600px;
-    height: ~"calc(100% - 22px)";
-    margin-top: 4px;
-    font-size: 0;
+    height: ~"calc(100% - 54px)";
     margin: 0 auto;
 
     .code-wrapper {
       display: flex;
       flex-direction: row;
-      height: ~"calc(100% - 57px)";
+      height: 100%;
 
       &:not(.column) .result-wrapper {
         flex: 1;
@@ -32,21 +29,19 @@
 
 
     .wrapper {
-      font-size: 14px;
-      border: 1px solid @gray;
       position: relative;
 
       .wrapper-header {
-        height: 58px;
+        height: 50px;
         width: 100%;
-        background: #e9d9d3; // NAO VAI DAR MAN
-        color: @wine;
+        background: @blue;
+        color: @gray-light;
         font-size: 18px;
-        font-family: @font-family;
         transition: background-color, color 0.5s;
         position: relative;
         display: flex;
         align-items: center;
+        box-sizing: border-box;
         padding: 0 10px;
 
         span {
@@ -57,7 +52,7 @@
 
       .wrapper-content {
         width: 100%;
-        height: ~"calc(100% - 58px)";
+        height: ~"calc(100% - 50px)";
       }
 
       &.fiddle-wrapper {
@@ -80,6 +75,14 @@
                 display: flex;
                 flex-direction: row-reverse;
                 align-items: center;
+
+                i {
+                  cursor: pointer;
+                }
+
+                div:not(:first-child) {
+                  margin-right: 10px;
+                }
               }
           }
 
