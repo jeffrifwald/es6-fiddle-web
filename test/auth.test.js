@@ -5,7 +5,7 @@ var request = require('supertest'),
     passportMock = require('./passport-mock'),
     { testUser, testFiddle } = require('./seedData');
 
-describe('GET /github/onlyAuthoisedUser authorized', function() {
+describe('GET /github/myProfile authorized', function() {
     var agent = request.agent(app);
     beforeEach(function(done) {
         passportMock(app, {
@@ -22,8 +22,8 @@ describe('GET /github/onlyAuthoisedUser authorized', function() {
             });
     })
 
-    it('should allow access to /github/onlyAuthoisedUser', function(done) {
-        var req = agent.get('/github/onlyAuthoisedUser');
+    it('should allow access to /github/myProfile', function(done) {
+        var req = agent.get('/github/myProfile');
         //agent.attachCookies(req);
         req.expect(200, done);
     });

@@ -13,6 +13,10 @@ var fiddlesSchema = new Schema({
     value:{
         type:String,
         require:true
+    },
+    starCounter:{
+        type:Number,
+        default: 0
     }
 
 

@@ -17,7 +17,7 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
           <nav>
             <span class="loginBtns"><a href="/auth/github">Login</a></span>
             <span class="loginBtns"><a href="/github/logout">Logout</a></span>
-            <span class="loginBtns"><a href="/github/onlyAuthoisedUser">Profile</a></span>
+            <span class="loginBtns"><a href="/github/myProfile">Profile</a></span>
             <span class="loginBtns"><a href="/about">About</a></span>
             <span class="loginBtns"><a href="/blog">Blog</a></span>
           </nav>
@@ -98,6 +98,7 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
                               <a class="tweet" href="#" target="_blank">Tweet</a>
                           </div>
                       </div>
+                      <div title="star" class="star"></div>
                       <div title="save" class="save"></div>
                       <div title="lint" class="lint"></div>
                       <div title="run" class="run"></div>
@@ -112,6 +113,7 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
             </div>
           </div>
         </div>
+        <div id="snackbar"></div>
         <script defer src="/src/analytics.js"></script>
         <script async src="/src/es6-fiddle.js"></script>
     </body>

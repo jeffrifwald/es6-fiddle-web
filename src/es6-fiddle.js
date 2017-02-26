@@ -4,6 +4,7 @@
         runBtn = document.querySelector('.run'),
         lintBtn = document.querySelector('.lint'),
         saveBtn = document.querySelector('.save'),
+        starBtn = document.querySelector('.star'),
         vertBtn = document.querySelector('.vertical'),
         horzBtn = document.querySelector('.horizontal'),
         darkModeBtn = document.querySelector('.dark-mode'),
@@ -344,6 +345,28 @@
                 }
             };
 
+            //star the code
+            starBtn.onclick = function() {
+                var starReq = new XMLHttpRequest(),
+                    pathArr = window.location.pathname.split('/'),
+                    fiddleID = pathArr[1].length > 1 ? pathArr[1] : - 1;
+                if (fiddleID !== - 1) {
+                    starReq.open('POST', '/star/' + fiddleID, true);
+                    starReq.setRequestHeader('Content-type','application/json');
+                    starReq.onload = function() {
+                        if (this.status === 200 ){
+                            starBtn.classList.remove('star');
+                            starBtn.classList.add('star_complete');
+                        } else {
+                            showSnackbar(JSON.parse(this.response).message);
+                        }
+                    };
+                    starReq.send();
+                } else {
+                    showSnackbar('Please save your fiddle first!');
+                }
+            };
+
             themeChanger.onchange = function() {
                 var theme = themeChanger.options[themeChanger.selectedIndex].textContent;
                 fiddle.setOption('theme', theme);
@@ -395,6 +418,13 @@
     function stopDrag() {
         documentElement.removeEventListener('mousemove', doDrag, false);
         documentElement.removeEventListener('mouseup', stopDrag, false);
+    }
+
+    function showSnackbar(message) {
+        var snackbar = document.getElementById('snackbar');
+        snackbar.innerHTML = message;
+        snackbar.className = 'show';
+        setTimeout(function() { snackbar.className = snackbar.className.replace('show', ''); }, 3000);
     }
 
     //add babel to the iframe

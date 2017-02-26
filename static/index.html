@@ -4925,6 +4925,36 @@ THE SOFTWARE.
   transition: background-color 0.5s;
   background-image: url('../../../../../images/save.png');
 }
+.star {
+  background-color: #983e50;
+  color: #fff;
+  background-repeat: no-repeat;
+  border-radius: 2px;
+  height: 25px;
+  width: 25px;
+  padding: 5px;
+  box-sizing: border-box;
+  background-size: cover;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.5s;
+  background-image: url('../../../../../images/star.png');
+}
+.star_complete {
+  background-color: #983e50;
+  color: #fff;
+  background-repeat: no-repeat;
+  border-radius: 2px;
+  height: 25px;
+  width: 25px;
+  padding: 5px;
+  box-sizing: border-box;
+  background-size: cover;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.5s;
+  background-image: url('../../../../../images/star_complete.png');
+}
 .share {
   background-color: #983e50;
   color: #fff;
@@ -5238,6 +5268,66 @@ body.dark {
   color: transparent;
   text-shadow: 0 0 0 #000;
 }
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #983e50;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
 .dark .content .fiddle-header,
 .dark .content .result-header {
   background-color: #983e50;
@@ -5272,7 +5362,7 @@ if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && loca
           <nav>
             <span class="loginBtns"><a href="/auth/github">Login</a></span>
             <span class="loginBtns"><a href="/github/logout">Logout</a></span>
-            <span class="loginBtns"><a href="/github/onlyAuthoisedUser">Profile</a></span>
+            <span class="loginBtns"><a href="/github/myProfile">Profile</a></span>
             <span class="loginBtns"><a href="/about">About</a></span>
             <span class="loginBtns"><a href="/blog">Blog</a></span>
           </nav>
@@ -5353,6 +5443,7 @@ if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && loca
                               <a class="tweet" href="#" target="_blank">Tweet</a>
                           </div>
                       </div>
+                      <div title="star" class="star"></div>
                       <div title="save" class="save"></div>
                       <div title="lint" class="lint"></div>
                       <div title="run" class="run"></div>
@@ -5367,6 +5458,7 @@ if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && loca
             </div>
           </div>
         </div>
+        <div id="snackbar"></div>
         <script defer src="/src/analytics.js"></script>
         <script async src="/src/es6-fiddle.js"></script>
     </body>
