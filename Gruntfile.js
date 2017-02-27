@@ -1,11 +1,13 @@
 module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
-    var jsFiles = [
-            'static/lib/jshint/**/*.js',
-            'static/lib/codemirror/**/*.js',
+    var jsSrcFiles = [
             'src/*.js',
             'src/examples/*.js',
             'src/add-examples.js'
+        ],
+        jsLibFiles = [
+            'static/lib/jshint/**/*.js',
+            'static/lib/codemirror/**/*.js'
         ],
         styleFiles = ['static/lib/**/*.css', 'style/**/*.less'],
         pkg = grunt.file.readJSON('package.json'),
@@ -28,10 +30,23 @@ module.exports = function(grunt) {
                 'pre-push': 'test'
             }
         },
+        babel: {
+            options: {
+                sourceMap: false,
+                presets: ['es2015']
+            },
+            dist: {
+                files: [{
+                    'expand': true,
+                    'src': jsSrcFiles,
+                    'dest': 'dist/'
+                }]
+            }
+        },
         uglify: {
             compile: {
                 files: {
-                    'static/src/es6-fiddle.js': jsFiles,
+                    'static/src/es6-fiddle.js': [jsLibFiles, 'dist/src/**/*.js'],
                     'static/lib/babel/babel.min.js' : ['static/lib/babel/*.js', '!static/lib/babel/babel.min.js']
                 }
             }
@@ -52,8 +67,8 @@ module.exports = function(grunt) {
                 tasks: ['less', 'inline']
             },
             src: {
-                files: jsFiles,
-                tasks: ['uglify', 'eslint']
+                files: jsSrcFiles,
+                tasks: ['babel', 'uglify', 'eslint']
             },
             html: {
                 files: 'src/index.html',
@@ -99,7 +114,7 @@ module.exports = function(grunt) {
         },
         browserSync: {
             bsFiles: {
-                src: [jsFiles, styleFiles],
+                src: [jsSrcFiles, styleFiles],
             },
             options: {
                 watchTask: true,
@@ -122,6 +137,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['githooks', 'watch']);
     grunt.registerTask('test', ['lesslint', 'eslint']);
-    grunt.registerTask('build', ['less', 'uglify','imagemin', 'inline']);
+    grunt.registerTask('build', ['less', 'babel', 'uglify','imagemin', 'inline']);
     grunt.registerTask('dev', ['express:dev', 'browserSync', 'watch']);
 };
