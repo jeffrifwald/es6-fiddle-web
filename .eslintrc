@@ -65,6 +65,13 @@
         "allowSingleLine": true
       }
     ],
-    "eol-last": 2
+    "eol-last": 2,
+    "no-var": 2,
+    "prefer-template": 2,
+    "prefer-arrow-callback": 2,
+    "arrow-body-style": [
+      2,
+      "as-needed"
+    ]
   }
 }
