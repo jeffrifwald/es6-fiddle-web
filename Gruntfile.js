@@ -13,7 +13,6 @@ module.exports = grunt => {
         styleFiles = ['static/lib/**/*.css', 'style/**/*.less'],
         pkg = grunt.file.readJSON('package.json'),
         npmTasks = [
-            'grunt-contrib-jshint',
             'grunt-contrib-uglify',
             'grunt-contrib-watch',
             'grunt-jscs',
@@ -39,7 +38,7 @@ module.exports = grunt => {
             dist: {
                 files: [{
                     'expand': true,
-                    'src': 'dist/src/**/*.js',
+                    'src': 'src/**/*.js',
                     'dest': 'dist/'
                 }]
             }
@@ -47,10 +46,10 @@ module.exports = grunt => {
         uglify: {
             compile: {
                 files: {
-                    'static/src/add-examples.js': 'dist/add-examples.js',
-                    'static/src/authenticated.js': 'dist/authenticated.js',
                     'static/src/es6-fiddle.js': [jsLibFiles, 'dist/src/**/*.js', '!dist/add-examples.js',
                         '!dist/authenticated.js'],
+                    'static/src/add-examples.js': 'dist/src/add-examples.js',
+                    'static/src/authenticated.js': 'dist/src/authenticated.js',
                     'static/lib/babel/babel.min.js' : ['static/lib/babel/*.js', '!static/lib/babel/babel.min.js']
                 }
             }
