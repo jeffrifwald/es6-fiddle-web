@@ -1,11 +1,14 @@
-module.exports = function(grunt) {
+module.exports = grunt => {
     require('load-grunt-tasks')(grunt);
-    var jsFiles = [
+    const jsSrcFiles = [
+            'src/**/*.js',
+            '!src/authenticated.js',
+            '!src/add-examples.js'
+        ],
+        jsFiles = 'src/**/*.js',
+        jsLibFiles = [
             'static/lib/jshint/**/*.js',
-            'static/lib/codemirror/**/*.js',
-            'src/*.js',
-            'src/examples/*.js',
-            'src/add-examples.js'
+            'static/lib/codemirror/**/*.js'
         ],
         styleFiles = ['static/lib/**/*.css', 'style/**/*.less'],
         pkg = grunt.file.readJSON('package.json'),
@@ -27,10 +30,26 @@ module.exports = function(grunt) {
                 'pre-push': 'test'
             }
         },
+        babel: {
+            options: {
+                sourceMap: false,
+                presets: ['es2015']
+            },
+            dist: {
+                files: [{
+                    'expand': true,
+                    'src': 'src/**/*.js',
+                    'dest': 'dist/'
+                }]
+            }
+        },
         uglify: {
             compile: {
                 files: {
-                    'static/src/es6-fiddle.js': jsFiles,
+                    'static/src/es6-fiddle.js': [jsLibFiles, 'dist/src/**/*.js', '!dist/add-examples.js',
+                        '!dist/authenticated.js'],
+                    'static/src/add-examples.js': 'dist/src/add-examples.js',
+                    'static/src/authenticated.js': 'dist/src/authenticated.js',
                     'static/lib/babel/babel.min.js' : ['static/lib/babel/*.js', '!static/lib/babel/babel.min.js']
                 }
             }
@@ -38,7 +57,9 @@ module.exports = function(grunt) {
         less: {
             production: {
                 files: {
-                    'static/style/es6-fiddle.css': ['static/lib/**/*.css', 'style/main.less']
+                    'static/style/es6-fiddle.css': ['static/lib/**/*.css', 'style/main.less'],
+                    'static/style/profile.css': ['style/profile.less'],
+                    'static/style/blog.css': ['style/blog.less']
                 }
             }
         },
@@ -52,7 +73,7 @@ module.exports = function(grunt) {
             },
             src: {
                 files: jsFiles,
-                tasks: ['uglify', 'eslint']
+                tasks: ['babel', 'uglify', 'eslint']
             },
             html: {
                 files: 'src/index.html',
@@ -99,7 +120,7 @@ module.exports = function(grunt) {
         },
         browserSync: {
             bsFiles: {
-                src: [jsFiles, styleFiles],
+                src: [jsSrcFiles, styleFiles],
             },
             options: {
                 watchTask: true,
@@ -116,12 +137,10 @@ module.exports = function(grunt) {
         }
     });
 
-    npmTasks.forEach(function(task) {
-        grunt.loadNpmTasks(task);
-    });
+    npmTasks.forEach(task => grunt.loadNpmTasks(task));
 
     grunt.registerTask('default', ['githooks', 'watch']);
     grunt.registerTask('test', ['lesslint', 'eslint']);
-    grunt.registerTask('build', ['less', 'uglify','imagemin', 'inline']);
+    grunt.registerTask('build', ['less', 'babel', 'uglify','imagemin', 'inline']);
     grunt.registerTask('dev', ['express:dev', 'browserSync', 'watch']);
 };

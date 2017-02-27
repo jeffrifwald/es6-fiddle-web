@@ -1,9 +1,7 @@
 window.es6Example.defaultParam = {};
 
 window.es6Example.defaultParam.code = [
-    'function sayMsg(msg=\'This is a default message.\') {',
-    '\tconsole.log(msg);',
-    '}',
+    'var sayMsg = (msg=\'This is a default message.\') => console.log(msg);',
     '',
     'sayMsg();',
     'sayMsg(\'This is a different message!\');',

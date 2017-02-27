@@ -4900,15 +4900,18 @@ body * {
   margin: 0;
   padding: 0;
 }
-h1 {
-  font-size: 24px;
+h1,
+h2,
+h3 {
   font-family: 'Bitter', serif;
   color: #284B63;
 }
 h2 {
   font-size: 20px;
-  font-family: 'Bitter', serif;
   color: #4a9a71;
+}
+h1 {
+  font-size: 24px;
 }
 p {
   color: #353535;
@@ -5102,6 +5105,11 @@ a:hover {
 .header .logo img:hover {
   margin-top: -37%;
 }
+.header .only-loggedout,
+.header .only-logged,
+.header .only-logged-profile {
+  display: none;
+}
 .header .dark-mode {
   cursor: pointer;
 }
@@ -5289,7 +5297,7 @@ a:hover {
     <script>
 // redirect traffic to HTTPS from HTTP
 if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && location.protocol != 'https:') {
-    location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+    location.href = `https:${window.location.href.substring(window.location.protocol.length)}`;
 }
 
 </script>
@@ -5298,10 +5306,10 @@ if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && loca
   <body>
     <div class="header">
       <nav>
-        <div class="logo"><img src="/images/logo.png"/></div>
-        <span class="loginBtns"><a href="/auth/github">Login</a></span>
-        <span class="loginBtns"><a href="/github/logout">Logout</a></span>
-        <span class="loginBtns"><a href="/github/myProfile">Profile</a></span>
+        <div class="logo"><a href="/"><img src="/images/logo.png"/></a></div>
+        <span class="loginBtns only-loggedout"><a href="/auth/github">Login</a></span>
+        <span class="loginBtns only-logged"><a href="/github/logout">Logout</a></span>
+        <span class="loginBtns only-logged-profile"><a href="/github/myProfile">Profile</a></span>
         <span class="loginBtns"><a href="/about">About</a></span>
         <span class="loginBtns"><a href="/blog">Blog</a></span>
       </nav>
@@ -5319,5 +5327,6 @@ if (location.hostname != 'localhost' && location.hostname != '127.0.0.1' && loca
 	  	<h1>Find a bug?</h1>
 	  		<p> We're always working on improving ESFiddle. Please read the <a href="https://github.com/esfiddle/esfiddle/blob/develop/REPORTBUG.md" target="_blank">Help I've Found a Bug</a> article and follow the guidelines.</p>
   	</div>
+      <script async src="/src/authenticated.js"></script>
   </body>
 </html>

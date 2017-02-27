@@ -3,7 +3,8 @@
 "tags": ["ES6", "ESFiddle", "releases"],
 "category": "javascript",
 "date": "2017-02-22",
-"image": "http://i.imgur.com/IvGr1XY.jpg"
+"image": "https://i.ytimg.com/vi/MsbNJPsjD-w/maxresdefault.jpg",
+"preview": "ES2016 Feature Set finalized. ES2016, also known as ES7, is the newest specification that follows the yearly ECMAScript release cycle they annouced along with ES2015."
 }}}
 
 ## ES2016 Feature Set finalized

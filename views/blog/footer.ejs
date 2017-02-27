@@ -1,25 +1,33 @@
           </div>
-
-
-            <div class="footer">
-              <ul class="nav nav-list">
-                <li class="nav-header">categories:</li>
-                <% getCategories().forEach(function(cat) { %>
-                  <li><a href="/categories/<%= cat %>"><%= cat %></a></li>
-                <% }) %>
-              </ul>
-
-              <ul>
-                <li class="nav-header">tags:</li>
-                <% getTags().forEach(function(tag) { %>
-                  <li><a href="/tags/<%= tag %>"><%= tag %></a></li>
-                <% }) %>
-              </ul>
-            </div>
-
-
         </div>
       </div>
     </div>
+    <footer>
+      <div class="logo"><a href="/"><img src="/images/logo.png"></a></div>
+      <div class="nav nav-list">
+        <span class="nav-header">Categories:</span>
+        <ul>
+          <% getCategories().forEach(function(cat) { %>
+            <li><a href="/categories/<%= cat %>"><%= cat %></a></li>
+          <% }) %>
+        </ul>
+      </div>
+    </footer>
+    <script async src="/src/authenticated.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+<script>
+  var disqus_config = function () {
+    this.page.url = window.location.href ;
+    this.page.identifier = window.location.href;
+  };
+  (function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+  s.src = '//esfiddle.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </body>
 </html>

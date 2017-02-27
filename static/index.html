@@ -4899,15 +4899,18 @@ body * {
   margin: 0;
   padding: 0;
 }
-h1 {
-  font-size: 24px;
+h1,
+h2,
+h3 {
   font-family: 'Bitter', serif;
   color: #284B63;
 }
 h2 {
   font-size: 20px;
-  font-family: 'Bitter', serif;
   color: #4a9a71;
+}
+h1 {
+  font-size: 24px;
 }
 p {
   color: #353535;
@@ -5100,6 +5103,11 @@ a:hover {
 }
 .header .logo img:hover {
   margin-top: -37%;
+}
+.header .only-loggedout,
+.header .only-logged,
+.header .only-logged-profile {
+  display: none;
 }
 .header .dark-mode {
   cursor: pointer;
@@ -5306,10 +5314,10 @@ a:hover {
     <body>
         <div class="header">
           <nav>
-            <div class="logo"><img src="/images/logo.png"/></div>
-            <span class="loginBtns"><a href="/auth/github">Login</a></span>
-            <span class="loginBtns"><a href="/github/logout">Logout</a></span>
-            <span class="loginBtns"><a href="/github/myProfile">Profile</a></span>
+            <div class="logo"><a href="/"><img src="/images/logo.png"/></a></div>
+            <span class="loginBtns only-loggedout"><a href="/auth/github">Login</a></span>
+            <span class="loginBtns only-logged"><a href="/github/logout">Logout</a></span>
+            <span class="loginBtns only-logged-profile"><a href="/github/myProfile">Profile</a></span>
             <span class="loginBtns"><a href="/about">About</a></span>
             <span class="loginBtns"><a href="/blog">Blog</a></span>
           </nav>
@@ -5416,7 +5424,7 @@ a:hover {
                         <i class="fa fa-floppy-o" aria-hidden="true"></i>
                       </div>
                       <div title="star" class="star" data-balloon="Star Fiddle" data-balloon-pos="up">
-                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
                       </div>
                       <div title="lint" class="lint" data-balloon="Lint Fiddle" data-balloon-pos="up">
                         <i class="fa fa-check" aria-hidden="true"></i>
@@ -5442,5 +5450,7 @@ a:hover {
         </div>
         <div class="snackbar"></div>
         <script async src="/src/es6-fiddle.js"></script>
+        <script async src="/src/authenticated.js"></script>
+        <script async src="/src/add-examples.js"></script>
     </body>
 </html>

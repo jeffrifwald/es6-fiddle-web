@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-var express = require('express'),
+const express = require('express'),
     compression = require('compression'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
@@ -11,6 +11,7 @@ var express = require('express'),
     Fiddles = require('./db/fiddles'),
     app = express(),
     port = Number(process.env.PORT || 5001),
+    isLoggedIn = false,
     //Setting up poet for blog
     Poet = require('poet'),
     poet = Poet(app, {
@@ -35,7 +36,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // caching middleware
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
     if ( req.url.match(/^\/(images|lib\/babel)\/.+/) ) {
         res.setHeader('Cache-Control', 'public, max-age=2628000');
     }
@@ -45,7 +46,7 @@ app.use(function(req, res, next) {
 //initialize poet
 poet.init();
 
-app.set('views', __dirname + '/views');
+app.set('views', `${__dirname  }/views`);
 app.set('view engine', 'ejs');
 
 //Passport middleware function to make sure user is authenticated.
@@ -57,40 +58,44 @@ function ensureAuthenticated(req, res, next) {
     res.redirect('/github/login');
 }
 
-app.use('/', express.static(__dirname + '/static'));
+app.use('/', express.static(`${__dirname  }/static`));
 
 // This one is matching '/xyz/' NOT -> '/xyz/sdf'
-app.get(/^\/\w+\/$/, function(req, res) {
-    res.sendFile(__dirname + '/static/index.html');
+app.get(/^\/\w+\/$/, (req, res) => {
+    res.sendFile(`${__dirname  }/static/index.html`);
 });
-app.get('/about', function(req, res) {
-    res.sendFile(__dirname + '/static/about.html');
+app.get('/about', (req, res) => {
+    res.sendFile(`${__dirname  }/static/about.html`);
 });
-app.get(/^\/embed\/\w+\/$/, function(req, res) {
-    res.sendFile(__dirname + '/static/embed.html');
+app.get(/^\/embed\/\w+\/$/, (req, res) => {
+    res.sendFile(`${__dirname  }/static/embed.html`);
 });
 
 //poet routes
-app.get('/blog', function(req, res) {
+app.get('/blog', (req, res) => {
     res.render('blog/index');
 });
 
+app.get('/authenticated', (req, res) => {
+    res.send({'logged': isLoggedIn});
+})
+
 // This one is matching '/xyz' NOT -> '/xyz/'
-app.get(/^\/\w+$/, function(req, res) {
-    res.redirect(req.url + '/');
+app.get(/^\/\w+$/, (req, res) => {
+    res.redirect(`${req.url  }/`);
 });
 
-app.get(/^\/embed\/\w+$/, function(req, res) {
-    res.redirect(req.url + '/');
+app.get(/^\/embed\/\w+$/, (req, res) => {
+    res.redirect(`${req.url  }/`);
 });
 
-app.get('/github/login', function(req, res) {
+app.get('/github/login', (req, res) => {
     res.render('login');
 });
 
 //TESTING URL FOR GITHUB
 app.get('/auth/github',
-  passport.authenticate('github', { scope: [ 'user:email' ] }), function(req, res) {
+  passport.authenticate('github', { scope: [ 'user:email' ] }), (req, res) => {
       // The request will be redirected to GitHub for authentication, so this
      // function will not be called.
       console.log('just to get rid of lint error !',res);
@@ -98,25 +103,32 @@ app.get('/auth/github',
 
 app.get('/auth/github/callback',
   passport.authenticate('github', {
-      failureRedirect: '/github/login', failureFlash: true, successFlash: 'Welcome!' }),
-  function(req, res) {
+      failureRedirect: '/github/login',
+      failureFlash: true,
+      successFlash: 'Welcome!'
+  }),
+  (req, res) => {
+      isLoggedIn = true;
     // Successful authentication, redirect home.
       res.redirect('/github/myProfile');
   });
 
-app.get('/github/myProfile', ensureAuthenticated, function(req, res) {
+app.get('/github/myProfile', ensureAuthenticated, (req, res) => {
     Fiddles.find({userId:req.user._id}).then ( fiddles => {
-        res.render('authenticated', { user: req.user, fiddles:fiddles, startedFiddles:req.user.startedFiddles,
+        res.render('authenticated', {
+            user: req.user, fiddles:fiddles,
+            startedFiddles:req.user.startedFiddles,
             message: req.flash() });
     })
-                    .catch( e => res.status(400).send(e));
+    .catch( e => res.status(400).send(e));
 
 });
-app.get('/about', function(req, res) {
+app.get('/about', (req, res) => {
     res.render('about');
 });
-app.get('/github/logout', function(req, res) {
+app.get('/github/logout', (req, res) => {
     req.logout();
+    isLoggedIn = false;
     res.redirect('/');
 });
 
@@ -125,11 +137,11 @@ api(app);
 app.listen(port);
 
 console.log(
-    'Express version ' +
-    pkg.dependencies.express.replace(/[^\w\.]/g, '') +
-    ' starting server on port ' +
-    port +
-    '.'
+    `Express version ${
+    pkg.dependencies.express.replace(/[^\w\.]/g, '')
+    } starting server on port ${
+    port
+    }.`
 );
 
 module.exports.app = app;
