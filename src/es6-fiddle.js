@@ -392,7 +392,7 @@
         resizer.addEventListener('mousedown', initDrag, false);
     }, false);
 
-    function initDrag(e) {
+    const initDrag = e => {
         startX = e.clientX;
         startWidth = parseInt(document.defaultView.getComputedStyle(fiddleWrapper).width, 10);
         startY = e.clientY;
@@ -401,7 +401,7 @@
         documentElement.addEventListener('mouseup', stopDrag, false);
     }
 
-    function doDrag(e) {
+    const doDrag = e => {
         const layout = localStorage.getItem('es6fiddleLayout');
         if (layout === 'horizontal') {
             fiddleWrapper.style.flexBasis = `${startHeight + e.clientY - startY}px`;
@@ -410,12 +410,12 @@
         }
     }
 
-    function stopDrag() {
+    const stopDrag = () => {
         documentElement.removeEventListener('mousemove', doDrag, false);
         documentElement.removeEventListener('mouseup', stopDrag, false);
     }
 
-    function showSnackbar(message) {
+    const showSnackbar = message => {
         snackbar.innerHTML = message;
         snackbar.classList.add('show');
         setTimeout(() => {

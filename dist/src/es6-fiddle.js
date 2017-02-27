@@ -166,9 +166,9 @@
     };
 
     // Sets the styling for the results box with the given text and border color
-    function setResultsColors(textColor, borderColor) {
+    var setResultsColors = function setResultsColors(textColor, borderColor) {
         style.innerHTML = 'body{font-family:monospace;padding:10px;color:' + textColor + '; transition:color 0.5s;}\n             div{border-bottom:1px solid ' + borderColor + ';padding: 2px 0; transition:bottom-border 0.5s;}';
-    }
+    };
 
     //add the fiddle area
     fiddle = window.CodeMirror(document.querySelector('.fiddle'), {
@@ -372,36 +372,36 @@
         resizer.addEventListener('mousedown', initDrag, false);
     }, false);
 
-    function initDrag(e) {
+    var initDrag = function initDrag(e) {
         startX = e.clientX;
         startWidth = parseInt(document.defaultView.getComputedStyle(fiddleWrapper).width, 10);
         startY = e.clientY;
         startHeight = parseInt(document.defaultView.getComputedStyle(fiddleWrapper).height, 10);
         documentElement.addEventListener('mousemove', doDrag, false);
         documentElement.addEventListener('mouseup', stopDrag, false);
-    }
+    };
 
-    function doDrag(e) {
+    var doDrag = function doDrag(e) {
         var layout = localStorage.getItem('es6fiddleLayout');
         if (layout === 'horizontal') {
             fiddleWrapper.style.flexBasis = startHeight + e.clientY - startY + 'px';
         } else {
             fiddleWrapper.style.flexBasis = startWidth + e.clientX - startX + 'px';
         }
-    }
+    };
 
-    function stopDrag() {
+    var stopDrag = function stopDrag() {
         documentElement.removeEventListener('mousemove', doDrag, false);
         documentElement.removeEventListener('mouseup', stopDrag, false);
-    }
+    };
 
-    function showSnackbar(message) {
+    var showSnackbar = function showSnackbar(message) {
         snackbar.innerHTML = message;
         snackbar.classList.add('show');
         setTimeout(function () {
             snackbar.classList.remove('show');
         }, 3000);
-    }
+    };
 
     //add babel to the iframe
     babel.src = '/lib/babel/babel.min.js';
