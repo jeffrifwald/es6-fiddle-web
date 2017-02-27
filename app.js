@@ -11,7 +11,6 @@ const express = require('express'),
     Fiddles = require('./db/fiddles'),
     app = express(),
     port = Number(process.env.PORT || 5001),
-    isLoggedIn = false,
     //Setting up poet for blog
     Poet = require('poet'),
     poet = Poet(app, {
@@ -25,6 +24,7 @@ const express = require('express'),
             '/blog/:page': 'blog/page'
         }
     });
+let isLoggedIn = false;
 
 app.use(compression());
 app.use(bodyParser.json());
