@@ -1,22 +1,17 @@
-<div class="post">
-
-
-  <div>
-  <%= post.image %>
-  <h2><a href=<%= post.url %>><%= post.title %></a></h2>
+<div class="post-snippet">
+  <h2><a href="<%= post.url %>"><%= post.title %></a></h2>
+  <div class="date">
+    <i class="fa fa-calendar" aria-hidden="true"></i>
+    <%= (post.date.getMonth() + 1) + '.' + post.date.getDate() + '.' + post.date.getFullYear() %>
+  </div>
+ <div class="categories">
+    | Category:
+   <span class="category"><a href="/categories/<%=  post.category %>"><%=  post.category %></a></span>
+ </div>
+  <div  class="thumbnail">
+      <img src="<%= post.image %>" />
   </div>
   <div class="post">
     <%- post.preview %>
   </div>
-  <span class="date">
-    <%= (post.date.getMonth() + 1) + '.' + post.date.getDate() + '.' + post.date.getFullYear() %>
- </span>
-  <div class="tags">
-    <% post.tags.forEach(function(tag){ %>
-      <a href='<%= tagUrl(tag) %>'>
-        <span class="label label-info"><%= tag %></span>
-      </a>
-    <% }) %>
-  </div>
-
 </div>

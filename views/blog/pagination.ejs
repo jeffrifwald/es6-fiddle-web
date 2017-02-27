@@ -1,14 +1,15 @@
-<div>
-  <ul class="pagination">
+<div class="pagination">
+  <ul>
 
      <% var i = 1 %>
      <% var pageCount = getPageCount() %>
      <% var cssClass %>
-
-     <% while (i <= pageCount) { %>
-      <% cssClass = (page == i) ? 'class="active"' : ''  %>
-      <%- '<li ' + cssClass + '><a href="/blog/' + i + '"> ' + i + '</a></li>' %>
-      <% i++ %>
+     <% if (pageCount > 1) { %>
+       <% while (i <= pageCount) { %>
+        <% cssClass = (page == i) ? 'class="active"' : ''  %>
+        <%- '<li ' + cssClass + '><a href="/blog/' + i + '"> ' + i + '</a></li>' %>
+        <% i++ %>
+      <% } %>
     <% } %>
 
   </ul>

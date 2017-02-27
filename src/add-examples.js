@@ -2,8 +2,8 @@
 
 if (!window.embedded) {
     var example;
-    
     for (example in window.es6Example) {
+        console.log(window.es6Example);
         if (window.es6Example.hasOwnProperty(example)) {
             window.exampleSelector.innerHTML +=
                 '<option value="' + example + '">' +

@@ -3,9 +3,9 @@ module.exports = function(grunt) {
     var jsFiles = [
             'static/lib/jshint/**/*.js',
             'static/lib/codemirror/**/*.js',
-            'src/*.js',
-            'src/examples/*.js',
-            'src/add-examples.js'
+            'src/**/*.js',
+            '!src/authenticated.js',
+            '!src/add-examples.js',
         ],
         styleFiles = ['static/lib/**/*.css', 'style/**/*.less'],
         pkg = grunt.file.readJSON('package.json'),
@@ -32,6 +32,8 @@ module.exports = function(grunt) {
             compile: {
                 files: {
                     'static/src/es6-fiddle.js': jsFiles,
+                    'static/src/add-examples.js': 'src/add-examples.js',
+                    'static/src/authenticated.js': 'src/authenticated.js',
                     'static/lib/babel/babel.min.js' : ['static/lib/babel/*.js', '!static/lib/babel/babel.min.js']
                 }
             }
@@ -39,7 +41,9 @@ module.exports = function(grunt) {
         less: {
             production: {
                 files: {
-                    'static/style/es6-fiddle.css': ['static/lib/**/*.css', 'style/main.less']
+                    'static/style/es6-fiddle.css': ['static/lib/**/*.css', 'style/main.less'],
+                    'static/style/profile.css': ['style/profile.less'],
+                    'static/style/blog.css': ['style/blog.less']
                 }
             }
         },

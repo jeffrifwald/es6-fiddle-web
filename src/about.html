@@ -18,10 +18,10 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
   <body>
     <div class="header">
       <nav>
-        <div class="logo"><img src="/images/logo.png"/></div>
-        <span class="loginBtns"><a href="/auth/github">Login</a></span>
-        <span class="loginBtns"><a href="/github/logout">Logout</a></span>
-        <span class="loginBtns"><a href="/github/myProfile">Profile</a></span>
+        <div class="logo"><a href="/"><img src="/images/logo.png"/></a></div>
+        <span class="loginBtns only-loggedout"><a href="/auth/github">Login</a></span>
+        <span class="loginBtns only-logged"><a href="/github/logout">Logout</a></span>
+        <span class="loginBtns only-logged-profile"><a href="/github/myProfile">Profile</a></span>
         <span class="loginBtns"><a href="/about">About</a></span>
         <span class="loginBtns"><a href="/blog">Blog</a></span>
       </nav>
@@ -39,5 +39,6 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
 	  	<h1>Find a bug?</h1>
 	  		<p> We're always working on improving ESFiddle. Please read the <a href="https://github.com/esfiddle/esfiddle/blob/develop/REPORTBUG.md" target="_blank">Help I've Found a Bug</a> article and follow the guidelines.</p>
   	</div>
+      <script async src="/src/authenticated.js"></script>
   </body>
 </html>
