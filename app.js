@@ -14,15 +14,15 @@ var express = require('express'),
     //Setting up poet for blog
     Poet = require('poet'),
     poet = Poet(app, {
-      posts:'./_posts',
-      postsPerPage: 5,
-      metaFormat: 'json',
-      routes: {
-        '/blog/:post': 'blog/post',
-        '/tags/:tag': 'blog/tag',
-        '/categories/:category': 'blog/category',
-        '/blog/:page': 'blog/page'
-      }
+        posts:'./_posts',
+        postsPerPage: 5,
+        metaFormat: 'json',
+        routes: {
+            '/blog/:post': 'blog/post',
+            '/tags/:tag': 'blog/tag',
+            '/categories/:category': 'blog/category',
+            '/blog/:page': 'blog/page'
+        }
     });
 
 app.use(compression());
@@ -36,10 +36,10 @@ app.use(passport.session());
 
 // caching middleware
 app.use(function(req, res, next) {
-  if ( req.url.match(/^\/(images|lib\/babel)\/.+/) ) {
-    res.setHeader('Cache-Control', 'public, max-age=2628000');
-  }
-  next();
+    if ( req.url.match(/^\/(images|lib\/babel)\/.+/) ) {
+        res.setHeader('Cache-Control', 'public, max-age=2628000');
+    }
+    next();
 });
 
 //initialize poet
@@ -85,8 +85,7 @@ app.get(/^\/embed\/\w+$/, function(req, res) {
 });
 
 app.get('/github/login', function(req, res) {
-    var title = 'you are on login page! you are not logged in.';
-    res.render('login', { title: title, message: req.flash() });
+    res.render('login');
 });
 
 //TESTING URL FOR GITHUB
@@ -108,8 +107,8 @@ app.get('/auth/github/callback',
 app.get('/github/myProfile', ensureAuthenticated, function(req, res) {
     Fiddles.find({userId:req.user._id}).then ( fiddles => {
         res.render('authenticated', { user: req.user, fiddles:fiddles, startedFiddles:req.user.startedFiddles,
-                                        message: req.flash() });
-                    })
+            message: req.flash() });
+    })
                     .catch( e => res.status(400).send(e));
 
 });

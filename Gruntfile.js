@@ -10,7 +10,6 @@ module.exports = function(grunt) {
         styleFiles = ['static/lib/**/*.css', 'style/**/*.less'],
         pkg = grunt.file.readJSON('package.json'),
         npmTasks = [
-            'grunt-contrib-jshint',
             'grunt-contrib-uglify',
             'grunt-contrib-watch',
             'grunt-jscs',
@@ -92,7 +91,8 @@ module.exports = function(grunt) {
                     'adjoining-classes': false,
                     'universal-selector': false,
                     'font-sizes': false,
-                    'box-model': false
+                    'box-model': false,
+                    'unique-headings': false
                 }
             },
             target: ['style/main.less']

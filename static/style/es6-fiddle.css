@@ -4869,10 +4869,32 @@ body * {
   overflow-y: hidden;
   overflow-x: auto;
 }
+.login-page {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  height: 100%;
+}
+.login-page img {
+  padding-bottom: 40px;
+}
+.login-page .title {
+  margin: 0;
+  padding: 0;
+}
 h1 {
   font-size: 24px;
   font-family: 'Bitter', serif;
   color: #284B63;
+}
+h2 {
+  font-size: 20px;
+  font-family: 'Bitter', serif;
+  color: #4a9a71;
 }
 p {
   color: #353535;
