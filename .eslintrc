@@ -43,7 +43,7 @@
       "never"
     ],
     "one-var": [
-      2,
+      0,
       "always"
     ],
     "space-infix-ops": 2,
@@ -67,6 +67,7 @@
     ],
     "eol-last": 2,
     "no-var": 2,
+    "prefer-const": 2,
     "prefer-template": 2,
     "prefer-arrow-callback": 2,
     "arrow-body-style": [
