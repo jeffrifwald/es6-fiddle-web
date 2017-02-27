@@ -57,8 +57,8 @@
     //check to see if the share button should be shown
     if (fiddleId && !embedded) {
         share = document.querySelector('.share');
-        src = document.location.protocol + '//' + document.location.host + '/embed/' + fiddleId + '/';
-        iframe = '<iframe width="100%" height="300" frameborder="0" allowfullscreen src="' + src + '"></iframe>';
+        src = `${document.location.protocol}//${document.location.host}/embed/${fiddleId}/`;
+        iframe = `<iframe width="100%" height="300" frameborder="0" allowfullscreen src="${src}"></iframe>`;
         startFiddle.style.display = 'block';
         if (share) {
             embed = share.querySelector('.share-embed');
@@ -70,7 +70,7 @@
             embed.value = iframe;
             link.onclick = link.select;
             embed.onclick = embed.select;
-            twitter.href = 'http://twitter.com/home?status=ES6%20fiddle:%20' + document.location.href;
+            twitter.href = `http://twitter.com/home?status=ES6%20fiddle:%20${document.location.href}`;
         }
     } else {
         startFiddle.style.display = 'none';
@@ -166,8 +166,8 @@
     // Sets the styling for the results box with the given text and border color
     function setResultsColors(textColor, borderColor) {
         style.innerHTML =
-            'body{font-family:monospace;padding:10px;color:' + textColor + '; transition:color 0.5s;}\n' +
-            'div{border-bottom:1px solid ' + borderColor + ';padding: 2px 0; transition:bottom-border 0.5s;}';
+            `body{font-family:monospace;padding:10px;color:${textColor}; transition:color 0.5s;}
+             div{border-bottom:1px solid ${borderColor};padding: 2px 0; transition:bottom-border 0.5s;}`;
     }
 
     //add the fiddle area
@@ -251,7 +251,7 @@
                 userInput.className = 'babel-text';
 
                 //set the new script code
-                const inputWithTryCatch = 'try {' + fiddle.getValue() + '} catch(e) { console.log(e.message); }';
+                const inputWithTryCatch = `try {${fiddle.getValue()}} catch(e) { console.log(e.message); }`;
                 userInput.innerHTML = inputWithTryCatch;
                 bootstrap.innerHTML = (
                     'document.body.innerHTML = \'\';\n' +
@@ -264,7 +264,7 @@
             };
 
         if (fiddleId) { //load up the saved code
-            loadReq.open('GET', '/fiddles/' + fiddleId, true);
+            loadReq.open('GET', `/fiddles/${fiddleId}`, true);
             loadReq.send();
             loadReq.onload = function() {
                 loadResp = JSON.parse(this.response);
@@ -315,10 +315,7 @@
                     window.JSHINT.errors.forEach(err => {
                         fiddle.addLineClass(err.line - 1, 'background', 'line-error');
                         lintLog.innerHTML +=
-                            'console.log(\'Line \' + ' +
-                            err.line +
-                            ' + \':\', \'' +
-                            err.reason.replace(/'/g, '\\\'') + '\')\n';
+                            `console.log('Line ' + ${err.line} + ':', '${err.reason.replace(/'/g, '\\\'')}')\n`;
                     });
                 } else {
                     lintLog.innerHTML += 'console.log(\'Your code is lint free!\');';
@@ -339,7 +336,7 @@
                     saveReq.onload = function() {
                         if (this.status >= 200 && this.status < 400) {
                             resp = JSON.parse(this.response);
-                            window.location.href = '/' + resp.fiddle + '/';
+                            window.location.href = `/${resp.fiddle}/`;
                         }
                     };
                     saveReq.send(JSON.stringify({
@@ -355,7 +352,7 @@
                     pathArr = window.location.pathname.split('/'),
                     fiddleID = pathArr[1].length > 1 ? pathArr[1] : - 1;
                 if (fiddleID !== - 1) {
-                    starReq.open('POST', '/star/' + fiddleID, true);
+                    starReq.open('POST', `/star/${fiddleID}`, true);
                     starReq.setRequestHeader('Content-type','application/json');
                     starReq.onload = function() {
                         if (this.status === 200 ){
@@ -413,9 +410,9 @@
     function doDrag(e) {
         const layout = localStorage.getItem('es6fiddleLayout');
         if (layout === 'horizontal') {
-            fiddleWrapper.style.flexBasis = startHeight + e.clientY - startY + 'px';
+            fiddleWrapper.style.flexBasis = `${startHeight + e.clientY - startY}px`;
         } else {
-            fiddleWrapper.style.flexBasis = startWidth + e.clientX - startX + 'px';
+            fiddleWrapper.style.flexBasis = `${startWidth + e.clientX - startX}px`;
         }
     }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-((() => {
+(function () {
 
     var body = document.querySelector('body'),
         runBtn = document.querySelector('.run'),
@@ -86,14 +86,14 @@
 
         editLink.href = document.location.href.replace('/embed', '');
 
-        es6Btn.onclick = () => {
+        es6Btn.onclick = function () {
             document.querySelector('.fiddle').style.display = 'block';
             document.querySelector('.result-wrapper').style.display = 'none';
             es6Btn.className += ' selected';
             consoleBtn.className = consoleBtn.className.replace(' selected', '');
         };
 
-        consoleBtn.onclick = () => {
+        consoleBtn.onclick = function () {
             document.querySelector('.fiddle').style.display = 'none';
             document.querySelector('.result-wrapper').style.display = 'block';
             es6Btn.className = es6Btn.className.replace(' selected', '');
@@ -104,20 +104,20 @@
     // Change the layout of the page based on the type clicked.
     // Save this layout choice in localStorage
     // By default this will be vertical
-    vertBtn.onclick = () => {
+    vertBtn.onclick = function () {
         setVerticalStyle();
         saveLayoutOption('vertical');
     };
 
     // Onclick of the horizontal button then make the page visually horizontal
     // And save the layout option clicked (in this case horizontal) to localstorage
-    horzBtn.onclick = () => {
+    horzBtn.onclick = function () {
         setHorizontalStyle();
         saveLayoutOption('horizontal');
     };
 
     // When the dark mode button is clicked, toggle the dark mode setting
-    darkModeBtn.onclick = () => {
+    darkModeBtn.onclick = function () {
         if (darkMode === true) {
             darkMode = false;
             disableDarkMode();
@@ -167,7 +167,7 @@
 
     // Sets the styling for the results box with the given text and border color
     function setResultsColors(textColor, borderColor) {
-        style.innerHTML = 'body{font-family:monospace;padding:10px;color:' + textColor + '; transition:color 0.5s;}\n' + 'div{border-bottom:1px solid ' + borderColor + ';padding: 2px 0; transition:bottom-border 0.5s;}';
+        style.innerHTML = 'body{font-family:monospace;padding:10px;color:' + textColor + '; transition:color 0.5s;}\n             div{border-bottom:1px solid ' + borderColor + ';padding: 2px 0; transition:bottom-border 0.5s;}';
     }
 
     //add the fiddle area
@@ -205,7 +205,7 @@
     iHead.appendChild(style);
 
     //wait for babel to load
-    babel.onload = () => {
+    babel.onload = function () {
         var loadResp = void 0;
         var loadReq = new XMLHttpRequest(),
             runFiddle = function runFiddle() {
@@ -265,7 +265,7 @@
             runBtn.onclick = runFiddle;
 
             //lint the result
-            lintBtn.onclick = () => {
+            lintBtn.onclick = function () {
                 var lint = window.JSHINT(fiddle.getValue(), {
                     esnext: true,
                     devel: true,
@@ -282,12 +282,12 @@
                 lintLog.innerHTML = 'document.body.innerHTML = \'\';\n';
 
                 //remove the line error class from all lines
-                fiddle.eachLine(line => {
+                fiddle.eachLine(function (line) {
                     fiddle.removeLineClass(line, 'background', 'line-error');
                 });
 
                 if (!lint) {
-                    window.JSHINT.errors.forEach(err => {
+                    window.JSHINT.errors.forEach(function (err) {
                         fiddle.addLineClass(err.line - 1, 'background', 'line-error');
                         lintLog.innerHTML += 'console.log(\'Line \' + ' + err.line + ' + \':\', \'' + err.reason.replace(/'/g, '\\\'') + '\')\n';
                     });
@@ -299,7 +299,7 @@
             };
 
             //save the code
-            saveBtn.onclick = () => {
+            saveBtn.onclick = function () {
                 var code = fiddle.getValue(),
                     saveReq = new XMLHttpRequest(),
                     pathArr = window.location.pathname.split('/');
@@ -321,7 +321,7 @@
             };
 
             //star the code
-            starBtn.onclick = () => {
+            starBtn.onclick = function () {
                 var starReq = new XMLHttpRequest(),
                     pathArr = window.location.pathname.split('/'),
                     fiddleID = pathArr[1].length > 1 ? pathArr[1] : -1;
@@ -342,14 +342,14 @@
                 }
             };
 
-            themeChanger.onchange = () => {
+            themeChanger.onchange = function () {
                 var theme = themeChanger.options[themeChanger.selectedIndex].textContent;
                 fiddle.setOption('theme', theme);
                 localStorage.setItem('theme', theme);
             };
 
             //load the selected code
-            window.exampleSelector.onchange = () => {
+            window.exampleSelector.onchange = function () {
                 if (window.exampleSelector.value) {
                     var code = 'Example Can Not Be Found';
 
@@ -398,7 +398,7 @@
     function showSnackbar(message) {
         snackbar.innerHTML = message;
         snackbar.classList.add('show');
-        setTimeout(() => {
+        setTimeout(function () {
             snackbar.classList.remove('show');
         }, 3000);
     }
@@ -406,4 +406,4 @@
     //add babel to the iframe
     babel.src = '/lib/babel/babel.min.js';
     iHead.appendChild(babel);
-}))();
+})();
