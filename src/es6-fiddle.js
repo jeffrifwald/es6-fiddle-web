@@ -1,6 +1,6 @@
-(function() {
-    var fiddle = null,
-        body = document.querySelector('body'),
+((() => {
+
+    const body = document.querySelector('body'),
         runBtn = document.querySelector('.run'),
         lintBtn = document.querySelector('.lint'),
         saveBtn = document.querySelector('.save'),
@@ -12,15 +12,12 @@
         codeWrapper = document.querySelector('.code-wrapper'),
         fieldWrapperClass = '.fiddle-wrapper',
         fiddleWrapper = document.querySelector(fieldWrapperClass),
-        darkMode = localStorage.getItem('es6fiddleDarkMode') == 'true',
         themeChanger = document.querySelector('.change-theme'),
         iDoc = document.querySelector('.result').contentDocument,
         iHead = iDoc.getElementsByTagName('head')[0],
         babel = document.createElement('script'),
         logger = document.createElement('script'),
         style = document.createElement('style'),
-        lintLog = null,
-        userInput = null,
         savedTheme = localStorage.getItem('theme'),
         darkModeTheme = 'monokai',
         pathArr = location.pathname.split('/'),
@@ -29,8 +26,13 @@
         resizer = document.querySelector('.resizer'),
         documentElement = document.documentElement,
         snackbar = document.querySelector('.snackbar'),
-        startFiddle = document.querySelector('.star'),
         starIcon = document.querySelector('.fa-star-o'),
+        startFiddle = document.querySelector('.star');
+
+    let fiddle = null,
+        darkMode = localStorage.getItem('es6fiddleDarkMode') == 'true',
+        lintLog = null,
+        userInput = null,
         startX,
         startY,
         startWidth,
@@ -56,8 +58,8 @@
     //check to see if the share button should be shown
     if (fiddleId && !embedded) {
         share = document.querySelector('.share');
-        src = document.location.protocol + '//' + document.location.host + '/embed/' + fiddleId + '/';
-        iframe = '<iframe width="100%" height="300" frameborder="0" allowfullscreen src="' + src + '"></iframe>';
+        src = `${document.location.protocol}//${document.location.host}/embed/${fiddleId}/`;
+        iframe = `<iframe width="100%" height="300" frameborder="0" allowfullscreen src="${src}"></iframe>`;
         startFiddle.style.display = 'block';
         if (share) {
             embed = share.querySelector('.share-embed');
@@ -69,7 +71,7 @@
             embed.value = iframe;
             link.onclick = link.select;
             embed.onclick = embed.select;
-            twitter.href = 'http://twitter.com/home?status=ES6%20fiddle:%20' + document.location.href;
+            twitter.href = `http://twitter.com/home?status=ES6%20fiddle:%20${document.location.href}`;
         }
     } else {
         startFiddle.style.display = 'none';
@@ -83,14 +85,14 @@
 
         editLink.href = document.location.href.replace('/embed', '');
 
-        es6Btn.onclick = function() {
+        es6Btn.onclick = () => {
             document.querySelector('.fiddle').style.display = 'block';
             document.querySelector('.result-wrapper').style.display = 'none';
             es6Btn.className += ' selected';
             consoleBtn.className = consoleBtn.className.replace(' selected', '');
         };
 
-        consoleBtn.onclick = function() {
+        consoleBtn.onclick = () => {
             document.querySelector('.fiddle').style.display = 'none';
             document.querySelector('.result-wrapper').style.display = 'block';
             es6Btn.className = es6Btn.className.replace(' selected', '');
@@ -101,20 +103,20 @@
     // Change the layout of the page based on the type clicked.
     // Save this layout choice in localStorage
     // By default this will be vertical
-    vertBtn.onclick = function() {
+    vertBtn.onclick = () => {
         setVerticalStyle();
         saveLayoutOption('vertical');
     };
 
     // Onclick of the horizontal button then make the page visually horizontal
     // And save the layout option clicked (in this case horizontal) to localstorage
-    horzBtn.onclick = function() {
+    horzBtn.onclick = () => {
         setHorizontalStyle();
         saveLayoutOption('horizontal');
     };
 
     // When the dark mode button is clicked, toggle the dark mode setting
-    darkModeBtn.onclick = function() {
+    darkModeBtn.onclick = () => {
         if (darkMode === true) {
             darkMode = false;
             disableDarkMode();
@@ -134,40 +136,34 @@
 
     // Save the layout option specified to localStorage
     // Pass in a string either "vertical" or "horizontal" to save the layout
-    function saveLayoutOption(layoutType) {
-        localStorage.setItem('es6fiddleLayout', layoutType);
-    }
+    const saveLayoutOption = layoutType => localStorage.setItem('es6fiddleLayout', layoutType);
 
     // A method to change the width of the results and fiddle containers
     // Setting the width to 100% will make the fiddle box be on top and the results below
-    function setHorizontalStyle() {
-        codeWrapper.classList.add('column');
-    }
+    const  setHorizontalStyle = () => codeWrapper.classList.add('column');
 
     // Called when we want to make the page back to its default vertical style
     // This will make the page have the fiddle on the left and the results on the right
-    function setVerticalStyle() {
-        codeWrapper.classList.remove('column');
-    }
+    const setVerticalStyle = () => codeWrapper.classList.remove('column');
 
     // Enable dark mode by adding the .dark class to the body, which then enables dark mode specific styling
-    function enableDarkMode() {
+    const enableDarkMode = () => {
         body.classList.add('dark');
         setResultsColors('#FFF', '#333');
-    }
+    };
 
     // Disable dark mode by removing the .dark class from the body
-    function disableDarkMode() {
+    const disableDarkMode = () => {
         body.classList.remove('dark');
         setResultsColors('#666', '#EEE');
-    }
+    };
 
     // Sets the styling for the results box with the given text and border color
-    function setResultsColors(textColor, borderColor) {
+    const setResultsColors = (textColor, borderColor) => {
         style.innerHTML =
-            'body{font-family:monospace;padding:10px;color:' + textColor + '; transition:color 0.5s;}\n' +
-            'div{border-bottom:1px solid ' + borderColor + ';padding: 2px 0; transition:bottom-border 0.5s;}';
-    }
+            `body{font-family:monospace;padding:10px;color:${textColor}; transition:color 0.5s;}
+             div{border-bottom:1px solid ${borderColor};padding: 2px 0; transition:bottom-border 0.5s;}`;
+    };
 
     //add the fiddle area
     fiddle = window.CodeMirror(document.querySelector('.fiddle'), {
@@ -230,10 +226,10 @@
     iHead.appendChild(style);
 
     //wait for babel to load
-    babel.onload = function() {
-        var loadReq = new XMLHttpRequest(),
-            loadResp,
-            runFiddle = function() {
+    babel.onload = () => {
+        let loadResp;
+        const loadReq = new XMLHttpRequest(),
+            runFiddle = () => {
                 if (userInput) { //clean up the old code
                     iHead.removeChild(userInput);
                 }
@@ -250,7 +246,7 @@
                 userInput.className = 'babel-text';
 
                 //set the new script code
-                var inputWithTryCatch = 'try {' + fiddle.getValue() + '} catch(e) { console.log(e.message); }';
+                const inputWithTryCatch = `try {${fiddle.getValue()}} catch(e) { console.log(e.message); }`;
                 userInput.innerHTML = inputWithTryCatch;
                 bootstrap.innerHTML = (
                     'document.body.innerHTML = \'\';\n' +
@@ -263,7 +259,7 @@
             };
 
         if (fiddleId) { //load up the saved code
-            loadReq.open('GET', '/fiddles/' + fiddleId, true);
+            loadReq.open('GET', `/fiddles/${fiddleId}`, true);
             loadReq.send();
             loadReq.onload = function() {
                 loadResp = JSON.parse(this.response);
@@ -289,8 +285,8 @@
             runBtn.onclick = runFiddle;
 
             //lint the result
-            lintBtn.onclick = function() {
-                var lint = window.JSHINT(fiddle.getValue(), {
+            lintBtn.onclick = () => {
+                const lint = window.JSHINT(fiddle.getValue(), {
                     esnext: true,
                     devel: true,
                     browser: true
@@ -306,18 +302,15 @@
                 lintLog.innerHTML = 'document.body.innerHTML = \'\';\n';
 
                 //remove the line error class from all lines
-                fiddle.eachLine(function(line) {
+                fiddle.eachLine(line => {
                     fiddle.removeLineClass(line, 'background', 'line-error');
                 });
 
                 if (!lint) {
-                    window.JSHINT.errors.forEach(function(err) {
+                    window.JSHINT.errors.forEach(err => {
                         fiddle.addLineClass(err.line - 1, 'background', 'line-error');
                         lintLog.innerHTML +=
-                            'console.log(\'Line \' + ' +
-                            err.line +
-                            ' + \':\', \'' +
-                            err.reason.replace(/'/g, '\\\'') + '\')\n';
+                            `console.log('Line ' + ${err.line} + ':', '${err.reason.replace(/'/g, '\\\'')}')\n`;
                     });
                 } else {
                     lintLog.innerHTML += 'console.log(\'Your code is lint free!\');';
@@ -327,18 +320,18 @@
             };
 
             //save the code
-            saveBtn.onclick = function() {
-                var code = fiddle.getValue(),
+            saveBtn.onclick = () => {
+                const code = fiddle.getValue(),
                     saveReq = new XMLHttpRequest(),
-                    pathArr = window.location.pathname.split('/'),
-                    resp;
+                    pathArr = window.location.pathname.split('/');
+                let resp;
                 if (code) {
                     saveReq.open('POST', '/save', true);
                     saveReq.setRequestHeader('Content-type','application/json');
                     saveReq.onload = function() {
                         if (this.status >= 200 && this.status < 400) {
                             resp = JSON.parse(this.response);
-                            window.location.href = '/' + resp.fiddle + '/';
+                            window.location.href = `/${resp.fiddle}/`;
                         }
                     };
                     saveReq.send(JSON.stringify({
@@ -349,12 +342,12 @@
             };
 
             //star the code
-            starBtn.onclick = function() {
-                var starReq = new XMLHttpRequest(),
+            starBtn.onclick = () => {
+                const starReq = new XMLHttpRequest(),
                     pathArr = window.location.pathname.split('/'),
                     fiddleID = pathArr[1].length > 1 ? pathArr[1] : - 1;
                 if (fiddleID !== - 1) {
-                    starReq.open('POST', '/star/' + fiddleID, true);
+                    starReq.open('POST', `/star/${fiddleID}`, true);
                     starReq.setRequestHeader('Content-type','application/json');
                     starReq.onload = function() {
                         if (this.status === 200 ){
@@ -371,16 +364,16 @@
                 }
             };
 
-            themeChanger.onchange = function() {
-                var theme = themeChanger.options[themeChanger.selectedIndex].textContent;
+            themeChanger.onchange = () => {
+                const theme = themeChanger.options[themeChanger.selectedIndex].textContent;
                 fiddle.setOption('theme', theme);
                 localStorage.setItem('theme', theme);
             };
 
             //load the selected code
-            window.exampleSelector.onchange = function() {
+            window.exampleSelector.onchange = () => {
                 if (window.exampleSelector.value) {
-                    var code = 'Example Can Not Be Found';
+                    let code = 'Example Can Not Be Found';
 
                     if (window.es6Example[window.exampleSelector.value]) {
                         code = window.es6Example[window.exampleSelector.value].code;
@@ -401,7 +394,7 @@
         resizer.addEventListener('mousedown', initDrag, false);
     }, false);
 
-    function initDrag(e) {
+    const initDrag = e => {
         startX = e.clientX;
         startWidth = parseInt(document.defaultView.getComputedStyle(fiddleWrapper).width, 10);
         startY = e.clientY;
@@ -410,24 +403,24 @@
         documentElement.addEventListener('mouseup', stopDrag, false);
     }
 
-    function doDrag(e) {
-        var layout = localStorage.getItem('es6fiddleLayout');
+    const doDrag = e => {
+        const layout = localStorage.getItem('es6fiddleLayout');
         if (layout === 'horizontal') {
-            fiddleWrapper.style.flexBasis = startHeight + e.clientY - startY + 'px';
+            fiddleWrapper.style.flexBasis = `${startHeight + e.clientY - startY}px`;
         } else {
-            fiddleWrapper.style.flexBasis = startWidth + e.clientX - startX + 'px';
+            fiddleWrapper.style.flexBasis = `${startWidth + e.clientX - startX}px`;
         }
     }
 
-    function stopDrag() {
+    const stopDrag = () => {
         documentElement.removeEventListener('mousemove', doDrag, false);
         documentElement.removeEventListener('mouseup', stopDrag, false);
     }
 
-    function showSnackbar(message) {
+    const showSnackbar = message => {
         snackbar.innerHTML = message;
         snackbar.classList.add('show');
-        setTimeout(function() {
+        setTimeout(() => {
             snackbar.classList.remove('show');
         }, 3000);
     }
@@ -435,4 +428,4 @@
     //add babel to the iframe
     babel.src = '/lib/babel/babel.min.js';
     iHead.appendChild(babel);
-})();
+}))();
