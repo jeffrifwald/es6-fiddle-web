@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>About</title>
     <meta charset="utf-8">
     <meta name="Description" content="Try out ES6+ features and share them with your friends, right in your browser!
 With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) with our preset samples or create your own snippets to share with others.">
@@ -11,16 +9,17 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
 
     <title>Blog</title>
     <script src="https://use.fontawesome.com/52284be701.js"></script>
-    <link rel="stylesheet" href="/style/es6-fiddle.css?__inline=true">
+    <link rel="stylesheet" href="/style/blog.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
     <link rel="icon" href="/images/favicon.png">
   </head>
   <body>
     <div class="header">
       <nav>
-        <div class="logo"><img src="/images/logo.png"/></div>
-        <span class="loginBtns"><a href="/auth/github">Login</a></span>
-        <span class="loginBtns"><a href="/github/logout">Logout</a></span>
-        <span class="loginBtns"><a href="/github/myProfile">Profile</a></span>
+        <div class="logo"><a href="/"><img src="/images/logo.png"/></a></div>
+        <span class="loginBtns only-loggedout"><a href="/auth/github">Login</a></span>
+        <span class="loginBtns only-logged"><a href="/github/logout">Logout</a></span>
+        <span class="loginBtns only-logged-profile"><a href="/github/myProfile">Profile</a></span>
         <span class="loginBtns"><a href="/about">About</a></span>
         <span class="loginBtns"><a href="/blog">Blog</a></span>
       </nav>
@@ -29,8 +28,8 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
       </nav>
     </div>
 
-     <div class="wrap">
-       <div class="container about">
+     <div class="wrap blog">
+       <div class="container">
          <h1> ESFiddle Blog </h1>
          <div class="row">
            <div class="span8">

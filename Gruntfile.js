@@ -1,10 +1,11 @@
 module.exports = grunt => {
     require('load-grunt-tasks')(grunt);
     const jsSrcFiles = [
-            'src/*.js',
-            'src/examples/*.js',
-            'src/add-examples.js'
+            'src/**/*.js',
+            '!src/authenticated.js',
+            '!src/add-examples.js'
         ],
+        jsFiles = 'src/**/*.js',
         jsLibFiles = [
             'static/lib/jshint/**/*.js',
             'static/lib/codemirror/**/*.js'
@@ -38,7 +39,7 @@ module.exports = grunt => {
             dist: {
                 files: [{
                     'expand': true,
-                    'src': jsSrcFiles,
+                    'src': 'dist/src/**/*.js',
                     'dest': 'dist/'
                 }]
             }
@@ -46,7 +47,10 @@ module.exports = grunt => {
         uglify: {
             compile: {
                 files: {
-                    'static/src/es6-fiddle.js': [jsLibFiles, 'dist/src/**/*.js'],
+                    'static/src/add-examples.js': 'dist/add-examples.js',
+                    'static/src/authenticated.js': 'dist/authenticated.js',
+                    'static/src/es6-fiddle.js': [jsLibFiles, 'dist/src/**/*.js', '!dist/add-examples.js',
+                        '!dist/authenticated.js'],
                     'static/lib/babel/babel.min.js' : ['static/lib/babel/*.js', '!static/lib/babel/babel.min.js']
                 }
             }
@@ -54,7 +58,9 @@ module.exports = grunt => {
         less: {
             production: {
                 files: {
-                    'static/style/es6-fiddle.css': ['static/lib/**/*.css', 'style/main.less']
+                    'static/style/es6-fiddle.css': ['static/lib/**/*.css', 'style/main.less'],
+                    'static/style/profile.css': ['style/profile.less'],
+                    'static/style/blog.css': ['style/blog.less']
                 }
             }
         },
@@ -67,7 +73,7 @@ module.exports = grunt => {
                 tasks: ['less', 'inline']
             },
             src: {
-                files: jsSrcFiles,
+                files: jsFiles,
                 tasks: ['babel', 'uglify', 'eslint']
             },
             html: {
@@ -107,7 +113,8 @@ module.exports = grunt => {
                     'adjoining-classes': false,
                     'universal-selector': false,
                     'font-sizes': false,
-                    'box-model': false
+                    'box-model': false,
+                    'unique-headings': false
                 }
             },
             target: ['style/main.less']

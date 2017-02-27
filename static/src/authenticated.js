@@ -1,0 +1,1 @@
+!function(){var a=document.querySelector(".only-loggedout"),b=document.querySelector(".only-logged"),c=document.querySelector(".only-logged-profile");fetch("/authenticated").then(function(a){return a.json()}).then(function(d){d.logged?(b.style.display="block",c.style.display="block"):a.style.display="block"})}();

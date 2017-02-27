@@ -4869,10 +4869,17 @@ body * {
   overflow-y: hidden;
   overflow-x: auto;
 }
-h1 {
-  font-size: 24px;
+h1,
+h2,
+h3 {
   font-family: 'Bitter', serif;
   color: #284B63;
+}
+h1 {
+  font-size: 24px;
+}
+h2 {
+  font-size: 20px;
 }
 p {
   color: #353535;
@@ -5065,6 +5072,11 @@ a:hover {
 }
 .header .logo img:hover {
   margin-top: -37%;
+}
+.header .only-loggedout,
+.header .only-logged,
+.header .only-logged-profile {
+  display: none;
 }
 .header .dark-mode {
   cursor: pointer;

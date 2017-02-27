@@ -11,18 +11,20 @@ var express = require('express'),
     Fiddles = require('./db/fiddles'),
     app = express(),
     port = Number(process.env.PORT || 5001),
+    isLoggedIn = false,
     //Setting up poet for blog
     Poet = require('poet'),
     poet = Poet(app, {
-      posts:'./_posts',
-      postsPerPage: 5,
-      metaFormat: 'json',
-      routes: {
-        '/blog/:post': 'blog/post',
-        '/tags/:tag': 'blog/tag',
-        '/categories/:category': 'blog/category',
-        '/blog/:page': 'blog/page'
-      }
+        posts:'./_posts',
+        postsPerPage: 5,
+        metaFormat: 'json',
+        readMoreTag: 'Read More',
+        routes: {
+            '/blog/:post': 'blog/post',
+            '/tags/:tag': 'blog/tag',
+            '/categories/:category': 'blog/category',
+            '/blog/:page': 'blog/page'
+        }
     });
 
 app.use(compression());
@@ -36,10 +38,10 @@ app.use(passport.session());
 
 // caching middleware
 app.use(function(req, res, next) {
-  if ( req.url.match(/^\/(images|lib\/babel)\/.+/) ) {
-    res.setHeader('Cache-Control', 'public, max-age=2628000');
-  }
-  next();
+    if ( req.url.match(/^\/(images|lib\/babel)\/.+/) ) {
+        res.setHeader('Cache-Control', 'public, max-age=2628000');
+    }
+    next();
 });
 
 //initialize poet
@@ -75,6 +77,10 @@ app.get('/blog', function(req, res) {
     res.render('blog/index');
 });
 
+app.get('/authenticated', function(req, res) {
+    res.send({'logged': isLoggedIn});
+})
+
 // This one is matching '/xyz' NOT -> '/xyz/'
 app.get(/^\/\w+$/, function(req, res) {
     res.redirect(req.url + '/');
@@ -99,18 +105,24 @@ app.get('/auth/github',
 
 app.get('/auth/github/callback',
   passport.authenticate('github', {
-      failureRedirect: '/github/login', failureFlash: true, successFlash: 'Welcome!' }),
+      failureRedirect: '/github/login',
+      failureFlash: true,
+      successFlash: 'Welcome!'
+  }),
   function(req, res) {
+      isLoggedIn = true;
     // Successful authentication, redirect home.
       res.redirect('/github/myProfile');
   });
 
 app.get('/github/myProfile', ensureAuthenticated, function(req, res) {
     Fiddles.find({userId:req.user._id}).then ( fiddles => {
-        res.render('authenticated', { user: req.user, fiddles:fiddles, startedFiddles:req.user.startedFiddles,
-                                        message: req.flash() });
-                    })
-                    .catch( e => res.status(400).send(e));
+        res.render('authenticated', {
+            user: req.user, fiddles:fiddles,
+            startedFiddles:req.user.startedFiddles,
+            message: req.flash() });
+    })
+    .catch( e => res.status(400).send(e));
 
 });
 app.get('/about', function(req, res) {
@@ -118,6 +130,7 @@ app.get('/about', function(req, res) {
 });
 app.get('/github/logout', function(req, res) {
     req.logout();
+    isLoggedIn = false;
     res.redirect('/');
 });
 

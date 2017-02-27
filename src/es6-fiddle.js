@@ -26,6 +26,7 @@
         resizer = document.querySelector('.resizer'),
         documentElement = document.documentElement,
         snackbar = document.querySelector('.snackbar'),
+        starIcon = document.querySelector('.fa-star-o'),
         startFiddle = document.querySelector('.star');
 
     let fiddle = null,
@@ -350,8 +351,9 @@
                     starReq.setRequestHeader('Content-type','application/json');
                     starReq.onload = function() {
                         if (this.status === 200 ){
-                            starBtn.classList.remove('star');
-                            starBtn.classList.add('star_complete');
+                            starIcon.classList.remove('fa-star-o');
+                            starIcon.classList.add('fa-star');
+                            showSnackbar('Your fiddle has been favourited');
                         } else {
                             showSnackbar(JSON.parse(this.response).message);
                         }
