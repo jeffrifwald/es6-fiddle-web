@@ -1,6 +1,8 @@
-(function() {
+'use strict';
 
-    const body = document.querySelector('body'),
+(function () {
+
+    var body = document.querySelector('body'),
         runBtn = document.querySelector('.run'),
         lintBtn = document.querySelector('.lint'),
         saveBtn = document.querySelector('.save'),
@@ -28,24 +30,24 @@
         snackbar = document.querySelector('.snackbar'),
         startFiddle = document.querySelector('.star');
 
-    let fiddle = null,
+    var fiddle = null,
         darkMode = localStorage.getItem('es6fiddleDarkMode') == 'true',
         lintLog = null,
         userInput = null,
-        startX,
-        startY,
-        startWidth,
-        startHeight,
+        startX = void 0,
+        startY = void 0,
+        startWidth = void 0,
+        startHeight = void 0,
         bootstrap = null,
-        share,
-        src,
-        iframe,
-        embed,
-        link,
-        twitter,
-        es6Btn,
-        consoleBtn,
-        editLink;
+        share = void 0,
+        src = void 0,
+        iframe = void 0,
+        embed = void 0,
+        link = void 0,
+        twitter = void 0,
+        es6Btn = void 0,
+        consoleBtn = void 0,
+        editLink = void 0;
 
     //set the global examples object
     window.es6Example = {};
@@ -84,14 +86,14 @@
 
         editLink.href = document.location.href.replace('/embed', '');
 
-        es6Btn.onclick = function() {
+        es6Btn.onclick = function () {
             document.querySelector('.fiddle').style.display = 'block';
             document.querySelector('.result-wrapper').style.display = 'none';
             es6Btn.className += ' selected';
             consoleBtn.className = consoleBtn.className.replace(' selected', '');
         };
 
-        consoleBtn.onclick = function() {
+        consoleBtn.onclick = function () {
             document.querySelector('.fiddle').style.display = 'none';
             document.querySelector('.result-wrapper').style.display = 'block';
             es6Btn.className = es6Btn.className.replace(' selected', '');
@@ -102,20 +104,20 @@
     // Change the layout of the page based on the type clicked.
     // Save this layout choice in localStorage
     // By default this will be vertical
-    vertBtn.onclick = function() {
+    vertBtn.onclick = function () {
         setVerticalStyle();
         saveLayoutOption('vertical');
     };
 
     // Onclick of the horizontal button then make the page visually horizontal
     // And save the layout option clicked (in this case horizontal) to localstorage
-    horzBtn.onclick = function() {
+    horzBtn.onclick = function () {
         setHorizontalStyle();
         saveLayoutOption('horizontal');
     };
 
     // When the dark mode button is clicked, toggle the dark mode setting
-    darkModeBtn.onclick = function() {
+    darkModeBtn.onclick = function () {
         if (darkMode === true) {
             darkMode = false;
             disableDarkMode();
@@ -165,9 +167,7 @@
 
     // Sets the styling for the results box with the given text and border color
     function setResultsColors(textColor, borderColor) {
-        style.innerHTML =
-            'body{font-family:monospace;padding:10px;color:' + textColor + '; transition:color 0.5s;}\n' +
-            'div{border-bottom:1px solid ' + borderColor + ';padding: 2px 0; transition:bottom-border 0.5s;}';
+        style.innerHTML = 'body{font-family:monospace;padding:10px;color:' + textColor + '; transition:color 0.5s;}\n' + 'div{border-bottom:1px solid ' + borderColor + ';padding: 2px 0; transition:bottom-border 0.5s;}';
     }
 
     //add the fiddle area
@@ -181,7 +181,7 @@
     // If the user has previously selected to use the horizontal layout then load that
     if (savedLayout === 'horizontal') {
         setHorizontalStyle();
-    // Otherwise make the page the default vertical style
+        // Otherwise make the page the default vertical style
     } else {
         setVerticalStyle();
     }
@@ -199,74 +199,48 @@
     }
 
     //add the logger script to the iframe
-    logger.innerHTML =
-        'window.console.log = (function() {\n' +
-        '\tvar escaped = {"&": "&amp;", "<": "&lt;", ">": "&gt;", "\\\"": "&quot;", "\'": "&#39", "/": "&#x2F;"};\n' +
-        '\tvar escapeHTML = function(str) {\n' +
-        '\t\treturn String(str).replace(/[&<>"\'\/]/g, function (s) {\n' +
-        '\t\t\t\treturn escaped[s];\n' +
-        '\t\t});\n' +
-        '\t};' +
-        '\tvar log = console.log;\n' +
-        '\treturn function() {\n' +
-        '\t\tlog.apply(window.console, arguments);\n' +
-        '\t\tdocument.body.innerHTML +=\n' +
-        '\t\t\t"<div>" + \n' +
-        '\t\t\t\tescapeHTML(Array.prototype.slice.call(arguments).join(" ")) + \n' +
-        '\t\t\t"</div>";\n' +
-        '\t};\n' +
-        '})();\n\n' +
-        'window.console.error = (function() {\n' +
-        '\tvar err = console.error;\n' +
-        '\treturn function() {\n' +
-        '\t\terr.apply(window.console, arguments);\n' +
-        '\t\tdocument.body.innerHTML +=\n' +
-        '\t\t\t"<div>" + \n' +
-        '\t\t\t\tArray.prototype.slice.call(arguments).join(" ") + \n' +
-        '\t\t"</div>";\n' +
-        '\t};\n' +
-        '})();\n\n';
+    logger.innerHTML = 'window.console.log = (function() {\n' + '\tvar escaped = {"&": "&amp;", "<": "&lt;", ">": "&gt;", "\\\"": "&quot;", "\'": "&#39", "/": "&#x2F;"};\n' + '\tvar escapeHTML = function(str) {\n' + '\t\treturn String(str).replace(/[&<>"\'\/]/g, function (s) {\n' + '\t\t\t\treturn escaped[s];\n' + '\t\t});\n' + '\t};' + '\tvar log = console.log;\n' + '\treturn function() {\n' + '\t\tlog.apply(window.console, arguments);\n' + '\t\tdocument.body.innerHTML +=\n' + '\t\t\t"<div>" + \n' + '\t\t\t\tescapeHTML(Array.prototype.slice.call(arguments).join(" ")) + \n' + '\t\t\t"</div>";\n' + '\t};\n' + '})();\n\n' + 'window.console.error = (function() {\n' + '\tvar err = console.error;\n' + '\treturn function() {\n' + '\t\terr.apply(window.console, arguments);\n' + '\t\tdocument.body.innerHTML +=\n' + '\t\t\t"<div>" + \n' + '\t\t\t\tArray.prototype.slice.call(arguments).join(" ") + \n' + '\t\t"</div>";\n' + '\t};\n' + '})();\n\n';
     iHead.appendChild(logger);
 
     iHead.appendChild(style);
 
     //wait for babel to load
-    babel.onload = function() {
-        let loadResp;
-        const loadReq = new XMLHttpRequest(),
-            runFiddle = function() {
-                if (userInput) { //clean up the old code
-                    iHead.removeChild(userInput);
-                }
-                if (bootstrap) { //clean up the old code
-                    iHead.removeChild(bootstrap);
-                }
+    babel.onload = function () {
+        var loadResp = void 0;
+        var loadReq = new XMLHttpRequest(),
+            runFiddle = function runFiddle() {
+            if (userInput) {
+                //clean up the old code
+                iHead.removeChild(userInput);
+            }
+            if (bootstrap) {
+                //clean up the old code
+                iHead.removeChild(bootstrap);
+            }
 
-                //create new script elements for the bootstrap and user input
-                userInput = document.createElement('script');
-                bootstrap = document.createElement('script');
+            //create new script elements for the bootstrap and user input
+            userInput = document.createElement('script');
+            bootstrap = document.createElement('script');
 
-                //user input needs to be a 'text/babel' script for babel
-                userInput.setAttribute('type', 'text/babel');
-                userInput.className = 'babel-text';
+            //user input needs to be a 'text/babel' script for babel
+            userInput.setAttribute('type', 'text/babel');
+            userInput.className = 'babel-text';
 
-                //set the new script code
-                const inputWithTryCatch = 'try {' + fiddle.getValue() + '} catch(e) { console.log(e.message); }';
-                userInput.innerHTML = inputWithTryCatch;
-                bootstrap.innerHTML = (
-                    'document.body.innerHTML = \'\';\n' +
-                    'babel.run(document.querySelector(".babel-text").innerHTML);\n'
-                );
+            //set the new script code
+            var inputWithTryCatch = 'try {' + fiddle.getValue() + '} catch(e) { console.log(e.message); }';
+            userInput.innerHTML = inputWithTryCatch;
+            bootstrap.innerHTML = 'document.body.innerHTML = \'\';\n' + 'babel.run(document.querySelector(".babel-text").innerHTML);\n';
 
-                //append the new scripts
-                iHead.appendChild(userInput);
-                iHead.appendChild(bootstrap);
-            };
+            //append the new scripts
+            iHead.appendChild(userInput);
+            iHead.appendChild(bootstrap);
+        };
 
-        if (fiddleId) { //load up the saved code
+        if (fiddleId) {
+            //load up the saved code
             loadReq.open('GET', '/fiddles/' + fiddleId, true);
             loadReq.send();
-            loadReq.onload = function() {
+            loadReq.onload = function () {
                 loadResp = JSON.parse(this.response);
                 if (this.status >= 200 && this.status < 400) {
                     if (loadResp.value) {
@@ -274,11 +248,12 @@
                     } else {
                         fiddle.setValue('\/* Sorry, but I could not load your code right now. *\/');
                     }
-                } else if (this.status === 404 ){
+                } else if (this.status === 404) {
                     fiddle.setValue(loadResp.message);
                 }
 
-                if (embedded) { //go ahead and run the code
+                if (embedded) {
+                    //go ahead and run the code
                     runFiddle();
                 }
             };
@@ -290,8 +265,8 @@
             runBtn.onclick = runFiddle;
 
             //lint the result
-            lintBtn.onclick = function() {
-                const lint = window.JSHINT(fiddle.getValue(), {
+            lintBtn.onclick = function () {
+                var lint = window.JSHINT(fiddle.getValue(), {
                     esnext: true,
                     devel: true,
                     browser: true
@@ -307,18 +282,14 @@
                 lintLog.innerHTML = 'document.body.innerHTML = \'\';\n';
 
                 //remove the line error class from all lines
-                fiddle.eachLine(function(line) {
+                fiddle.eachLine(function (line) {
                     fiddle.removeLineClass(line, 'background', 'line-error');
                 });
 
                 if (!lint) {
-                    window.JSHINT.errors.forEach(function(err) {
+                    window.JSHINT.errors.forEach(function (err) {
                         fiddle.addLineClass(err.line - 1, 'background', 'line-error');
-                        lintLog.innerHTML +=
-                            'console.log(\'Line \' + ' +
-                            err.line +
-                            ' + \':\', \'' +
-                            err.reason.replace(/'/g, '\\\'') + '\')\n';
+                        lintLog.innerHTML += 'console.log(\'Line \' + ' + err.line + ' + \':\', \'' + err.reason.replace(/'/g, '\\\'') + '\')\n';
                     });
                 } else {
                     lintLog.innerHTML += 'console.log(\'Your code is lint free!\');';
@@ -328,37 +299,37 @@
             };
 
             //save the code
-            saveBtn.onclick = function() {
-                const code = fiddle.getValue(),
+            saveBtn.onclick = function () {
+                var code = fiddle.getValue(),
                     saveReq = new XMLHttpRequest(),
                     pathArr = window.location.pathname.split('/');
-                let resp;
+                var resp = void 0;
                 if (code) {
                     saveReq.open('POST', '/save', true);
-                    saveReq.setRequestHeader('Content-type','application/json');
-                    saveReq.onload = function() {
+                    saveReq.setRequestHeader('Content-type', 'application/json');
+                    saveReq.onload = function () {
                         if (this.status >= 200 && this.status < 400) {
                             resp = JSON.parse(this.response);
                             window.location.href = '/' + resp.fiddle + '/';
                         }
                     };
                     saveReq.send(JSON.stringify({
-                        fiddle: pathArr[1].length > 1 ? pathArr[1] : - 1,
+                        fiddle: pathArr[1].length > 1 ? pathArr[1] : -1,
                         value: fiddle.getValue()
                     }));
                 }
             };
 
             //star the code
-            starBtn.onclick = function() {
-                const starReq = new XMLHttpRequest(),
+            starBtn.onclick = function () {
+                var starReq = new XMLHttpRequest(),
                     pathArr = window.location.pathname.split('/'),
-                    fiddleID = pathArr[1].length > 1 ? pathArr[1] : - 1;
-                if (fiddleID !== - 1) {
+                    fiddleID = pathArr[1].length > 1 ? pathArr[1] : -1;
+                if (fiddleID !== -1) {
                     starReq.open('POST', '/star/' + fiddleID, true);
-                    starReq.setRequestHeader('Content-type','application/json');
-                    starReq.onload = function() {
-                        if (this.status === 200 ){
+                    starReq.setRequestHeader('Content-type', 'application/json');
+                    starReq.onload = function () {
+                        if (this.status === 200) {
                             starBtn.classList.remove('star');
                             starBtn.classList.add('star_complete');
                         } else {
@@ -371,16 +342,16 @@
                 }
             };
 
-            themeChanger.onchange = function() {
-                const theme = themeChanger.options[themeChanger.selectedIndex].textContent;
+            themeChanger.onchange = function () {
+                var theme = themeChanger.options[themeChanger.selectedIndex].textContent;
                 fiddle.setOption('theme', theme);
                 localStorage.setItem('theme', theme);
             };
 
             //load the selected code
-            window.exampleSelector.onchange = function() {
+            window.exampleSelector.onchange = function () {
                 if (window.exampleSelector.value) {
-                    let code = 'Example Can Not Be Found';
+                    var code = 'Example Can Not Be Found';
 
                     if (window.es6Example[window.exampleSelector.value]) {
                         code = window.es6Example[window.exampleSelector.value].code;
@@ -411,7 +382,7 @@
     }
 
     function doDrag(e) {
-        const layout = localStorage.getItem('es6fiddleLayout');
+        var layout = localStorage.getItem('es6fiddleLayout');
         if (layout === 'horizontal') {
             fiddleWrapper.style.flexBasis = startHeight + e.clientY - startY + 'px';
         } else {
@@ -427,7 +398,7 @@
     function showSnackbar(message) {
         snackbar.innerHTML = message;
         snackbar.classList.add('show');
-        setTimeout(function() {
+        setTimeout(function () {
             snackbar.classList.remove('show');
         }, 3000);
     }
