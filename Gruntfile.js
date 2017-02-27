@@ -1,6 +1,6 @@
-module.exports = function(grunt) {
+module.exports = grunt => {
     require('load-grunt-tasks')(grunt);
-    var jsSrcFiles = [
+    const jsSrcFiles = [
             'src/*.js',
             'src/examples/*.js',
             'src/add-examples.js'
@@ -131,9 +131,7 @@ module.exports = function(grunt) {
         }
     });
 
-    npmTasks.forEach(function(task) {
-        grunt.loadNpmTasks(task);
-    });
+    npmTasks.forEach(task => grunt.loadNpmTasks(task));
 
     grunt.registerTask('default', ['githooks', 'watch']);
     grunt.registerTask('test', ['lesslint', 'eslint']);
