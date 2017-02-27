@@ -1,0 +1,70 @@
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: @bg;
+
+  .content {
+    width: 800px;
+    max-width: 100%;
+    background: @white;
+    box-shadow: 2px 2px 20px rgba(0,0,0,0.2);
+    height: 460px;
+
+    .userphoto {
+      width: 50%;
+      transform: scale(1.05);
+      overflow: hidden;
+      float: left;
+      position: relative;
+      height: 100%;
+      border-radius: 4px;
+
+      img {
+        display: block;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        filter: grayscale(20%);
+        .transition(all, 200ms);
+
+        &:hover {
+          filter: grayscale(0%);
+        }
+      }
+    }
+
+    .user-details {
+      float: left;
+      width: 50%;
+      padding-left: 30px;
+      padding-top: 50px;
+      overflow: scroll;
+      height: 460px;
+
+      h3 {
+        margin-bottom: 5px;
+      }
+
+      .recent {
+        margin-top: 40px;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      h1,
+      .bio {
+        text-align: center;
+        margin-bottom: 5px;
+      }
+
+      .bio {
+        font-weight: bold;
+        font-size: 14px;
+      }
+    }
+  }
+}

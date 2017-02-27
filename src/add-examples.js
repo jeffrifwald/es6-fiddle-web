@@ -1,8 +1,6 @@
 //add all of the example code to the example selector
-
 if (!window.embedded) {
     let example;
-
     for (example in window.es6Example) {
         if (window.es6Example.hasOwnProperty(example)) {
             window.exampleSelector.innerHTML +=
@@ -20,6 +18,5 @@ if (!window.embedded) {
                     `<option value="${example}">${window.es7Example[example].display}</option>`;
             }
         }
-
     }
 }
