@@ -137,33 +137,33 @@
 
     // Save the layout option specified to localStorage
     // Pass in a string either "vertical" or "horizontal" to save the layout
-    function saveLayoutOption(layoutType) {
-        localStorage.setItem('es6fiddleLayout', layoutType);
-    }
+    var saveLayoutOption = function saveLayoutOption(layoutType) {
+        return localStorage.setItem('es6fiddleLayout', layoutType);
+    };
 
     // A method to change the width of the results and fiddle containers
     // Setting the width to 100% will make the fiddle box be on top and the results below
-    function setHorizontalStyle() {
-        codeWrapper.classList.add('column');
-    }
+    var setHorizontalStyle = function setHorizontalStyle() {
+        return codeWrapper.classList.add('column');
+    };
 
     // Called when we want to make the page back to its default vertical style
     // This will make the page have the fiddle on the left and the results on the right
-    function setVerticalStyle() {
-        codeWrapper.classList.remove('column');
-    }
+    var setVerticalStyle = function setVerticalStyle() {
+        return codeWrapper.classList.remove('column');
+    };
 
     // Enable dark mode by adding the .dark class to the body, which then enables dark mode specific styling
-    function enableDarkMode() {
+    var enableDarkMode = function enableDarkMode() {
         body.classList.add('dark');
         setResultsColors('#FFF', '#333');
-    }
+    };
 
     // Disable dark mode by removing the .dark class from the body
-    function disableDarkMode() {
+    var disableDarkMode = function disableDarkMode() {
         body.classList.remove('dark');
         setResultsColors('#666', '#EEE');
-    }
+    };
 
     // Sets the styling for the results box with the given text and border color
     function setResultsColors(textColor, borderColor) {

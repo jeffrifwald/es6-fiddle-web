@@ -135,40 +135,34 @@
 
     // Save the layout option specified to localStorage
     // Pass in a string either "vertical" or "horizontal" to save the layout
-    function saveLayoutOption(layoutType) {
-        localStorage.setItem('es6fiddleLayout', layoutType);
-    }
+    const saveLayoutOption = layoutType => localStorage.setItem('es6fiddleLayout', layoutType);
 
     // A method to change the width of the results and fiddle containers
     // Setting the width to 100% will make the fiddle box be on top and the results below
-    function setHorizontalStyle() {
-        codeWrapper.classList.add('column');
-    }
+    const  setHorizontalStyle = () => codeWrapper.classList.add('column');
 
     // Called when we want to make the page back to its default vertical style
     // This will make the page have the fiddle on the left and the results on the right
-    function setVerticalStyle() {
-        codeWrapper.classList.remove('column');
-    }
+    const setVerticalStyle = () => codeWrapper.classList.remove('column');
 
     // Enable dark mode by adding the .dark class to the body, which then enables dark mode specific styling
-    function enableDarkMode() {
+    const enableDarkMode = () => {
         body.classList.add('dark');
         setResultsColors('#FFF', '#333');
-    }
+    };
 
     // Disable dark mode by removing the .dark class from the body
-    function disableDarkMode() {
+    const disableDarkMode = () => {
         body.classList.remove('dark');
         setResultsColors('#666', '#EEE');
-    }
+    };
 
     // Sets the styling for the results box with the given text and border color
-    function setResultsColors(textColor, borderColor) {
+    const setResultsColors = (textColor, borderColor) => {
         style.innerHTML =
             `body{font-family:monospace;padding:10px;color:${textColor}; transition:color 0.5s;}
              div{border-bottom:1px solid ${borderColor};padding: 2px 0; transition:bottom-border 0.5s;}`;
-    }
+    };
 
     //add the fiddle area
     fiddle = window.CodeMirror(document.querySelector('.fiddle'), {

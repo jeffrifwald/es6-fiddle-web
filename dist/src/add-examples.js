@@ -3,7 +3,7 @@
 //add all of the example code to the example selector
 
 if (!window.embedded) {
-    var example;
+    var example = void 0;
 
     for (example in window.es6Example) {
         if (window.es6Example.hasOwnProperty(example)) {
