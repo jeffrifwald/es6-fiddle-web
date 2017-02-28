@@ -22,7 +22,9 @@ const codeWrapper = $.getElement('.code-wrapper'),
   embedded = pathAr[1] === 'embed',
   startFiddle = $.getElement('.star');
 
-let fiddle = null;
+let fiddle = null,
+  userInput = null,
+  bootstrap = null;
 
 analytics.start();
 redirectTraffic.register();
@@ -115,8 +117,6 @@ logger.start();
 //  wait for babel to load
 babel.onload = () => {
   const runFiddle = () => {
-    let userInput = null,
-      bootstrap = null;
     if (userInput) { // clean up the old code
       iHead.removeChild(userInput);
     }

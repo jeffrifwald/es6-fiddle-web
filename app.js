@@ -25,6 +25,7 @@ const express = require('express'),
         }
     });
 let isLoggedIn = false;
+
 app.use(compression());
 app.use(bodyParser.json());
 app.use(flash());
