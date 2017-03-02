@@ -40,6 +40,7 @@
       uglify: {
         compile: {
           files: {
+            'static/src/authenticated.js': ['src/authenticated.js'],
             'static/lib/babel/babel.min.js': ['static/lib/babel/*.js', '!static/lib/babel/babel.min.js'],
           },
         },

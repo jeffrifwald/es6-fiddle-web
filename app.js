@@ -24,7 +24,6 @@ const express = require('express'),
             '/blog/:page': 'blog/page'
         }
     });
-let isLoggedIn = false;
 
 app.use(compression());
 app.use(bodyParser.json());
@@ -77,7 +76,7 @@ app.get('/blog', (req, res) => {
 });
 
 app.get('/authenticated', (req, res) => {
-    res.send({'logged': isLoggedIn});
+    res.send({'logged': req.isAuthenticated()});
 })
 
 // This one is matching '/xyz' NOT -> '/xyz/'
@@ -108,7 +107,6 @@ app.get('/auth/github/callback',
       successFlash: 'Welcome!'
   }),
   (req, res) => {
-      isLoggedIn = true;
     // Successful authentication, redirect home.
       res.redirect('/github/myProfile');
   });
@@ -128,7 +126,6 @@ app.get('/about', (req, res) => {
 });
 app.get('/github/logout', (req, res) => {
     req.logout();
-    isLoggedIn = false;
     res.redirect('/');
 });
 
