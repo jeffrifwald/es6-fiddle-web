@@ -44,6 +44,8 @@ Contributing
 ------------
 We welcome pull requests from first-timers and seasoned veteran programmers alike. Follow the steps above to get setup.
 
+In addition to this we are looking for maintainers. Please come and chat with us in our [gitter](https://gitter.im/esfiddle/Lobby) if you are interested.
+
 Please first review the [Code of Conduct](CODE_OF_CONDUCT.md) and the [Contributing guide](CONTRIBUTE.md) to help you get setup.
 
 Then have a look at some of the [projects issues](https://github.com/esfiddle/esfiddle/issues) Checkout the labels [first-timers-only](https://github.com/esfiddle/esfiddle/labels/first-timers-only), [bite-size](https://github.com/esfiddle/esfiddle/labels/bite-size) (for small issues) and [up-for-grabs](https://github.com/esfiddle/esfiddle/labels/up-for-grabs).
