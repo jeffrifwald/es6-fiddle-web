@@ -12,9 +12,9 @@ console.log(['ä','a','z'].sort(l10nDE.compare)); // ['a','ä','z']
 console.log(['ä','a','z'].sort(l10nSV.compare)); // ["a", "z", "ä"]
 
 /* Date Time Format */
-let l10nUS = new Intl.DateTimeFormat("en-US") // English - US
-let l10nGB = new Intl.DateTimeFormat("en-GB") // English - GB
-let l10nEG = new Intl.DateTimeFormat("ar-EG") // Arabic
+let l10nUS = new Intl.DateTimeFormat("en-US"); // English - US
+let l10nGB = new Intl.DateTimeFormat("en-GB"); // English - GB
+let l10nEG = new Intl.DateTimeFormat("ar-EG"); // Arabic
 let date = new Date(Date.UTC(2016, 1, 19, 19, 19, 19));
 
 console.log(l10nUS.format(date)); // US follows month/day/year format
@@ -24,7 +24,7 @@ console.log(l10nEG.format(date)); // Arabic uses thier own arabic digits
 /* Number Format */
 let l10nDEnum = new Intl.NumberFormat('de-DE');
 let l10nINnum = new Intl.NumberFormat('en-IN');
-let number = 9876532.10
+let number = 9876532.10;
 //German number system uses periods for thousands and comma for decimal
 console.log(l10nDEnum.format(number));
 // Indian number system uses thousands,lakhs,crores as separators
