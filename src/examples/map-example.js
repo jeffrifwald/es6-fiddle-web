@@ -1,3 +1,5 @@
+/* global window */
+window.es6Example = window.es6Example || {};
 window.es6Example.map = {};
 
 window.es6Example.map.code =

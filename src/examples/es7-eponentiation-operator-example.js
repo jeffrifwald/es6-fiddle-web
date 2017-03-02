@@ -1,3 +1,5 @@
+/* global window */
+window.es7Example = window.es7Example || {};
 window.es7Example.exponentiation = {};
 
 window.es7Example.exponentiation.code =

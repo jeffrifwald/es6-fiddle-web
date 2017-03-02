@@ -1,3 +1,5 @@
+/* global window */
+window.es6Example = window.es6Example || {};
 window.es6Example.iterator = {};
 
 window.es6Example.iterator.code =
@@ -5,7 +7,7 @@ window.es6Example.iterator.code =
 let sum = 0;
 
 for (let v of arr) {
-	sum += v;
+  sum += v;
 }
 
 console.log('1 + 2 + 3 + 4 + 5 =', sum);`;

@@ -1,3 +1,5 @@
+/* global window */
+window.es7Example = window.es7Example || {};
 window.es7Example.arrayIndex = {};
 
 window.es7Example.arrayIndex.code =
@@ -16,7 +18,6 @@ console.log(array.includes(undefined, 3));
 console.log(array.includes(undefined, 4));
 
 //able to detect NaN array elements
-console.log(array.includes(NaN));
-`;
+console.log(array.includes(NaN));`;
 
 window.es7Example.arrayIndex.display = 'Array Includes: Search from Index';
