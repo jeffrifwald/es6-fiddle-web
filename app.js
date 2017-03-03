@@ -57,17 +57,17 @@ function ensureAuthenticated(req, res, next) {
     res.redirect('/github/login');
 }
 
-app.use('/', express.static(`${__dirname  }/static`));
+app.use('/', express.static(`${__dirname  }/dist`));
 
 // This one is matching '/xyz/' NOT -> '/xyz/sdf'
 app.get(/^\/\w+\/$/, (req, res) => {
-    res.sendFile(`${__dirname  }/static/index.html`);
+    res.sendFile(`${__dirname  }/dist/index.html`);
 });
 app.get('/about', (req, res) => {
-    res.sendFile(`${__dirname  }/static/about.html`);
+    res.sendFile(`${__dirname  }/dist/about.html`);
 });
 app.get(/^\/embed\/\w+\/$/, (req, res) => {
-    res.sendFile(`${__dirname  }/static/embed.html`);
+    res.sendFile(`${__dirname  }/dist/embed.html`);
 });
 
 //poet routes
