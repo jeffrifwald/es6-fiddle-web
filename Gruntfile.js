@@ -29,7 +29,7 @@
       },
       browserify: {
         prod: {
-          src: ['src/examples/*.js', 'src/index.js'],
+          src: ['src/js/examples/*.js', 'src/index.js'],
           dest: 'dist/src/es6-fiddle.js',
           options: {
             browserifyOptions: { debug: true },
@@ -67,7 +67,7 @@
           tasks: ['browserify', 'uglify', 'eslint'],
         },
         html: {
-          files: 'src/index.html',
+          files: 'src/views/index.html',
           tasks: ['inline'],
         },
       },
@@ -81,11 +81,11 @@
       },
       inline: {
         index: {
-          src: 'src/index.html',
+          src: 'src/views/index.html',
           dest: 'dist/index.html',
         },
         about: {
-          src: 'src/about.html',
+          src: 'src/views/about.html',
           dest: 'dist/about.html',
         },
       },
