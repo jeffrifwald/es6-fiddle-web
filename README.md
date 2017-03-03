@@ -34,11 +34,11 @@ npm start
 
 Found a bug?
 ------------
-Read the [Help I've Found a Bug](REPORTBUG.md) article and follow its instructions.
+Read the [Help I've Found a Bug](/docs/REPORTBUG.md) article and follow its instructions.
 
-Want to know what are working on?
+Want to know what we are working on?
 ------------
-Checkout our [vision](VISION.md).
+Check out our [vision](/docs/VISION.md).
 
 Contributing
 ------------
@@ -46,6 +46,6 @@ We welcome pull requests from first-timers and seasoned veteran programmers alik
 
 In addition to this we are looking for maintainers. Please come and chat with us in our [gitter](https://gitter.im/esfiddle/Lobby) if you are interested.
 
-Please first review the [Code of Conduct](CODE_OF_CONDUCT.md) and the [Contributing guide](CONTRIBUTE.md) to help you get setup.
+Please first review the [Code of Conduct](/docs/CODE_OF_CONDUCT.md) and the [Contributing guide](/docs/CONTRIBUTE.md) to help you get setup.
 
 Then have a look at some of the [projects issues](https://github.com/esfiddle/esfiddle/issues) Checkout the labels [first-timers-only](https://github.com/esfiddle/esfiddle/labels/first-timers-only), [bite-size](https://github.com/esfiddle/esfiddle/labels/bite-size) (for small issues) and [up-for-grabs](https://github.com/esfiddle/esfiddle/labels/up-for-grabs).
