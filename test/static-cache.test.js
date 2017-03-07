@@ -8,7 +8,7 @@ var request = require('supertest'),
 describe('GET /images/*', () => {
 
 	it('Should return max-age=2628000 for each image', (done) => {
-		fs.readdir(path.resolve(__dirname, "../static/images/"), (err, files) => {
+		fs.readdir(path.resolve(__dirname, "../dist/images/"), (err, files) => {
 			files.forEach( (file, index, arr) => {
 				request(app)
 				.get(`/images/${file}`)

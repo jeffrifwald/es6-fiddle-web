@@ -1,14 +1,14 @@
 import 'whatwg-fetch';
 import codemirror from 'codemirror';
-import analytics from './js/analytics';
-import redirectTraffic from './js/redirect-traffic';
-import layoutFunctions from './js/layoutFunctions';
-import clickEvents from './js/clickEvents';
-import drag from './js/drag';
-import logger from './js/logger';
-import examples from './js/add-examples';
-import $ from './js/helpers';
-import share from './js/share';
+import analytics from './analytics';
+import redirectTraffic from './redirect-traffic';
+import layoutFunctions from './layoutFunctions';
+import clickEvents from './clickEvents';
+import drag from './drag';
+import logger from './logger';
+import examples from './add-examples';
+import $ from './helpers';
+import share from './share';
 
 const codeWrapper = $.getElement('.code-wrapper'),
   fiddleWrapper = $.getElement('.fiddle-wrapper'),

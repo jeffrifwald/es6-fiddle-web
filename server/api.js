@@ -1,6 +1,6 @@
 // var mongo = require('mongodb').MongoClient,
-let Fiddles = require('./db/fiddles'),
-  Users = require('./db/users');
+let Fiddles = require('../db/fiddles'),
+  Users = require('../db/users');
 
 module.exports = function (app) {
     // mongo.connect(String(process.env.MONGODB_URI), function(err, db) {

@@ -6,7 +6,7 @@
         '!src/authenticated.js'
       ],
       jsFiles = 'src/**/*.js',
-      styleFiles = ['static/lib/**/*.css', 'style/**/*.less'],
+      styleFiles = ['dist/lib/**/*.css', 'style/**/*.less'],
       pkg = grunt.file.readJSON('package.json'),
       npmTasks = [
         'grunt-contrib-uglify',
@@ -29,8 +29,8 @@
       },
       browserify: {
         prod: {
-          src: ['src/examples/*.js', 'src/index.js'],
-          dest: 'static/src/es6-fiddle.js',
+          src: ['src/js/examples/*.js', 'src/js/index.js'],
+          dest: 'dist/src/es6-fiddle.js',
           options: {
             browserifyOptions: { debug: true },
             transform: [['babelify', { presets: ['es2015'] }]],
@@ -40,17 +40,17 @@
       uglify: {
         compile: {
           files: {
-            'static/src/authenticated.js': ['src/authenticated.js'],
-            'static/lib/babel/babel.min.js': ['static/lib/babel/*.js', '!static/lib/babel/babel.min.js'],
+            'dist/src/authenticated.js': ['src/authenticated.js'],
+            'dist/lib/babel/babel.min.js': ['dist/lib/babel/*.js', '!dist/lib/babel/babel.min.js'],
           },
         },
       },
       less: {
         production: {
           files: {
-            'static/style/es6-fiddle.css': ['static/lib/**/*.css', 'style/main.less'],
-            'static/style/profile.css': ['style/profile.less'],
-            'static/style/blog.css': ['style/blog.less'],
+            'dist/style/es6-fiddle.css': ['dist/lib/**/*.css', 'style/main.less'],
+            'dist/style/profile.css': ['style/profile.less'],
+            'dist/style/blog.css': ['style/blog.less'],
           },
         },
       },
@@ -67,7 +67,7 @@
           tasks: ['browserify', 'uglify', 'eslint'],
         },
         html: {
-          files: 'src/index.html',
+          files: 'src/views/index.html',
           tasks: ['inline'],
         },
       },
@@ -81,12 +81,12 @@
       },
       inline: {
         index: {
-          src: 'src/index.html',
-          dest: 'static/index.html',
+          src: 'src/views/index.html',
+          dest: 'dist/index.html',
         },
         about: {
-          src: 'src/about.html',
-          dest: 'static/about.html',
+          src: 'src/views/about.html',
+          dest: 'dist/about.html',
         },
       },
       eslint: {
