@@ -122,7 +122,7 @@
       express: {
         dev: {
           options: {
-            script: 'app.js',
+            script: 'server/app.js',
           },
         },
       },

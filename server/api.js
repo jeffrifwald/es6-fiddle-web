@@ -1,13 +1,13 @@
 // var mongo = require('mongodb').MongoClient,
-let Fiddles = require('../db/fiddles'),
-  Users = require('../db/users');
+const Fiddles = require('./db/fiddles');
+const Users = require('./db/users');
 
 module.exports = function (app) {
-    // mongo.connect(String(process.env.MONGODB_URI), function(err, db) {
-    //     fiddles = db.collection('fiddles');
-    // });
+  // mongo.connect(String(process.env.MONGODB_URI), function(err, db) {
+  //     fiddles = db.collection('fiddles');
+  // });
 
-    // This will match /fiddles/fiddleNo
+  // This will match /fiddles/fiddleNo
   app.get(/^\/fiddles\/\w+$/, (req, res) => {
     const fiddle = req.url.split('/').pop();
 
@@ -18,7 +18,7 @@ module.exports = function (app) {
         } else {
           res.status(404).json({
             message: `\/* Oops! I got 404,\n * but not the fiddle \"${fiddle
-                                            }\" you are looking for :( \n *\/\n`,
+            }\" you are looking for :( \n *\/\n`,
           });
         }
       });
@@ -27,7 +27,7 @@ module.exports = function (app) {
 
   app.post('/save', (req, res) => {
     let fiddle;
-      //  console.log('user logged in = ', req.user);
+    //  console.log('user logged in = ', req.user);
     if (req.body.value) { // don't save anything empty
       if (req.body.fiddle !== -1 && req.isAuthenticated()) {  // Check if user trying to save existing fiddle;
         fiddle = req.body.fiddle;
@@ -60,7 +60,7 @@ module.exports = function (app) {
                 fiddle,
               });
             })
-                                .catch(() => res.status(400).send());
+              .catch(() => res.status(400).send());
           } else {
             fiddle = parseInt(Date.now(), 10).toString(36);
             const newFiddle = new Fiddles({
@@ -75,7 +75,7 @@ module.exports = function (app) {
                 fiddle,
               });
             })
-                                .catch(() => res.status(400).send());
+              .catch(() => res.status(400).send());
           }
         }
       });
@@ -87,30 +87,30 @@ module.exports = function (app) {
   app.post('/star/:fiddleID', (req, res) => {
     const fiddleID = req.params.fiddleID;
 
-        // Only authorized user allowed to star a fiddle
+    // Only authorized user allowed to star a fiddle
     if (!req.isAuthenticated()) {
       return res.status(401).json({ message: 'Only logged in user allowed to star fiddle !' });
     }
 
-        // First check if user already started this fiddle before.
+    // First check if user already started this fiddle before.
     Users.findById(req.user._id).then((user) => {
       if (user.startedFiddles.indexOf(fiddleID) > -1) {
         throw (`fiddle: ${fiddleID} is already stared !`);
       } else {
         return Fiddles.findOneAndUpdate({ fiddle: fiddleID },
-                                                                { $inc: { starCounter: 1 } },
-                                                                { new: true });
+          { $inc: { starCounter: 1 } },
+          { new: true });
       }
     }).then((fiddle) => {
       if (!fiddle) {
         throw (`fiddle: ${fiddleID} Not Found !`);
       }
-                            // Now add this fiddle to user startedFiddle array
+      // Now add this fiddle to user startedFiddle array
       return Users.findByIdAndUpdate(req.user._id, {
         $push: { startedFiddles: fiddleID },
       });
     }).then(() => res.status(200).send({ stared: true })).catch((e) => {
-                                    // console.log('star/:fiddle', e);
+      // console.log('star/:fiddle', e);
       res.status(400).json({ message: e });
     });
   });
