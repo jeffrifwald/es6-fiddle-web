@@ -1,7 +1,7 @@
 var request = require('supertest'),
     superagent = require('superagent'),
     expect = require('chai').expect,
-    app = require('./../app').app,
+    app = require('./../server/app').app,
     fs = require('fs'),
     path = require('path');
 

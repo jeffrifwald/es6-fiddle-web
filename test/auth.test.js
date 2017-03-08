@@ -1,7 +1,7 @@
 var request = require('supertest'),
     superagent = require('superagent'),
     expect = require('chai').expect,
-    app = require('./../app').app,
+    app = require('./../server/app').app,
     passportMock = require('./passport-mock'),
     { testUser, testFiddle } = require('./seedData');
 

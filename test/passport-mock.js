@@ -5,7 +5,7 @@
 
 var passport = require('passport'),
     StrategyMock = require('./strategy-mock'),
-    Users = require('./../db/users');
+    Users = require('./../server/db/users');
 
 function verifyFunction(user, done) { // user = { id: 1};
     // Emulate database fetch result
