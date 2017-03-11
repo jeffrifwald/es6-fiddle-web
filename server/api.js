@@ -114,4 +114,30 @@ module.exports = function (app) {
       res.status(400).json({ message: e });
     });
   });
+
+  app.post('/private/:fiddleID', (req, res) => {
+      const fiddleID = req.params.fiddleID;
+
+      // Only authorized user allowed to star a fiddle
+      if (!req.isAuthenticated()) {
+        return res.status(401).json({ message: 'Only logged in user allowed to have private fiddle !' });
+      }
+
+
+      Fiddles.findOne({fiddle:fiddleID}).then(fiddle => {
+            if(!fiddle){
+              throw (`fiddle: ${fiddleID} Not Found !`);
+            }
+            if(fiddle.userId.toHexString() !== req.user._id.toHexString()){
+                throw (`You can only make your own fiddle private !`);
+            }else{
+              return Fiddles.findOneAndUpdate({ fiddle: fiddleID }, {isPrivate:true}, { new: true });
+            }
+         }).then( fiddle => res.json({fiddle}))
+         .catch( e => {
+            console.log(e);
+            res.status(400).json({ message: e })});
+
+  });
+
 };
