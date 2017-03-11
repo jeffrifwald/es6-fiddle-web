@@ -2,9 +2,10 @@
   module.exports = (grunt) => {
     require('load-grunt-tasks')(grunt);
     const jsSrcFiles = [
-        'src/**/*.js',
-        '!src/authenticated.js'
+        'src/js/**/*.js',
+        '!src/js/authenticated.js'
       ],
+      htmlFiles = ['src/views/index.html', 'src/views/about.html']
       jsFiles = 'src/**/*.js',
       styleFiles = ['dist/lib/**/*.css', 'style/**/*.less'],
       pkg = grunt.file.readJSON('package.json'),
@@ -40,7 +41,7 @@
       uglify: {
         compile: {
           files: {
-            'dist/src/authenticated.js': ['src/authenticated.js'],
+            'dist/src/authenticated.js': ['src/js/authenticated.js'],
             'dist/lib/babel/babel.min.js': ['dist/lib/babel/*.js', '!dist/lib/babel/babel.min.js'],
           },
         },
@@ -67,7 +68,7 @@
           tasks: ['browserify', 'uglify', 'eslint'],
         },
         html: {
-          files: 'src/views/index.html',
+          files: htmlFiles,
           tasks: ['inline'],
         },
       },
