@@ -5,6 +5,7 @@
         'src/js/**/*.js',
         '!src/js/authenticated.js'
       ],
+      htmlFiles = ['src/views/index.html', 'src/views/about.html']
       jsFiles = 'src/**/*.js',
       styleFiles = ['dist/lib/**/*.css', 'style/**/*.less'],
       pkg = grunt.file.readJSON('package.json'),
@@ -67,7 +68,7 @@
           tasks: ['browserify', 'uglify', 'eslint'],
         },
         html: {
-          files: 'src/views/index.html',
+          files: htmlFiles,
           tasks: ['inline'],
         },
       },
