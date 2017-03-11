@@ -2,8 +2,8 @@
   module.exports = (grunt) => {
     require('load-grunt-tasks')(grunt);
     const jsSrcFiles = [
-        'src/**/*.js',
-        '!src/authenticated.js'
+        'src/js/**/*.js',
+        '!src/js/authenticated.js'
       ],
       jsFiles = 'src/**/*.js',
       styleFiles = ['dist/lib/**/*.css', 'style/**/*.less'],
@@ -40,7 +40,7 @@
       uglify: {
         compile: {
           files: {
-            'dist/src/authenticated.js': ['src/authenticated.js'],
+            'dist/src/authenticated.js': ['src/js/authenticated.js'],
             'dist/lib/babel/babel.min.js': ['dist/lib/babel/*.js', '!dist/lib/babel/babel.min.js'],
           },
         },

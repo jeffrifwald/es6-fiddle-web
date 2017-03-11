@@ -5294,17 +5294,6 @@ a:hover {
 }
 
 </style>
-    <script>
-/* global location window */
-
-// redirect traffic to HTTPS from HTTP
-if (location.hostname !== 'localhost'
-    && location.hostname !== '127.0.0.1'
-    && location.protocol !== 'https:') {
-  location.href = `https:${window.location.href.substring(window.location.protocol.length)}`;
-}
-
-</script>
     <link rel="icon" href="/images/favicon.png">
   </head>
   <body>
@@ -5331,6 +5320,6 @@ if (location.hostname !== 'localhost'
 	  	<h1>Find a bug?</h1>
 	  		<p> We're always working on improving ESFiddle. Please read the <a href="https://github.com/esfiddle/esfiddle/blob/develop/docs/REPORTBUG.md" target="_blank">Help I've Found a Bug</a> article and follow the guidelines.</p>
   	</div>
-      <script async src="/src/authenticated.js"></script>
+    <script async src="../../dist/src/authenticated.js"></script>
   </body>
 </html>
