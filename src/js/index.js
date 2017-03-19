@@ -9,6 +9,7 @@ import logger from './logger';
 import examples from './add-examples';
 import $ from './helpers';
 import share from './share';
+import snackbar from './snackbar';
 
 const codeWrapper = $.getElement('.code-wrapper'),
   fiddleWrapper = $.getElement('.fiddle-wrapper'),
@@ -225,6 +226,25 @@ babel.onload = () => {
         })
         .then(resp => resp.json())
         .then(data => clickEvents.starFiddle(data));
+      }
+    };
+
+    // Make fiddle private
+    $.getElement('.private').onclick = () => {
+      const pathArr = window.location.pathname.split('/'),
+        fiddleID = pathArr[1].length > 1 ? pathArr[1] : -1;
+      if (fiddleID !== -1) {
+        fetch(`/private/${fiddleID}`, {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: new Headers({
+            'Content-Type': 'application/json',
+          }),
+        })
+        .then(resp => resp.json())
+        .then(data => clickEvents.privateFiddle(data));
+      }else{
+        snackbar.showSnackbar('You don\'t appear to have any code');
       }
     };
 
