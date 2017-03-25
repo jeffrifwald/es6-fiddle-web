@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
 import codemirror from 'codemirror';
+import 'codemirror/mode/javascript/javascript';
 import analytics from './analytics';
 import redirectTraffic from './redirect-traffic';
 import layoutFunctions from './layoutFunctions';
