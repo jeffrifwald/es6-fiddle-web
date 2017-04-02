@@ -14,6 +14,21 @@ module.exports = function (app) {
     if (fiddle) {
       Fiddles.findOne({ fiddle }, (err, item) => {
         if (item) {
+          //Check if this fiddle is private......
+          if(item.isPrivate){
+            if(!req.isAuthenticated()){
+              return res.status(401).json({
+                message: `This is a private fiddle please login.`,
+              });
+            }
+            if(item.userId.toHexString() === req.user._id){
+              return res.json(item);
+            }else{
+              return res.status(400).json({
+                message: `This is a private fiddle!.`,
+              });
+            }
+          }
           res.json(item);
         } else {
           res.status(404).json({
