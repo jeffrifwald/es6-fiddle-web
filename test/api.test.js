@@ -248,7 +248,7 @@ describe('POST /star/:fiddle', function () {
             });
     });
 
-    it('Shuold return 400 unknown fiddle', done => {
+    it('Should return 400 unknown fiddle', done => {
         agent.post('/star/' + parseInt(Date.now(), 10).toString(36))
             .expect(400)
             .end((err) => {
@@ -276,4 +276,74 @@ describe('GET /authenticated', function () {
                 done();
             });
     });
+});
+
+
+describe('POST /private/:fiddleID', function () {
+    var agent = request.agent(app);
+    beforeEach(function (done) {
+        passportMock(app, {
+            passAuthentication: true,
+            userId: testUser.user1._id
+        });
+        agent.get('/mock/login')
+            .end(function (err) {
+                if (!err) {
+                    //console.log(JSON.stringify(result,undefined,2));
+                    done();
+                } else {
+                    done(err);
+                }
+            });
+    })
+
+    it('Should make fiddle private', done => {
+        agent.post('/private/' + testFiddle.fiddleU1.fiddle)
+            .expect(200)
+            .expect((res) => {
+                expect(res.body.fiddle.isPrivate).to.true;
+            })
+            .end((err) => {
+                if (err) { return done(err); }
+                Fiddles.findOne({ fiddle: testFiddle.fiddleU1.fiddle }).then(fiddle => {
+                    expect(fiddle.isPrivate).to.true;
+                    done();
+                }).catch(e => done(e));
+            });
+    });
+
+    it('should return 400 of user trying to make another user\'s fiddle private', done => {
+            agent.post('/private/' + testFiddle.fiddleU2.fiddle)
+            .expect(400)
+            .end((err) => {
+                if (err) { return done(err); }
+                Fiddles.findOne({ fiddle: testFiddle.fiddleU2.fiddle }).then(fiddle => {
+                    expect(fiddle.isPrivate).to.false;
+                    done();
+                }).catch(e => done(e));
+            });
+    });
+
+    it('should return 400 of user trying to make another anonymous fiddle private', done => {
+            agent.post('/private/' + testFiddle.fiddleGuest.fiddle)
+            .expect(400)
+            .end((err) => {
+                if (err) { return done(err); }
+                Fiddles.findOne({ fiddle: testFiddle.fiddleGuest.fiddle }).then(fiddle => {
+                    expect(fiddle.isPrivate).to.false;
+                    done();
+                }).catch(e => done(e));
+            });
+    });
+
+    it('should return 401 for unauthorized user', done => {
+        request(app).post('/private/' + testFiddle.fiddleU1.fiddle)
+            .expect(401)
+            .end((err) => {
+                if (err) { return done(err); }
+                done();
+            });
+    });
+
+
 });
