@@ -143,7 +143,10 @@ module.exports = function (app) {
             if(!fiddle){
               throw (`fiddle: ${fiddleID} Not Found !`);
             }
-            if(fiddle.userId.toHexString() !== req.user._id ){
+            if(!fiddle.userId){
+                //This fiddle is saved by anonymous user...
+              throw (`You can only make your own fiddle private please click on save first!`);
+            }else if(fiddle.userId.toHexString() !== req.user._id ){
                 throw (`You can only make your own fiddle private !`);
             }else{
               return Fiddles.findOneAndUpdate({ fiddle: fiddleID }, {isPrivate:true}, { new: true });

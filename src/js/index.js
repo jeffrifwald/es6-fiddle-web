@@ -152,6 +152,12 @@ babel.onload = () => {
       } else {
         fiddle.setValue('* Sorry, but I could not load your code right now. *');
       }
+      if(data.isPrivate){
+        const privateIcon = $.getElement('.fa-globe');
+        privateIcon.classList.remove('fa-globe');
+        privateIcon.classList.add('fa-lock');
+        privateIcon.parentElement.setAttribute('data-balloon','Private Fiddle');
+      }
     } else {
       $.addStyleTo(startFiddle, 'display', 'none');
       fiddle.setValue(data.message);
@@ -244,7 +250,7 @@ babel.onload = () => {
         .then(resp => resp.json())
         .then(data => clickEvents.privateFiddle(data));
       }else{
-        snackbar.showSnackbar('You don\'t appear to have any code');
+        snackbar.showSnackbar('You don\'t appear to have any code or its not saved.');
       }
     };
 
