@@ -41,7 +41,7 @@ const clickEvents = {
     if (!data.message) {
       privateIcon.classList.remove('fa-globe');
       privateIcon.classList.add('fa-lock');
-      privateIcon.parentElement.setAttribute('data-balloon','Private Fiddle');
+      privateIcon.parentElement.setAttribute('data-balloon', 'Private Fiddle');
       snackbar.showSnackbar('This fiddle is now private!');
     } else {
       snackbar.showSnackbar(data.message);
