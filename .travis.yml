@@ -1,3 +1,14 @@
 language: node_js
 node_js:
     - "node"
+    - "7"
+    - "6"
+services: mongodb
+env: "MONGODB_URI='mongodb://localhost:27017/fiddles'"
+install:
+    - npm install -g mocha
+    - npm install -g istanbul
+    - npm install
+script: npm run test && istanbul cover _mocha
+after_success:
+    - bash <(curl -s https://codecov.io/bash)

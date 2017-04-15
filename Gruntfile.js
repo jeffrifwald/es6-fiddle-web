@@ -1,77 +1,138 @@
-module.exports = function(grunt) {
-    var jsFiles = [
-            'static/lib/jshint/**/*.js',
-            'static/lib/codemirror/**/*.js',
-            'src/es6-fiddle.js',
-            'src/*-example.js',
-            'src/add-examples.js'
-        ],
-        styleFiles = ['static/lib/**/*.css', 'style/*.styl'],
-        lintFiles = ['Gruntfile.js', 'app.js', 'api.js', 'src/*.js'],
-        pkg = grunt.file.readJSON('package.json'),
-        npmTasks = [
-            'grunt-contrib-jshint',
-            'grunt-contrib-stylus',
-            'grunt-contrib-uglify',
-            'grunt-contrib-watch',
-            'grunt-jscs'
-        ];
+/* eslint-disable */
+  module.exports = (grunt) => {
+    require('load-grunt-tasks')(grunt);
+    const jsSrcFiles = [
+        'src/js/**/*.js',
+        '!src/js/authenticated.js'
+      ],
+      htmlFiles = ['src/views/index.html', 'src/views/about.html']
+      jsFiles = 'src/**/*.js',
+      styleFiles = ['dist/lib/**/*.css', 'style/**/*.less'],
+      pkg = grunt.file.readJSON('package.json'),
+      npmTasks = [
+        'grunt-contrib-uglify',
+        'grunt-contrib-watch',
+        'grunt-jscs',
+        'grunt-contrib-imagemin',
+        'grunt-inline',
+        'grunt-browser-sync',
+        'grunt-express-server',
+        'grunt-githooks',
+        'grunt-browserify',
+      ];
 
     grunt.initConfig({
-        pkg: pkg,
-        jscs: {
-            all: lintFiles,
-            options: {
-                config: '.jscs.json',
-                fix: true
-            }
+      pkg,
+      githooks: {
+        all: {
+          'pre-push': 'test',
         },
-        jshint: {
-            all: lintFiles,
-            options: {
-                jshintrc: '.jshintrc'
-            }
+      },
+      browserify: {
+        prod: {
+          src: ['src/js/examples/*.js', 'src/js/index.js'],
+          dest: 'dist/src/es6-fiddle.js',
+          options: {
+            browserifyOptions: { debug: true },
+            transform: [['babelify', { presets: ['es2015'] }]],
+          },
         },
-        uglify: {
-            options: {
-                mangle: false
-            },
-            compile: {
-                files: {
-                    'static/src/es6-fiddle.js': jsFiles
-                }
-            }
+      },
+      uglify: {
+        compile: {
+          files: {
+            'dist/src/authenticated.js': ['src/js/authenticated.js'],
+            'dist/lib/babel/babel.min.js': ['dist/lib/babel/*.js', '!dist/lib/babel/babel.min.js'],
+          },
         },
-        stylus: {
-            compile: {
-                files: {
-                    'static/style/es6-fiddle.css': styleFiles
-                },
-                options: {
-                    import: ['nib']
-                }
-            }
+      },
+      less: {
+        production: {
+          files: {
+            'dist/style/es6-fiddle.css': ['dist/lib/**/*.css', 'style/main.less'],
+            'dist/style/profile.css': ['style/profile.less'],
+            'dist/style/blog.css': ['style/blog.less'],
+          },
         },
-        watch: {
-            options: {
-                atBegin: true
-            },
-            style: {
-                files: styleFiles,
-                tasks: ['stylus']
-            },
-            src: {
-                files: jsFiles,
-                tasks: ['uglify']
-            }
-        }
+      },
+      watch: {
+        options: {
+          reload: true,
+        },
+        style: {
+          files: styleFiles,
+          tasks: ['less', 'inline'],
+        },
+        src: {
+          files: jsFiles,
+          tasks: ['browserify', 'uglify', 'eslint'],
+        },
+        html: {
+          files: htmlFiles,
+          tasks: ['inline'],
+        },
+      },
+      imagemin: {
+        dynamic: {
+          files: [{
+            expand: true,
+            src: ['**/*.{png,jpg,gif}'],
+          }],
+        },
+      },
+      inline: {
+        index: {
+          src: 'src/views/index.html',
+          dest: 'dist/index.html',
+        },
+        about: {
+          src: 'src/views/about.html',
+          dest: 'dist/about.html',
+        },
+      },
+      eslint: {
+        options: {
+          config: '.eslintrc',
+        },
+        target: ['src/**/*.js', 'Gruntfile.js'],
+      },
+      lesslint: {
+        options: {
+          imports: ['style/**/*.less'],
+          csslint: {
+            'box-sizing': false,
+            'adjoining-classes': false,
+            'universal-selector': false,
+            'font-sizes': false,
+            'box-model': false,
+            'unique-headings': false,
+          },
+        },
+        target: ['style/main.less'],
+      },
+      browserSync: {
+        bsFiles: {
+          src: [jsSrcFiles, styleFiles],
+        },
+        options: {
+          watchTask: true,
+          proxy: 'http://localhost:3000',
+          reloadOnRestart: true,
+        },
+      },
+      express: {
+        dev: {
+          options: {
+            script: 'server/app.js',
+          },
+        },
+      },
     });
 
-    npmTasks.forEach(function(task) {
-        grunt.loadNpmTasks(task);
-    });
+    npmTasks.forEach(task => grunt.loadNpmTasks(task));
 
-    grunt.registerTask('default', ['watch']);
-    grunt.registerTask('test', ['jshint', 'jscs']);
-    grunt.registerTask('build', ['stylus', 'uglify']);
-};
+    grunt.registerTask('default', ['githooks', 'watch']);
+    grunt.registerTask('test', ['lesslint', 'eslint']);
+    grunt.registerTask('build', ['less', 'browserify', 'uglify', 'imagemin', 'inline']);
+    grunt.registerTask('dev', ['express:dev', 'browserSync', 'watch']);
+  };

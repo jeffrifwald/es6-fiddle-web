@@ -1,0 +1,11 @@
+<% include header.ejs %>
+
+<h2><a href="<%- categoryUrl(category) %>">Posts in Category * <%= category %></a></h2>
+
+<% posts.forEach(function(post){ %>
+  <% include postSnippet.ejs %>
+<% }) %>
+
+<% include pagination.ejs %>
+
+<% include footer.ejs %>

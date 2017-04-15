@@ -1,0 +1,12 @@
+<% include header.ejs %>
+
+<div class="post">
+  <h1><%= post.title %></h1>
+
+  <div class="post">
+    <%- post.content %>
+  </div>
+</div>
+<div class="comments" id="disqus_thread"></div>
+
+<% include footer.ejs %>
