@@ -1,51 +1,18 @@
-ESFiddle
+How to install NodeJS and MongoDB
 ===
+*These steps were created using a Windows 10 machine.*
 
-[![Build Status](https://travis-ci.org/esfiddle/esfiddle.png?branch=master)](https://travis-ci.org/esfiddle/esfiddle) 
-[![Join the chat at https://gitter.im/esfiddle/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/esfiddle/Lobby)
-[![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
-[![first-timers-only Friendly](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](http://www.firsttimersonly.com/)
+### NodeJS
+1) Visit https://nodejs.org/ to download and install the latest stable version.
 
-Try out the latest ES6+ features right in your browser.
+### MongoDB
+1) Visit https://www.mongodb.com/download-center?jmp=nav#community, select your operating system and install the latest community version.
+2) In your Windows search bar type ```Environment Variables``` or go to the ```Control Panel > System & Security > System > Advanced System Settings > Environment Variables```, navigate to the ```Path``` variable hit ```Edit``` and add  your MongoDB path. (Ex. C:\Program Files\MongoDB\Server\3.4\bin)
+3) Create ```\data\db``` folders somewhere on your drive. (Ex. C:\data\db)
+4) Open an elevated command prompt and run ```mongod``` to make sure everything is installed correctly so far. The last line of the command prompt should say something like this:  
+```2017-04-17T17:01:56.013-0500 I NETWORK  [thread1] waiting for connections on port 27017```
+5) Now you can close out of the elevated command prompt, open Git Shell, and ```cd``` to esfiddle. While in this folder type ```mongod --dbpath path/to/your/db/folder``` (Ex. mongod --dbpath C:\data\db)
+6) Go to ```C:\Users\YOUR_USERNAME_HERE\AppData\Roaming\npm``` and if you don't see grunt.cmd run ```npm install -g grunt-cli``` in a new elevated command prompt, and then close that command prompt.
+7) Finally, go back into your esfiddle folder and run ```npm install```. 
 
-See it online [here](https://esfiddle.net/).
-
-Getting Started
-------------
-*This guide assumes you already have MongoDB and NodeJS installed.*
-
-Clone the repository
-```bash
-# Get the latest version
-git clone git@github.com:esfiddle/esfiddle.git
-
-# Change directory
-cd esfiddle
-
-# Update PRIVATE section in sample.env file and rename it to '.env'
-mv sample.env .env
-
-# Open a new terminal window and start MongoDB
-mongod --dbpath path/to/your/db/folder
-
-# Start the application
-npm start
-```
-
-Found a bug?
-------------
-Read the [Help I've Found a Bug](/docs/REPORTBUG.md) article and follow its instructions.
-
-Want to know what we are working on?
-------------
-Check out our [vision](/docs/VISION.md).
-
-Contributing
-------------
-We welcome pull requests from first-timers and seasoned veteran programmers alike. Follow the steps above to get setup.
-
-In addition to this we are looking for maintainers. Please come and chat with us in our [gitter](https://gitter.im/esfiddle/Lobby) if you are interested.
-
-Please first review the [Code of Conduct](/docs/CODE_OF_CONDUCT.md) and the [Contributing guide](/docs/CONTRIBUTE.md) to help you get setup.
-
-Then have a look at some of the [projects issues](https://github.com/esfiddle/esfiddle/issues) Checkout the labels [first-timers-only](https://github.com/esfiddle/esfiddle/labels/first-timers-only), [bite-size](https://github.com/esfiddle/esfiddle/labels/bite-size) (for small issues) and [up-for-grabs](https://github.com/esfiddle/esfiddle/labels/up-for-grabs).
+Now whenever you want to start working on the project simply open the command prompt, type ```mongod```. Then open a second Git Shell, ```cd``` to esfiddle, and run ```npm start``` and you're ready to go!
