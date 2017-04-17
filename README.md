@@ -12,7 +12,7 @@ See it online [here](https://esfiddle.net/).
 
 Getting Started
 ------------
-*This guide assumes you already have MongoDB and NodeJS installed.*
+*This guide assumes you already have MongoDB and NodeJS installed. Click [here](/docs/VISION.md) for instructions on how to install MongoDB and NodeJS*
 
 Clone the repository
 ```bash
