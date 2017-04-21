@@ -132,7 +132,6 @@ function calculateLineNumber(fiddleValue) {
     }
     return line;
   });
-  console.log(newLines);
   return newLines.join('\n');
 }
 
