@@ -116,6 +116,26 @@ if (savedTheme) {
 // add the logger script to the iframe
 logger.start();
 
+// Add line number to all console.log() statements
+function calculateLineNumber(fiddleValue) {
+  const lines = fiddleValue.split(/\n/);
+  let newLines = '';
+  newLines = lines.map((line, index) => {
+    const consReg = /(console\.log\()(.*)/;
+    //  separate console.log from original string and split it in to
+    // "console.log(" and ")"
+    const clgLines = line.match(consReg);
+    if (clgLines) {
+      // Add line no: to console.log and join it with rest of the original line.
+      // return line.slice(0, clgLines.index) + clgLines[1] + `'${index+1}: ' + ` +clgLines[2];
+      return `${line.slice(0, clgLines.index) + clgLines[1]}'${index + 1}: ' + ${clgLines[2]}`;
+    }
+    return line;
+  });
+  console.log(newLines);
+  return newLines.join('\n');
+}
+
 //  wait for babel to load
 babel.onload = () => {
   const runFiddle = () => {
@@ -142,7 +162,7 @@ babel.onload = () => {
                     'document.body.innerHTML = \'\';\n' +
                     'babel.run(document.querySelector(".babel-text").innerHTML);\n'
                   );
-    
+
     // append the new scripts
     iHead.appendChild(userInput);
     iHead.appendChild(bootstrap);
@@ -280,23 +300,6 @@ babel.onload = () => {
   }
 };
 
-function calculateLineNumber(fiddleValue){
-  let lines = fiddleValue.split(/\n/);
-  let newLines = "";
-  
-  newLines = lines.map( (line,index) =>{
-                      let consReg = /(console\.log\()(.*)/;
-                      //separate console.log from original string and split it in to "console.log(" and ")"
-                      let clgLines = line.match(consReg);
-                      if(clgLines){
-                        // Add line no: to console.log and join it with rest of the original line.
-                        return line.slice(0,clgLines.index) + clgLines[1]+`'${index+1}: ' + `+clgLines[2];
-                      }
-                      return line;
-                  });
-  return newLines.join('\n');
-  
-}
 
 // Add dragging funcionality
 
