@@ -5064,6 +5064,7 @@ a:hover {
 }
 .content .wrapper.result-wrapper .result {
   border: none;
+  border-left: 1px solid #e8e8e8;
   transition: background-color 0.5s;
   position: absolute;
 }
@@ -5258,6 +5259,10 @@ a:hover {
   background-color: #272822;
   color: #bfbfbf;
   transition: 0.5s all ease;
+}
+.dark .content .wrapper.result-wrapper .result {
+  border: none;
+  border-left: 1px solid #4d4d4d;
 }
 @media (max-width: 768px) {
   .content .code-wrapper {
