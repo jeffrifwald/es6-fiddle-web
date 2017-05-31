@@ -16,7 +16,7 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
   </head>
   <body>
     <div class="header">
-      <% include components/navbar.ejs %>
+      <% include ../components/navbar.ejs %>
       <nav>
         <span><a href="https://github.com/esfiddle/esfiddle" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></span>
       </nav>
@@ -24,12 +24,12 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
 
   <div class="profile">
     <% if (typeof user === 'undefined') { %>
-        <% include components/profileNotFound.ejs %>
+        <% include notFound.ejs %>
     <% } else if (publicProfile) { %>
-        <% include components/profilePublic.ejs %>
-    <% } else if (authenticatedProfile) { %><!-- @end else -->
-        <% include components/profileAuth.ejs %>
-    <% } %><!-- @end else -->
+        <% include public.ejs %>
+    <% } else if (authenticatedProfile) { %>
+        <% include authenticated.ejs %>
+    <% } %>
   </div><!-- @end #w -->
 </body>
 <script async src="../src/authenticated.js"></script>
