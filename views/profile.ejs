@@ -23,32 +23,13 @@ With ESFiddle you can sample ES6 (ECMAScript 2015) and ES7 (ECMAScript 2016) wit
     </div>
 
   <div class="profile">
-    <!-- @end #content -->
-    <% if (typeof _id !== 'undefined') { %>
-      <div class="content" class="clearfix">
-        <h3> Oops! I could not find the user <i><%= _id %></i> that you are looking for :(  </h3>
-      </div><!-- @end #content -->
-    <% } else { %>
-      <div class="content" class="clearfix">
-        <div class="userphoto"><img src= "<%= user.avatar_url %>" alt="default avatar"></div>
-        <div class="user-details">
-          <h1><%= user.name %></h1>
-          <section class="bio">
-            @<%= user.login %>
-          </section>
-
-          <section class="activity recent">
-            <h3>Most recent fiddles:</h3>
-            <ul>
-              <% for(var i=0; i<fiddles.length; i++) { %>
-                      <li><a href='/<%= fiddles[i].fiddle %>'> <%= fiddles[i].fiddle %></a></li>
-              <% } %>
-            </ul>
-          </section>
-      </div>
-      </div><!-- @end #content -->
+    <% if (typeof user === 'undefined') { %>
+        <% include components/profileNotFound.ejs %>
+    <% } else if (publicProfile) { %>
+        <% include components/profilePublic.ejs %>
+    <% } else if (authenticatedProfile) { %><!-- @end else -->
+        <% include components/profileAuth.ejs %>
     <% } %><!-- @end else -->
-
   </div><!-- @end #w -->
 </body>
 <script async src="../src/authenticated.js"></script>

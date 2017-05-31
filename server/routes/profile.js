@@ -16,7 +16,8 @@ module.exports = app => {
                     }).then( fiddles => {
                         res.render('profile', {
                             user: user, fiddles: fiddles,
-                            message: req.flash()
+                            message: req.flash(), publicProfile: true,
+                            authenticatedProfile: false,
                         });
                     })
                 } else {
