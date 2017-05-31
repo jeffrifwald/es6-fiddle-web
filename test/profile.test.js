@@ -3,7 +3,7 @@ var request = require('supertest'),
     app = require('./../server/app').app,
     { testUser, testFiddle } = require('./seedData');
 
-describe.only('GET /profile/:_id returns a user and fiddles', function () {
+describe('GET /profile/:_id returns a user and fiddles', function () {
     var agent = request.agent(app);
     it('should get correct user and fiddles from DB', (done) => {
         agent.get('/profile/' + testUser.user1._id)
@@ -14,7 +14,7 @@ describe.only('GET /profile/:_id returns a user and fiddles', function () {
             });
     });
 
-    it('should return 404 for a bad _id param', (done) => {
+    it('should return 404 for a false _id param', (done) => {
         agent.get('/profile/' + + parseInt(Date.now(), 10).toString(36))
             .expect(404)
             .end(function(err, res){
