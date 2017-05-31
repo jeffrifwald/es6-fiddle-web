@@ -1,8 +1,10 @@
 <section class="activity recent">
-  <h3>Most recent fiddles:</h3>
+  <h3>Starred fiddles:</h3>
   <ul>
     <% for(var i=0; i<fiddles.length; i++) { %>
-            <li><a href='/<%= fiddles[i].fiddle %>'> <%= fiddles[i].fiddle %></a></li>
+      <% if (fiddles[i].starCounter > 0) { %>
+        <li><a href='/<%= fiddles[i].fiddle %>'> <%= fiddles[i].fiddle %></a></li>
+      <% } %>
     <% } %>
   </ul>
 </section>
