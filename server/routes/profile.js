@@ -21,7 +21,7 @@ module.exports = app => {
                         });
                     })
                 } else {
-                    res.render('profile', {
+                    res.status(404).render('profile', {
                         _id: _id,
                     });
                 }
