@@ -134,5 +134,5 @@
     grunt.registerTask('default', ['githooks', 'watch']);
     grunt.registerTask('test', ['lesslint', 'eslint']);
     grunt.registerTask('build', ['less', 'browserify', 'uglify', 'imagemin', 'inline']);
-    grunt.registerTask('dev', ['express:dev', 'browserSync', 'watch']);
+    grunt.registerTask('dev', ['less', 'express:dev', 'browserSync', 'watch']);
   };

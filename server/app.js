@@ -25,6 +25,7 @@ const poet = Poet(app, {
 
 const routeStatic = require('./routes/static')
 const routeIndex = require('./routes/index')
+const routeProfile = require('./routes/profile')
 const routeAuth = require('./routes/auth')
 
 app.use(compression());
@@ -48,6 +49,7 @@ app.set('views', `${path.resolve("./")}/views`);
 app.set('view engine', 'ejs');
 
 routeAuth(app);
+routeProfile(app);
 routeStatic(app);
 routeIndex(app);
 api(app);
