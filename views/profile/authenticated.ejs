@@ -5,10 +5,10 @@
         <section class="bio">
           @<%= user.login %>
         </section>
-        <% include starredFiddles %>
+        <!--<% include starredFiddles %>-->
         <% include recentFiddles %>
         <% if (startedFiddles.length > 0) { %>
-          <% include startedFiddles %>
+          <% include starredFiddles %>
         <% } %>
     </div>
     </div><!-- @end #content -->
