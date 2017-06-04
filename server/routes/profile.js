@@ -27,9 +27,7 @@ module.exports = (app) => {
                 user,
                 fiddles,
                 startedFiddles: pubStarFiddles.map(fiddle => fiddle.fiddle),
-                message: req.flash(),
-                publicProfile: true,
-                authenticatedProfile: false,
+                message: req.flash()
               });
             });
           });
