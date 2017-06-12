@@ -149,6 +149,29 @@ body * {
 .header nav a:hover {
   color: #686868;
 }
+footer {
+  width: 100%;
+  background: #A8D5BE;
+  color: #353535;
+  font-size: 12px;
+  display: flex;
+  padding: 10px;
+  box-sizing: border-box;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #86c4a4;
+}
+footer a {
+  color: #353535;
+}
+footer .nav-header {
+  font-weight: bold;
+}
+footer ul {
+  margin: 0;
+  padding-left: 10px;
+  list-style: none;
+}
 .blog {
   width: 70%;
   padding-top: 60px;
@@ -222,27 +245,4 @@ body * {
 }
 .blog .pagination ul li a {
   color: #353535;
-}
-footer {
-  width: 100%;
-  background: #A8D5BE;
-  color: #353535;
-  font-size: 12px;
-  display: flex;
-  padding: 10px;
-  box-sizing: border-box;
-  justify-content: space-around;
-  align-items: center;
-  border-top: 1px solid #86c4a4;
-}
-footer a {
-  color: #353535;
-}
-footer .nav-header {
-  font-weight: bold;
-}
-footer ul {
-  margin: 0;
-  padding-left: 10px;
-  list-style: none;
 }
