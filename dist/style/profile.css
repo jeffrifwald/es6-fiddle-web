@@ -150,62 +150,49 @@ body * {
   color: #686868;
 }
 .profile {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
   background: #fdfdfd;
 }
 .profile .content {
   width: 800px;
-  max-width: 100%;
-  background: #fff;
-  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
-  height: 460px;
+  margin: 108px auto;
+  max-width: 90%;
 }
-.profile .content .userphoto {
-  width: 50%;
-  transform: scale(1.05);
-  overflow: hidden;
-  float: left;
-  position: relative;
-  height: 100%;
-  border-radius: 4px;
+.profile .content .profile__bio {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 81px;
 }
-.profile .content .userphoto img {
+.profile .content .profile__bio .profile__img {
+  border-radius: 50%;
+  border: 1px solid #284B63;
+  margin-right: 50px;
+  width: 25%;
+  height: 25%;
+  min-width: 120px;
   display: block;
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
   filter: grayscale(20%);
   transition: 200ms all ease;
 }
-.profile .content .userphoto img:hover {
-  filter: grayscale(0%);
+.profile .content .profile__bio .profile__img:hover {
+  filter: grayscale(5%);
 }
-.profile .content .user-details {
-  float: left;
+.profile .content .profile__bio .profile__details {
+  flex-grow: 1;
+  height: auto;
+  transform: translateY(15%);
+}
+.profile .content .profile__bio .profile__details h3 {
+  margin: 0;
+}
+.profile .content .main {
+  display: flex;
+  justify-content: space-between;
+}
+.profile .content .main .activity {
   width: 50%;
-  padding-left: 30px;
-  padding-top: 50px;
-  overflow: scroll;
-  height: 460px;
 }
-.profile .content .user-details h3 {
-  margin-bottom: 5px;
-}
-.profile .content .user-details .recent {
-  margin-top: 40px;
-}
-.profile .content .user-details ul {
+.profile .content .main .activity ul {
   list-style: none;
-}
-.profile .content .user-details h1,
-.profile .content .user-details .bio {
-  text-align: center;
-  margin-bottom: 5px;
-}
-.profile .content .user-details .bio {
-  font-weight: bold;
-  font-size: 14px;
+  padding-left: 0;
 }

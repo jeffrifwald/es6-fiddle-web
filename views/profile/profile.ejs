@@ -1,13 +1,22 @@
 
 <div class="content" class="clearfix">
-        <div class="userphoto"><img src= "<%= user.avatar_url %>" alt="default avatar"></div>
-        <div class="user-details">
-          <h1><%= user.name %></h1>
-          <section class="bio">
-            @<%= user.login %>
-          </section>
+  <header class="profile__bio">
+    <img src="<%= user.avatar_url %>" alt="ESFiddle Avatar" class="profile__img">
 
-          <% include recentFiddles %>
-          <% include starredFiddles %>
-        </div>
-      </div><!-- @end #content -->
+    <div class="profile__details">
+      <h1><%= user.name %></h1>
+      <h3><%= user.login %></h3>
+      <h3><a href='/<%= user.html_url %>'>github.com/<%= user.login %></a></h3>
+      <h3><%= user.bio %></h3>
+      <% if( user.totalFiddles ){ %>
+        <h3><%= user.totalFiddles %> Fiddles</h3>
+        <% } else {%>
+        <h3>0 Fiddles</h3>
+      <% } %>
+    </div>
+  </header>
+  <div class="main">
+    <% include recentFiddles %>
+    <% include starredFiddles %>
+  </div>
+</div><!-- @end #content -->

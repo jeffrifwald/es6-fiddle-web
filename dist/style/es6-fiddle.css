@@ -463,3 +463,17 @@ a:hover {
     overflow-x: scroll;
   }
 }
+@media (max-width: 480px) {
+  .profile__img {
+    margin-right: 30px;
+  }
+  .profile__details {
+    transform: translateY(5%);
+  }
+  .main {
+    display: block;
+  }
+  .main .activity {
+    width: 100%;
+  }
+}
