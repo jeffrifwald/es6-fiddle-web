@@ -5,53 +5,51 @@
     width: 800px;
     margin: 108px auto;
     max-width: 90%;
+  }
+}
 
-    .profile__bio {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 81px;
+.profile__bio {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 81px;
 
-      .profile__img {
-        border-radius: 50%;
-        border: 1px solid @blue-dark;
-        margin-right: 50px;
-        width: 25%;
-        height: 25%;
-        min-width: 120px;
-        display: block;
-        position: relative;
-        filter: grayscale(20%);
-        .transition(all, 200ms);
+  .profile__img {
+    border-radius: 50%;
+    border: 1px solid @blue-dark;
+    margin-right: 50px;
+    width: 25%;
+    height: 25%;
+    min-width: 150px;
+    display: block;
+    position: relative;
+    filter: grayscale(20%);
+    .transition(all, 200ms);
 
-        &:hover {
-          filter: grayscale(5%);
-        }
-      }
-
-      .profile__details {
-        flex-grow: 1;
-        height: auto;
-        transform: translateY(15%);
-        h3 {
-          margin: 0;
-        }
-      }
+    &:hover {
+      filter: grayscale(5%);
     }
+  }
 
-    .main {
-      display: flex;
-      justify-content: space-between;
-
-      .activity {
-        width: 50%;
-
-        ul {
-          list-style: none;
-          padding-left: 0;
-        }
-      }
+  .profile__details {
+    flex-grow: 1;
+    height: auto;
+    transform: translateY(1%);
+    h3 {
+      margin: 0;
     }
+  }
+}
 
+.main {
+  display: flex;
+  justify-content: space-between;
 
+  .activity {
+    width: 50%;
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
   }
 }
