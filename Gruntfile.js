@@ -108,6 +108,7 @@
             'box-model': false,
             'unique-headings': false,
           },
+          failOnWarning: false,
         },
         target: ['style/main.less'],
       },
