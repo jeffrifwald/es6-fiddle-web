@@ -28,6 +28,9 @@ mv sample.env .env
 # Open a new terminal window and start MongoDB
 mongod --dbpath path/to/your/db/folder
 
+# Install the dependencies 
+npm i
+
 # Start the application
 npm start
 ```
