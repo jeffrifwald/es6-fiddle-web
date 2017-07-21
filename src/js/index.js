@@ -282,7 +282,7 @@ babel.onload = () => {
       localStorage.setItem('theme', theme);
     };
 
-            // load the selected code
+    // load the selected code
     window.exampleSelector.onchange = () => {
       if (window.exampleSelector.value) {
         let code = 'Example Can Not Be Found';
