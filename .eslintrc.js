@@ -4,7 +4,8 @@ module.exports = {
         "import"
     ],
     "rules": {
-      "one-var": 0
+      "one-var": 0,
+      "no-underscore-dangle": "off",
     },
     "globals": {
       "document": 1,
