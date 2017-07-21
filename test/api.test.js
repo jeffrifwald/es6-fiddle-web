@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+
 const request = require('supertest');
 const { expect } = require('chai');
 const { app } = require('./../server/app');
@@ -79,9 +81,9 @@ describe('POST /save Authorized', () => {
       .end((err, res) => {
         if (err) { return done(err); }
 
-        Fiddles.findOne({ fiddle: newFiddle.fiddle }, (err, item) => {
-          if (err) {
-            return done(err);
+        return Fiddles.findOne({ fiddle: newFiddle.fiddle }, (findErr, item) => {
+          if (findErr) {
+            return done(findErr);
           }
 
           expect(item.fiddle).to.equal(res.body.fiddle);
@@ -107,9 +109,9 @@ describe('POST /save Authorized', () => {
       .end((err, res) => {
         if (err) { return done(err); }
 
-        Fiddles.findOne({ fiddle: res.body.fiddle }, (err, item) => {
-          if (err) {
-            return done(err);
+        return Fiddles.findOne({ fiddle: res.body.fiddle }, (findErr, item) => {
+          if (findErr) {
+            return done(findErr);
           }
 
           expect(item.fiddle).to.not.equal(newFiddle.fiddle);
@@ -120,7 +122,7 @@ describe('POST /save Authorized', () => {
       });
   });
 
-  it('should create new fiddle if existing fiddle doen\'t have userID property.', done => {
+  it('should create new fiddle if existing fiddle doen\'t have userID property.', (done) => {
     const newFiddle = {
       fiddle: testFiddle.fiddleGuest.fiddle,
       value: 'console.log("updating existing fiddle")',
@@ -163,7 +165,7 @@ describe('POST /save Authorized', () => {
       .end((err, res) => {
         if (err) { return done(err); }
 
-        Fiddles.findOne({ fiddle: res.body.fiddle }, (findErr, item) => {
+        return Fiddles.findOne({ fiddle: res.body.fiddle }, (findErr, item) => {
           if (findErr) {
             return done(findErr);
           }
@@ -181,7 +183,7 @@ describe('GET /fiddles/fiddle', () => {
   it('should get correct fiddle from DB', (done) => {
     request(app).get(`/fiddles/${testFiddle.fiddleGuest.fiddle}`)
       .expect(200)
-      .expect(res => {
+      .expect((res) => {
         expect(res.body).to.not.null;
         expect(res.body.fiddle).to.equal(testFiddle.fiddleGuest.fiddle);
         expect(res.body.value).to.equal(testFiddle.fiddleGuest.value);
@@ -197,7 +199,6 @@ describe('GET /fiddles/fiddle', () => {
         expect(res.body.fiddle).to.not.exist;
         expect(res.body.value).to.not.exist;
         expect(res.body.message).to.exist;
-
       })
       .end(done);
   });
@@ -227,7 +228,7 @@ describe('POST /star/:fiddle', () => {
       .end((err) => {
         if (err) { return done(err); }
 
-        Fiddles.findOne({ fiddle: testFiddle.fiddleU1.fiddle })
+        return Fiddles.findOne({ fiddle: testFiddle.fiddleU1.fiddle })
           .then((fiddle) => {
             expect(fiddle.starCounter).to.equal(1);
             return done();
@@ -301,7 +302,8 @@ describe('POST /private/:fiddleID', () => {
       })
       .end((err) => {
         if (err) { return done(err); }
-        Fiddles.findOne({ fiddle: testFiddle.fiddleU1.fiddle })
+
+        return Fiddles.findOne({ fiddle: testFiddle.fiddleU1.fiddle })
           .then((fiddle) => {
             expect(fiddle.isPrivate).to.true;
             return done();
