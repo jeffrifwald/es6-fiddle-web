@@ -17,6 +17,7 @@ module.exports = {
       "JSHINT": 1,
       "Headers": 1,
       "describe": 1,
-      "it": 1
+      "it": 1,
+      "beforeEach": 1,
     }
 };
