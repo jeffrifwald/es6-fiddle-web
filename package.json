@@ -72,10 +72,14 @@
     "supertest": "^3.0.0"
   },
   "scripts": {
-    "test": "grunt test && npm run test-node",
+    "test": "grunt test && npm run lint-server && npm run test-node",
+    "lint-server": "./node_modules/eslint/bin/eslint.js server/** test/**",
     "test-node": "mocha test/*.test.js",
     "prestart": "",
     "start": "grunt dev",
     "build": "grunt build"
+  },
+  "engines": {
+    "node": "^6.11.1 || ^7.10.1 || >=8.1.4"
   }
 }
