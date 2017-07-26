@@ -76,6 +76,7 @@
     "lint-server": "./node_modules/eslint/bin/eslint.js server/** test/**",
     "test-node": "mocha test/*.test.js",
     "prestart": "",
+    "postinstall": "grunt build",
     "start": "grunt dev",
     "build": "grunt build"
   },
