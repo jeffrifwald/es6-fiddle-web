@@ -55,17 +55,17 @@
     "grunt-jscs": "^3.0.1",
     "grunt-lesslint": "^3.2.0",
     "grunt-rollup": "^1.0.1",
-    "load-grunt-tasks": "^3.5.2"
+    "load-grunt-tasks": "^3.5.2",
+    "eslint": "^3.13.1",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "codecov": "1.0.1",
     "cross-env": "3.1.4",
-    "eslint": "^3.13.1",
-    "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.0",
     "factor-bundle": "^2.5.0",
     "istanbul": "0.4.5",
     "mocha": "^3.2.0",

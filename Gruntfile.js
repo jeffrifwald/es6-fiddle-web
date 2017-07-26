@@ -77,7 +77,8 @@
         dynamic: {
           files: [{
             expand: true,
-            src: ['**/*.{png,jpg,gif}'],
+            src: ['images/*.{png,jpg,gif}'],
+            dest: 'dist/'
           }],
         },
       },
