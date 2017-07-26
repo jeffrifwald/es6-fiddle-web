@@ -28,7 +28,7 @@ describe('GET /images/*', () => {
   });
 });
 
-describe('GET /lib/babel/babel.min.js', () => {
+/* describe('GET /lib/babel/babel.min.js', () => {
   it('Should return max-age=2628000 for babel.min.js', (done) => {
     request(app)
       .get('/lib/babel/babel.min.js')
@@ -38,4 +38,4 @@ describe('GET /lib/babel/babel.min.js', () => {
       })
       .end(done);
   });
-});
+}); */
