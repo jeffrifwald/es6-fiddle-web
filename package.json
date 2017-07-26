@@ -43,7 +43,8 @@
     "grunt-browserify": "^5.0.0",
     "grunt-contrib-imagemin": "^1.0.1",
     "grunt-contrib-less": "^1.4.0",
-    "grunt-contrib-uglify": "^2.0.0"
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-cli": "^1.2.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -58,7 +59,6 @@
     "grunt-assets-inline": "0.1.19",
     "grunt-babel": "6.0.0",
     "grunt-browser-sync": "2.2.0",
-    "grunt-cli": "^1.2.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-eslint": "^19.0.0",
     "grunt-express-server": "0.5.3",
