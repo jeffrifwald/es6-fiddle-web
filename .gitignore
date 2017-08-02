@@ -6,3 +6,5 @@ npm-debug.log
 .idea/*
 coverage
 /.gitattributes
+dist/
+!dist/lib/
