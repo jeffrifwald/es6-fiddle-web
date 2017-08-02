@@ -308,5 +308,5 @@ fiddleWrapper.addEventListener('click', function init() {
 }, false);
 
 // add babel to the iframe
-babel.src = '//cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js';
+babel.src = '/lib/babel/babel.min.js';
 iHead.appendChild(babel);
