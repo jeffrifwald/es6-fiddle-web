@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 <div class="content clearfix">
   <header class="profile__bio">
     <img src="<%= user.avatar_url %>" alt="ESFiddle Avatar" class="profile__img">
@@ -10,6 +11,16 @@
     </div>
   </header>
   <div class="main">
+=======
+<div class="content" class="clearfix">
+  <div class="userphoto"><img src= "<%= user.avatar_url %>" alt="default avatar"></div>
+  <div class="user-details">
+    <h1><%= user.name %></h1>
+    <section class="bio">
+      @<%= user.login %>
+    </section>
+
+>>>>>>> develop
     <% include recentFiddles %>
     <% include starredFiddles %>
   </div>

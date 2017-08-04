@@ -42,7 +42,6 @@
         compile: {
           files: {
             'dist/src/authenticated.js': ['src/js/authenticated.js'],
-            'dist/lib/babel/babel.min.js': ['dist/lib/babel/*.js', '!dist/lib/babel/babel.min.js'],
           },
         },
       },
@@ -77,7 +76,8 @@
         dynamic: {
           files: [{
             expand: true,
-            src: ['**/*.{png,jpg,gif}'],
+            src: ['images/*.{png,jpg,gif}'],
+            dest: 'dist/'
           }],
         },
       },
@@ -108,6 +108,7 @@
             'box-model': false,
             'unique-headings': false,
           },
+          failOnWarning: false,
         },
         target: ['style/main.less'],
       },

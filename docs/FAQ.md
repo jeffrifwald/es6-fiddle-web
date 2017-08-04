@@ -1,5 +1,4 @@
 # Frequently Asked Questions
-===
 
 ## What does ES in ESFiddle stand for?
 It stands for ECMAScript - the language on which Javascript is based off of. When the TC39 (Technical Committee 39) ,who manage what goes into the language of ECMAScript, introduce a new feature to the language, it is the job of the browser makers to implement it. Because this takes time and can vary across browsers we created ESFiddle to try out these new features before they are implemented in the browser.
@@ -30,3 +29,8 @@ Let's first make sure you have MongoDB set up on your machine locally or somewhe
 Now, this is probably just a little thing: a failed connection to the database. In order to fix this, you need to point MongoDB in the direction where your database is. Usually, you'd do this by launching `mongod --dbpath path/to/your/db/folder`. For example, for a Mac machine with MongoDB installed via Homebrew, this command would look like this: `mongod --dbpath /usr/local/var/mongodb`. 
 
 Using MongoDB locally is not a requirement. If you have experience with hosted databases such as MLab, for example, by all means feel free to use your `mongodb://` URL as your path to the database. For your convenience, there's a sample.env file with this variable ready for your custom URL. NB: Don't forget to rename `sample.env` file to just `.env`
+
+ - ### My Mongo url is 'undefined:27017' and fails to start the server
+![errorImage](https://user-images.githubusercontent.com/16874651/27354460-134cf2a2-5621-11e7-8b97-c9e5f826656e.png)
+
+This can be fixed by ensuring that your `.env` is configured correctly. Please take a look at the `sample.env`, make a copy, change any details and rename it to `.env`. Making sure there is a file called `.env` or the server will not be able to find your enviroment variables.
