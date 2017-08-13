@@ -209,6 +209,17 @@ describe('GET /fiddles/fiddle', function () {
     });
 });
 
+describe('POST /gist/:fiddle unauthorized', function () {
+    it('should return 401 for unauthorized user', done => {
+        request(app).post('/gist/' + testFiddle.fiddleU1.fiddle)
+        .expect(401)
+        .end((err) => {
+            if (err) { return done(err); }
+             done();
+         });
+    });
+});
+
 
 describe('POST /star/:fiddle', function () {
     var agent = request.agent(app);
@@ -347,7 +358,7 @@ describe('POST /private/:fiddleID', function () {
 
     // TEST FOR GET /fiddles/ API for private fiddles........
     describe('GET /fiddles/fiddle for private fiddle', function () {
-        
+
         it('should get private fiddle for logged in user.', (done) => {
             agent.get('/fiddles/' + testFiddle.fiddleU1.fiddle)
                 .expect(200)
@@ -356,7 +367,7 @@ describe('POST /private/:fiddleID', function () {
                 })
                 .end(done);
         });
-        
+
         it('should return 401 if user is not logged in and fiddle is private', (done) => {
             request(app).get('/fiddles/' + testFiddle.fiddleU1.fiddle)
                 .expect(401)
