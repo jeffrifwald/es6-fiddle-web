@@ -147,7 +147,7 @@ module.exports = (app) => {
     const code = req.body.value;
     const content = `${header}\n\n${code}`;
 
-    Fiddles.findOne({ fiddle: fiddleID })
+    return Fiddles.findOne({ fiddle: fiddleID })
     .then((fiddle) => {
       const data = {
         description: 'ESFiddle Generated Gist',
@@ -159,7 +159,8 @@ module.exports = (app) => {
         },
       };
       if (!fiddle) {
-        throw (`fiddle: ${fiddleID} Not Found !`);
+        const err = new Error(`fiddle: ${fiddleID} Not Found !`);
+        throw err;
       } else {
         fetch(`https://api.github.com/gists?access_token=${token}`, { method: 'POST', body: JSON.stringify(data) })
           .then(gist => gist.json())

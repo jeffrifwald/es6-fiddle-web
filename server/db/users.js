@@ -24,12 +24,12 @@ usersSchema.statics.findOrCreate = function (profile, accessToken) {
   return Users.findOne({ githubId: profile.id }).then((user) => {
     if (user) {
       // Updating accessToken is necessary for exportAsGist
-      if(user.accessToken !== accessToken){
-          user.accessToken = accessToken;
-          return user.save();
-          } else {
-              return Promise.resolve(user);
-          }
+      if (user.accessToken !== accessToken) {
+        const updatedUser = user;
+        updatedUser.accessToken = accessToken;
+        return updatedUser.save();
+      }
+      return Promise.resolve(user);
     }
 
     const NewUser = new Users({

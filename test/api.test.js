@@ -230,8 +230,8 @@ describe('POST /star/:fiddle', () => {
 
           return Fiddles.findOne({ fiddle: testFiddle.fiddleU1.fiddle })
               .then((fiddle) => {
-              expect(fiddle.starCounter).to.equal(1);
-              return done();
+                expect(fiddle.starCounter).to.equal(1);
+                return done();
               })
               .catch(e => done(e));
         });
@@ -282,7 +282,7 @@ describe('POST /gist/:fiddle unauthorized', () => {
         .expect(401)
         .end((err) => {
           if (err) { return done(err); }
-          done();
+          return done();
         });
   });
 });
@@ -396,35 +396,36 @@ describe('POST /private/:fiddleID', () => {
     });
 
         // TEST FOR GET /fiddles/ API for private fiddles........
-    describe('GET /fiddles/fiddle for private fiddle', function() {
-
+    describe('GET /fiddles/fiddle for private fiddle', () => {
       it('should get private fiddle for logged in user.', (done) => {
-        agent.get('/fiddles/' + testFiddle.fiddleU1.fiddle)
+        agent.get(`/fiddles/${testFiddle.fiddleU1.fiddle}`)
             .expect(200)
-            .expect(res => {
+            .expect((res) => {
               expect(res.body.fiddle).to.equal(testFiddle.fiddleU1.fiddle);
             })
             .end(done);
-        });
+      });
 
       it('should return 401 if user is not logged in and fiddle is private', (done) => {
-        request(app).get('/fiddles/' + testFiddle.fiddleU1.fiddle)
+        request(app).get(`/fiddles/${testFiddle.fiddleU1.fiddle}`)
               .expect(401)
               .end((err) => {
                 if (err) { return done(err); }
-                done();
+                return done();
               });
       });
 
       it('should return 400 if logged in user trying to access other user\'s private fiddle', (done) => {
         // Making fiddle for user2 private for testing if user1 can access it !
-        Fiddles.findOneAndUpdate({ fiddle: testFiddle.fiddleU2.fiddle }, { isPrivate: true }, { new: true })
+        Fiddles.findOneAndUpdate({ fiddle: testFiddle.fiddleU2.fiddle },
+          { isPrivate: true },
+          { new: true })
             .then(() => {
-              agent.get('/fiddles/' + testFiddle.fiddleU2.fiddle)
+              agent.get(`/fiddles/${testFiddle.fiddleU2.fiddle}`)
                     .expect(400)
                     .end((err) => {
                       if (err) { return done(err); }
-                      done();
+                      return done();
                     });
             });
       });
