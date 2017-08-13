@@ -19,5 +19,9 @@ module.exports = {
       "describe": 1,
       "it": 1,
       "beforeEach": 1,
+      "before"     : 1,
+      "after"      : 1,
+      "afterEach"  : 1,
+      "clearTestDB": 1,
     }
 };
