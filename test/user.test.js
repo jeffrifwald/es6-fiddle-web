@@ -30,7 +30,7 @@ afterEach((done) => {
 });
 
 
-describe.only('Database Tests', () => {
+describe('Database Tests', () => {
   let testUser;
 
   beforeEach(() => {
