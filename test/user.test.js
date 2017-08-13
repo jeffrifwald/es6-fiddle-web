@@ -4,33 +4,32 @@ const { expect } = require('chai'),
 
 const MONGODB_URI_TEST = 'mongodb://localhost:27017/Fiddles_Test';
 
-beforeEach((done) => {
-  function clearDB() {
-    for (let i = 0; i < mongoose.connection.collections.length; i += 1) {
-      mongoose.connection.collections[i].remove(() => {});
-    }
-    return done();
-  }
-
-  if (mongoose.connection.readyState === 0) {
-    return mongoose.connect(MONGODB_URI_TEST, (err) => {
-      if (err) {
-        throw err;
-      }
-      return clearDB();
-    });
-  }
-
-  return clearDB();
-});
-
-afterEach((done) => {
-  mongoose.disconnect();
-  return done();
-});
-
-
 describe('Database Tests', () => {
+  beforeEach((done) => {
+    function clearDB() {
+      for (let i = 0; i < mongoose.connection.collections.length; i += 1) {
+        mongoose.connection.collections[i].remove(() => {});
+      }
+      return done();
+    }
+
+    if (mongoose.connection.readyState === 0) {
+      return mongoose.connect(MONGODB_URI_TEST, (err) => {
+        if (err) {
+          throw err;
+        }
+        return clearDB();
+      });
+    }
+
+    return clearDB();
+  });
+
+  afterEach((done) => {
+    mongoose.disconnect();
+    return done();
+  });
+
   let testUser;
 
   beforeEach(() => {
