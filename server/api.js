@@ -11,7 +11,7 @@ module.exports = (app) => {
       Fiddles.findOne({ fiddle }, (err, item) => {
         if (!item) {
           return res.status(404).json({
-            message: `/* Oops! I got 404, 
+            message: `/* Oops! I got 404,
             * but not the fiddle '${fiddle}' you are looking for :(
             */
             `,
@@ -143,25 +143,23 @@ module.exports = (app) => {
 
     const fiddleID = req.params.fiddleID;
     const token = req.user.accessToken;
-    const header = `/**\n  Exported from ESFiddle.net\n  Check it out here https://esfiddle.net/${fiddleID}\n**/`;
-    const code = req.body.value;
-    const content = `${header}\n\n${code}`;
 
     return Fiddles.findOne({ fiddle: fiddleID })
     .then((fiddle) => {
-      const data = {
-        description: 'ESFiddle Generated Gist',
-        public: !fiddle.isPrivate,
-        files: {
-          'fiddle.js': {
-            content,
-          },
-        },
-      };
       if (!fiddle) {
         const err = new Error(`fiddle: ${fiddleID} Not Found !`);
         throw err;
       } else {
+        const data = {
+          description: 'ESFiddle Generated Gist',
+          public: !fiddle.isPrivate,
+          files: {
+            'fiddle.js': {
+              content: `/**\n  Exported from ESFiddle.net\n  Check it out here https://esfiddle.net/${fiddleID}\n**/\n\n${req.body.value}`,
+            },
+          },
+        };
+
         fetch(`https://api.github.com/gists?access_token=${token}`, { method: 'POST', body: JSON.stringify(data) })
           .then(gist => gist.json())
           .then(json => res.json(json));

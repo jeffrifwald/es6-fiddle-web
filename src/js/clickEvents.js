@@ -65,7 +65,10 @@ const clickEvents = {
         }),
       })
       .then(resp => resp.json())
-      .then(() => {
+      .then((data) => {
+        if (data.message) {
+          throw new Error(data.message);
+        }
         snackbar.showSnackbar('Gist created! View at https://gists.github.com');
       })
       .catch((err) => {
