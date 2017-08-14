@@ -25,7 +25,6 @@ module.exports = (app) => {
       res.redirect('/github/myProfile');
     });
 
-
   app.get('/github/login', (req, res) => {
     res.render('login');
   });
@@ -38,7 +37,6 @@ module.exports = (app) => {
           fiddles,
           startedFiddles: req.user.startedFiddles,
           message: req.flash(),
-
         });
       })
       .catch(e => res.status(400).send(e));

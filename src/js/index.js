@@ -238,8 +238,8 @@ babel.onload = () => {
     };
     // export to Github gist
     $.getElement('.gist').onclick = () => clickEvents.exportAsGist(fiddle);
+    
       // save the code
-
     document.querySelector('.save').onclick = () => clickEvents.saveBtn(fiddle);
 
     // star the code
