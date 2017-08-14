@@ -11,7 +11,7 @@ module.exports = (app) => {
       Fiddles.findOne({ fiddle }, (err, item) => {
         if (!item) {
           return res.status(404).json({
-            message: `/* Oops! I got 404,
+            message: `/* Oops! I got 404, 
             * but not the fiddle '${fiddle}' you are looking for :(
             */
             `,
