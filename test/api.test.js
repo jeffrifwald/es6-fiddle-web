@@ -199,6 +199,7 @@ describe('GET /fiddles/fiddle', () => {
         expect(res.body.fiddle).to.not.exist;
         expect(res.body.value).to.not.exist;
         expect(res.body.message).to.exist;
+        expect(res.body.message).to.include('Oops! I got 404');
       })
       .end(done);
   });
@@ -401,6 +402,9 @@ describe('POST /private/:fiddleID', () => {
     it('should return 401 if user is not logged in and fiddle is private', (done) => {
       request(app).get(`/fiddles/${testFiddle.fiddleU1.fiddle}`)
             .expect(401)
+            .expect((res) => {
+              expect(res.body.message).to.equal('This is a private fiddle please login.');
+            })
             .end((err) => {
               if (err) { return done(err); }
               return done();
@@ -414,6 +418,9 @@ describe('POST /private/:fiddleID', () => {
           .then(() => {
             agent.get(`/fiddles/${newFiddle}`)
                   .expect(400)
+                  .expect((res) => {
+                    expect(res.body.message).to.equal('This is a private fiddle!.');
+                  })
                   .end((err) => {
                     if (err) { return done(err); }
                     return done();
