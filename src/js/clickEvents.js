@@ -66,10 +66,10 @@ const clickEvents = {
       })
       .then(resp => resp.json())
       .then((data) => {
-        if (data.message) {
-          snackbar.showSnackbar(data.message);
-        }
         snackbar.showSnackbar('Gist created! View at https://gists.github.com');
+      })
+      .catch((err) => {
+        snackbar.showSnackbar(err.message);
       });
     } else {
       snackbar.showSnackbar('You don\'t appear to have any code or its not saved.');
