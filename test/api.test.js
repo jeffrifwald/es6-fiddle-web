@@ -277,6 +277,23 @@ describe('GET /authenticated', () => {
 });
 
 describe('POST /gist/:fiddle unauthorized', () => {
+  const agent = request.agent(app);
+
+  beforeEach((done) => {
+    passportMock(app, {
+      passAuthentication: true,
+      userId: testUser.user1._id,
+    });
+    agent.get('/mock/login')
+      .end((err) => {
+        if (err) {
+          return done(err);
+        }
+
+        return done();
+      });
+  });
+
   it('should return 401 for unauthorized user', (done) => {
     request(app).post(`/gist/${testFiddle.fiddleU1.fiddle}`)
         .expect(401)
@@ -284,6 +301,15 @@ describe('POST /gist/:fiddle unauthorized', () => {
           if (err) { return done(err); }
           return done();
         });
+  });
+
+  it('Should return 400 unknown fiddle', (done) => {
+    agent.post(`/gist/${parseInt(Date.now(), 10).toString(36)}`)
+      .expect(400)
+      .end((err) => {
+        if (err) { return done(err); }
+        return done();
+      });
   });
 });
 
