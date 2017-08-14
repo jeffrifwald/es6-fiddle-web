@@ -65,7 +65,7 @@ const clickEvents = {
         }),
       })
       .then(resp => resp.json())
-      .then((data) => {
+      .then(() => {
         snackbar.showSnackbar('Gist created! View at https://gists.github.com');
       })
       .catch((err) => {
