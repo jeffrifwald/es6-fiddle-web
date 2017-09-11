@@ -5,7 +5,7 @@
         'src/js/**/*.js',
         '!src/js/authenticated.js'
       ],
-      htmlFiles = ['src/views/index.html', 'src/views/about.html']
+      htmlFiles = ['src/views/index.html', 'src/views/about.html', 'src/views/iframe.html'],
       jsFiles = 'src/**/*.js',
       styleFiles = ['dist/lib/**/*.css', 'style/**/*.less'],
       pkg = grunt.file.readJSON('package.json'),
@@ -37,6 +37,14 @@
             transform: [['babelify', { presets: ['es2015'] }]],
           },
         },
+        sandbox: {
+          src: ['src/js/sandbox/iframe.js'],
+          dest: 'dist/src/sandbox/iframe.js',
+          options: {
+            browserifyOptions: { debug: true },
+            transform: [['babelify', { presets: ['es2015'] }]],
+          },
+        }
       },
       uglify: {
         compile: {
@@ -90,6 +98,10 @@
           src: 'src/views/about.html',
           dest: 'dist/about.html',
         },
+        frame: {
+          src: 'src/views/iframe.html',
+          dest: 'dist/iframe.html'
+        }
       },
       eslint: {
         options: {
