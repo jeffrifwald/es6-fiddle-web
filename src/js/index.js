@@ -7,6 +7,7 @@ import layoutFunctions from './layoutFunctions';
 import clickEvents from './clickEvents';
 import drag from './drag';
 import examples from './add-examples';
+import libraries from './add-libraries';
 import $ from './helpers';
 import share from './share';
 import snackbar from './snackbar';
@@ -25,10 +26,12 @@ const codeWrapper = $.getElement('.code-wrapper'),
 
 analytics.start();
 redirectTraffic.register();
-
 window.embedded = embedded;
 window.exampleSelector = $.getElement('.examples');
 examples.addExamples();
+
+window.librariesSelector = $.getElement('.libraries');
+libraries.addLibraries();
 
 // check to see if the share button should be shown
 if (fiddleId && !embedded) {
@@ -258,6 +261,19 @@ if (!embedded) {
       }
 
       fiddle.setValue(code);
+    }
+  };
+
+  // load the selected javascript library
+  window.librariesSelector.onchange = () => {
+    if (window.librariesSelector.value) {
+      const script = $.createElement('script');
+      script.onload = function onScriptLoad() {
+        console.log(`${window.librariesSelector.selectedOptions[0].text} Script loaded`);
+      };
+      script.src = window.librariesSelector.value;
+
+      document.head.appendChild(script);
     }
   };
 } // end not embedded
