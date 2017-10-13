@@ -26,6 +26,7 @@ const codeWrapper = $.getElement('.code-wrapper'),
 
 analytics.start();
 redirectTraffic.register();
+
 window.embedded = embedded;
 window.exampleSelector = $.getElement('.examples');
 examples.addExamples();
