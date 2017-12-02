@@ -195,10 +195,10 @@ if (!embedded) {
 
     frameBridge.send(MESSAGES.RUN_SCRIPT, lints.join('\n'));
   };
-          
+
   // export to Github gist
   $.getElement('.gist').onclick = () => clickEvents.exportAsGist(fiddle);
-        
+
   // save the code
   document.querySelector('.save').onclick = () => clickEvents.saveBtn(fiddle);
 
