@@ -14,7 +14,7 @@ module.exports = (app) => {
     res.send({ logged: req.isAuthenticated() });
   });
 
-  app.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }), (req, res) => res);
+  app.get('/auth/github', passport.authenticate('github', { scope: ['user:email', 'gist'] }), (req, res) => res);
 
   app.get('/auth/github/callback',
     passport.authenticate('github', {
