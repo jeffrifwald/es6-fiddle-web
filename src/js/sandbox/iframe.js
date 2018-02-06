@@ -4,6 +4,7 @@
 
 import MicroEvent from './microevent';
 import MESSAGES from './keys';
+import $ from '../helpers';
 
 const $bus = new MicroEvent();
 
@@ -43,7 +44,11 @@ window.onload = () => window.parent && window.parent.postMessage({ LOADED: true 
 /* global babel */
 $bus.on(MESSAGES.RUN_SCRIPT, (code) => {
   document.body.innerHTML = ''; // reset logs
-  babel.run(`try { ${code} } catch (e) { console.error(e) }`);
+  const transformedOutput = Babel.transform(code, { presets: ['es2015'] }).code;
+  const scriptNode = $.createElement('script');
+  const scriptText = document.createTextNode(`try { ${transformedOutput} } catch (e) { console.error(e) }`);
+  scriptNode.appendChild(scriptText);
+  document.body.appendChild(scriptNode);
 });
 
 // UPDATE_VIEW EVENT
