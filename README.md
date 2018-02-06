@@ -1,6 +1,8 @@
 ESFiddle
 ===
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/esfiddle/esfiddle.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/esfiddle/esfiddle.png?branch=master)](https://travis-ci.org/esfiddle/esfiddle) 
 [![Join the chat at https://gitter.im/esfiddle/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/esfiddle/Lobby)
 [![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
