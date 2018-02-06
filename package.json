@@ -65,6 +65,7 @@
     "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {
+    "babel-core": "6.26.0",
     "chai": "^4.1.2",
     "codecov": "3.0.0",
     "cross-env": "5.1.3",
@@ -80,8 +81,8 @@
     "prestart": "",
     "postinstall": "grunt build",
     "start": "grunt dev",
-		"build": "grunt build",
-		"cover": "istanbul cover node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register --colors --reporter dot test/"
+    "build": "grunt build",
+    "cover": "istanbul cover node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register --colors --reporter dot test/"
   },
   "engines": {
     "node": "^6.11.1 || ^7.10.1 || >=8.1.4"
