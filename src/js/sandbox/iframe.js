@@ -41,7 +41,7 @@ window.onload = () => window.parent && window.parent.postMessage({ LOADED: true 
 // listen (and react to) events on $bus
 
 // RUN_SCRIPT EVENT
-/* global babel */
+/* global Babel */
 $bus.on(MESSAGES.RUN_SCRIPT, (code) => {
   document.body.innerHTML = ''; // reset logs
   const transformedOutput = Babel.transform(code, { presets: ['es2015'] }).code;
