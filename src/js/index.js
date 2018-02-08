@@ -270,7 +270,8 @@ if (!embedded) {
     if (window.librariesSelector.value) {
       const script = $.createElement('script');
       script.onload = function onScriptLoad() {
-        console.log(`${window.librariesSelector.selectedOptions[0].text} Script loaded`);
+        // Library loaded
+        // console.log(`${window.librariesSelector.selectedOptions[0].text} Script loaded`);
       };
       script.src = window.librariesSelector.value;
 
