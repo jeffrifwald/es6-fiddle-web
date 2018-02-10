@@ -51,6 +51,16 @@ $bus.on(MESSAGES.RUN_SCRIPT, (code) => {
   document.body.appendChild(scriptNode);
 });
 
+$bus.on(MESSAGES.LOAD_LIBRARY, (libraryUrls) => {
+  const length = libraryUrls.length;
+  for (let index = 0; index < length; index += 1) {
+    const scriptNode = $.createElement('script');
+    scriptNode.src = libraryUrls[index];
+    document.body.appendChild(scriptNode);
+  }
+});
+
+
 // UPDATE_VIEW EVENT
 const STYLE_EL = document.createElement('style');
 STYLE_EL.id = 'esfiddle-result-styles';

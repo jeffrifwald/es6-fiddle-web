@@ -4,4 +4,5 @@
 module.exports = {
   RUN_SCRIPT: 'Sandbox.RUN_SCRIPT',
   UPDATE_VIEW: 'Sandbox.UPDATE_VIEW',
+  LOAD_LIBRARY: 'Sandbox.LOAD_LIBRARY',
 };

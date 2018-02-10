@@ -201,7 +201,7 @@ if (!embedded) {
   };
 
   // export to Github gist
-  $.getElement('.gist').onclick = () => clickEvents.exportAsGist(fiddle);
+  // $.getElement('.gist').onclick = () => clickEvents.exportAsGist(fiddle);
 
   // save the code
   document.querySelector('.save').onclick = () => clickEvents.saveBtn(fiddle);
@@ -268,14 +268,12 @@ if (!embedded) {
   // load the selected javascript library
   window.librariesSelector.onchange = () => {
     if (window.librariesSelector.value) {
-      const script = $.createElement('script');
-      script.onload = function onScriptLoad() {
-        // Library loaded
-        // console.log(`${window.librariesSelector.selectedOptions[0].text} Script loaded`);
-      };
-      script.src = window.librariesSelector.value;
-
-      document.head.appendChild(script);
+      const selectedIndex = window.librariesSelector.selectedIndex;
+      const dependecyUrls = libraries.getLibraryDependencyUrls(selectedIndex);
+      if (dependecyUrls) {
+        frameBridge.send(MESSAGES.LOAD_LIBRARY, dependecyUrls);
+      }
+      frameBridge.send(MESSAGES.LOAD_LIBRARY, [window.librariesSelector.value]);
     }
   };
 } // end not embedded
