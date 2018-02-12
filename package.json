@@ -54,6 +54,7 @@
     "grunt-jscs": "^3.0.1",
     "grunt-lesslint": "^3.2.0",
     "grunt-rollup": "^1.0.1",
+    "helmet": "^3.11.0",
     "jshint": "^2.9.4",
     "load-grunt-tasks": "^3.5.2",
     "mongodb": "^2.2.5",
@@ -80,8 +81,8 @@
     "prestart": "",
     "postinstall": "grunt build",
     "start": "grunt dev",
-		"build": "grunt build",
-		"cover": "istanbul cover node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register --colors --reporter dot test/"
+    "build": "grunt build",
+    "cover": "istanbul cover node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register --colors --reporter dot test/"
   },
   "engines": {
     "node": "^6.11.1 || ^7.10.1 || >=8.1.4"

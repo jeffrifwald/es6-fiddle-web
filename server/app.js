@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('./auth');
+const helmet = require('helmet');
 const api = require('./api');
 const Poet = require('poet');
 const path = require('path');
@@ -37,6 +38,8 @@ app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: fals
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(helmet());
 
 app.use((req, res, next) => {
   if (req.url.match(/^\/(images|lib\/babel)\/.+/)
