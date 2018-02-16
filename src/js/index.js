@@ -31,6 +31,8 @@ window.embedded = embedded;
 window.exampleSelector = $.getElement('.examples');
 examples.addExamples();
 
+// Initialize the libraries that are loaded
+window.loadedLibraries = [];
 window.librariesSelector = $.getElement('.libraries');
 libraries.addLibraries();
 
@@ -131,6 +133,15 @@ function calculateLineNumber(fiddleValue) {
   return newLines.join('\n');
 }
 
+// Saves the libraries when loaded in an array if its not already present
+function saveLibraryLocally(libraryURLs) {
+  libraryURLs.forEach((library) => {
+    if (window.loadedLibraries.indexOf(library) === -1) {
+      window.loadedLibraries.push(library);
+    }
+  });
+}
+
 /* eslint-disable */
 const runFiddle = () => {
   frameBridge.send(MESSAGES.RUN_SCRIPT, calculateLineNumber(fiddle.getValue()));
@@ -150,6 +161,11 @@ const getFiddle = (data) => {
       privateIcon.classList.remove('fa-globe');
       privateIcon.classList.add('fa-lock');
       privateIcon.parentElement.setAttribute('data-balloon', 'Private Fiddle');
+    }
+
+    if (data.libraries && data.libraries.length > 0) {
+      window.loadedLibraries = data.libraries;
+      frameBridge.send(MESSAGES.LOAD_LIBRARY, data.libraries);
     }
   } else {
     $.addStyleTo(startFiddle, 'display', 'none');
@@ -272,8 +288,10 @@ if (!embedded) {
       const dependecyUrls = libraries.getLibraryDependencyUrls(selectedIndex);
       if (dependecyUrls) {
         frameBridge.send(MESSAGES.LOAD_LIBRARY, dependecyUrls);
+        saveLibraryLocally(dependecyUrls);
       }
       frameBridge.send(MESSAGES.LOAD_LIBRARY, [window.librariesSelector.value]);
+      saveLibraryLocally([window.librariesSelector.value]);
     }
   };
 } // end not embedded
