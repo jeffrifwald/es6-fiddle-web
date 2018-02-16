@@ -25,7 +25,7 @@ const fiddlesSchema = new Schema({
   libraries: {
     type: Array,
     default: [],
-  }
+  },
 });
 
 const Fiddles = mongoose.model('Fiddles', fiddlesSchema);

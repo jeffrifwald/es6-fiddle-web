@@ -62,9 +62,9 @@ module.exports = (app) => {
       }
 
       if (item.userId && item.userId.toHexString() === req.user._id) {
-        const itemToSave = Object.assign(item, { 
-          value: req.body.value, 
-          libraries: req.body.libraries ? req.body.libraries : [], 
+        const itemToSave = Object.assign(item, {
+          value: req.body.value,
+          libraries: req.body.libraries ? req.body.libraries : [],
         });
         return itemToSave.save()
           .then(() => res.json({ saved: true, fiddle }))
