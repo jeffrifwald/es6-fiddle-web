@@ -124,6 +124,11 @@ const libraries = {
     return null;
   },
 
+  getDisplayNameFromURL(urls) {
+    return librariesList.filter(library => urls.indexOf(library.url) !== -1)
+      .map(library => library.display);
+  },
+
 };
 
 module.exports = libraries;

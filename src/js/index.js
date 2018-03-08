@@ -142,6 +142,15 @@ function saveLibraryLocally(libraryURLs) {
   });
 }
 
+// Displays the Loaded Libraries
+function updateLoadedLibraries() {
+  let value = '-';
+  if (window.loadedLibraries.length > 0) {
+    value = (libraries.getDisplayNameFromURL(window.loadedLibraries)).join(', ');
+  }
+  window.librariesSelector.html(value);
+}
+
 /* eslint-disable */
 const runFiddle = () => {
   frameBridge.send(MESSAGES.RUN_SCRIPT, calculateLineNumber(fiddle.getValue()));
@@ -166,6 +175,7 @@ const getFiddle = (data) => {
     if (data.libraries && data.libraries.length > 0) {
       window.loadedLibraries = data.libraries;
       frameBridge.send(MESSAGES.LOAD_LIBRARY, data.libraries);
+      updateLoadedLibraries();
     }
   } else {
     $.addStyleTo(startFiddle, 'display', 'none');
@@ -292,6 +302,7 @@ if (!embedded) {
       }
       frameBridge.send(MESSAGES.LOAD_LIBRARY, [window.librariesSelector.value]);
       saveLibraryLocally([window.librariesSelector.value]);
+      updateLoadedLibraries();
     }
   };
 } // end not embedded
