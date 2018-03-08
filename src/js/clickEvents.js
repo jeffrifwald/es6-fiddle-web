@@ -92,6 +92,7 @@ const clickEvents = {
         body: JSON.stringify({
           fiddle: pathArr[1].length > 1 ? pathArr[1] : -1,
           value: code,
+          libraries: window.loadedLibraries,
         }),
       })
       .then(response => response.json())
