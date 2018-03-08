@@ -34,6 +34,7 @@ examples.addExamples();
 // Initialize the libraries that are loaded
 window.loadedLibraries = [];
 window.librariesSelector = $.getElement('.libraries');
+window.librariesContent = $.getElement('.libraries-list-content');
 libraries.addLibraries();
 
 // check to see if the share button should be shown
@@ -148,7 +149,7 @@ function updateLoadedLibraries() {
   if (window.loadedLibraries.length > 0) {
     value = (libraries.getDisplayNameFromURL(window.loadedLibraries)).join(', ');
   }
-  window.librariesSelector.html(value);
+  window.librariesContent.innerHTML = value;
 }
 
 /* eslint-disable */
