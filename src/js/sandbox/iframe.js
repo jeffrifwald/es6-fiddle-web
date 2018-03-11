@@ -44,7 +44,7 @@ window.onload = () => window.parent && window.parent.postMessage({ LOADED: true 
 /* global Babel */
 $bus.on(MESSAGES.RUN_SCRIPT, (code) => {
   document.body.innerHTML = ''; // reset logs
-  const transformedOutput = Babel.transform(code, { presets: ['es2015'] }).code;
+  const transformedOutput = Babel.transform(code, { presets: ['env'] }).code;
   const scriptNode = $.createElement('script');
   const scriptText = document.createTextNode(`try { ${transformedOutput} } catch (e) { console.error(e) }`);
   scriptNode.appendChild(scriptText);
