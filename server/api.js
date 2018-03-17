@@ -53,6 +53,7 @@ module.exports = (app) => {
         const newFiddle = new Fiddles({
           fiddle,
           value: req.body.value,
+          libraries: req.body.libraries ? req.body.libraries : [],
         });
         if (req.isAuthenticated()) {
           newFiddle.userId = req.user._id;
@@ -61,7 +62,10 @@ module.exports = (app) => {
       }
 
       if (item.userId && item.userId.toHexString() === req.user._id) {
-        const itemToSave = Object.assign(item, { value: req.body.value });
+        const itemToSave = Object.assign(item, {
+          value: req.body.value,
+          libraries: req.body.libraries ? req.body.libraries : [],
+        });
         return itemToSave.save()
           .then(() => res.json({ saved: true, fiddle }))
           .catch(() => res.status(400).send());
@@ -72,6 +76,7 @@ module.exports = (app) => {
         fiddle,
         value: req.body.value,
         userId: req.user._id,
+        libraries: req.body.libraries ? req.body.libraries : [],
       });
 
       return newFiddle.save()
