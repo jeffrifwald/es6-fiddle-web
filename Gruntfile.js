@@ -34,7 +34,7 @@
           dest: 'dist/src/es6-fiddle.js',
           options: {
             browserifyOptions: { debug: true },
-            transform: [['babelify', { presets: ['es2015'] }]],
+            transform: [['babelify', { presets: ['env'] }]],
           },
         },
         sandbox: {
@@ -42,7 +42,7 @@
           dest: 'dist/src/sandbox/iframe.js',
           options: {
             browserifyOptions: { debug: true },
-            transform: [['babelify', { presets: ['es2015'] }]],
+            transform: [['babelify', { presets: ['env'] }]],
           },
         }
       },
