@@ -97,9 +97,11 @@ module.exports = (app) => {
         if (user.startedFiddles.indexOf(fiddleID) > -1) {
           throw new Error(`fiddle: ${fiddleID} is already stared !`);
         } else {
-          return Fiddles.findOneAndUpdate({ fiddle: fiddleID },
+          return Fiddles.findOneAndUpdate(
+            { fiddle: fiddleID },
             { $inc: { starCounter: 1 } },
-            { new: true });
+            { new: true },
+          );
         }
       })
       .then((fiddle) => {
@@ -146,32 +148,32 @@ module.exports = (app) => {
       return res.status(401).json({ message: 'Only logged in users can export fiddles to Github!' });
     }
 
-    const fiddleID = req.params.fiddleID;
-    const token = req.user.accessToken;
+    const { fiddleID } = req.params;
+    const { token } = req.user;
 
     return Fiddles.findOne({ fiddle: fiddleID })
-    .then((fiddle) => {
-      if (!fiddle) {
-        const err = new Error(`fiddle: ${fiddleID} Not Found !`);
-        throw err;
-      } else {
-        const data = {
-          description: 'ESFiddle Generated Gist',
-          public: !fiddle.isPrivate,
-          files: {
-            'fiddle.js': {
-              content: `/**\n  Exported from ESFiddle.net\n  Check it out here https://esfiddle.net/${fiddleID}\n**/\n\n${req.body.value}`,
+      .then((fiddle) => {
+        if (!fiddle) {
+          const err = new Error(`fiddle: ${fiddleID} Not Found !`);
+          throw err;
+        } else {
+          const data = {
+            description: 'ESFiddle Generated Gist',
+            public: !fiddle.isPrivate,
+            files: {
+              'fiddle.js': {
+                content: `/**\n  Exported from ESFiddle.net\n  Check it out here https://esfiddle.net/${fiddleID}\n**/\n\n${req.body.value}`,
+              },
             },
-          },
-        };
+          };
 
-        fetch(`https://api.github.com/gists?access_token=${token}`, { method: 'POST', body: JSON.stringify(data) })
-          .then(gist => gist.json())
-          .then(json => res.json(json));
-      }
-    })
-    .catch((e) => {
-      res.status(400).json({ message: e });
-    });
+          fetch(`https://api.github.com/gists?access_token=${token}`, { method: 'POST', body: JSON.stringify(data) })
+            .then(gist => gist.json())
+            .then(json => res.json(json));
+        }
+      })
+      .catch((e) => {
+        res.status(400).json({ message: e });
+      });
   });
 };

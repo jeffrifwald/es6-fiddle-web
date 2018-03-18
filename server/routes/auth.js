@@ -16,14 +16,13 @@ module.exports = (app) => {
 
   app.get('/auth/github', passport.authenticate('github', { scope: ['user:email', 'gist'] }), (req, res) => res);
 
-  app.get('/auth/github/callback',
-    passport.authenticate('github', {
-      failureRedirect: '/github/login',
-      failureFlash: true,
-      successFlash: 'Welcome!',
-    }), (req, res) => {
-      res.redirect('/github/myProfile');
-    });
+  app.get('/auth/github/callback', passport.authenticate('github', {
+    failureRedirect: '/github/login',
+    failureFlash: true,
+    successFlash: 'Welcome!',
+  }), (req, res) => {
+    res.redirect('/github/myProfile');
+  });
 
   app.get('/github/login', (req, res) => {
     res.render('login');

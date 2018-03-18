@@ -18,7 +18,7 @@ const codeWrapper = $.getElement('.code-wrapper'),
   fiddleWrapper = $.getElement('.fiddle-wrapper'),
   themeChanger = $.getElement('.change-theme'),
   savedTheme = localStorage.getItem('theme'),
-  pathAr = location.pathname.split('/'),
+  pathAr = window.location.pathname.split('/'),
   fiddleId = pathAr[pathAr.length - 2],
   embedded = pathAr[1] === 'embed',
   startFiddle = $.getElement('.star');
@@ -246,8 +246,8 @@ if (!embedded) {
           'Content-Type': 'application/json',
         }),
       })
-      .then(resp => resp.json())
-      .then(data => clickEvents.starFiddle(data));
+        .then(resp => resp.json())
+        .then(data => clickEvents.starFiddle(data));
     }
   };
 
@@ -264,8 +264,8 @@ if (!embedded) {
           'Content-Type': 'application/json',
         }),
       })
-          .then(resp => resp.json())
-          .then(data => clickEvents.privateFiddle(data));
+        .then(resp => resp.json())
+        .then(data => clickEvents.privateFiddle(data));
     } else {
       snackbar.showSnackbar('You don\'t appear to have any code or its not saved.');
     }
@@ -295,7 +295,7 @@ if (!embedded) {
   // load the selected javascript library
   window.librariesSelector.onchange = () => {
     if (window.librariesSelector.value) {
-      const selectedIndex = window.librariesSelector.selectedIndex;
+      const { selectedIndex } = window.librariesSelector;
       const dependecyUrls = libraries.getLibraryDependencyUrls(selectedIndex);
       if (dependecyUrls) {
         frameBridge.send(MESSAGES.LOAD_LIBRARY, dependecyUrls);

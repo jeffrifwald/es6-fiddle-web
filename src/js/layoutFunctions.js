@@ -19,7 +19,7 @@ const layoutFunctions = {
   setVerticalStyle(codeWrapper) { codeWrapper.classList.remove('column'); },
 
   // Sets the styling for the results box with the given text and border color
-    /* eslint-disable */
+  /* eslint-disable */
   setResultsColors(textColor, borderColor) {
     frameBridge.send(MESSAGES.UPDATE_VIEW, {textColor, borderColor});
   },

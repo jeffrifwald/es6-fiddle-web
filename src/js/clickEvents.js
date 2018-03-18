@@ -64,16 +64,16 @@ const clickEvents = {
           value: code,
         }),
       })
-      .then(resp => resp.json())
-      .then((data) => {
-        if (data.message) {
-          throw new Error(data.message);
-        }
-        snackbar.showSnackbar('Gist created! View at https://gists.github.com');
-      })
-      .catch((err) => {
-        snackbar.showSnackbar(err.message);
-      });
+        .then(resp => resp.json())
+        .then((data) => {
+          if (data.message) {
+            throw new Error(data.message);
+          }
+          snackbar.showSnackbar('Gist created! View at https://gists.github.com');
+        })
+        .catch((err) => {
+          snackbar.showSnackbar(err.message);
+        });
     } else {
       snackbar.showSnackbar('You don\'t appear to have any code or its not saved.');
     }
@@ -95,12 +95,12 @@ const clickEvents = {
           libraries: window.loadedLibraries,
         }),
       })
-      .then(response => response.json())
-      .then((data) => {
-        if (data.saved) {
-          window.location.href = `/${data.fiddle}/`;
-        }
-      });
+        .then(response => response.json())
+        .then((data) => {
+          if (data.saved) {
+            window.location.href = `/${data.fiddle}/`;
+          }
+        });
     } else {
       snackbar.showSnackbar('You don\'t appear to have any code');
     }
