@@ -61,6 +61,7 @@ describe('POST /save Authorized', () => {
       });
   });
 
+  //TODO
   it('Types of users');
   it('user1 - Registered  user - currently logged in ');
   it('user2 - Registered  user');
