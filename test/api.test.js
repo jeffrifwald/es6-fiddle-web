@@ -453,7 +453,7 @@ describe('POST /private/:fiddleID', () => {
         Fiddles.findOneAndUpdate(
           { fiddle: testFiddle.fiddleU2.fiddle },
           { isPrivate: true },
-          { new: true },
+          { new: true } // eslint-disable-line comma-dangle
         )
           .then(() => {
             agent.get(`/fiddles/${testFiddle.fiddleU2.fiddle}`)

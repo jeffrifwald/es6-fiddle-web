@@ -100,7 +100,7 @@ module.exports = (app) => {
           return Fiddles.findOneAndUpdate(
             { fiddle: fiddleID },
             { $inc: { starCounter: 1 } },
-            { new: true },
+            { new: true } // eslint-disable-line comma-dangle
           );
         }
       })
