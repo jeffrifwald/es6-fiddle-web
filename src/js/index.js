@@ -24,6 +24,7 @@ const codeWrapper = $.getElement('.code-wrapper'),
   embedded = pathAr[1] === 'embed',
   startFiddle = $.getElement('.star');
 
+
 analytics.start();
 redirectTraffic.register();
 
@@ -41,9 +42,7 @@ libraries.addLibraries();
 if (fiddleId && !embedded) {
   const shareEl = $.getElement('.share');
   $.addStyleTo(startFiddle, 'display', 'block');
-  if (shareEl) {
-    share.shareFiddle(fiddleId);
-  }
+  if (shareEl) { share.shareFiddle(fiddleId); }
 } else {
   $.addStyleTo(startFiddle, 'display', 'none');
 }
@@ -149,7 +148,7 @@ function saveLibraryLocally(libraryURLs) {
 function updateLoadedLibraries() {
   let value = '-';
   if (window.loadedLibraries.length > 0) {
-    value = libraries.getDisplayNameFromURL(window.loadedLibraries).join(', ');
+    value = (libraries.getDisplayNameFromURL(window.loadedLibraries)).join(', ');
   }
   window.librariesContent.innerHTML = value;
 }
@@ -185,8 +184,7 @@ const getFiddle = (data) => {
     fiddle.setValue(data.message);
   }
 
-  if (embedded) {
-    // go ahead and run the code
+  if (embedded) { // go ahead and run the code
     runFiddle();
   }
 };
@@ -195,9 +193,7 @@ const getFiddle = (data) => {
 if (fiddleId) {
   fetch(`/fiddles/${fiddleId}`, {
     credentials: 'same-origin',
-  })
-    .then(resp => resp.json())
-    .then(data => getFiddle(data));
+  }).then(resp => resp.json()).then(data => getFiddle(data));
 }
 
 // if this is not an embedded fiddle than add extra elements to this
@@ -213,6 +209,7 @@ if (!embedded) {
       browser: true,
     });
 
+
     // remove the line error class from all lines
     fiddle.eachLine((line) => {
       fiddle.removeLineClass(line, 'background', 'line-error');
@@ -222,12 +219,10 @@ if (!embedded) {
     if (!lint) {
       JSHINT.errors.forEach((err) => {
         fiddle.addLineClass(err.line - 1, 'background', 'line-error');
-        lints.push(
-          `console.log('Line ' + ${err.line} + ':', '${err.reason.replace(/'/g, "\\'")}')\n`,
-        );
+        lints.push(`console.log('Line ' + ${err.line} + ':', '${err.reason.replace(/'/g, '\\\'')}')\n`);
       });
     } else {
-      lints.push("console.log('Awesome! Your code is lint free!');");
+      lints.push('console.log(\'Awesome! Your code is lint free!\');');
     }
 
     frameBridge.send(MESSAGES.RUN_SCRIPT, lints.join('\n'));
@@ -252,8 +247,8 @@ if (!embedded) {
           'Content-Type': 'application/json',
         }),
       })
-        .then(resp => resp.json())
-        .then(data => clickEvents.starFiddle(data));
+      .then(resp => resp.json())
+      .then(data => clickEvents.starFiddle(data));
     }
   };
 
@@ -270,10 +265,10 @@ if (!embedded) {
           'Content-Type': 'application/json',
         }),
       })
-        .then(resp => resp.json())
-        .then(data => clickEvents.privateFiddle(data));
+          .then(resp => resp.json())
+          .then(data => clickEvents.privateFiddle(data));
     } else {
-      snackbar.showSnackbar("You don't appear to have any code or its not saved.");
+      snackbar.showSnackbar('You don\'t appear to have any code or its not saved.');
     }
   };
 
@@ -314,12 +309,9 @@ if (!embedded) {
   };
 } // end not embedded
 
+
 // Add dragging funcionality
-fiddleWrapper.addEventListener(
-  'click',
-  function init() {
-    fiddleWrapper.removeEventListener('click', init, false);
-    $.getElement('.resizer').addEventListener('mousedown', drag.initDrag, false);
-  },
-  false,
-);
+fiddleWrapper.addEventListener('click', function init() {
+  fiddleWrapper.removeEventListener('click', init, false);
+  $.getElement('.resizer').addEventListener('mousedown', drag.initDrag, false);
+}, false);
