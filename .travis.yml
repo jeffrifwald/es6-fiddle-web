@@ -1,14 +1,21 @@
 language: node_js
 node_js:
-    - "node"
-    - "7"
-    - "6"
+- node
+- '7'
+- '6'
 services: mongodb
-env: "MONGODB_URI='mongodb://localhost:27017/fiddles'"
+env:
+  matrix:
+  - MONGODB_URI='mongodb://localhost:27017/fiddles'
+  global:
+    secure: k3V2J13tzfyW5YfM+EyPFPYDfhrz0Awu0nTLokvyO3n/2d03a4HJprADTTUbRIQ1vD1hsbXfBDalemOG7qWxEy9Ar3sPStpoStV1dZc1I94zCFL8YRTNT0q+yUDodg95NIQTE+3wp2Am+yxaVPz+ZcP3UCKdxMKWhcrd9T3QKSlDiGdAEAr9rpeoflDpqPd7/N+gPeKld+L/yr61J/C1GDrPmhhE07JpOHKBY9Lt7NWttA8LI5O6Nu3O14spIm8IazkZv8lCCy0Q7Wj+iXn6z/Klu34RjOm8EXNTQtCJvjr2bR8hpUySeJw+BzTttPOAxztinyX/9XAggt90KQ4CdZOF64ET6cuK0jPCo96sES19dgPaLUTTY0CNjr3Bfmp6qw9BI+J/mMcohG2pxZTJMuIHKjD7ILFnCKiWblOBl108YfZY/4Y6bGExDtm8DFtcB0Kr2AV8tHvQxdkQRsGT595fmVs7GPv95r7x94Ow4xR2MLMHvlYOfEICRgx6KpzFv5SckdU3kv5OJYxcwhSmA7kFY665CdtH3h3Pwcxhzy53GefCA+TxmxiV023EiMkzl50S1bF3vTgs1hWmA3R9uCCSIZUEIpavlxzPxxGnxYbAsDTJH3Ead+JFiQpvUVhrvOniIYMBjTHVIPOxZmJByT5Jk5GzMtaUybH4iGz0fV0=
+before_install:
+- "[[ $(node -v) =~ ^v9.*$ ]] || npm install -g npm@latest"
+- npm install -g greenkeeper-lockfile@1
 install:
-    - npm install -g mocha
-    - npm install -g istanbul
-    - npm install
+- npm install
+before_script: greenkeeper-lockfile-update
 script: npm run test && npm run cover
+after_script: greenkeeper-lockfile-upload
 after_success:
-    - bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash)

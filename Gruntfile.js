@@ -30,8 +30,10 @@
       },
       browserify: {
         prod: {
-          src: ['src/js/examples/*.js', 'src/js/index.js'],
-          dest: 'dist/src/es6-fiddle.js',
+          files: {
+            'dist/src/es6-fiddle.js': ['src/js/examples/*.js', 'src/js/index.js'],
+            'dist/src/authenticated.js': 'src/js/authenticated.js'
+          },
           options: {
             browserifyOptions: { debug: true },
             transform: [['babelify', { presets: ['env'] }]],
@@ -44,12 +46,12 @@
             browserifyOptions: { debug: true },
             transform: [['babelify', { presets: ['env'] }]],
           },
-        }
+        },
       },
       uglify: {
         compile: {
           files: {
-            'dist/src/authenticated.js': ['src/js/authenticated.js'],
+            'dist/src/authenticated.js': ['dist/src/authenticated.js'],
           },
         },
       },

@@ -107,7 +107,7 @@ const libraries = {
 
   addLibraries() {
     const el = $.getElement('.libraries');
-    const length = librariesList.length;
+    const { length } = librariesList;
     for (let index = 0; index < length; index += 1) {
       const library = librariesList[index];
       el.innerHTML +=
@@ -116,7 +116,7 @@ const libraries = {
   },
 
   getLibraryDependencyUrls(selectedIndex) {
-    const dependency = librariesList[selectedIndex - 1].dependency;
+    const { dependency } = librariesList[selectedIndex - 1];
     if (dependency) {
       return librariesList.filter(library => dependency.indexOf(library.display) !== -1)
         .map(library => library.url);

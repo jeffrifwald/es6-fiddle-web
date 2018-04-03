@@ -1,4 +1,4 @@
-const expect = require('chai').expect,
+const { expect } = require('chai'),
   Users = require('../server/db/users');
 
 describe('Users model', () => {

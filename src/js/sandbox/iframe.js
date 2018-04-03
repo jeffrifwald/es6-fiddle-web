@@ -23,8 +23,8 @@ window.addEventListener('message', (event) => {
     return;
   }
 
-  const data = event.data;
-  const type = data.type;
+  const { data } = event;
+  const { type } = data;
 
   // type exists and must be one of allowed types
   if (!type || !Boolean(~ALLOWED_TYPES.indexOf(type))) {  // eslint-disable-line
@@ -52,7 +52,7 @@ $bus.on(MESSAGES.RUN_SCRIPT, (code) => {
 });
 
 $bus.on(MESSAGES.LOAD_LIBRARY, (libraryUrls) => {
-  const length = libraryUrls.length;
+  const { length } = libraryUrls;
   for (let index = 0; index < length; index += 1) {
     const scriptNode = $.createElement('script');
     scriptNode.src = libraryUrls[index];
