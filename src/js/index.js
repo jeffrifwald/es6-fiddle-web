@@ -7,6 +7,7 @@ import layoutFunctions from './layoutFunctions';
 import clickEvents from './clickEvents';
 import drag from './drag';
 import examples from './add-examples';
+import EditionInfo from './es-editions';
 import libraries from './add-libraries';
 import $ from './helpers';
 import share from './share';
@@ -29,7 +30,7 @@ redirectTraffic.register();
 
 window.embedded = embedded;
 window.exampleSelector = $.getElement('.examples');
-examples.addExamples();
+examples.addExamples(EditionInfo);
 
 // Initialize the libraries that are loaded
 window.loadedLibraries = [];
@@ -280,15 +281,15 @@ if (!embedded) {
   // load the selected code
   window.exampleSelector.onchange = () => {
     if (window.exampleSelector.value) {
-      let code = 'Example Can Not Be Found';
+      const name = window.exampleSelector.value;
+      // set a deafult message to clear previous example code
+      fiddle.setValue(`${name} Can Not Be Found`);
 
-      if (window.es6Example[window.exampleSelector.value]) {
-        ({ code } = window.es6Example[window.exampleSelector.value]);
-      } else if (window.es7Example[window.exampleSelector.value]) {
-        ({ code } = window.es7Example[window.exampleSelector.value]);
-      }
-
-      fiddle.setValue(code);
+      Object.values(EditionInfo).map(
+        // setValue only if the example exists
+        values =>
+          window[values.example][name] && fiddle.setValue(window[values.example][name].code),
+      );
     }
   };
 

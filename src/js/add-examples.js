@@ -1,27 +1,22 @@
 import $ from './helpers';
 
 const examples = {
-  addExamples() {
+  addExamples(EditionInfo) {
     if (!window.embedded) {
       const el = $.getElement('.examples');
-      let example;
-      for (example in window.es6Example) { //eslint-disable-line
-        if (Object.prototype.hasOwnProperty.call(window.es6Example, example)) {
-          el.innerHTML +=
-            `<option value="${example}">${window.es6Example[example].display}</option>`;
-        }
-      }
-
-      el.innerHTML += '<option disabled>ES7 Examples</option>';
-
-      for (example in window.es7Example) { //eslint-disable-line
-        if (Object.prototype.hasOwnProperty.call(window.es7Example, example)) {
-          el.innerHTML +=
-              `<option value="${example}">${window.es7Example[example].display}</option>`;
-        }
-      }
+      Object.entries(EditionInfo).map(([key, value]) => {
+        const shortName = key.toUpperCase();
+        // Add a divider between editions
+        el.innerHTML += `<option disabled>--- ${value.name} (${shortName}) Examples ---</option>`;
+        // Map over each Example and add an option to the select/dropdown list
+        el.innerHTML += Object.keys(window[value.example]).map(
+          example =>
+            Object.prototype.hasOwnProperty.call(window[value.example], example) &&
+            `<option value="${example}"> ${window[value.example][example].display}</option>`,
+        );
+        return undefined;
+      });
     }
-    return undefined;
   },
 };
 
