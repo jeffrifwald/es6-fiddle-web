@@ -5,7 +5,8 @@ module.exports = {
     ],
     "rules": {
       "one-var": 0,
-      "no-underscore-dangle": "off",
+			"no-underscore-dangle": "off",
+			"arrow-body-style": ["warn", "as-needed"],
     },
     "globals": {
       "document": 1,
