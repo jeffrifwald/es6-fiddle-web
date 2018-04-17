@@ -6,36 +6,39 @@ import redirectTraffic from './redirect-traffic';
 import layoutFunctions from './layoutFunctions';
 import clickEvents from './clickEvents';
 import drag from './drag';
-import logger from './logger';
 import examples from './add-examples';
+import EditionInfo from './es-editions';
+import libraries from './add-libraries';
 import $ from './helpers';
 import share from './share';
 import snackbar from './snackbar';
+import frameBridge from './frameBridge';
+import MESSAGES from './sandbox/keys';
 
 const codeWrapper = $.getElement('.code-wrapper'),
   fiddleWrapper = $.getElement('.fiddle-wrapper'),
   themeChanger = $.getElement('.change-theme'),
-  iDoc = $.getElement('.result').contentDocument,
-  iHead = iDoc.getElementsByTagName('head')[0],
-  babel = $.createElement('script'),
   savedTheme = localStorage.getItem('theme'),
-  pathAr = location.pathname.split('/'),
+  pathAr = window.location.pathname.split('/'),
   fiddleId = pathAr[pathAr.length - 2],
   embedded = pathAr[1] === 'embed',
   startFiddle = $.getElement('.star');
 
-let fiddle = null,
-  userInput = null,
-  bootstrap = null;
 
 analytics.start();
 redirectTraffic.register();
 
 window.embedded = embedded;
 window.exampleSelector = $.getElement('.examples');
-examples.addExamples();
+examples.addExamples(EditionInfo);
 
-    // check to see if the share button should be shown
+// Initialize the libraries that are loaded
+window.loadedLibraries = [];
+window.librariesSelector = $.getElement('.libraries');
+window.librariesContent = $.getElement('.libraries-list-content');
+libraries.addLibraries();
+
+// check to see if the share button should be shown
 if (fiddleId && !embedded) {
   const shareEl = $.getElement('.share');
   $.addStyleTo(startFiddle, 'display', 'block');
@@ -81,7 +84,7 @@ $.getElement('.horizontal').onclick = () => {
 };
 
 // add the fiddle area
-fiddle = codemirror($.getElement('.fiddle'), {
+const fiddle = codemirror($.getElement('.fiddle'), {
   lineNumbers: !embedded,
   readOnly: embedded ? 'nocursor' : false,
   theme: savedTheme || 'default',
@@ -113,9 +116,6 @@ if (savedTheme) {
   themeChanger.value = savedTheme;
 }
 
-// add the logger script to the iframe
-logger.start();
-
 // Add line number to all console.log() statements
 function calculateLineNumber(fiddleValue) {
   const lines = fiddleValue.split(/\n/);
@@ -127,186 +127,191 @@ function calculateLineNumber(fiddleValue) {
     const clgLines = line.match(consReg);
     if (clgLines) {
       // Add line no: to console.log and join it with rest of the original line.
-      // return line.slice(0, clgLines.index) + clgLines[1] + `'${index+1}: ' + ` +clgLines[2];
-      return `${line.slice(0, clgLines.index) + clgLines[1]}'${index + 1}: ' + ${clgLines[2]}`;
+      // return line.slice(0, clgLines.index) + clgLines[1] + `'${index+1}: ' , ` +clgLines[2];
+      return `${line.slice(0, clgLines.index) + clgLines[1]}'${index + 1}: ' , ${clgLines[2]}`;
     }
     return line;
   });
   return newLines.join('\n');
 }
 
-//  wait for babel to load
-babel.onload = () => {
-  const runFiddle = () => {
-    if (userInput) { // clean up the old code
-      iHead.removeChild(userInput);
+// Saves the libraries when loaded in an array if its not already present
+function saveLibraryLocally(libraryURLs) {
+  libraryURLs.forEach((library) => {
+    if (window.loadedLibraries.indexOf(library) === -1) {
+      window.loadedLibraries.push(library);
     }
-    if (bootstrap) { // clean up the old code
-      iHead.removeChild(bootstrap);
-    }
+  });
+}
 
-    // create new script elements for the bootstrap and user input
-    userInput = $.createElement('script');
-    bootstrap = $.createElement('script');
+// Displays the Loaded Libraries
+function updateLoadedLibraries() {
+  let value = '-';
+  if (window.loadedLibraries.length > 0) {
+    value = (libraries.getDisplayNameFromURL(window.loadedLibraries)).join(', ');
+  }
+  window.librariesContent.innerHTML = value;
+}
 
-    // user input needs to be a 'text/babel' script for babel
-    userInput.setAttribute('type', 'text/babel');
-    $.addClass(userInput, 'babel-text');
+/* eslint-disable */
+const runFiddle = () => {
+  frameBridge.send(MESSAGES.RUN_SCRIPT, calculateLineNumber(fiddle.getValue()));
+};
 
-    // set the new script code
-    // Warp in try and catch to display error on console panel..
-    // calculateLineNumber is called to Add line numbers to console.log for console panel.
-    userInput.innerHTML = `try {${calculateLineNumber(fiddle.getValue())}} catch(e) { console.log(e.message); }`;
-    bootstrap.innerHTML = (
-                    'document.body.innerHTML = \'\';\n' +
-                    'babel.run(document.querySelector(".babel-text").innerHTML);\n'
-                  );
+/* eslint-enable */
 
-    // append the new scripts
-    iHead.appendChild(userInput);
-    iHead.appendChild(bootstrap);
-  };
-
-  const getFiddle = (data) => {
-    if (data.fiddle) {
-      if (data.value) {
-        fiddle.setValue(data.value);
-      } else {
-        fiddle.setValue('* Sorry, but I could not load your code right now. *');
-      }
-      if (data.isPrivate) {
-        const privateIcon = $.getElement('.fa-globe');
-        privateIcon.classList.remove('fa-globe');
-        privateIcon.classList.add('fa-lock');
-        privateIcon.parentElement.setAttribute('data-balloon', 'Private Fiddle');
-      }
+const getFiddle = (data) => {
+  if (data.fiddle) {
+    if (data.value) {
+      fiddle.setValue(data.value);
     } else {
-      $.addStyleTo(startFiddle, 'display', 'none');
-      fiddle.setValue(data.message);
+      fiddle.setValue('* Sorry, but I could not load your code right now. *');
+    }
+    if (data.isPrivate) {
+      const privateIcon = $.getElement('.fa-globe');
+      privateIcon.classList.remove('fa-globe');
+      privateIcon.classList.add('fa-lock');
+      privateIcon.parentElement.setAttribute('data-balloon', 'Private Fiddle');
     }
 
-    if (embedded) { // go ahead and run the code
-      runFiddle();
+    if (data.libraries && data.libraries.length > 0) {
+      window.loadedLibraries = data.libraries;
+      frameBridge.send(MESSAGES.LOAD_LIBRARY, data.libraries);
+      updateLoadedLibraries();
     }
-  };
-
-  if (fiddleId) { // load up the saved code
-    fetch(`/fiddles/${fiddleId}`, {
-      credentials: 'same-origin',
-    })
-    .then(resp => resp.json())
-    .then(data => getFiddle(data));
+  } else {
+    $.addStyleTo(startFiddle, 'display', 'none');
+    fiddle.setValue(data.message);
   }
 
-  if (!embedded) {
-    // run the input
-    $.getElement('.run').onclick = runFiddle;
-
-    // lint the result
-    $.getElement('.lint').onclick = () => {
-      let lintLog;
-      const lint = JSHINT(fiddle.getValue(), {
-        esnext: true,
-        devel: true,
-        browser: true,
-      });
-
-      // clean up the old lint log script
-      if (lintLog) {
-        iHead.removeChild(lintLog);
-      }
-
-      // make a new lint log script
-      lintLog = $.createElement('script');
-      lintLog.innerHTML = 'document.body.innerHTML = \'\';\n';
-
-                // remove the line error class from all lines
-      fiddle.eachLine((line) => {
-        fiddle.removeLineClass(line, 'background', 'line-error');
-      });
-
-      if (!lint) {
-        JSHINT.errors.forEach((err) => {
-          fiddle.addLineClass(err.line - 1, 'background', 'line-error');
-          lintLog.innerHTML += `console.log('Line ' + ${err.line} + ':', '${err.reason.replace(/'/g, '\\\'')}')\n`;
-        });
-      } else {
-        lintLog.innerHTML += 'console.log(\'Awesome! Your code is lint free!\');';
-      }
-
-      iHead.appendChild(lintLog);
-    };
-
-      // save the code
-    document.querySelector('.save').onclick = () => clickEvents.saveBtn(fiddle);
-
-    // star the code
-    $.getElement('.star').onclick = () => {
-      const pathArr = window.location.pathname.split('/'),
-        fiddleID = pathArr[1].length > 1 ? pathArr[1] : -1;
-      if (fiddleID !== -1) {
-        fetch(`/star/${fiddleID}`, {
-          method: 'POST',
-          credentials: 'same-origin',
-          headers: new Headers({
-            'Content-Type': 'application/json',
-          }),
-        })
-        .then(resp => resp.json())
-        .then(data => clickEvents.starFiddle(data));
-      }
-    };
-
-    // Make fiddle private
-    $.getElement('.private').onclick = () => {
-      const pathArr = window.location.pathname.split('/'),
-        fiddleID = pathArr[1].length > 1 ? pathArr[1] : -1;
-      if (fiddleID !== -1) {
-        fetch(`/private/${fiddleID}`, {
-          method: 'POST',
-          credentials: 'same-origin',
-          headers: new Headers({
-            'Content-Type': 'application/json',
-          }),
-        })
-        .then(resp => resp.json())
-        .then(data => clickEvents.privateFiddle(data));
-      } else {
-        snackbar.showSnackbar('You don\'t appear to have any code or its not saved.');
-      }
-    };
-
-    themeChanger.onchange = () => {
-      const theme = themeChanger.options[themeChanger.selectedIndex].textContent;
-      fiddle.setOption('theme', theme);
-      localStorage.setItem('theme', theme);
-    };
-
-            // load the selected code
-    window.exampleSelector.onchange = () => {
-      if (window.exampleSelector.value) {
-        let code = 'Example Can Not Be Found';
-
-        if (window.es6Example[window.exampleSelector.value]) {
-          ({ code } = window.es6Example[window.exampleSelector.value]);
-        } else if (window.es7Example[window.exampleSelector.value]) {
-          ({ code } = window.es7Example[window.exampleSelector.value]);
-        }
-
-        fiddle.setValue(code);
-      }
-    };
+  if (embedded) { // go ahead and run the code
+    runFiddle();
   }
 };
 
+// if fiddleId is define then load up the saved code
+if (fiddleId) {
+  fetch(`/fiddles/${fiddleId}`, {
+    credentials: 'same-origin',
+  }).then(resp => resp.json()).then(data => getFiddle(data));
+}
+
+// if this is not an embedded fiddle than add extra elements to this
+if (!embedded) {
+  // run the input
+  $.getElement('.run').onclick = runFiddle;
+
+  // lint the result
+  $.getElement('.lint').onclick = () => {
+    const lint = JSHINT(fiddle.getValue(), {
+      esnext: true,
+      devel: true,
+      browser: true,
+    });
+
+
+    // remove the line error class from all lines
+    fiddle.eachLine((line) => {
+      fiddle.removeLineClass(line, 'background', 'line-error');
+    });
+
+    const lints = [];
+    if (!lint) {
+      JSHINT.errors.forEach((err) => {
+        fiddle.addLineClass(err.line - 1, 'background', 'line-error');
+        lints.push(`console.log('Line ' + ${err.line} + ':', '${err.reason.replace(/'/g, '\\\'')}')\n`);
+      });
+    } else {
+      lints.push('console.log(\'Awesome! Your code is lint free!\');');
+    }
+
+    frameBridge.send(MESSAGES.RUN_SCRIPT, lints.join('\n'));
+  };
+
+  // export to Github gist
+  $.getElement('.gist').onclick = () => clickEvents.exportAsGist(fiddle);
+
+  // save the code
+  document.querySelector('.save').onclick = () => clickEvents.saveBtn(fiddle);
+
+  // star the code
+  $.getElement('.star').onclick = () => {
+    const pathArr = window.location.pathname.split('/'),
+      fiddleID = pathArr[1].length > 1 ? pathArr[1] : -1;
+
+    if (fiddleID !== -1) {
+      fetch(`/star/${fiddleID}`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+        }),
+      })
+        .then(resp => resp.json())
+        .then(data => clickEvents.starFiddle(data));
+    }
+  };
+
+  // Make fiddle private
+  $.getElement('.private').onclick = () => {
+    const pathArr = window.location.pathname.split('/'),
+      fiddleID = pathArr[1].length > 1 ? pathArr[1] : -1;
+
+    if (fiddleID !== -1) {
+      fetch(`/private/${fiddleID}`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+        }),
+      })
+        .then(resp => resp.json())
+        .then(data => clickEvents.privateFiddle(data));
+    } else {
+      snackbar.showSnackbar('You don\'t appear to have any code or its not saved.');
+    }
+  };
+
+  themeChanger.onchange = () => {
+    const theme = themeChanger.options[themeChanger.selectedIndex].textContent;
+    fiddle.setOption('theme', theme);
+    localStorage.setItem('theme', theme);
+  };
+
+  // load the selected code
+  window.exampleSelector.onchange = () => {
+    if (window.exampleSelector.value) {
+      const name = window.exampleSelector.value;
+      // set a deafult message to clear previous example code
+      fiddle.setValue(`${name} Can Not Be Found`);
+
+      Object.values(EditionInfo).map(
+        // setValue only if the example exists
+        values =>
+          window[values.example][name] && fiddle.setValue(window[values.example][name].code),
+      );
+    }
+  };
+
+  // load the selected javascript library
+  window.librariesSelector.onchange = () => {
+    if (window.librariesSelector.value) {
+      const { selectedIndex } = window.librariesSelector;
+      const dependecyUrls = libraries.getLibraryDependencyUrls(selectedIndex);
+      if (dependecyUrls) {
+        frameBridge.send(MESSAGES.LOAD_LIBRARY, dependecyUrls);
+        saveLibraryLocally(dependecyUrls);
+      }
+      frameBridge.send(MESSAGES.LOAD_LIBRARY, [window.librariesSelector.value]);
+      saveLibraryLocally([window.librariesSelector.value]);
+      updateLoadedLibraries();
+    }
+  };
+} // end not embedded
+
 
 // Add dragging funcionality
-
 fiddleWrapper.addEventListener('click', function init() {
   fiddleWrapper.removeEventListener('click', init, false);
   $.getElement('.resizer').addEventListener('mousedown', drag.initDrag, false);
 }, false);
-
-// add babel to the iframe
-babel.src = '/lib/babel/babel.min.js';
-iHead.appendChild(babel);

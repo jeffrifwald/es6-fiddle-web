@@ -5,7 +5,7 @@
         'src/js/**/*.js',
         '!src/js/authenticated.js'
       ],
-      htmlFiles = ['src/views/index.html', 'src/views/about.html']
+      htmlFiles = ['src/views/index.html', 'src/views/about.html', 'src/views/iframe.html'],
       jsFiles = 'src/**/*.js',
       styleFiles = ['dist/lib/**/*.css', 'style/**/*.less'],
       pkg = grunt.file.readJSON('package.json'),
@@ -30,19 +30,28 @@
       },
       browserify: {
         prod: {
-          src: ['src/js/examples/*.js', 'src/js/index.js'],
-          dest: 'dist/src/es6-fiddle.js',
+          files: {
+            'dist/src/es6-fiddle.js': ['src/js/examples/*.js', 'src/js/index.js'],
+            'dist/src/authenticated.js': 'src/js/authenticated.js'
+          },
           options: {
             browserifyOptions: { debug: true },
-            transform: [['babelify', { presets: ['es2015'] }]],
+            transform: [['babelify', { presets: ['env'] }]],
+          },
+        },
+        sandbox: {
+          src: ['src/js/sandbox/iframe.js'],
+          dest: 'dist/src/sandbox/iframe.js',
+          options: {
+            browserifyOptions: { debug: true },
+            transform: [['babelify', { presets: ['env'] }]],
           },
         },
       },
       uglify: {
         compile: {
           files: {
-            'dist/src/authenticated.js': ['src/js/authenticated.js'],
-            'dist/lib/babel/babel.min.js': ['dist/lib/babel/*.js', '!dist/lib/babel/babel.min.js'],
+            'dist/src/authenticated.js': ['dist/src/authenticated.js'],
           },
         },
       },
@@ -52,6 +61,7 @@
             'dist/style/es6-fiddle.css': ['dist/lib/**/*.css', 'style/main.less'],
             'dist/style/profile.css': ['style/profile.less'],
             'dist/style/blog.css': ['style/blog.less'],
+            'dist/style/about.css': ['style/about.less'],
           },
         },
       },
@@ -76,7 +86,8 @@
         dynamic: {
           files: [{
             expand: true,
-            src: ['**/*.{png,jpg,gif}'],
+            src: ['images/*.{png,jpg,gif}'],
+            dest: 'dist/'
           }],
         },
       },
@@ -89,6 +100,10 @@
           src: 'src/views/about.html',
           dest: 'dist/about.html',
         },
+        frame: {
+          src: 'src/views/iframe.html',
+          dest: 'dist/iframe.html'
+        }
       },
       eslint: {
         options: {
@@ -107,6 +122,7 @@
             'box-model': false,
             'unique-headings': false,
           },
+          failOnWarning: false,
         },
         target: ['style/main.less'],
       },

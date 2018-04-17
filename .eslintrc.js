@@ -4,16 +4,26 @@ module.exports = {
         "import"
     ],
     "rules": {
-      "one-var": 0
+      "one-var": 0,
+			"no-underscore-dangle": "off",
+			"arrow-body-style": ["warn", "as-needed"],
+			"function-paren-newline": ["warn", "consistent"],
     },
     "globals": {
       "document": 1,
-      "localStorage" : 1,
+      "localStorage": 1,
       "window": 1,
       "location": 1,
-      "XMLHttpRequest" :1,
+      "XMLHttpRequest": 1,
       "fetch": 1,
       "JSHINT": 1,
-      "Headers": 1
+      "Headers": 1,
+      "describe": 1,
+      "it": 1,
+      "beforeEach": 1,
+      "before"     : 1,
+      "after"      : 1,
+      "afterEach"  : 1,
+      "clearTestDB": 1,
     }
 };

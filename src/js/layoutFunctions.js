@@ -1,4 +1,7 @@
 /* global localStorage document */
+import frameBridge from './frameBridge';
+import MESSAGES from './sandbox/keys';
+
 const layoutFunctions = {
 
   // Save the layout option specified to localStorage
@@ -16,14 +19,9 @@ const layoutFunctions = {
   setVerticalStyle(codeWrapper) { codeWrapper.classList.remove('column'); },
 
   // Sets the styling for the results box with the given text and border color
+  /* eslint-disable */
   setResultsColors(textColor, borderColor) {
-    const style = document.createElement('style'),
-      iDoc = document.querySelector('.result').contentDocument,
-      head = iDoc.getElementsByTagName('head')[0];
-    style.innerHTML =
-          `body{font-family:monospace;padding:10px;color:${textColor}; transition:color 0.5s;}
-           div{border-bottom:1px solid ${borderColor};padding: 2px 0; transition:bottom-border 0.5s;}`;
-    head.appendChild(style);
+    frameBridge.send(MESSAGES.UPDATE_VIEW, {textColor, borderColor});
   },
 };
 
