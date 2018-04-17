@@ -7,6 +7,7 @@ module.exports = {
       "one-var": 0,
 			"no-underscore-dangle": "off",
 			"arrow-body-style": ["warn", "as-needed"],
+			"function-paren-newline": ["warn", "consistent"],
     },
     "globals": {
       "document": 1,
