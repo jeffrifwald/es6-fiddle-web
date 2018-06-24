@@ -48,7 +48,7 @@
     "grunt-contrib-less": "^1.4.0",
     "grunt-contrib-uglify": "^3.3.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-eslint": "^20.1.0",
+    "grunt-eslint": "^21.0.0",
     "grunt-express-server": "0.5.3",
     "grunt-githooks": "^0.6.0",
     "grunt-inline": "0.3.6",
