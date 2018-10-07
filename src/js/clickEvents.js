@@ -12,6 +12,7 @@ const clickEvents = {
       darkMode = false;
       disableDarkMode();
       localStorage.setItem('es6fiddleDarkMode', false);
+      fiddle.setOption('theme', 'default');
     } else {
       darkMode = true;
       enableDarkMode();
