@@ -8,11 +8,16 @@ const clickEvents = {
   darkModeClick(disableDarkMode, enableDarkMode, fiddle) {
     let darkMode = localStorage.getItem('es6fiddleDarkMode') === 'true';
     const darkModeTheme = 'monokai';
+    const lightModeTheme = 'default';
     if (darkMode === true) {
       darkMode = false;
       disableDarkMode();
+
+      // When switching to light mode, set the theme
+      $.getElement('.change-theme').value = lightModeTheme; // eslint-disable-line
+      fiddle.setOption('theme', lightModeTheme);
+
       localStorage.setItem('es6fiddleDarkMode', false);
-      fiddle.setOption('theme', 'default');
     } else {
       darkMode = true;
       enableDarkMode();
