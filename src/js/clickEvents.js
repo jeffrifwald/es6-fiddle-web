@@ -16,6 +16,7 @@ const clickEvents = {
       // When switching to light mode, set the theme
       $.getElement('.change-theme').value = lightModeTheme; // eslint-disable-line
       fiddle.setOption('theme', lightModeTheme);
+      localStorage.setItem('theme', lightModeTheme);
 
       localStorage.setItem('es6fiddleDarkMode', false);
     } else {
