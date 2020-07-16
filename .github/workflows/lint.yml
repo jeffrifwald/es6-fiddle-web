@@ -1,4 +1,4 @@
-name: CI
+name: Lint
 
 on: [push, pull_request]
 jobs:
@@ -27,6 +27,3 @@ jobs:
       
       - name: Lint the app
         run: npm run lint
-      
-      - name: Test app
-        run: npm test
