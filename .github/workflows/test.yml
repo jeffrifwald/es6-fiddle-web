@@ -7,7 +7,7 @@ jobs:
       mongodb:
         image: mongo:3.6
         env:
-          - MONGO_INITDB_DATABASE=fiddles
+          MONGO_INITDB_DATABASE: fiddles
         ports:
           - 27017:27017
     # The type of runner that the job will run on
