@@ -1,5 +1,5 @@
 {
-  "name": "es6-fiddle-web",
+  "name": "@esfiddle/app",
   "description": "Fiddlin' with ECMAScript6.",
   "version": "1.0.0",
   "homepage": "https://www.esfiddle.net",
@@ -87,6 +87,6 @@
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- --require babel-core/register --colors --exit --reporter dot test/"
   },
   "engines": {
-    "node": "^6.11.1 || ^7.10.1 || >=8.1.4"
+    "node": ">=8.1.4"
   }
 }
