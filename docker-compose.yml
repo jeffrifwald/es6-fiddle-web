@@ -20,7 +20,7 @@ services:
       - VIRTUAL_HOST=esfiddle.ghent.cloud,esfiddle.net
       - PORT=3001
       - VIRTUAL_PORT=3001
-      - LETSENCRYPT_HOST=esfiddle.ghent.cloud
+      - LETSENCRYPT_HOST=esfiddle.ghent.cloud,esfiddle.net
       - LETSENCRYPT_EMAIL=josh@ghent.cloud
     ports:
       - "3001:3001"
