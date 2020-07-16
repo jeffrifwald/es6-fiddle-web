@@ -88,6 +88,7 @@ const fiddle = codemirror($.getElement('.fiddle'), {
   lineNumbers: !embedded,
   readOnly: embedded ? 'nocursor' : false,
   theme: savedTheme || 'default',
+  autofocus: true,
 });
 fiddle.focus();
 
