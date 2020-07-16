@@ -3,6 +3,13 @@ name: Test
 on: [push, pull_request]
 jobs:
   test:
+    services:
+      mongodb:
+        image: mongo:3.6
+        env:
+          - MONGO_INITDB_DATABASE=fiddles
+        ports:
+          - 27017:27017
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     strategy:
@@ -27,3 +34,5 @@ jobs:
       
       - name: Test app
         run: npm test
+        env:
+          MONGO_URI: mongodb://localhost:27017/fiddles
