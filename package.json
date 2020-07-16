@@ -77,8 +77,8 @@
     "supertest": "^3.0.0"
   },
   "scripts": {
-    "test": "grunt test && npm run lint-server && npm run test-node",
-    "lint-server": "./node_modules/eslint/bin/eslint.js server/** test/**",
+    "test": "grunt test && npm run test-node",
+    "lint": "./node_modules/eslint/bin/eslint.js server/** test/**",
     "test-node": "mocha test/*.test.js --exit",
     "prestart": "",
     "postinstall": "grunt build",
