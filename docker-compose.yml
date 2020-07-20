@@ -1,0 +1,61 @@
+version: '3'
+
+services:
+  app:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs:12
+    restart: unless-stopped
+    env_file: .env
+    expose:
+      - "3001"
+    environment:
+      - MONGO_HOSTNAME=db
+      - MONGO_USERNAME=$MONGO_USERNAME
+      - MONGO_PASSWORD=$MONGO_PASSWORD
+      - MONGO_DB=$MONGO_DB
+      - VIRTUAL_HOST=esfiddle.ghent.cloud,esfiddle.net
+      - PORT=3001
+      - VIRTUAL_PORT=3001
+      - LETSENCRYPT_HOST=esfiddle.ghent.cloud,esfiddle.net
+      - LETSENCRYPT_EMAIL=josh@ghent.cloud
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+    networks:
+      - app-network
+      - https-proxy
+
+  db:
+    image: mongo:3.6.12
+    restart: unless-stopped
+    env_file: .env
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_ROOT_PASSWORD
+      - MONGO_INITDB_DATABASE=$MONGO_DB
+    volumes:
+      - dbdata:/data/db
+      - ./init-db.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    networks:
+      - app-network
+
+networks:
+  https-proxy:
+    external:
+      name: https-proxy
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+  node_modules:

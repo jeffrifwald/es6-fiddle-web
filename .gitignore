@@ -8,3 +8,5 @@ coverage
 /.gitattributes
 dist/
 !dist/lib/
+users-*.json
+fiddles-*.json

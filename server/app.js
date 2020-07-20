@@ -34,7 +34,7 @@ const routeAuth = require('./routes/auth');
 app.use(compression());
 app.use(bodyParser.json());
 app.use(flash());
-app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
 
 app.use(passport.initialize());
 app.use(passport.session());
