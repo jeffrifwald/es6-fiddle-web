@@ -59,7 +59,7 @@
     "jshint": "^2.9.4",
     "load-grunt-tasks": "^4.0.0",
     "mongodb": "^3.0.2",
-    "mongoose": "^5.3.1",
+    "mongoose": "^5.7.5",
     "node-fetch": "^2.0.0",
     "passport": "^0.4.0",
     "passport-github2": "^0.1.10",
