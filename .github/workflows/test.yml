@@ -36,3 +36,4 @@ jobs:
         run: npm test
         env:
           MONGODB_URI: mongodb://localhost:27017/fiddles
+          SESSION_SECRET: keyboard-cat
