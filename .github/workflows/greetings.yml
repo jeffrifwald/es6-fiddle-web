@@ -1,0 +1,13 @@
+name: Greetings
+
+on: [pull_request, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: 'Hey there :wave: Thanks for filling an issue. Our maintainers will get looking into it shortly but in the meantime, have a go yourself. You can get setup with ESFiddle locally by following our Contribution guide.'' first issue'
+        pr-message: 'Woohoo! :tada: Your first PR on ESFiddle! This is amazing. We are so happy that you have been able to contribute to open source. We will get this reviewed and merged right away, and we hope to see you soon :wave:'' first pr'

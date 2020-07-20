@@ -1,5 +1,5 @@
 {
-  "name": "es6-fiddle-web",
+  "name": "@esfiddle/app",
   "description": "Fiddlin' with ECMAScript6.",
   "version": "1.0.0",
   "homepage": "https://www.esfiddle.net",
@@ -77,8 +77,8 @@
     "supertest": "^3.0.0"
   },
   "scripts": {
-    "test": "grunt test && npm run lint-server && npm run test-node",
-    "lint-server": "./node_modules/eslint/bin/eslint.js server/** test/**",
+    "test": "npm run test-node",
+    "lint": "./node_modules/eslint/bin/eslint.js server/** test/**",
     "test-node": "mocha test/*.test.js --exit",
     "prestart": "",
     "postinstall": "grunt build",
@@ -87,6 +87,6 @@
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- --require babel-core/register --colors --exit --reporter dot test/"
   },
   "engines": {
-    "node": "^6.11.1 || ^7.10.1 || >=8.1.4"
+    "node": ">=8.1.4"
   }
 }
