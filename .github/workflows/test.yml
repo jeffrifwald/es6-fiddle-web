@@ -35,4 +35,4 @@ jobs:
       - name: Test app
         run: npm test
         env:
-          MONGO_URI: mongodb://localhost:27017/fiddles
+          MONGODB_URI: mongodb://localhost:27017/fiddles
