@@ -1,20 +1,20 @@
 {
   "name": "@esfiddle/app",
-  "description": "Fiddlin' with ECMAScript6.",
+  "description": "Fiddlin' with ECMAScript",
   "version": "1.0.0",
-  "homepage": "https://www.esfiddle.net",
+  "homepage": "https://esfiddle.net",
   "license": "SEE LICENSE IN LICENSE.md",
   "maintainers": [
     {
       "name": "Josh Ghent",
       "email": "josh@esfiddle.net",
-      "url": "github.com/joshghent"
+      "url": "https://github.com/joshghent"
     }
   ],
   "author": {
     "name": "Jeff McRiffey",
     "email": "jeff.mcriffey@tryambition.com",
-    "url": "github.com/jmcriffey"
+    "url": "https://github.com/jmcriffey"
   },
   "repository": {
     "type": "git",
@@ -63,7 +63,7 @@
     "node-fetch": "^2.0.0",
     "passport": "^0.4.0",
     "passport-github2": "^0.1.10",
-    "poet": "^2.0.2",
+    "poet": "^3.0.0",
     "whatwg-fetch": "^2.0.2"
   },
   "devDependencies": {
@@ -73,7 +73,7 @@
     "cross-env": "5.1.3",
     "factor-bundle": "^2.5.0",
     "istanbul": "^1.1.0-alpha.1",
-    "mocha": "^5.0.0",
+    "mocha": "^8.0.1",
     "supertest": "^3.0.0"
   },
   "scripts": {
