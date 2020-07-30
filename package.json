@@ -1,20 +1,20 @@
 {
   "name": "@esfiddle/app",
-  "description": "Fiddlin' with ECMAScript6.",
+  "description": "Fiddlin' with ECMAScript",
   "version": "1.0.0",
-  "homepage": "https://www.esfiddle.net",
+  "homepage": "https://esfiddle.net",
   "license": "SEE LICENSE IN LICENSE.md",
   "maintainers": [
     {
       "name": "Josh Ghent",
       "email": "josh@esfiddle.net",
-      "url": "github.com/joshghent"
+      "url": "https://github.com/joshghent"
     }
   ],
   "author": {
     "name": "Jeff McRiffey",
     "email": "jeff.mcriffey@tryambition.com",
-    "url": "github.com/jmcriffey"
+    "url": "https://github.com/jmcriffey"
   },
   "repository": {
     "type": "git",
