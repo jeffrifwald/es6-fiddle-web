@@ -1,15 +1,6 @@
 ESFiddle
 ===
 
-******
-**This repo is now stagnant and remains for the old version of ESFiddle. The redesign is being developed here https://github.com/esfiddle/site. If you're a previous contributor or just looking to join a new project then feel free to grab an issue from there or reach out on Gitter.**
-******
-
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/esfiddle/esfiddle.svg)](https://greenkeeper.io/)
-
-[![Build Status](https://travis-ci.org/esfiddle/esfiddle.png?branch=master)](https://travis-ci.org/esfiddle/esfiddle) 
-[![Join the chat at https://gitter.im/esfiddle/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/esfiddle/Lobby)
 [![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 [![first-timers-only Friendly](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](http://www.firsttimersonly.com/)
 
@@ -35,7 +26,7 @@ cp sample.env ./.env
 # Open a new terminal window and start MongoDB
 mongod --dbpath path/to/your/db/folder
 
-# Install the dependencies 
+# Install the dependencies
 npm i
 
 # Start the application
