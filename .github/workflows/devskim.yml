@@ -1,4 +1,4 @@
-name: DevSkin
+name: DevSkim
 
 on: [pull_request]
 jobs:
